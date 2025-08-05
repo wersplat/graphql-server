@@ -19,11 +19,29 @@ export interface Player {
   currentRp?: number;
   peakRp?: number;
   tier?: PlayerTier;
+  position?: PlayerPosition;
+  salaryTier?: SalaryTier;
   teamName?: string;
   isVerified?: boolean;
   createdAt: Date;
   updatedAt?: Date;
   user: User;
+}
+
+export enum PlayerPosition {
+  POINT_GUARD = 'Point_Guard',
+  SHOOTING_GUARD = 'Shooting_Guard',
+  LOCK = 'Lock',
+  POWER_FORWARD = 'Power_Forward',
+  CENTER = 'Center'
+}
+
+export enum SalaryTier {
+  S = 'S',
+  A = 'A',
+  B = 'B',
+  C = 'C',
+  D = 'D'
 }
 
 export enum PlayerTier {

@@ -51,6 +51,8 @@ export class SupabaseService {
         currentRp: data.player_rp || 0,
         peakRp: data.player_rp || 0,
         tier: 'bronze' as any, // Default tier
+        position: data.position || null,
+        salaryTier: data.salary_tier || null,
         teamName: null,
         isVerified: false,
         createdAt: data.created_at,
@@ -91,6 +93,8 @@ export class SupabaseService {
         currentRp: player.player_rp || 0,
         peakRp: player.player_rp || 0,
         tier: 'bronze' as any, // Default tier
+        position: player.position || null,
+        salaryTier: player.salary_tier || null,
         teamName: null,
         isVerified: false,
         createdAt: player.created_at,
@@ -213,7 +217,7 @@ export class SupabaseService {
       teamBId: data.team_b_id,
       teamAName: data.team_a_name,
       teamBName: data.team_b_name,
-      stage: data.stage?.toLowerCase() || 'group',
+      stage: data.stage || 'Group_Play',
       gameNumber: data.game_number || 1,
       status: data.played_at ? 'completed' : 'scheduled', // Determine status based on played_at
       scoreA: data.score_a,
@@ -282,7 +286,7 @@ export class SupabaseService {
       teamBId: match.team_b_id,
       teamAName: match.team_a_name,
       teamBName: match.team_b_name,
-      stage: match.stage?.toLowerCase() || 'group',
+      stage: match.stage || 'Group_Play',
       gameNumber: match.game_number || 1,
       status: match.played_at ? 'completed' : 'scheduled', // Determine status based on played_at
       scoreA: match.score_a,
@@ -423,7 +427,8 @@ export class SupabaseService {
       id: data.id,
       name: data.name,
       description: data.description,
-      eventType: data.type?.toLowerCase() || 'tournament',
+      eventType: data.type || 'Tournament',
+      tier: data.tier || 'T3',
       status: data.status?.toLowerCase() || 'open',
       entryFee: 0, // Not in schema
       maxParticipants: null, // Not in schema
@@ -463,7 +468,8 @@ export class SupabaseService {
       id: event.id,
       name: event.name,
       description: event.description,
-      eventType: event.type?.toLowerCase() || 'tournament',
+      eventType: event.type || 'Tournament',
+      tier: event.tier || 'T3',
       status: event.status?.toLowerCase() || 'open',
       entryFee: 0,
       maxParticipants: null,

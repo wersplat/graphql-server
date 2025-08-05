@@ -38,14 +38,26 @@ export enum MatchStatus {
 }
 
 export enum MatchStage {
-  GROUP = 'group',
-  ROUND_OF_32 = 'round_of_32',
-  ROUND_OF_16 = 'round_of_16',
-  QUARTERFINALS = 'quarterfinals',
-  SEMIFINALS = 'semifinals',
-  FINALS = 'finals',
-  THIRD_PLACE = 'third_place',
-  EXHIBITION = 'exhibition'
+  REGULAR_SEASON = 'Regular_Season',
+  GROUP_PLAY = 'Group_Play',
+  ROUND_1 = 'Round_1',
+  ROUND_2 = 'Round_2',
+  ROUND_3 = 'Round_3',
+  ROUND_4 = 'Round_4',
+  SEMI_FINALS = 'Semi_Finals',
+  FINALS = 'Finals',
+  GRAND_FINALS = 'Grand_Finals',
+  L1 = 'L1',
+  L2 = 'L2',
+  L3 = 'L3',
+  L4 = 'L4',
+  L5 = 'L5',
+  W1 = 'W1',
+  W2 = 'W2',
+  W3 = 'W3',
+  W4 = 'W4',
+  LF = 'LF',
+  WF = 'WF'
 }
 
 export interface Team {
@@ -64,6 +76,7 @@ export interface Event {
   name: string;
   description?: string;
   eventType?: EventType;
+  tier?: EventTier;
   status?: EventStatus;
   entryFee: number;
   maxParticipants?: number;
@@ -76,10 +89,15 @@ export interface Event {
 }
 
 export enum EventType {
-  DRAFT = 'draft',
-  BYOT = 'byot',
-  TOURNAMENT = 'tournament',
-  LEAGUE = 'league'
+  LEAGUE = 'League',
+  TOURNAMENT = 'Tournament'
+}
+
+export enum EventTier {
+  T1 = 'T1',
+  T2 = 'T2',
+  T3 = 'T3',
+  T4 = 'T4'
 }
 
 export enum EventStatus {

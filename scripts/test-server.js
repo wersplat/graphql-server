@@ -85,7 +85,7 @@ async function testServer() {
           teamBId: "fe1ed148-bc8d-4f7f-8851-96a9fdb0d820"
           teamAName: "Spicy Boys"
           teamBName: "Feen for Food"
-          stage: group
+          stage: Group_Play
         }) {
           id
           teamAName

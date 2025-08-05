@@ -59,6 +59,10 @@ type Player {
   peakRp: Float
   "Current player tier (bronze, silver, gold, etc.)"
   tier: PlayerTier
+  "Player position on the court"
+  position: PlayerPosition
+  "Salary tier indicating player value"
+  salaryTier: SalaryTier
   "Name of the team the player is currently on"
   teamName: String
   "Whether the player account has been verified"
@@ -90,6 +94,52 @@ enum PlayerTier {
   pink_diamond
   "Legendary level player"
   galaxy_opal
+}
+
+"""
+Player positions on the court.
+"""
+enum PlayerPosition {
+  "Point guard position"
+  Point_Guard
+  "Shooting guard position"
+  Shooting_Guard
+  "Lock position"
+  Lock
+  "Power forward position"
+  Power_Forward
+  "Center position"
+  Center
+}
+
+"""
+Salary tiers for players indicating their value and compensation level.
+"""
+enum SalaryTier {
+  "Superstar tier"
+  S
+  "All-star tier"
+  A
+  "Starter tier"
+  B
+  "Role player tier"
+  C
+  "Bench tier"
+  D
+}
+
+"""
+Event tiers indicating the level and prestige of the competition.
+"""
+enum EventTier {
+  "Tier 1 - Highest level events"
+  T1
+  "Tier 2 - High level events"
+  T2
+  "Tier 3 - Mid level events"
+  T3
+  "Tier 4 - Entry level events"
+  T4
 }
 
 """
@@ -175,22 +225,46 @@ enum MatchStatus {
 Stages of a tournament or competition indicating the round or phase.
 """
 enum MatchStage {
+  "Regular season matches"
+  Regular_Season
   "Group stage matches"
-  group
-  "Round of 32 matches"
-  round_of_32
-  "Round of 16 matches"
-  round_of_16
-  "Quarterfinal matches"
-  quarterfinals
+  Group_Play
+  "Round 1 matches"
+  Round_1
+  "Round 2 matches"
+  Round_2
+  "Round 3 matches"
+  Round_3
+  "Round 4 matches"
+  Round_4
   "Semifinal matches"
-  semifinals
+  Semi_Finals
   "Championship final match"
-  finals
-  "Third place playoff match"
-  third_place
-  "Exhibition or friendly match"
-  exhibition
+  Finals
+  "Grand championship final match"
+  Grand_Finals
+  "League level 1 matches"
+  L1
+  "League level 2 matches"
+  L2
+  "League level 3 matches"
+  L3
+  "League level 4 matches"
+  L4
+  "League level 5 matches"
+  L5
+  "Winner bracket round 1"
+  W1
+  "Winner bracket round 2"
+  W2
+  "Winner bracket round 3"
+  W3
+  "Winner bracket round 4"
+  W4
+  "Loser bracket final"
+  LF
+  "Winner bracket final"
+  WF
 }
 
 """
@@ -229,6 +303,8 @@ type Event {
   description: String
   "Type of event (tournament, league, etc.)"
   eventType: EventType
+  "Tier level of the event"
+  tier: EventTier
   "Current status of the event"
   status: EventStatus
   "Entry fee to participate in the event"
@@ -253,14 +329,10 @@ type Event {
 Types of competitive events in the platform.
 """
 enum EventType {
-  "Draft event where players are selected"
-  draft
-  "Bring Your Own Team event"
-  byot
+  "League event with regular season matches"
+  League
   "Single elimination or double elimination tournament"
-  tournament
-  "Ongoing league with regular matches"
-  league
+  Tournament
 }
 
 """
