@@ -1,271 +1,542 @@
 # GraphQL Schema for Bodega Cats GC API
+# 
+# This schema provides a unified GraphQL API for the Bodega Cats GC gaming platform.
+# It serves as a layer between multiple frontends (admin, dashboard, public) and the Supabase backend.
 
+"""
+Custom scalar for handling date and time values in ISO 8601 format.
+"""
 scalar DateTime
+
+"""
+Custom scalar for handling UUID values.
+"""
 scalar UUID
 
+"""
+Represents a user in the Bodega Cats GC platform.
+Users can have associated player profiles with gaming statistics.
+"""
 type User {
+  "Unique identifier for the user"
   id: ID!
+  "Username for login and display"
   username: String!
+  "Email address for notifications and account management"
   email: String!
+  "Full name of the user"
   fullName: String
+  "Whether the user account is active"
   isActive: Boolean!
+  "Whether the user has administrative privileges"
   isAdmin: Boolean!
+  "Discord ID for integration with Discord"
   discordId: String
+  "When the user account was created"
   createdAt: DateTime!
+  "When the user account was last updated"
   updatedAt: DateTime
+  "Associated player profile with gaming statistics"
   player: Player
 }
 
+"""
+Represents a player profile with gaming statistics and achievements.
+Each player is associated with a user account.
+"""
 type Player {
+  "Unique identifier for the player"
   id: ID!
+  "ID of the associated user account"
   userId: ID!
+  "Gaming handle/username used in matches"
   gamertag: String!
+  "Geographic region for matchmaking"
   region: String
+  "Current ranking points"
   currentRp: Float
+  "Highest ranking points achieved"
   peakRp: Float
+  "Current player tier (bronze, silver, gold, etc.)"
   tier: PlayerTier
+  "Name of the team the player is currently on"
   teamName: String
+  "Whether the player account has been verified"
   isVerified: Boolean
+  "When the player profile was created"
   createdAt: DateTime!
+  "When the player profile was last updated"
   updatedAt: DateTime
+  "Associated user account"
   user: User!
 }
 
+"""
+Player tiers representing skill levels and achievements.
+Higher tiers indicate better performance and more experience.
+"""
 enum PlayerTier {
+  "Beginner level player"
   bronze
+  "Intermediate level player"
   silver
+  "Advanced level player"
   gold
+  "Expert level player"
   platinum
+  "Elite level player"
   diamond
+  "Master level player"
   pink_diamond
+  "Legendary level player"
   galaxy_opal
 }
 
+"""
+Represents a competitive match between two teams.
+Matches can be in various stages and have detailed statistics.
+"""
 type Match {
+  "Unique identifier for the match"
   id: ID!
+  "ID of the event this match belongs to"
   eventId: UUID
+  "ID of the first team"
   teamAId: UUID!
+  "ID of the second team"
   teamBId: UUID!
+  "Name of the first team"
   teamAName: String!
+  "Name of the second team"
   teamBName: String!
+  "Current stage of the match (group, finals, etc.)"
   stage: MatchStage!
+  "Game number within the match series"
   gameNumber: Int!
+  "Current status of the match"
   status: MatchStatus!
+  "Score for team A"
   scoreA: Int
+  "Score for team B"
   scoreB: Int
+  "ID of the winning team"
   winnerId: UUID
+  "Name of the winning team"
   winnerName: String
+  "When the match was scheduled to start"
   scheduledAt: DateTime
+  "When the match was actually played"
   playedAt: DateTime
+  "When the match started"
   startedAt: DateTime
+  "When the match ended"
   endedAt: DateTime
+  "URL to the match boxscore/stats"
   boxscoreUrl: String
+  "When the match record was created"
   createdAt: DateTime!
+  "When the match record was last updated"
   updatedAt: DateTime
+  "Whether the match is currently being played live"
   isLive: Boolean!
+  "Time elapsed in the current match (for live matches)"
   timeElapsed: String
+  "Team A details"
   teamA: Team
+  "Team B details"
   teamB: Team
+  "Winning team details"
   winner: Team
+  "Event details"
   event: Event
+  "Player statistics for team A"
   teamAPlayers: [PlayerMatchStats!]!
+  "Player statistics for team B"
   teamBPlayers: [PlayerMatchStats!]!
 }
 
+"""
+Status of a match indicating its current state in the competition.
+"""
 enum MatchStatus {
+  "Match is scheduled but not yet started"
   scheduled
+  "Match is currently being played"
   in_progress
+  "Match has finished"
   completed
+  "Match was cancelled"
   cancelled
+  "Match was postponed to a later date"
   postponed
 }
 
+"""
+Stages of a tournament or competition indicating the round or phase.
+"""
 enum MatchStage {
+  "Group stage matches"
   group
+  "Round of 32 matches"
   round_of_32
+  "Round of 16 matches"
   round_of_16
+  "Quarterfinal matches"
   quarterfinals
+  "Semifinal matches"
   semifinals
+  "Championship final match"
   finals
+  "Third place playoff match"
   third_place
+  "Exhibition or friendly match"
   exhibition
 }
 
+"""
+Represents a team in the Bodega Cats GC platform.
+Teams compete in matches and tournaments.
+"""
 type Team {
+  "Unique identifier for the team"
   id: ID!
+  "Name of the team"
   name: String!
+  "Description of the team"
   description: String
+  "URL to the team logo"
   logoUrl: String
+  "Geographic region the team represents"
   region: String
+  "Whether the team is currently active"
   isActive: Boolean!
+  "When the team was created"
   createdAt: DateTime!
+  "When the team was last updated"
   updatedAt: DateTime
 }
 
+"""
+Represents a tournament, league, or other competitive event.
+Events contain multiple matches and have specific rules and prizes.
+"""
 type Event {
+  "Unique identifier for the event"
   id: ID!
+  "Name of the event"
   name: String!
+  "Description of the event"
   description: String
+  "Type of event (tournament, league, etc.)"
   eventType: EventType
+  "Current status of the event"
   status: EventStatus
+  "Entry fee to participate in the event"
   entryFee: Float!
+  "Maximum number of participants allowed"
   maxParticipants: Int
+  "Current number of registered participants"
   currentParticipants: Int!
+  "When the event starts"
   startDate: DateTime
+  "When the event ends"
   endDate: DateTime
+  "ID of the user who created the event"
   createdBy: ID!
+  "When the event was created"
   createdAt: DateTime!
+  "When the event was last updated"
   updatedAt: DateTime
 }
 
+"""
+Types of competitive events in the platform.
+"""
 enum EventType {
+  "Draft event where players are selected"
   draft
+  "Bring Your Own Team event"
   byot
+  "Single elimination or double elimination tournament"
   tournament
+  "Ongoing league with regular matches"
   league
 }
 
+"""
+Status of an event indicating its current phase.
+"""
 enum EventStatus {
+  "Event is in draft mode and not yet published"
   draft
+  "Event is open for registration"
   open
+  "Event registration is closed"
   registration_closed
+  "Event is currently running"
   in_progress
+  "Event has finished"
   completed
+  "Event was cancelled"
   cancelled
 }
 
+"""
+Detailed statistics for a player in a specific match.
+These stats are used for rankings and performance analysis.
+"""
 type PlayerMatchStats {
+  "Unique identifier for the stats record"
   id: ID!
+  "ID of the match these stats belong to"
   matchId: ID!
+  "ID of the player these stats belong to"
   playerId: ID!
+  "ID of the team the player was on"
   teamId: ID!
+  "Total points scored"
   points: Int!
+  "Number of assists"
   assists: Int!
+  "Number of rebounds"
   rebounds: Int!
+  "Number of steals"
   steals: Int!
+  "Number of blocks"
   blocks: Int!
+  "Number of turnovers"
   turnovers: Int!
+  "Number of fouls"
   fouls: Int!
+  "Field goals made"
   fgm: Int!
+  "Field goals attempted"
   fga: Int!
+  "Three-point shots made"
   threePointsMade: Int!
+  "Three-point shots attempted"
   threePointsAttempted: Int!
+  "Free throws made"
   ftm: Int!
+  "Free throws attempted"
   fta: Int!
+  "Plus/minus rating"
   plusMinus: Int!
+  "Minutes played in the match"
   minutesPlayed: Int!
+  "When the stats record was created"
   createdAt: DateTime!
+  "When the stats record was last updated"
   updatedAt: DateTime
 }
 
+"""
+Input type for creating a new match.
+"""
 input MatchInput {
+  "ID of the event this match belongs to"
   eventId: UUID
+  "ID of the first team"
   teamAId: UUID!
+  "ID of the second team"
   teamBId: UUID!
+  "Name of the first team"
   teamAName: String!
+  "Name of the second team"
   teamBName: String!
+  "Stage of the match (defaults to GROUP)"
   stage: MatchStage = GROUP
+  "Game number within the match series (defaults to 1)"
   gameNumber: Int = 1
+  "When the match is scheduled to start"
   scheduledAt: DateTime
 }
 
+"""
+Input type for updating an existing match.
+"""
 input MatchUpdateInput {
+  "New status of the match"
   status: MatchStatus
+  "Updated score for team A"
   scoreA: Int
+  "Updated score for team B"
   scoreB: Int
+  "ID of the winning team"
   winnerId: UUID
+  "When the match was played"
   playedAt: DateTime
+  "URL to the match boxscore/stats"
   boxscoreUrl: String
+  "Updated stage of the match"
   stage: MatchStage
+  "Updated game number"
   gameNumber: Int
 }
 
+"""
+Input type for submitting player match statistics.
+"""
 input PlayerMatchStatsInput {
+  "ID of the player"
   playerId: UUID!
+  "ID of the team the player was on"
   teamId: UUID!
+  "Total points scored (defaults to 0)"
   points: Int = 0
+  "Number of assists (defaults to 0)"
   assists: Int = 0
+  "Number of rebounds (defaults to 0)"
   rebounds: Int = 0
+  "Number of steals (defaults to 0)"
   steals: Int = 0
+  "Number of blocks (defaults to 0)"
   blocks: Int = 0
+  "Number of turnovers (defaults to 0)"
   turnovers: Int = 0
+  "Number of fouls (defaults to 0)"
   fouls: Int = 0
+  "Field goals made (defaults to 0)"
   fgm: Int = 0
+  "Field goals attempted (defaults to 0)"
   fga: Int = 0
+  "Three-point shots made (defaults to 0)"
   threePointsMade: Int = 0
+  "Three-point shots attempted (defaults to 0)"
   threePointsAttempted: Int = 0
+  "Free throws made (defaults to 0)"
   ftm: Int = 0
+  "Free throws attempted (defaults to 0)"
   fta: Int = 0
+  "Plus/minus rating (defaults to 0)"
   plusMinus: Int = 0
+  "Minutes played in the match (defaults to 0)"
   minutesPlayed: Int = 0
 }
 
+"""
+Root query type for the Bodega Cats GC GraphQL API.
+Provides access to all read operations for users, matches, teams, events, and players.
+"""
 type Query {
   # User queries
+  "Get a specific user by ID"
   getUser(id: ID!): User
+  "Get a list of users with pagination"
   getUsers(limit: Int = 10, offset: Int = 0): [User!]!
   
   # Match queries
+  "Get a specific match by ID"
   getMatch(id: ID!): Match
+  "Get a list of matches with optional filtering and pagination"
   getMatches(
+    "Filter by team ID (returns matches where this team participated)"
     teamId: ID
+    "Filter by event ID"
     eventId: UUID
+    "Filter by match status"
     status: MatchStatus
+    "Filter by match stage"
     stage: MatchStage
+    "Maximum number of matches to return (defaults to 20)"
     limit: Int = 20
+    "Number of matches to skip for pagination (defaults to 0)"
     offset: Int = 0
   ): [Match!]!
   
   # Team queries
+  "Get a specific team by ID"
   getTeam(id: ID!): Team
+  "Get a list of teams with pagination"
   getTeams(limit: Int = 10, offset: Int = 0): [Team!]!
   
   # Event queries
+  "Get a specific event by ID"
   getEvent(id: ID!): Event
+  "Get a list of events with optional filtering and pagination"
   getEvents(
+    "Filter by event status"
     status: EventStatus
+    "Filter by event type"
     eventType: EventType
+    "Maximum number of events to return (defaults to 10)"
     limit: Int = 10
+    "Number of events to skip for pagination (defaults to 0)"
     offset: Int = 0
   ): [Event!]!
   
   # Player queries
+  "Get a specific player by ID"
   getPlayer(id: ID!): Player
+  "Get a list of players with optional filtering and pagination"
   getPlayers(
+    "Filter by player tier"
     tier: PlayerTier
+    "Filter by region"
     region: String
+    "Maximum number of players to return (defaults to 20)"
     limit: Int = 20
+    "Number of players to skip for pagination (defaults to 0)"
     offset: Int = 0
   ): [Player!]!
 }
 
+"""
+Root mutation type for the Bodega Cats GC GraphQL API.
+Provides access to all write operations for creating, updating, and deleting data.
+"""
 type Mutation {
   # Match mutations
+  "Create a new match"
   submitMatch(input: MatchInput!): Match!
+  "Update an existing match"
   updateMatch(id: ID!, input: MatchUpdateInput!): Match!
+  "Delete a match"
   deleteMatch(id: ID!): Boolean!
+  "Submit player statistics for a match"
   submitMatchStats(matchId: ID!, stats: [PlayerMatchStatsInput!]!): [PlayerMatchStats!]!
   
   # User mutations (admin only)
+  "Create a new user (admin only)"
   createUser(input: UserInput!): User!
+  "Update an existing user (admin only)"
   updateUser(id: ID!, input: UserUpdateInput!): User!
+  "Delete a user (admin only)"
   deleteUser(id: ID!): Boolean!
 }
 
+"""
+Input type for creating a new user.
+"""
 input UserInput {
+  "Username for login and display"
   username: String!
+  "Email address for notifications and account management"
   email: String!
+  "Full name of the user"
   fullName: String
+  "Whether the user account is active (defaults to true)"
   isActive: Boolean = true
+  "Whether the user has administrative privileges (defaults to false)"
   isAdmin: Boolean = false
+  "Discord ID for integration with Discord"
   discordId: String
 }
 
+"""
+Input type for updating an existing user.
+"""
 input UserUpdateInput {
+  "Updated username"
   username: String
+  "Updated email address"
   email: String
+  "Updated full name"
   fullName: String
+  "Updated active status"
   isActive: Boolean
+  "Updated admin privileges"
   isAdmin: Boolean
+  "Updated Discord ID"
   discordId: String
 } 
