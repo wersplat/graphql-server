@@ -1,0 +1,53 @@
+{
+  "name": "bodega-graphql-server",
+  "version": "1.0.0",
+  "description": "GraphQL API server for Bodega Cats GC - unifying endpoints for admin and public frontends",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "jest",
+    "test:server": "node scripts/test-server.js",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "graphql",
+    "apollo-server",
+    "typescript",
+    "bodega-cats",
+    "gaming"
+  ],
+  "author": "Bodega Cats GC",
+  "license": "MIT",
+  "dependencies": {
+    "@apollo/server": "^4.9.5",
+    "apollo-server-express": "^3.12.1",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "dotenv": "^16.3.1",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
+    "@supabase/supabase-js": "^2.38.4",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17",
+    "@types/node": "^20.10.0",
+    "@types/uuid": "^9.0.7",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "jest": "^29.7.0",
+    "node-fetch": "^2.7.0",
+    "tsx": "^4.6.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 

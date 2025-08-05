@@ -1,0 +1,271 @@
+# GraphQL Schema for Bodega Cats GC API
+
+scalar DateTime
+scalar UUID
+
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  fullName: String
+  isActive: Boolean!
+  isAdmin: Boolean!
+  discordId: String
+  createdAt: DateTime!
+  updatedAt: DateTime
+  player: Player
+}
+
+type Player {
+  id: ID!
+  userId: ID!
+  gamertag: String!
+  region: String
+  currentRp: Float
+  peakRp: Float
+  tier: PlayerTier
+  teamName: String
+  isVerified: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime
+  user: User!
+}
+
+enum PlayerTier {
+  bronze
+  silver
+  gold
+  platinum
+  diamond
+  pink_diamond
+  galaxy_opal
+}
+
+type Match {
+  id: ID!
+  eventId: UUID
+  teamAId: UUID!
+  teamBId: UUID!
+  teamAName: String!
+  teamBName: String!
+  stage: MatchStage!
+  gameNumber: Int!
+  status: MatchStatus!
+  scoreA: Int
+  scoreB: Int
+  winnerId: UUID
+  winnerName: String
+  scheduledAt: DateTime
+  playedAt: DateTime
+  startedAt: DateTime
+  endedAt: DateTime
+  boxscoreUrl: String
+  createdAt: DateTime!
+  updatedAt: DateTime
+  isLive: Boolean!
+  timeElapsed: String
+  teamA: Team
+  teamB: Team
+  winner: Team
+  event: Event
+  teamAPlayers: [PlayerMatchStats!]!
+  teamBPlayers: [PlayerMatchStats!]!
+}
+
+enum MatchStatus {
+  scheduled
+  in_progress
+  completed
+  cancelled
+  postponed
+}
+
+enum MatchStage {
+  group
+  round_of_32
+  round_of_16
+  quarterfinals
+  semifinals
+  finals
+  third_place
+  exhibition
+}
+
+type Team {
+  id: ID!
+  name: String!
+  description: String
+  logoUrl: String
+  region: String
+  isActive: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type Event {
+  id: ID!
+  name: String!
+  description: String
+  eventType: EventType
+  status: EventStatus
+  entryFee: Float!
+  maxParticipants: Int
+  currentParticipants: Int!
+  startDate: DateTime
+  endDate: DateTime
+  createdBy: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+enum EventType {
+  draft
+  byot
+  tournament
+  league
+}
+
+enum EventStatus {
+  draft
+  open
+  registration_closed
+  in_progress
+  completed
+  cancelled
+}
+
+type PlayerMatchStats {
+  id: ID!
+  matchId: ID!
+  playerId: ID!
+  teamId: ID!
+  points: Int!
+  assists: Int!
+  rebounds: Int!
+  steals: Int!
+  blocks: Int!
+  turnovers: Int!
+  fouls: Int!
+  fgm: Int!
+  fga: Int!
+  threePointsMade: Int!
+  threePointsAttempted: Int!
+  ftm: Int!
+  fta: Int!
+  plusMinus: Int!
+  minutesPlayed: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+input MatchInput {
+  eventId: UUID
+  teamAId: UUID!
+  teamBId: UUID!
+  teamAName: String!
+  teamBName: String!
+  stage: MatchStage = GROUP
+  gameNumber: Int = 1
+  scheduledAt: DateTime
+}
+
+input MatchUpdateInput {
+  status: MatchStatus
+  scoreA: Int
+  scoreB: Int
+  winnerId: UUID
+  playedAt: DateTime
+  boxscoreUrl: String
+  stage: MatchStage
+  gameNumber: Int
+}
+
+input PlayerMatchStatsInput {
+  playerId: UUID!
+  teamId: UUID!
+  points: Int = 0
+  assists: Int = 0
+  rebounds: Int = 0
+  steals: Int = 0
+  blocks: Int = 0
+  turnovers: Int = 0
+  fouls: Int = 0
+  fgm: Int = 0
+  fga: Int = 0
+  threePointsMade: Int = 0
+  threePointsAttempted: Int = 0
+  ftm: Int = 0
+  fta: Int = 0
+  plusMinus: Int = 0
+  minutesPlayed: Int = 0
+}
+
+type Query {
+  # User queries
+  getUser(id: ID!): User
+  getUsers(limit: Int = 10, offset: Int = 0): [User!]!
+  
+  # Match queries
+  getMatch(id: ID!): Match
+  getMatches(
+    teamId: ID
+    eventId: UUID
+    status: MatchStatus
+    stage: MatchStage
+    limit: Int = 20
+    offset: Int = 0
+  ): [Match!]!
+  
+  # Team queries
+  getTeam(id: ID!): Team
+  getTeams(limit: Int = 10, offset: Int = 0): [Team!]!
+  
+  # Event queries
+  getEvent(id: ID!): Event
+  getEvents(
+    status: EventStatus
+    eventType: EventType
+    limit: Int = 10
+    offset: Int = 0
+  ): [Event!]!
+  
+  # Player queries
+  getPlayer(id: ID!): Player
+  getPlayers(
+    tier: PlayerTier
+    region: String
+    limit: Int = 20
+    offset: Int = 0
+  ): [Player!]!
+}
+
+type Mutation {
+  # Match mutations
+  submitMatch(input: MatchInput!): Match!
+  updateMatch(id: ID!, input: MatchUpdateInput!): Match!
+  deleteMatch(id: ID!): Boolean!
+  submitMatchStats(matchId: ID!, stats: [PlayerMatchStatsInput!]!): [PlayerMatchStats!]!
+  
+  # User mutations (admin only)
+  createUser(input: UserInput!): User!
+  updateUser(id: ID!, input: UserUpdateInput!): User!
+  deleteUser(id: ID!): Boolean!
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  fullName: String
+  isActive: Boolean = true
+  isAdmin: Boolean = false
+  discordId: String
+}
+
+input UserUpdateInput {
+  username: String
+  email: String
+  fullName: String
+  isActive: Boolean
+  isAdmin: Boolean
+  discordId: String
+} 
