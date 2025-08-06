@@ -79,11 +79,13 @@ const corsOptions = {
   origin: process.env.ALLOWED_ORIGINS?.split(',') || [
     'https://dashboard.bodegacatsgc.gg',
     'https://admin.bodegacatsgc.gg',
-    'https://global.bodegacatsgc.gg'
+    'https://global.bodegacatsgc.gg',
+    'https://graphql.bodegacatsgc.gg',
+    'https://studio.apollographql.com'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'apollo-require-preflight']
 };
 
 async function startServer() {
