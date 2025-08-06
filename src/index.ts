@@ -1,6 +1,7 @@
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
@@ -126,7 +127,10 @@ async function startServer() {
       ...resolvers,
       ...scalarResolvers
     },
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    plugins: [
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      ApolloServerPluginLandingPageLocalDefault({ embed: true })
+    ],
     formatError: (formattedError, error) => {
       console.error('GraphQL Error:', formattedError);
       return {
@@ -149,7 +153,75 @@ async function startServer() {
     throw error;
   }
 
-  // Apply Apollo middleware
+  // Serve Apollo Studio Sandbox for GET requests to /graphql
+  app.get('/graphql', (req, res) => {
+    const endpoint = req.protocol + '://' + req.get('host') + '/graphql';
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>GraphQL Explorer - Bodega Cats GC</title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <style>
+            body {
+              margin: 0;
+              padding: 0;
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+              background: #f5f5f5;
+            }
+            .container {
+              max-width: 1200px;
+              margin: 0 auto;
+              padding: 20px;
+            }
+            .header {
+              text-align: center;
+              margin-bottom: 30px;
+            }
+            .header h1 {
+              color: #333;
+              margin-bottom: 10px;
+            }
+            .explorer-frame {
+              width: 100%;
+              height: 80vh;
+              border: none;
+              border-radius: 8px;
+              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            }
+            .loading {
+              text-align: center;
+              padding: 40px;
+              color: #666;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>🏀 Bodega Cats GC GraphQL Explorer</h1>
+              <p>Interactive GraphQL playground with full schema documentation</p>
+            </div>
+            <iframe 
+              class="explorer-frame"
+              src="https://studio.apollographql.com/sandbox/explorer?endpoint=${encodeURIComponent(endpoint)}"
+              title="GraphQL Explorer">
+              <div class="loading">
+                Loading GraphQL Explorer...
+                <br><br>
+                <a href="https://studio.apollographql.com/sandbox/explorer?endpoint=${encodeURIComponent(endpoint)}" target="_blank">
+                  Open in new tab if not loading
+                </a>
+              </div>
+            </iframe>
+          </div>
+        </body>
+      </html>
+    `);
+  });
+
+  // Apply Apollo middleware for POST requests to /graphql
   app.use(
     '/graphql',
     expressMiddleware(server, {
@@ -162,6 +234,11 @@ async function startServer() {
       }
     })
   );
+
+  // Serve Apollo Studio Explorer
+  app.get('/studio', (req, res) => {
+    res.redirect('https://studio.apollographql.com/sandbox/explorer?endpoint=' + encodeURIComponent(req.protocol + '://' + req.get('host') + '/graphql'));
+  });
 
   // Serve GraphQL Playground at root
   app.get('/', (req, res) => {
@@ -244,6 +321,11 @@ async function startServer() {
                   <h3>GraphQL Explorer</h3>
                   <p>Interactive GraphQL playground with schema documentation</p>
                   <a href="/graphql" target="_blank">Open GraphQL Explorer →</a>
+                </div>
+                <div class="endpoint">
+                  <h3>Apollo Studio</h3>
+                  <p>Advanced GraphQL IDE with full schema exploration</p>
+                  <a href="/studio" target="_blank">Open Apollo Studio →</a>
                 </div>
                 <div class="endpoint">
                   <h3>Health Check</h3>
