@@ -157,7 +157,9 @@ async function startServer() {
 
   // Serve Apollo Studio Sandbox for GET requests to /graphql
   app.get('/graphql', (req, res) => {
-    const endpoint = req.protocol + '://' + req.get('host') + '/graphql';
+    // Force HTTPS for production deployments
+    const protocol = process.env.NODE_ENV === 'production' ? 'https' : req.protocol;
+    const endpoint = protocol + '://' + req.get('host') + '/graphql';
     const studioUrl = `https://studio.apollographql.com/sandbox/explorer?endpoint=${encodeURIComponent(endpoint)}`;
     
     res.send(`
