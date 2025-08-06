@@ -156,6 +156,8 @@ async function startServer() {
   // Serve Apollo Studio Sandbox for GET requests to /graphql
   app.get('/graphql', (req, res) => {
     const endpoint = req.protocol + '://' + req.get('host') + '/graphql';
+    const studioUrl = `https://studio.apollographql.com/sandbox/explorer?endpoint=${encodeURIComponent(endpoint)}`;
+    
     res.send(`
       <!DOCTYPE html>
       <html>
@@ -168,53 +170,102 @@ async function startServer() {
               margin: 0;
               padding: 0;
               font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-              background: #f5f5f5;
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              min-height: 100vh;
+              display: flex;
+              align-items: center;
+              justify-content: center;
             }
             .container {
-              max-width: 1200px;
-              margin: 0 auto;
-              padding: 20px;
-            }
-            .header {
+              background: white;
+              border-radius: 16px;
+              padding: 40px;
               text-align: center;
-              margin-bottom: 30px;
+              box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+              max-width: 500px;
+              width: 90%;
             }
-            .header h1 {
+            .logo {
+              font-size: 48px;
+              margin-bottom: 20px;
+            }
+            h1 {
               color: #333;
               margin-bottom: 10px;
+              font-size: 28px;
             }
-            .explorer-frame {
-              width: 100%;
-              height: 80vh;
-              border: none;
-              border-radius: 8px;
-              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            }
-            .loading {
-              text-align: center;
-              padding: 40px;
+            p {
               color: #666;
+              margin-bottom: 30px;
+              line-height: 1.6;
+            }
+            .btn {
+              display: inline-block;
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+              padding: 16px 32px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: 600;
+              font-size: 16px;
+              transition: transform 0.2s, box-shadow 0.2s;
+              box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            }
+            .btn:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+            }
+            .endpoint {
+              background: #f8f9fa;
+              border: 1px solid #e9ecef;
+              border-radius: 8px;
+              padding: 16px;
+              margin-top: 20px;
+              font-family: 'Monaco', 'Menlo', monospace;
+              font-size: 14px;
+              color: #495057;
+              word-break: break-all;
+            }
+            .features {
+              margin-top: 30px;
+              text-align: left;
+            }
+            .features h3 {
+              color: #333;
+              margin-bottom: 15px;
+            }
+            .features ul {
+              color: #666;
+              line-height: 1.8;
+              padding-left: 20px;
             }
           </style>
         </head>
         <body>
           <div class="container">
-            <div class="header">
-              <h1>🏀 Bodega Cats GC GraphQL Explorer</h1>
-              <p>Interactive GraphQL playground with full schema documentation</p>
+            <div class="logo">🏀</div>
+            <h1>Bodega Cats GC GraphQL Explorer</h1>
+            <p>Interactive GraphQL playground with full schema documentation, query builder, and real-time execution.</p>
+            
+            <a href="${studioUrl}" target="_blank" class="btn">
+              🚀 Open GraphQL Explorer
+            </a>
+            
+            <div class="endpoint">
+              <strong>Endpoint:</strong> ${endpoint}
             </div>
-            <iframe 
-              class="explorer-frame"
-              src="https://studio.apollographql.com/sandbox/explorer?endpoint=${encodeURIComponent(endpoint)}"
-              title="GraphQL Explorer">
-              <div class="loading">
-                Loading GraphQL Explorer...
-                <br><br>
-                <a href="https://studio.apollographql.com/sandbox/explorer?endpoint=${encodeURIComponent(endpoint)}" target="_blank">
-                  Open in new tab if not loading
-                </a>
-              </div>
-            </iframe>
+            
+            <div class="features">
+              <h3>Features:</h3>
+              <ul>
+                <li>📚 Interactive schema documentation</li>
+                <li>🔍 Query builder with autocomplete</li>
+                <li>⚡ Real-time query execution</li>
+                <li>📊 Results visualization</li>
+                <li>💾 Query history and favorites</li>
+                <li>🔐 Variable support</li>
+              </ul>
+            </div>
           </div>
         </body>
       </html>
