@@ -11,7 +11,7 @@ import {
   EventType,
   EventStatus
 } from '../types/Match';
-import { supabaseService } from '../services/supabase';
+import { PgGraphQLService } from '../services/pg-graphql';
 import { v4 as uuidv4 } from 'uuid';
 
 // Mock data for development (fallback)
@@ -162,10 +162,10 @@ export const matchResolvers = {
     getMatch: async (_: any, { id }: { id: string }): Promise<Match | null> => {
       console.log(`Getting match with ID: ${id}`);
       try {
-        const match = await supabaseService.instance.getMatch(id);
+        const match = await PgGraphQLService.instance.getMatch(id);
         return match as unknown as Match;
       } catch (error) {
-        console.error('Error fetching match from Supabase:', error);
+        console.error('Error fetching match from pg_graphql:', error);
         // Fallback to mock data
         const match = mockMatches.find(m => m.id === id);
         return match || null;
@@ -196,10 +196,10 @@ export const matchResolvers = {
         if (status) filters.status = status;
         if (stage) filters.stage = stage;
         
-        const matches = await supabaseService.instance.getMatches(filters, limit, offset);
+        const matches = await PgGraphQLService.instance.getMatches(filters, limit, offset);
         return matches as unknown as Match[];
       } catch (error) {
-        console.error('Error fetching matches from Supabase:', error);
+        console.error('Error fetching matches from pg_graphql:', error);
         // Fallback to mock data
         let filteredMatches = mockMatches;
 
@@ -228,10 +228,10 @@ export const matchResolvers = {
     getTeam: async (_: any, { id }: { id: string }): Promise<Team | null> => {
       console.log(`Getting team with ID: ${id}`);
       try {
-        const team = await supabaseService.instance.getTeam(id);
+        const team = await PgGraphQLService.instance.getTeam(id);
         return team as unknown as Team;
       } catch (error) {
-        console.error('Error fetching team from Supabase:', error);
+        console.error('Error fetching team from pg_graphql:', error);
         // Fallback to mock data
         const team = mockTeams.find(t => t.id === id);
         return team || null;
@@ -241,10 +241,10 @@ export const matchResolvers = {
     getTeams: async (_: any, { limit = 10, offset = 0 }: { limit?: number; offset?: number }): Promise<Team[]> => {
       console.log(`Getting teams with limit: ${limit}, offset: ${offset}`);
       try {
-        const teams = await supabaseService.instance.getTeams(limit, offset);
+        const teams = await PgGraphQLService.instance.getTeams(limit, offset);
         return teams as unknown as Team[];
       } catch (error) {
-        console.error('Error fetching teams from Supabase:', error);
+        console.error('Error fetching teams from pg_graphql:', error);
         // Fallback to mock data
         return mockTeams.slice(offset, offset + limit);
       }
@@ -253,10 +253,10 @@ export const matchResolvers = {
     getEvent: async (_: any, { id }: { id: string }): Promise<Event | null> => {
       console.log(`Getting event with ID: ${id}`);
       try {
-        const event = await supabaseService.instance.getEvent(id);
+        const event = await PgGraphQLService.instance.getEvent(id);
         return event as unknown as Event;
       } catch (error) {
-        console.error('Error fetching event from Supabase:', error);
+        console.error('Error fetching event from pg_graphql:', error);
         // Fallback to mock data
         const event = mockEvents.find(e => e.id === id);
         return event || null;
@@ -281,10 +281,10 @@ export const matchResolvers = {
         if (status) filters.status = status;
         if (eventType) filters.eventType = eventType;
         
-        const events = await supabaseService.instance.getEvents(filters, limit, offset);
+        const events = await PgGraphQLService.instance.getEvents(filters, limit, offset);
         return events as unknown as Event[];
       } catch (error) {
-        console.error('Error fetching events from Supabase:', error);
+        console.error('Error fetching events from pg_graphql:', error);
         // Fallback to mock data
         let filteredEvents = mockEvents;
 
@@ -318,10 +318,10 @@ export const matchResolvers = {
           scheduled_at: input.scheduledAt
         };
         
-        const newMatch = await supabaseService.instance.createMatch(matchData);
-        return newMatch as Match;
+        const newMatch = await PgGraphQLService.instance.createMatch(matchData);
+        return newMatch as unknown as Match;
       } catch (error) {
-        console.error('Error creating match in Supabase:', error);
+        console.error('Error creating match in pg_graphql:', error);
         // Fallback to mock data
         const teamA = mockTeams.find(t => t.id === input.teamAId);
         const teamB = mockTeams.find(t => t.id === input.teamBId);
@@ -419,10 +419,10 @@ export const matchResolvers = {
           minutes_played: stat.minutesPlayed || 0
         }));
         
-        const playerStats = await supabaseService.instance.submitMatchStats(matchId, statsData);
+        const playerStats = await PgGraphQLService.instance.submitMatchStats(matchId, statsData);
         return playerStats as PlayerMatchStats[];
       } catch (error) {
-        console.error('Error submitting match stats to Supabase:', error);
+        console.error('Error submitting match stats to pg_graphql:', error);
         // Fallback to mock data
         const match = mockMatches.find(m => m.id === matchId);
         if (!match) {

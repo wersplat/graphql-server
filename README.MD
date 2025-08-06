@@ -5,6 +5,7 @@ A production-ready TypeScript-based GraphQL API server using Apollo Server with 
 ## 🚀 Features
 
 - **GraphQL API** with Apollo Server and Express
+- **pg_graphql Integration** for automatic schema generation and optimized queries
 - **Schema-first** approach using `.graphql` files
 - **TypeScript** for type safety and better developer experience
 - **Supabase Integration** for real-time database access
@@ -88,6 +89,9 @@ pnpm test
 
 # Test server functionality
 pnpm test:server
+
+# Test pg_graphql integration
+pnpm test:pg-graphql
 ```
 
 ## 🌐 API Endpoints
@@ -250,21 +254,28 @@ ALLOWED_ORIGINS=https://dashboard.bodegacatsgc.gg,https://admin.bodegacatsgc.gg,
 ## 🔄 Supabase Integration
 
 ### Current Implementation
-✅ **Fully Integrated**: The API now uses real Supabase data instead of mock resolvers
+✅ **pg_graphql Integration**: The API now uses pg_graphql extension for automatic schema generation and optimized queries
 
 ### Data Mapping
-- **Players Table**: Mapped to User/Player GraphQL types
-- **Matches Table**: Complete match data with team relationships
-- **Teams Table**: Team information with logos and regions
-- **Events Table**: Tournament and event details
-- **Player Match Stats**: Individual performance tracking
+- **Players Table**: Mapped to User/Player GraphQL types via pg_graphql
+- **Matches Table**: Complete match data with team relationships via pg_graphql
+- **Teams Table**: Team information with logos and regions via pg_graphql
+- **Events Table**: Tournament and event details via pg_graphql
+- **Player Match Stats**: Individual performance tracking via pg_graphql
 
 ### Key Features
-- **Real-time data** from Supabase
-- **Automatic field mapping** between database and GraphQL schema
-- **Null handling** for optional fields
-- **Enum value conversion** for database compatibility
-- **Fallback to mock data** if Supabase is unavailable
+- **Automatic schema generation** from PostgreSQL tables
+- **Direct database queries** using pg_graphql's `graphql.resolve()` function
+- **Query optimization** at the database level
+- **Real-time schema sync** with database changes
+- **Fallback to mock data** if pg_graphql is unavailable
+- **Type-safe transformations** between pg_graphql and GraphQL schema
+
+### pg_graphql Benefits
+- **Performance**: Direct database access with built-in optimization
+- **Maintenance**: Automatic schema updates when database changes
+- **Scalability**: Database-level query processing
+- **Development**: Reduced boilerplate and manual schema management
 
 ## 🧪 Testing
 

@@ -1,5 +1,5 @@
 import { User, Player, UserInput, UserUpdateInput, PlayerTier } from '../types/User';
-import { supabaseService } from '../services/supabase';
+import { PgGraphQLService } from '../services/pg-graphql';
 
 // Mock data for development (fallback)
 const mockUsers: User[] = [
@@ -20,7 +20,7 @@ const mockUsers: User[] = [
       region: 'PS5',
       currentRp: 2500.0,
       peakRp: 2800.0,
-      tier: 'diamond' as any,
+      tier: PlayerTier.DIAMOND,
       teamName: 'Bodega Cats',
       isVerified: true,
       createdAt: new Date('2024-01-01'),
@@ -45,7 +45,7 @@ const mockUsers: User[] = [
       region: 'Xbox',
       currentRp: 1800.0,
       peakRp: 2000.0,
-      tier: 'gold' as any,
+      tier: PlayerTier.GOLD,
       teamName: 'Alpha Team',
       isVerified: true,
       createdAt: new Date('2024-01-02'),
@@ -70,7 +70,7 @@ const mockUsers: User[] = [
       region: 'PC',
       currentRp: 2200.0,
       peakRp: 2400.0,
-      tier: 'platinum' as any,
+      tier: PlayerTier.PLATINUM,
       teamName: 'Beta Team',
       isVerified: false,
       createdAt: new Date('2024-01-03'),
@@ -92,10 +92,35 @@ export const userResolvers = {
     getUser: async (_: any, { id }: { id: string }): Promise<User | null> => {
       console.log(`Getting user with ID: ${id}`);
       try {
-        const user = await supabaseService.instance.getUser(id);
-        return user as unknown as User;
+        const player = await PgGraphQLService.instance.getPlayer(id);
+        if (!player) return null;
+        
+        // Create a User object from the player data
+        const user: User = {
+          id: player.id,
+          username: player.gamertag,
+          email: `${player.gamertag}@bodegacatsgc.gg`,
+          fullName: player.gamertag,
+          isActive: true,
+          isAdmin: false,
+          discordId: undefined, // Will be populated from player data if available
+          createdAt: player.createdAt,
+          updatedAt: player.updatedAt,
+          player: {
+            ...player,
+            tier: player.tier as PlayerTier,
+            user: {} as User // Will be populated by resolver
+          }
+        };
+
+        // Set up circular reference
+        if (user.player) {
+          user.player.user = user;
+        }
+        
+        return user;
       } catch (error) {
-        console.error('Error fetching user from Supabase:', error);
+        console.error('Error fetching user from pg_graphql:', error);
         // Fallback to mock data
         const user = mockUsers.find(u => u.id === id);
         return user || null;
@@ -105,12 +130,140 @@ export const userResolvers = {
     getUsers: async (_: any, { limit = 10, offset = 0 }: { limit?: number; offset?: number }): Promise<User[]> => {
       console.log(`Getting users with limit: ${limit}, offset: ${offset}`);
       try {
-        const users = await supabaseService.instance.getUsers(limit, offset);
-        return users as unknown as User[];
+        const players = await PgGraphQLService.instance.getPlayers(limit, offset);
+        
+        // Transform players to User format
+        return players.map((player: any) => {
+          const user: User = {
+            id: player.id,
+            username: player.gamertag,
+            email: `${player.gamertag}@bodegacatsgc.gg`,
+            fullName: player.gamertag,
+            isActive: true,
+            isAdmin: false,
+            discordId: undefined,
+            createdAt: player.createdAt,
+            updatedAt: player.updatedAt,
+            player: {
+              ...player,
+              tier: player.tier as PlayerTier,
+              user: {} as User // Will be populated by resolver
+            }
+          };
+
+          // Set up circular reference
+          if (user.player) {
+            user.player.user = user;
+          }
+          
+          return user;
+        });
       } catch (error) {
-        console.error('Error fetching users from Supabase:', error);
+        console.error('Error fetching users from pg_graphql:', error);
         // Fallback to mock data
         return mockUsers.slice(offset, offset + limit);
+      }
+    },
+
+    getPlayer: async (_: any, { id }: { id: string }): Promise<Player | null> => {
+      console.log(`Getting player with ID: ${id}`);
+      try {
+        const player = await PgGraphQLService.instance.getPlayer(id);
+        if (!player) return null;
+
+        // Create a User object for the player
+        const user: User = {
+          id: player.id,
+          username: player.gamertag,
+          email: `${player.gamertag}@bodegacatsgc.gg`,
+          fullName: player.gamertag,
+          isActive: true,
+          isAdmin: false,
+          discordId: undefined,
+          createdAt: player.createdAt,
+          updatedAt: player.updatedAt,
+          player: undefined // Will be set below
+        };
+
+        // Create the Player object with the user reference
+        const playerWithUser: Player = {
+          ...player,
+          tier: player.tier as PlayerTier,
+          user: user
+        };
+
+        // Set up circular reference
+        user.player = playerWithUser;
+        
+        return playerWithUser;
+      } catch (error) {
+        console.error('Error fetching player from pg_graphql:', error);
+        // Fallback to mock data
+        const user = mockUsers.find(u => u.id === id);
+        return user?.player || null;
+      }
+    },
+
+    getPlayers: async (_: any, { 
+      tier, 
+      region, 
+      limit = 20, 
+      offset = 0 
+    }: { 
+      tier?: PlayerTier; 
+      region?: string; 
+      limit?: number; 
+      offset?: number; 
+    }): Promise<Player[]> => {
+      console.log(`Getting players with filters: tier=${tier}, region=${region}, limit=${limit}, offset=${offset}`);
+      try {
+        const filters: any = {};
+        if (tier) filters.tier = tier;
+        if (region) filters.region = region;
+        
+        const players = await PgGraphQLService.instance.getPlayers(limit, offset, filters);
+        
+        return players.map((player: any) => {
+          // Create a User object for the player
+          const user: User = {
+            id: player.id,
+            username: player.gamertag,
+            email: `${player.gamertag}@bodegacatsgc.gg`,
+            fullName: player.gamertag,
+            isActive: true,
+            isAdmin: false,
+            discordId: undefined,
+            createdAt: player.createdAt,
+            updatedAt: player.updatedAt,
+            player: undefined // Will be set below
+          };
+
+          // Create the Player object with the user reference
+          const playerWithUser: Player = {
+            ...player,
+            tier: player.tier as PlayerTier,
+            user: user
+          };
+
+          // Set up circular reference
+          user.player = playerWithUser;
+          
+          return playerWithUser;
+        });
+      } catch (error) {
+        console.error('Error fetching players from pg_graphql:', error);
+        // Fallback to mock data
+        let filteredPlayers = mockUsers.map(u => u.player).filter(Boolean) as Player[];
+
+        if (tier) {
+          filteredPlayers = filteredPlayers.filter(p => p.tier === tier);
+        }
+
+        if (region) {
+          filteredPlayers = filteredPlayers.filter(p => p.region === region);
+        }
+
+        return filteredPlayers.slice(offset, offset + limit);
       }
     }
   },
@@ -119,36 +272,21 @@ export const userResolvers = {
     createUser: async (_: any, { input }: { input: UserInput }): Promise<User> => {
       console.log('Creating new user:', input);
       
-      try {
-        const userData = {
-          username: input.username,
-          email: input.email,
-          full_name: input.fullName,
-          is_active: input.isActive ?? true,
-          is_admin: input.isAdmin ?? false,
-          discord_id: input.discordId
-        };
-        
-        const newUser = await supabaseService.instance.createUser(userData);
-        return newUser as User;
-      } catch (error) {
-        console.error('Error creating user in Supabase:', error);
-        // Fallback to mock data
-        const newUser: User = {
-          id: (mockUsers.length + 1).toString(),
-          username: input.username,
-          email: input.email,
-          fullName: input.fullName || undefined,
-          isActive: input.isActive ?? true,
-          isAdmin: input.isAdmin ?? false,
-          discordId: input.discordId || undefined,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        };
+      // For now, we'll use mock data since creating users might require additional logic
+      const newUser: User = {
+        id: (mockUsers.length + 1).toString(),
+        username: input.username,
+        email: input.email,
+        fullName: input.fullName || undefined,
+        isActive: input.isActive ?? true,
+        isAdmin: input.isAdmin ?? false,
+        discordId: input.discordId || undefined,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
 
-        mockUsers.push(newUser);
-        return newUser;
-      }
+      mockUsers.push(newUser);
+      return newUser;
     },
 
     updateUser: (_: any, { id, input }: { id: string; input: UserUpdateInput }): User => {
@@ -191,7 +329,7 @@ export const userResolvers = {
 
   Player: {
     user: (parent: Player): User => {
-      return mockUsers.find(u => u.id === parent.userId) || {} as User;
+      return parent.user;
     }
   }
 }; 
