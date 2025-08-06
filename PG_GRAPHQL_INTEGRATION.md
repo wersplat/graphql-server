@@ -45,6 +45,7 @@ pnpm test:pg-graphql
 ```
 
 This will test:
+
 - pg_graphql extension availability
 - Players queries
 - Matches queries
@@ -121,16 +122,19 @@ The service automatically maps pg_graphql's schema to your existing GraphQL type
 ## Benefits
 
 ### 1. Performance
+
 - **Direct Database Access**: No intermediate REST API calls
 - **Query Optimization**: pg_graphql automatically optimizes queries
 - **Reduced Latency**: Fewer network hops
 
 ### 2. Development Experience
+
 - **Automatic Schema Sync**: Database changes immediately available
 - **Type Safety**: Full TypeScript support with generated types
 - **Simplified Maintenance**: No need to manually update GraphQL schema
 
 ### 3. Scalability
+
 - **Database-Level Processing**: Queries executed at the database level
 - **Built-in Pagination**: Automatic cursor-based pagination
 - **Efficient Filtering**: Database-level filtering and sorting
@@ -140,21 +144,27 @@ The service automatically maps pg_graphql's schema to your existing GraphQL type
 ### Common Issues
 
 1. **pg_graphql extension not available**
+
    ```
    Error: pg_graphql extension not available
    ```
+
    **Solution**: Install and enable the pg_graphql extension in your Supabase database
 
 2. **Table not found in schema**
+
    ```
    Error: Table "table_name" not found
    ```
+
    **Solution**: Ensure the table exists in your Supabase database and has the correct permissions
 
 3. **Permission denied**
+
    ```
    Error: Permission denied for table
    ```
+
    **Solution**: Check Row Level Security (RLS) policies and user permissions
 
 ### Testing

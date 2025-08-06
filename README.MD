@@ -18,7 +18,7 @@ A production-ready TypeScript-based GraphQL API server using Apollo Server with 
 
 ## 📋 Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - pnpm (recommended) or npm
 - Supabase account with configured database
 - Railway account for deployment
@@ -26,21 +26,25 @@ A production-ready TypeScript-based GraphQL API server using Apollo Server with 
 ## 🛠️ Installation
 
 1. **Clone the repository and navigate to the graphql-server directory:**
+
    ```bash
    cd graphql-server
    ```
 
 2. **Install dependencies:**
+
    ```bash
    pnpm install
    ```
 
 3. **Set up environment variables:**
+
    ```bash
    cp env.example .env
    ```
-   
+
    Edit `.env` with your configuration:
+
    ```env
    # Server Configuration
    PORT=4000
@@ -58,6 +62,7 @@ A production-ready TypeScript-based GraphQL API server using Apollo Server with 
 ## 🏃‍♂️ Running Locally
 
 ### Development Mode
+
 ```bash
 pnpm dev
 ```
@@ -65,6 +70,7 @@ pnpm dev
 This starts the server with hot reloading using `tsx watch`.
 
 ### Production Build
+
 ```bash
 # Build the project
 pnpm build
@@ -74,6 +80,7 @@ pnpm start
 ```
 
 ### Other Commands
+
 ```bash
 # Type checking
 pnpm type-check
@@ -98,24 +105,27 @@ pnpm test:pg-graphql
 
 Once running, the server will be available at:
 
-- **GraphQL Playground**: http://localhost:4000/graphql
-- **Apollo Studio**: http://localhost:4000/studio
-- **Health Check**: http://localhost:4000/health
-- **API Info**: http://localhost:4000/
+- **GraphQL Playground**: <http://localhost:4000/graphql>
+- **Apollo Studio**: <http://localhost:4000/studio>
+- **Health Check**: <http://localhost:4000/health>
+- **API Info**: <http://localhost:4000/>
 
 ## 🎮 GraphQL Playground
 
 ### Local Development
-- **Visit**: http://localhost:4000/graphql
+
+- **Visit**: <http://localhost:4000/graphql>
 - **Click**: "🚀 Open GraphQL Explorer" button
 - **Result**: Opens Apollo Studio Sandbox with your local endpoint
 
 ### Production (Railway)
-- **Visit**: https://graphql.bodegacatsgc.gg/graphql
+
+- **Visit**: <https://graphql.bodegacatsgc.gg/graphql>
 - **Click**: "🚀 Open GraphQL Explorer" button
 - **Result**: Opens Apollo Studio Sandbox with your production endpoint
 
 ### Direct Apollo Studio Links
+
 - **Local**: `https://studio.apollographql.com/sandbox/explorer?endpoint=http%3A//localhost%3A4000/graphql`
 - **Production**: `https://studio.apollographql.com/sandbox/explorer?endpoint=https%3A//graphql.bodegacatsgc.gg/graphql`
 
@@ -124,6 +134,7 @@ Once running, the server will be available at:
 The API provides comprehensive access to Bodega Cats GC data with the following main types and operations:
 
 ### Core Types
+
 - **User/Player**: Player profiles with gamertags, RP, tiers, and team info
 - **Match**: Game results with team scores, stages, and statistics
 - **Team**: Team information with logos and regions
@@ -131,6 +142,7 @@ The API provides comprehensive access to Bodega Cats GC data with the following 
 - **PlayerMatchStats**: Individual player performance data
 
 ### Queries
+
 - `getUser(id: ID!): User` - Get user by ID
 - `getUsers(limit: Int, offset: Int): [User!]!` - List users with pagination
 - `getMatch(id: ID!): Match` - Get match by ID
@@ -143,6 +155,7 @@ The API provides comprehensive access to Bodega Cats GC data with the following 
 - `getPlayers(tier: PlayerTier, region: String, limit: Int, offset: Int): [Player!]!` - List players
 
 ### Mutations
+
 - `submitMatch(input: MatchInput!): Match!` - Create a new match
 - `updateMatch(id: ID!, input: MatchUpdateInput!): Match!` - Update an existing match
 - `deleteMatch(id: ID!): Boolean!` - Delete a match
@@ -154,6 +167,7 @@ The API provides comprehensive access to Bodega Cats GC data with the following 
 ## 🔧 Example Queries
 
 ### Get Player with Full Stats
+
 ```graphql
 query GetPlayer($id: ID!) {
   getUser(id: $id) {
@@ -177,6 +191,7 @@ query GetPlayer($id: ID!) {
 ```
 
 ### Get Recent Matches
+
 ```graphql
 query GetRecentMatches {
   getMatches(limit: 10) {
@@ -205,6 +220,7 @@ query GetRecentMatches {
 ```
 
 ### Submit a New Match
+
 ```graphql
 mutation SubmitMatch($input: MatchInput!) {
   submitMatch(input: $input) {
@@ -225,9 +241,11 @@ mutation SubmitMatch($input: MatchInput!) {
 ## 🚀 Production Deployment on Railway
 
 ### Current Status
-✅ **Deployed and Live**: https://graphql.bodegacatsgc.gg
+
+✅ **Deployed and Live**: <https://graphql.bodegacatsgc.gg>
 
 ### Deployment Features
+
 - **Automatic HTTPS** with Railway SSL certificates
 - **Custom domain** configured
 - **Environment variables** properly set
@@ -235,13 +253,16 @@ mutation SubmitMatch($input: MatchInput!) {
 - **Auto-deployment** from GitHub pushes
 
 ### Railway Configuration
+
 The project includes `railway.json` with optimized settings:
+
 - **Build**: Nixpacks with pnpm
 - **Health Check**: `/health` endpoint
 - **Restart Policy**: Automatic on failure
 - **Timeout**: 600 seconds for health checks
 
 ### Environment Variables (Production)
+
 ```env
 NODE_ENV=production
 PORT=4000
@@ -254,9 +275,11 @@ ALLOWED_ORIGINS=https://dashboard.bodegacatsgc.gg,https://admin.bodegacatsgc.gg,
 ## 🔄 Supabase Integration
 
 ### Current Implementation
+
 ✅ **pg_graphql Integration**: The API now uses pg_graphql extension for automatic schema generation and optimized queries
 
 ### Data Mapping
+
 - **Players Table**: Mapped to User/Player GraphQL types via pg_graphql
 - **Matches Table**: Complete match data with team relationships via pg_graphql
 - **Teams Table**: Team information with logos and regions via pg_graphql
@@ -264,6 +287,7 @@ ALLOWED_ORIGINS=https://dashboard.bodegacatsgc.gg,https://admin.bodegacatsgc.gg,
 - **Player Match Stats**: Individual performance tracking via pg_graphql
 
 ### Key Features
+
 - **Automatic schema generation** from PostgreSQL tables
 - **Direct database queries** using pg_graphql's `graphql.resolve()` function
 - **Query optimization** at the database level
@@ -272,6 +296,7 @@ ALLOWED_ORIGINS=https://dashboard.bodegacatsgc.gg,https://admin.bodegacatsgc.gg,
 - **Type-safe transformations** between pg_graphql and GraphQL schema
 
 ### pg_graphql Benefits
+
 - **Performance**: Direct database access with built-in optimization
 - **Maintenance**: Automatic schema updates when database changes
 - **Scalability**: Database-level query processing
@@ -280,11 +305,14 @@ ALLOWED_ORIGINS=https://dashboard.bodegacatsgc.gg,https://admin.bodegacatsgc.gg,
 ## 🧪 Testing
 
 ### Interactive Testing
+
 Use the GraphQL Playground for interactive testing:
-- **Local**: http://localhost:4000/graphql
-- **Production**: https://graphql.bodegacatsgc.gg/graphql
+
+- **Local**: <http://localhost:4000/graphql>
+- **Production**: <https://graphql.bodegacatsgc.gg/graphql>
 
 ### Automated Testing
+
 ```bash
 # Test server functionality
 pnpm test:server
@@ -369,6 +397,7 @@ graphql-server/
 ## 🔒 Security & Performance
 
 ### Security Features
+
 - **CORS** configured for specific domains including Apollo Studio
 - **Helmet** for security headers with GraphQL playground compatibility
 - **Input validation** through GraphQL schema
@@ -376,6 +405,7 @@ graphql-server/
 - **HTTPS enforcement** in production
 
 ### Performance Optimizations
+
 - **Lazy initialization** of Supabase client
 - **Efficient data transformation** with minimal overhead
 - **Connection pooling** through Supabase client
@@ -388,7 +418,7 @@ graphql-server/
 1. **HTTPS/HTTP Mixed Content Errors:**
    - Ensure `NODE_ENV=production` is set in Railway
    - Check that Railway is serving HTTPS
-   - Use the production URL: https://graphql.bodegacatsgc.gg/graphql
+   - Use the production URL: <https://graphql.bodegacatsgc.gg/graphql>
 
 2. **CORS Errors:**
    - Verify `ALLOWED_ORIGINS` includes Apollo Studio domain
@@ -400,6 +430,7 @@ graphql-server/
    - Review server logs for connection errors
 
 4. **Build Errors:**
+
    ```bash
    # Clean and reinstall
    rm -rf node_modules dist
@@ -413,6 +444,7 @@ graphql-server/
    - Ensure HTTPS is being used
 
 ### Debug Commands
+
 ```bash
 # Check TypeScript compilation
 pnpm type-check
@@ -427,25 +459,29 @@ pnpm build && ls -la dist/
 ## 📞 Support & Maintenance
 
 ### Getting Help
+
 1. **Check the troubleshooting section** above
 2. **Review server logs** in Railway dashboard
 3. **Test with GraphQL Playground** for query issues
 4. **Verify environment variables** are set correctly
 
 ### Regular Maintenance
+
 - **Schema updates**: Modify `src/schema.graphql` and regenerate types
 - **New resolvers**: Add to appropriate resolver file and update main index
 - **Environment changes**: Update `.env.example` and Railway variables
 - **Dependencies**: Regular updates with `pnpm update`
 
 ### Monitoring
-- **Health Check**: https://graphql.bodegacatsgc.gg/health
+
+- **Health Check**: <https://graphql.bodegacatsgc.gg/health>
 - **Railway Dashboard**: Monitor deployment status and logs
 - **Supabase Dashboard**: Monitor database performance and connections
 
 ## 🎯 Next Steps
 
 ### Planned Features
+
 - [ ] **Authentication**: JWT-based auth with Supabase Auth
 - [ ] **Rate Limiting**: Production rate limiting implementation
 - [ ] **Caching**: Redis caching for frequently accessed data
@@ -454,6 +490,7 @@ pnpm build && ls -la dist/
 - [ ] **Documentation**: Auto-generated API documentation
 
 ### Integration Opportunities
+
 - **Frontend Integration**: Connect admin and public frontends
 - **Mobile Apps**: GraphQL API for mobile applications
 - **Third-party Services**: Webhook integrations

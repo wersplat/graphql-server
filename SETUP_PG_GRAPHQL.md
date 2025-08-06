@@ -45,11 +45,13 @@ After running the installation script, you should see:
    - Extension appears in the list
 
 2. **Test the integration**
+
    ```bash
    npm run test:pg-graphql
    ```
 
    You should see output like:
+
    ```
    ✅ pg_graphql extension is available
    ✅ Players query: Working
@@ -77,12 +79,13 @@ CREATE POLICY "Allow authenticated users to read matches" ON matches
 Once pg_graphql is installed:
 
 1. **Start your development server**
+
    ```bash
    npm run dev
    ```
 
 2. **Visit the GraphQL playground**
-   - Go to http://localhost:4000/graphql
+   - Go to <http://localhost:4000/graphql>
    - Try running some queries
 
 3. **Test with your frontend**
@@ -111,16 +114,19 @@ Once pg_graphql is installed:
 ### Debugging
 
 1. **Check extension status**
+
    ```sql
    SELECT * FROM pg_extension WHERE extname = 'pg_graphql';
    ```
 
 2. **Test basic functionality**
+
    ```sql
    SELECT graphql.resolve('query { __schema { types { name } } }'::text, '{}'::jsonb);
    ```
 
 3. **Check table visibility**
+
    ```sql
    SELECT graphql.resolve('
      query {
