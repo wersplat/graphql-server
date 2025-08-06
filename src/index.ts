@@ -137,7 +137,7 @@ async function startServer() {
         }
       };
     },
-    introspection: process.env.NODE_ENV !== 'production'
+    introspection: true
   });
 
   // Start the server
@@ -162,6 +162,119 @@ async function startServer() {
       }
     })
   );
+
+  // Serve GraphQL Playground at root
+  app.get('/', (req, res) => {
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Bodega Cats GC GraphQL API</title>
+          <style>
+            body {
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+              margin: 0;
+              padding: 20px;
+              background: #f5f5f5;
+            }
+            .container {
+              max-width: 1200px;
+              margin: 0 auto;
+              background: white;
+              border-radius: 8px;
+              box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+              overflow: hidden;
+            }
+            .header {
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+              padding: 20px;
+              text-align: center;
+            }
+            .content {
+              padding: 20px;
+            }
+            .endpoints {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 20px;
+              margin: 20px 0;
+            }
+            .endpoint {
+              background: #f8f9fa;
+              padding: 15px;
+              border-radius: 6px;
+              border-left: 4px solid #667eea;
+            }
+            .endpoint h3 {
+              margin: 0 0 10px 0;
+              color: #333;
+            }
+            .endpoint a {
+              color: #667eea;
+              text-decoration: none;
+              font-weight: 500;
+            }
+            .endpoint a:hover {
+              text-decoration: underline;
+            }
+            .status {
+              background: #e8f5e8;
+              color: #2d5a2d;
+              padding: 10px;
+              border-radius: 4px;
+              margin: 20px 0;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>🏀 Bodega Cats GC GraphQL API</h1>
+              <p>Unified API for admin and public frontends</p>
+            </div>
+            <div class="content">
+              <div class="status">
+                ✅ Server is running and healthy
+              </div>
+              
+              <h2>Available Endpoints</h2>
+              <div class="endpoints">
+                <div class="endpoint">
+                  <h3>GraphQL Explorer</h3>
+                  <p>Interactive GraphQL playground with schema documentation</p>
+                  <a href="/graphql" target="_blank">Open GraphQL Explorer →</a>
+                </div>
+                <div class="endpoint">
+                  <h3>Health Check</h3>
+                  <p>Server health and status information</p>
+                  <a href="/health" target="_blank">Check Health →</a>
+                </div>
+                <div class="endpoint">
+                  <h3>API Test</h3>
+                  <p>Basic API functionality test</p>
+                  <a href="/test" target="_blank">Run Test →</a>
+                </div>
+              </div>
+              
+              <h2>Quick Start</h2>
+              <p>Click on "GraphQL Explorer" above to start exploring the API with the interactive playground.</p>
+              
+              <h2>API Documentation</h2>
+              <p>This GraphQL API provides unified access to:</p>
+              <ul>
+                <li><strong>Users & Players:</strong> User accounts and player profiles with gaming statistics</li>
+                <li><strong>Matches:</strong> Competitive matches between teams with detailed statistics</li>
+                <li><strong>Teams:</strong> Team information and rosters</li>
+                <li><strong>Events:</strong> Tournaments and leagues</li>
+                <li><strong>Player Stats:</strong> Detailed player performance data</li>
+              </ul>
+            </div>
+          </div>
+        </body>
+      </html>
+    `);
+  });
 
   // Health check endpoint
   app.get('/health', (req, res) => {
@@ -189,18 +302,7 @@ async function startServer() {
     });
   });
 
-  // Root endpoint
-  app.get('/', (req, res) => {
-    res.json({
-      message: 'Bodega Cats GC GraphQL API',
-      version: '1.0.0',
-      endpoints: {
-        graphql: '/graphql',
-        health: '/health'
-      },
-      documentation: 'Visit /graphql for the GraphQL playground'
-    });
-  });
+
 
   // Error handling middleware
   app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
