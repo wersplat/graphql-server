@@ -22,209 +22,262 @@ async function testPgGraphQL() {
   console.log('🧪 Testing pg_graphql integration...\n');
 
   try {
-    // Test 1: Check if pg_graphql extension is available
-    console.log('1. Checking pg_graphql extension availability...');
+    // Test 1: Check if pg_graphql endpoint is available
+    console.log('1. Checking pg_graphql endpoint availability...');
     
-    const { data: extensionCheck, error: extensionError } = await supabase.rpc('graphql_resolve', {
-      query_text: `
-        query IntrospectionQuery {
-          __schema {
-            types {
-              name
+    // Try to access the GraphQL endpoint directly
+    const graphqlEndpoint = `${supabaseUrl}/graphql/v1`;
+    
+    const response = await fetch(graphqlEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`
+      },
+      body: JSON.stringify({
+        query: `
+          query IntrospectionQuery {
+            __schema {
+              types {
+                name
+              }
             }
           }
-        }
-      `,
-      variables: {}
+        `
+      })
     });
 
-    if (extensionError) {
-      console.log('❌ pg_graphql extension not available:', extensionError.message);
+    if (!response.ok) {
+      console.log('❌ pg_graphql endpoint not available:', response.status, response.statusText);
       console.log('💡 Make sure pg_graphql is installed and enabled in your Supabase database');
       return;
     }
 
-    console.log('✅ pg_graphql extension is available');
+    const extensionCheck = await response.json();
+    
+    if (extensionCheck.errors) {
+      console.log('❌ pg_graphql endpoint error:', extensionCheck.errors[0].message);
+      return;
+    }
+
+    console.log('✅ pg_graphql endpoint is available');
     console.log('   Schema types found:', extensionCheck?.data?.__schema?.types?.length || 0);
 
     // Test 2: Test players query
     console.log('\n2. Testing players query...');
     
-    const playersQuery = `
-      query GetPlayers {
-        playersCollection(first: 3) {
-          edges {
-            node {
-              id
-              gamertag
-              playerRp
-              position
-              regionId
-              createdAt
+    const playersResponse = await fetch(graphqlEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`
+      },
+      body: JSON.stringify({
+        query: `
+          query GetPlayers {
+            playersCollection(first: 3) {
+              edges {
+                node {
+                  id
+                  gamertag
+                  player_rp
+                  position
+                  region_id
+                  created_at
+                }
+              }
             }
           }
-        }
-      }
-    `;
-
-    const { data: playersResult, error: playersError } = await supabase.rpc('graphql_resolve', {
-      query_text: playersQuery,
-      variables: {}
+        `
+      })
     });
 
-    if (playersError) {
-      console.log('❌ Players query failed:', playersError.message);
+    const playersResult = await playersResponse.json();
+
+    if (playersResult.errors) {
+      console.log('❌ Players query failed:', playersResult.errors[0].message);
     } else {
       console.log('✅ Players query successful');
       const players = playersResult?.data?.playersCollection?.edges || [];
       console.log(`   Found ${players.length} players`);
       players.forEach((edge, index) => {
         const player = edge.node;
-        console.log(`   ${index + 1}. ${player.gamertag} (RP: ${player.playerRp || 0})`);
+        console.log(`   ${index + 1}. ${player.gamertag} (RP: ${player.player_rp || 0})`);
       });
     }
 
     // Test 3: Test matches query
     console.log('\n3. Testing matches query...');
     
-    const matchesQuery = `
-      query GetMatches {
-        matchesCollection(first: 3) {
-          edges {
-            node {
-              id
-              teamAName
-              teamBName
-              scoreA
-              scoreB
-              stage
-              playedAt
+    const matchesResponse = await fetch(graphqlEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`
+      },
+      body: JSON.stringify({
+        query: `
+          query GetMatches {
+            matchesCollection(first: 3) {
+              edges {
+                node {
+                  id
+                  team_a_name
+                  team_b_name
+                  score_a
+                  score_b
+                  stage
+                  played_at
+                }
+              }
             }
           }
-        }
-      }
-    `;
-
-    const { data: matchesResult, error: matchesError } = await supabase.rpc('graphql_resolve', {
-      query_text: matchesQuery,
-      variables: {}
+        `
+      })
     });
 
-    if (matchesError) {
-      console.log('❌ Matches query failed:', matchesError.message);
+    const matchesResult = await matchesResponse.json();
+
+    if (matchesResult.errors) {
+      console.log('❌ Matches query failed:', matchesResult.errors[0].message);
     } else {
       console.log('✅ Matches query successful');
       const matches = matchesResult?.data?.matchesCollection?.edges || [];
       console.log(`   Found ${matches.length} matches`);
       matches.forEach((edge, index) => {
         const match = edge.node;
-        console.log(`   ${index + 1}. ${match.teamAName} vs ${match.teamBName} (${match.scoreA || 0}-${match.scoreB || 0})`);
+        console.log(`   ${index + 1}. ${match.team_a_name} vs ${match.team_b_name} (${match.score_a || 0}-${match.score_b || 0})`);
       });
     }
 
     // Test 4: Test teams query
     console.log('\n4. Testing teams query...');
     
-    const teamsQuery = `
-      query GetTeams {
-        teamsCollection(first: 3) {
-          edges {
-            node {
-              id
-              name
-              region
-              isActive
+    const teamsResponse = await fetch(graphqlEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`
+      },
+      body: JSON.stringify({
+        query: `
+          query GetTeams {
+            teamsCollection(first: 3) {
+              edges {
+                node {
+                  id
+                  name
+                  region_id
+                  logo_url
+                }
+              }
             }
           }
-        }
-      }
-    `;
-
-    const { data: teamsResult, error: teamsError } = await supabase.rpc('graphql_resolve', {
-      query_text: teamsQuery,
-      variables: {}
+        `
+      })
     });
 
-    if (teamsError) {
-      console.log('❌ Teams query failed:', teamsError.message);
+    const teamsResult = await teamsResponse.json();
+
+    if (teamsResult.errors) {
+      console.log('❌ Teams query failed:', teamsResult.errors[0].message);
     } else {
       console.log('✅ Teams query successful');
       const teams = teamsResult?.data?.teamsCollection?.edges || [];
       console.log(`   Found ${teams.length} teams`);
       teams.forEach((edge, index) => {
         const team = edge.node;
-        console.log(`   ${index + 1}. ${team.name} (${team.region || 'Unknown'})`);
+        console.log(`   ${index + 1}. ${team.name} (${team.region_id || 'Unknown'})`);
       });
     }
 
     // Test 5: Test events query
     console.log('\n5. Testing events query...');
     
-    const eventsQuery = `
-      query GetEvents {
-        eventsCollection(first: 3) {
-          edges {
-            node {
-              id
-              name
-              eventType
-              status
-              entryFee
-              currentParticipants
+    const eventsResponse = await fetch(graphqlEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`
+      },
+      body: JSON.stringify({
+        query: `
+          query GetEvents {
+            eventsCollection(first: 3) {
+              edges {
+                node {
+                  id
+                  name
+                  type
+                  status
+                  tier
+                  start_date
+                }
+              }
             }
           }
-        }
-      }
-    `;
-
-    const { data: eventsResult, error: eventsError } = await supabase.rpc('graphql_resolve', {
-      query_text: eventsQuery,
-      variables: {}
+        `
+      })
     });
 
-    if (eventsError) {
-      console.log('❌ Events query failed:', eventsError.message);
+    const eventsResult = await eventsResponse.json();
+
+    if (eventsResult.errors) {
+      console.log('❌ Events query failed:', eventsResult.errors[0].message);
     } else {
       console.log('✅ Events query successful');
       const events = eventsResult?.data?.eventsCollection?.edges || [];
       console.log(`   Found ${events.length} events`);
       events.forEach((edge, index) => {
         const event = edge.node;
-        console.log(`   ${index + 1}. ${event.name} (${event.eventType}, $${event.entryFee})`);
+        console.log(`   ${index + 1}. ${event.name} (${event.type}, ${event.tier})`);
       });
     }
 
     // Test 6: Test with variables
     console.log('\n6. Testing query with variables...');
     
-    const variableQuery = `
-      query GetPlayerById($id: UUID!) {
-        playersCollection(filter: { id: { eq: $id } }) {
-          edges {
-            node {
-              id
-              gamertag
-              playerRp
-            }
-          }
-        }
-      }
-    `;
-
     // Get first player ID for testing
     const firstPlayerId = playersResult?.data?.playersCollection?.edges?.[0]?.node?.id;
     
     if (firstPlayerId) {
-      const { data: playerResult, error: playerError } = await supabase.rpc('graphql_resolve', {
-        query_text: variableQuery,
-        variables: { id: firstPlayerId }
+      const variableResponse = await fetch(graphqlEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`
+        },
+        body: JSON.stringify({
+          query: `
+            query GetPlayerById($id: UUID!) {
+              playersCollection(filter: { id: { eq: $id } }) {
+                edges {
+                  node {
+                    id
+                    gamertag
+                    player_rp
+                  }
+                }
+              }
+            }
+          `,
+          variables: { id: firstPlayerId }
+        })
       });
 
-      if (playerError) {
-        console.log('❌ Variable query failed:', playerError.message);
+      const variableResult = await variableResponse.json();
+
+      if (variableResult.errors) {
+        console.log('❌ Variable query failed:', variableResult.errors[0].message);
       } else {
         console.log('✅ Variable query successful');
-        const player = playerResult?.data?.playersCollection?.edges?.[0]?.node;
+        const player = variableResult?.data?.playersCollection?.edges?.[0]?.node;
         if (player) {
           console.log(`   Found player: ${player.gamertag} (ID: ${player.id})`);
         }
@@ -235,7 +288,7 @@ async function testPgGraphQL() {
 
     console.log('\n🎉 pg_graphql integration test completed!');
     console.log('\n📋 Summary:');
-    console.log('✅ pg_graphql extension is working');
+    console.log('✅ pg_graphql endpoint is working');
     console.log('✅ Players query: Working');
     console.log('✅ Matches query: Working');
     console.log('✅ Teams query: Working');

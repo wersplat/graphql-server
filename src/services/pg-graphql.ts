@@ -21,19 +21,34 @@ export class PgGraphQLService {
 
   /**
    * Execute a GraphQL query using pg_graphql extension
-   * This calls the graphql.resolve() function in PostgreSQL
+   * This calls the pg_graphql endpoint directly
    */
-  private async executeGraphQLQuery(query: string, variables?: any) {
+  private async executeGraphQLQuery(query: string, variables?: any): Promise<any> {
     try {
-      // Use pg_graphql's graphql.resolve() function
-      const { data, error } = await this.client.rpc('graphql_resolve', {
-        query_text: query,
-        variables: variables || {}
+      const graphqlEndpoint = `${process.env.SUPABASE_URL}/graphql/v1`;
+      
+      const response = await fetch(graphqlEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': process.env.SUPABASE_ANON_KEY!,
+          'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`
+        },
+        body: JSON.stringify({
+          query,
+          variables: variables || {}
+        })
       });
 
-      if (error) {
-        console.error('pg_graphql query error:', error);
-        throw new Error(`pg_graphql query failed: ${error.message}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json() as any;
+      
+      if (data.errors) {
+        console.error('pg_graphql query error:', data.errors);
+        throw new Error(`pg_graphql query failed: ${data.errors[0].message}`);
       }
 
       return data;
@@ -52,21 +67,34 @@ export class PgGraphQLService {
         playersCollection(filter: { id: { eq: $id } }) {
           edges {
             node {
+              nodeId
               id
               gamertag
-              alternateGamertag
-              discordId
-              playerRp
+              alternate_gamertag
+              discord_id
+              player_rp
               position
-              regionId
-              salaryTier
-              isRookie
-              monthlyValue
-              performanceScore
-              playerRankScore
-              currentTeamId
-              twitterId
-              createdAt
+              region_id
+              salary_tier
+              is_rookie
+              monthly_value
+              performance_score
+              player_rank_score
+              current_team_id
+              twitter_id
+              created_at
+              teams {
+                nodeId
+                id
+                name
+                logo_url
+                region_id
+                current_rp
+                global_rank
+                leaderboard_tier
+                money_won
+                created_at
+              }
             }
           }
         }
@@ -86,16 +114,16 @@ export class PgGraphQLService {
       id: player.id,
       userId: player.id,
       gamertag: player.gamertag,
-      region: player.regionId,
-      currentRp: player.playerRp || 0,
-      peakRp: player.playerRp || 0,
-      tier: this.calculateTier(player.playerRp || 0),
+      region: player.region_id,
+      currentRp: player.player_rp || 0,
+      peakRp: player.player_rp || 0,
+      tier: this.calculateTier(player.player_rp || 0),
       position: player.position,
-      salaryTier: player.salaryTier,
-      teamName: undefined, // Will be populated by resolver
+      salaryTier: player.salary_tier,
+      teamName: player.teams?.name || undefined,
       isVerified: false,
-      createdAt: new Date(player.createdAt),
-      updatedAt: new Date(player.createdAt)
+      createdAt: new Date(player.created_at),
+      updatedAt: new Date(player.created_at)
     };
   }
 
@@ -104,41 +132,52 @@ export class PgGraphQLService {
    */
   async getPlayers(limit = 20, offset = 0, filters?: any) {
     let filterClause = '';
-    let variables: any = { limit, offset };
+    let variables: any = { limit };
 
     if (filters?.tier) {
-      filterClause = `filter: { playerRp: { gte: ${this.getTierMinRp(filters.tier)} } }`;
+      filterClause = `filter: { player_rp: { gte: ${this.getTierMinRp(filters.tier)} } }`;
     }
 
     if (filters?.region) {
-      filterClause = `filter: { regionId: { eq: "${filters.region}" } }`;
+      filterClause = `filter: { region_id: { eq: "${filters.region}" } }`;
     }
 
     const query = `
-      query GetPlayers($limit: Int!, $offset: Int!) {
+      query GetPlayers($limit: Int!) {
         playersCollection(
           first: $limit
-          after: $offset
           ${filterClause}
-          orderBy: [{ playerRp: DESC_NULLS_LAST }]
         ) {
           edges {
             node {
+              nodeId
               id
               gamertag
-              alternateGamertag
-              discordId
-              playerRp
+              alternate_gamertag
+              discord_id
+              player_rp
               position
-              regionId
-              salaryTier
-              isRookie
-              monthlyValue
-              performanceScore
-              playerRankScore
-              currentTeamId
-              twitterId
-              createdAt
+              region_id
+              salary_tier
+              is_rookie
+              monthly_value
+              performance_score
+              player_rank_score
+              current_team_id
+              twitter_id
+              created_at
+              teams {
+                nodeId
+                id
+                name
+                logo_url
+                region_id
+                current_rp
+                global_rank
+                leaderboard_tier
+                money_won
+                created_at
+              }
             }
           }
           pageInfo {
@@ -163,16 +202,16 @@ export class PgGraphQLService {
         id: player.id,
         userId: player.id,
         gamertag: player.gamertag,
-        region: player.regionId,
-        currentRp: player.playerRp || 0,
-        peakRp: player.playerRp || 0,
-        tier: this.calculateTier(player.playerRp || 0),
+        region: player.region_id,
+        currentRp: player.player_rp || 0,
+        peakRp: player.player_rp || 0,
+        tier: this.calculateTier(player.player_rp || 0),
         position: player.position,
-        salaryTier: player.salaryTier,
-        teamName: undefined,
+        salaryTier: player.salary_tier,
+        teamName: player.teams?.name || undefined,
         isVerified: false,
-        createdAt: new Date(player.createdAt),
-        updatedAt: new Date(player.createdAt)
+        createdAt: new Date(player.created_at),
+        updatedAt: new Date(player.created_at)
       };
     });
   }
@@ -186,35 +225,34 @@ export class PgGraphQLService {
         matchesCollection(filter: { id: { eq: $id } }) {
           edges {
             node {
+              nodeId
               id
-              eventId
-              teamAId
-              teamBId
-              teamAName
-              teamBName
+              event_id
+              team_a_id
+              team_b_id
+              team_a_name
+              team_b_name
               stage
-              gameNumber
-              scoreA
-              scoreB
-              winnerId
-              winnerName
-              boxscoreUrl
-              playedAt
-              event {
+              game_number
+              score_a
+              score_b
+              winner_id
+              winner_name
+              boxscore_url
+              played_at
+              events {
+                nodeId
                 id
                 name
                 description
-                eventType
+                type
                 tier
                 status
-                entryFee
-                maxParticipants
-                currentParticipants
-                startDate
-                endDate
-                createdBy
-                createdAt
-                updatedAt
+                prize_pool
+                max_rp
+                start_date
+                end_date
+                region_id
               }
             }
           }
@@ -232,41 +270,41 @@ export class PgGraphQLService {
     
     return {
       id: match.id,
-      eventId: match.eventId,
-      teamAId: match.teamAId,
-      teamBId: match.teamBId,
-      teamAName: match.teamAName,
-      teamBName: match.teamBName,
+      eventId: match.event_id,
+      teamAId: match.team_a_id,
+      teamBId: match.team_b_id,
+      teamAName: match.team_a_name,
+      teamBName: match.team_b_name,
       stage: match.stage,
-      gameNumber: match.gameNumber || 1,
+      gameNumber: match.game_number || 1,
       status: this.determineMatchStatus(match),
-      scoreA: match.scoreA,
-      scoreB: match.scoreB,
-      winnerId: match.winnerId,
-      winnerName: match.winnerName,
-      boxscoreUrl: match.boxscoreUrl,
+      scoreA: match.score_a,
+      scoreB: match.score_b,
+      winnerId: match.winner_id,
+      winnerName: match.winner_name,
+      boxscoreUrl: match.boxscore_url,
       scheduledAt: undefined, // Not in your schema
-      playedAt: match.playedAt ? new Date(match.playedAt) : undefined,
+      playedAt: match.played_at ? new Date(match.played_at) : undefined,
       startedAt: undefined, // Not in your schema
       endedAt: undefined, // Not in your schema
       createdAt: new Date(),
       updatedAt: new Date(),
       isLive: false,
-      event: match.event ? {
-        id: match.event.id,
-        name: match.event.name,
-        description: match.event.description,
-        eventType: match.event.eventType,
-        tier: match.event.tier,
-        status: match.event.status,
-        entryFee: match.event.entryFee,
-        maxParticipants: match.event.maxParticipants,
-        currentParticipants: match.event.currentParticipants,
-        startDate: match.event.startDate ? new Date(match.event.startDate) : undefined,
-        endDate: match.event.endDate ? new Date(match.event.endDate) : undefined,
-        createdBy: match.event.createdBy,
-        createdAt: new Date(match.event.createdAt),
-        updatedAt: match.event.updatedAt ? new Date(match.event.updatedAt) : undefined
+      event: match.events ? {
+        id: match.events.id,
+        name: match.events.name,
+        description: match.events.description,
+        eventType: match.events.type,
+        tier: match.events.tier,
+        status: match.events.status,
+        entryFee: 0, // Not in schema, defaulting to 0
+        maxParticipants: undefined, // Not in schema
+        currentParticipants: 0, // Not in schema, defaulting to 0
+        startDate: match.events.start_date ? new Date(match.events.start_date) : undefined,
+        endDate: match.events.end_date ? new Date(match.events.end_date) : undefined,
+        createdBy: 'system', // Not in schema, defaulting to system
+        createdAt: new Date(),
+        updatedAt: undefined
       } : undefined,
       teamAPlayers: [],
       teamBPlayers: []
@@ -278,14 +316,14 @@ export class PgGraphQLService {
    */
   async getMatches(filters: any = {}, limit = 20, offset = 0) {
     let filterClause = '';
-    let variables: any = { limit, offset };
+    let variables: any = { limit };
 
     if (filters.teamId) {
-      filterClause = `filter: { or: [{ teamAId: { eq: "${filters.teamId}" } }, { teamBId: { eq: "${filters.teamId}" } }] }`;
+      filterClause = `filter: { or: [{ team_a_id: { eq: "${filters.teamId}" } }, { team_b_id: { eq: "${filters.teamId}" } }] }`;
     }
 
     if (filters.eventId) {
-      filterClause = `filter: { eventId: { eq: "${filters.eventId}" } }`;
+      filterClause = `filter: { event_id: { eq: "${filters.eventId}" } }`;
     }
 
     if (filters.stage) {
@@ -293,44 +331,41 @@ export class PgGraphQLService {
     }
 
     const query = `
-      query GetMatches($limit: Int!, $offset: Int!) {
+      query GetMatches($limit: Int!) {
         matchesCollection(
           first: $limit
-          after: $offset
           ${filterClause}
-          orderBy: [{ playedAt: DESC_NULLS_LAST }]
         ) {
           edges {
             node {
+              nodeId
               id
-              eventId
-              teamAId
-              teamBId
-              teamAName
-              teamBName
+              event_id
+              team_a_id
+              team_b_id
+              team_a_name
+              team_b_name
               stage
-              gameNumber
-              scoreA
-              scoreB
-              winnerId
-              winnerName
-              boxscoreUrl
-              playedAt
-              event {
+              game_number
+              score_a
+              score_b
+              winner_id
+              winner_name
+              boxscore_url
+              played_at
+              events {
+                nodeId
                 id
                 name
                 description
-                eventType
+                type
                 tier
                 status
-                entryFee
-                maxParticipants
-                currentParticipants
-                startDate
-                endDate
-                createdBy
-                createdAt
-                updatedAt
+                prize_pool
+                max_rp
+                start_date
+                end_date
+                region_id
               }
             }
           }
@@ -348,41 +383,41 @@ export class PgGraphQLService {
       const match = edge.node;
       return {
         id: match.id,
-        eventId: match.eventId,
-        teamAId: match.teamAId,
-        teamBId: match.teamBId,
-        teamAName: match.teamAName,
-        teamBName: match.teamBName,
+        eventId: match.event_id,
+        teamAId: match.team_a_id,
+        teamBId: match.team_b_id,
+        teamAName: match.team_a_name,
+        teamBName: match.team_b_name,
         stage: match.stage,
-        gameNumber: match.gameNumber || 1,
+        gameNumber: match.game_number || 1,
         status: this.determineMatchStatus(match),
-        scoreA: match.scoreA,
-        scoreB: match.scoreB,
-        winnerId: match.winnerId,
-        winnerName: match.winnerName,
-        boxscoreUrl: match.boxscoreUrl,
+        scoreA: match.score_a,
+        scoreB: match.score_b,
+        winnerId: match.winner_id,
+        winnerName: match.winner_name,
+        boxscoreUrl: match.boxscore_url,
         scheduledAt: undefined,
-        playedAt: match.playedAt ? new Date(match.playedAt) : undefined,
+        playedAt: match.played_at ? new Date(match.played_at) : undefined,
         startedAt: undefined,
         endedAt: undefined,
         createdAt: new Date(),
         updatedAt: new Date(),
         isLive: false,
-        event: match.event ? {
-          id: match.event.id,
-          name: match.event.name,
-          description: match.event.description,
-          eventType: match.event.eventType,
-          tier: match.event.tier,
-          status: match.event.status,
-          entryFee: match.event.entryFee,
-          maxParticipants: match.event.maxParticipants,
-          currentParticipants: match.event.currentParticipants,
-          startDate: match.event.startDate ? new Date(match.event.startDate) : undefined,
-          endDate: match.event.endDate ? new Date(match.event.endDate) : undefined,
-          createdBy: match.event.createdBy,
-          createdAt: new Date(match.event.createdAt),
-          updatedAt: match.event.updatedAt ? new Date(match.event.updatedAt) : undefined
+        event: match.events ? {
+          id: match.events.id,
+          name: match.events.name,
+          description: match.events.description,
+          eventType: match.events.type,
+          tier: match.events.tier,
+          status: match.events.status,
+          entryFee: 0, // Not in schema, defaulting to 0
+          maxParticipants: undefined, // Not in schema
+          currentParticipants: 0, // Not in schema, defaulting to 0
+          startDate: match.events.start_date ? new Date(match.events.start_date) : undefined,
+          endDate: match.events.end_date ? new Date(match.events.end_date) : undefined,
+          createdBy: 'system', // Not in schema, defaulting to system
+          createdAt: new Date(),
+          updatedAt: undefined
         } : undefined,
         teamAPlayers: [],
         teamBPlayers: []
@@ -395,29 +430,29 @@ export class PgGraphQLService {
    */
   async getTeams(limit = 10, offset = 0) {
     const query = `
-      query GetTeams($limit: Int!, $offset: Int!) {
+      query GetTeams($limit: Int!) {
         teamsCollection(
           first: $limit
-          after: $offset
-          orderBy: [{ name: ASC }]
         ) {
           edges {
             node {
+              nodeId
               id
               name
-              description
-              logoUrl
-              region
-              isActive
-              createdAt
-              updatedAt
+              logo_url
+              region_id
+              current_rp
+              global_rank
+              leaderboard_tier
+              money_won
+              created_at
             }
           }
         }
       }
     `;
 
-    const result = await this.executeGraphQLQuery(query, { limit, offset });
+    const result = await this.executeGraphQLQuery(query, { limit });
     
     if (!result?.data?.teamsCollection?.edges) {
       return [];
@@ -428,12 +463,12 @@ export class PgGraphQLService {
       return {
         id: team.id,
         name: team.name,
-        description: team.description,
-        logoUrl: team.logoUrl,
-        region: team.region,
-        isActive: team.isActive,
-        createdAt: new Date(team.createdAt),
-        updatedAt: team.updatedAt ? new Date(team.updatedAt) : undefined
+        description: undefined, // Not in schema
+        logoUrl: team.logo_url,
+        region: team.region_id,
+        isActive: true, // Not in schema, defaulting to true
+        createdAt: new Date(team.created_at || Date.now()),
+        updatedAt: undefined
       };
     });
   }
@@ -447,14 +482,16 @@ export class PgGraphQLService {
         teamsCollection(filter: { id: { eq: $id } }) {
           edges {
             node {
+              nodeId
               id
               name
-              description
-              logoUrl
-              region
-              isActive
-              createdAt
-              updatedAt
+              logo_url
+              region_id
+              current_rp
+              global_rank
+              leaderboard_tier
+              money_won
+              created_at
             }
           }
         }
@@ -472,12 +509,12 @@ export class PgGraphQLService {
     return {
       id: team.id,
       name: team.name,
-      description: team.description,
-      logoUrl: team.logoUrl,
-      region: team.region,
-      isActive: team.isActive,
-      createdAt: new Date(team.createdAt),
-      updatedAt: team.updatedAt ? new Date(team.updatedAt) : undefined
+      description: undefined, // Not in schema
+      logoUrl: team.logo_url,
+      region: team.region_id,
+      isActive: true, // Not in schema, defaulting to true
+      createdAt: new Date(team.created_at || Date.now()),
+      updatedAt: undefined
     };
   }
 
@@ -486,40 +523,36 @@ export class PgGraphQLService {
    */
   async getEvents(filters: any = {}, limit = 10, offset = 0) {
     let filterClause = '';
-    let variables: any = { limit, offset };
+    let variables: any = { limit };
 
     if (filters.status) {
       filterClause = `filter: { status: { eq: "${filters.status}" } }`;
     }
 
-    if (filters.eventType) {
-      filterClause = `filter: { eventType: { eq: "${filters.eventType}" } }`;
+    if (filters.type) {
+      filterClause = `filter: { type: { eq: "${filters.type}" } }`;
     }
 
     const query = `
-      query GetEvents($limit: Int!, $offset: Int!) {
+      query GetEvents($limit: Int!) {
         eventsCollection(
           first: $limit
-          after: $offset
           ${filterClause}
-          orderBy: [{ startDate: DESC_NULLS_LAST }]
         ) {
           edges {
             node {
+              nodeId
               id
               name
               description
-              eventType
+              type
               tier
               status
-              entryFee
-              maxParticipants
-              currentParticipants
-              startDate
-              endDate
-              createdBy
-              createdAt
-              updatedAt
+              prize_pool
+              max_rp
+              start_date
+              end_date
+              region_id
             }
           }
         }
@@ -538,17 +571,17 @@ export class PgGraphQLService {
         id: event.id,
         name: event.name,
         description: event.description,
-        eventType: event.eventType,
+        eventType: event.type,
         tier: event.tier,
         status: event.status,
-        entryFee: event.entryFee,
-        maxParticipants: event.maxParticipants,
-        currentParticipants: event.currentParticipants,
-        startDate: event.startDate ? new Date(event.startDate) : undefined,
-        endDate: event.endDate ? new Date(event.endDate) : undefined,
-        createdBy: event.createdBy,
-        createdAt: new Date(event.createdAt),
-        updatedAt: event.updatedAt ? new Date(event.updatedAt) : undefined
+        entryFee: 0, // Not in schema, defaulting to 0
+        maxParticipants: undefined, // Not in schema
+        currentParticipants: 0, // Not in schema, defaulting to 0
+        startDate: event.start_date ? new Date(event.start_date) : undefined,
+        endDate: event.end_date ? new Date(event.end_date) : undefined,
+        createdBy: 'system', // Not in schema, defaulting to system
+        createdAt: new Date(),
+        updatedAt: undefined
       };
     });
   }
@@ -562,20 +595,18 @@ export class PgGraphQLService {
         eventsCollection(filter: { id: { eq: $id } }) {
           edges {
             node {
+              nodeId
               id
               name
               description
-              eventType
+              type
               tier
               status
-              entryFee
-              maxParticipants
-              currentParticipants
-              startDate
-              endDate
-              createdBy
-              createdAt
-              updatedAt
+              prize_pool
+              max_rp
+              start_date
+              end_date
+              region_id
             }
           }
         }
@@ -594,17 +625,17 @@ export class PgGraphQLService {
       id: event.id,
       name: event.name,
       description: event.description,
-      eventType: event.eventType,
+      eventType: event.type,
       tier: event.tier,
       status: event.status,
-      entryFee: event.entryFee,
-      maxParticipants: event.maxParticipants,
-      currentParticipants: event.currentParticipants,
-      startDate: event.startDate ? new Date(event.startDate) : undefined,
-      endDate: event.endDate ? new Date(event.endDate) : undefined,
-      createdBy: event.createdBy,
-      createdAt: new Date(event.createdAt),
-      updatedAt: event.updatedAt ? new Date(event.updatedAt) : undefined
+      entryFee: 0, // Not in schema, defaulting to 0
+      maxParticipants: undefined, // Not in schema
+      currentParticipants: 0, // Not in schema, defaulting to 0
+      startDate: event.start_date ? new Date(event.start_date) : undefined,
+      endDate: event.end_date ? new Date(event.end_date) : undefined,
+      createdBy: 'system', // Not in schema, defaulting to system
+      createdAt: new Date(),
+      updatedAt: undefined
     };
   }
 
