@@ -188,6 +188,138 @@ async function startCleanServer() {
 
   await server.start();
 
+  // Serve Apollo Studio Sandbox for GET requests to /graphql
+  app.get('/graphql', (req, res) => {
+    // Force HTTPS for production deployments
+    const protocol = process.env.NODE_ENV === 'production' ? 'https' : req.protocol;
+    const endpoint = protocol + '://' + req.get('host') + '/graphql';
+    const studioUrl = `https://studio.apollographql.com/sandbox/explorer?endpoint=${encodeURIComponent(endpoint)}`;
+    
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>GraphQL Explorer - Bodega Cats GC (Clean API)</title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <style>
+            body {
+              margin: 0;
+              padding: 0;
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              min-height: 100vh;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            .container {
+              background: white;
+              border-radius: 16px;
+              padding: 40px;
+              text-align: center;
+              box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+              max-width: 500px;
+              width: 90%;
+            }
+            .logo {
+              font-size: 48px;
+              margin-bottom: 20px;
+            }
+            h1 {
+              color: #333;
+              margin-bottom: 10px;
+              font-size: 28px;
+            }
+            p {
+              color: #666;
+              margin-bottom: 30px;
+              line-height: 1.6;
+            }
+            .btn {
+              display: inline-block;
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+              padding: 16px 32px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: 600;
+              font-size: 16px;
+              transition: transform 0.2s, box-shadow 0.2s;
+              box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            }
+            .btn:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+            }
+            .endpoint {
+              background: #f8f9fa;
+              border: 1px solid #e9ecef;
+              border-radius: 8px;
+              padding: 16px;
+              margin-top: 20px;
+              font-family: 'Monaco', 'Menlo', monospace;
+              font-size: 14px;
+              color: #495057;
+              word-break: break-all;
+            }
+            .features {
+              margin-top: 30px;
+              text-align: left;
+            }
+            .features h3 {
+              color: #333;
+              margin-bottom: 15px;
+            }
+            .features ul {
+              color: #666;
+              line-height: 1.8;
+              padding-left: 20px;
+            }
+            .clean-badge {
+              background: #10b981;
+              color: white;
+              padding: 4px 8px;
+              border-radius: 4px;
+              font-size: 12px;
+              font-weight: 600;
+              margin-left: 8px;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="logo">🏀</div>
+            <h1>Bodega Cats GC GraphQL Explorer<span class="clean-badge">CLEAN API</span></h1>
+            <p>Interactive GraphQL playground with simplified, flattened schema. No more verbose Relay-style queries!</p>
+            
+            <a href="${studioUrl}" target="_blank" class="btn">
+              🚀 Open GraphQL Explorer
+            </a>
+            
+            <div class="endpoint">
+              <strong>Endpoint:</strong> ${endpoint}
+            </div>
+            
+            <div class="features">
+              <h3>Clean API Features:</h3>
+              <ul>
+                <li>✨ Simplified data access (no edges.node nesting)</li>
+                <li>🎯 Clean field names (camelCase instead of snake_case)</li>
+                <li>📄 Simple pagination (limit/offset instead of cursors)</li>
+                <li>📚 Interactive schema documentation</li>
+                <li>🔍 Query builder with autocomplete</li>
+                <li>⚡ Real-time query execution</li>
+                <li>📊 Results visualization</li>
+                <li>💾 Query history and favorites</li>
+              </ul>
+            </div>
+          </div>
+        </body>
+      </html>
+    `);
+  });
+
   // Apply Apollo Server middleware
   app.use('/graphql', expressMiddleware(server, {
     context: async ({ req }) => {
@@ -218,9 +350,15 @@ async function startCleanServer() {
       endpoints: {
         graphql: '/graphql',
         health: '/health',
+        studio: '/studio',
       },
       documentation: 'Visit /graphql for the GraphQL Playground',
     });
+  });
+
+  // Serve Apollo Studio Explorer
+  app.get('/studio', (req, res) => {
+    res.redirect('https://studio.apollographql.com/sandbox/explorer?endpoint=' + encodeURIComponent(req.protocol + '://' + req.get('host') + '/graphql'));
   });
 
   // Error handling middleware
