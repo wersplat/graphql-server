@@ -1,5 +1,6 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { PlayerPosition } from '../types/User';
+import { MatchStage, MatchStatus, EventType, EventTier, EventStatus } from '../types/Match';
 
 export class PgGraphQLService {
   private client: SupabaseClient;
@@ -276,7 +277,7 @@ export class PgGraphQLService {
       teamBId: match.team_b_id,
       teamAName: match.team_a_name,
       teamBName: match.team_b_name,
-      stage: match.stage,
+      stage: this.mapStageValue(match.stage),
       gameNumber: match.game_number || 1,
       status: this.determineMatchStatus(match),
       scoreA: match.score_a,
@@ -295,9 +296,9 @@ export class PgGraphQLService {
         id: match.events.id,
         name: match.events.name,
         description: match.events.description,
-        eventType: match.events.type,
-        tier: match.events.tier,
-        status: match.events.status,
+        eventType: this.mapEventTypeValue(match.events.type),
+        tier: this.mapEventTierValue(match.events.tier),
+        status: this.mapEventStatusValue(match.events.status),
         entryFee: 0, // Not in schema, defaulting to 0
         maxParticipants: undefined, // Not in schema
         currentParticipants: 0, // Not in schema, defaulting to 0
@@ -389,7 +390,7 @@ export class PgGraphQLService {
         teamBId: match.team_b_id,
         teamAName: match.team_a_name,
         teamBName: match.team_b_name,
-        stage: match.stage,
+        stage: this.mapStageValue(match.stage),
         gameNumber: match.game_number || 1,
         status: this.determineMatchStatus(match),
         scoreA: match.score_a,
@@ -408,9 +409,9 @@ export class PgGraphQLService {
           id: match.events.id,
           name: match.events.name,
           description: match.events.description,
-          eventType: match.events.type,
-          tier: match.events.tier,
-          status: match.events.status,
+          eventType: this.mapEventTypeValue(match.events.type),
+          tier: this.mapEventTierValue(match.events.tier),
+          status: this.mapEventStatusValue(match.events.status),
           entryFee: 0, // Not in schema, defaulting to 0
           maxParticipants: undefined, // Not in schema
           currentParticipants: 0, // Not in schema, defaulting to 0
@@ -572,9 +573,9 @@ export class PgGraphQLService {
         id: event.id,
         name: event.name,
         description: event.description,
-        eventType: event.type,
-        tier: event.tier,
-        status: event.status,
+        eventType: this.mapEventTypeValue(event.type),
+        tier: this.mapEventTierValue(event.tier),
+        status: this.mapEventStatusValue(event.status),
         entryFee: 0, // Not in schema, defaulting to 0
         maxParticipants: undefined, // Not in schema
         currentParticipants: 0, // Not in schema, defaulting to 0
@@ -626,9 +627,9 @@ export class PgGraphQLService {
       id: event.id,
       name: event.name,
       description: event.description,
-      eventType: event.type,
-      tier: event.tier,
-      status: event.status,
+      eventType: this.mapEventTypeValue(event.type),
+      tier: this.mapEventTierValue(event.tier),
+      status: this.mapEventStatusValue(event.status),
       entryFee: 0, // Not in schema, defaulting to 0
       maxParticipants: undefined, // Not in schema
       currentParticipants: 0, // Not in schema, defaulting to 0
@@ -692,9 +693,9 @@ export class PgGraphQLService {
       teamBId: match.teamBId,
       teamAName: match.teamAName,
       teamBName: match.teamBName,
-      stage: match.stage,
+      stage: this.mapStageValue(match.stage),
       gameNumber: match.gameNumber || 1,
-      status: 'scheduled',
+      status: MatchStatus.SCHEDULED,
       scoreA: match.scoreA,
       scoreB: match.scoreB,
       winnerId: match.winnerId,
@@ -822,10 +823,10 @@ export class PgGraphQLService {
     return tierMap[tier] || 0;
   }
 
-  private determineMatchStatus(match: any): string {
-    if (match.winnerId) return 'completed';
-    if (match.scoreA !== null || match.scoreB !== null) return 'in_progress';
-    return 'scheduled';
+  private determineMatchStatus(match: any): MatchStatus {
+    if (match.winnerId) return MatchStatus.COMPLETED;
+    if (match.scoreA !== null || match.scoreB !== null) return MatchStatus.IN_PROGRESS;
+    return MatchStatus.SCHEDULED;
   }
 
   /**
@@ -843,6 +844,88 @@ export class PgGraphQLService {
     };
     
     return positionMap[position] || undefined;
+  }
+
+  /**
+   * Map database stage values to GraphQL enum values
+   */
+  private mapStageValue(stage: string | null | undefined): MatchStage | undefined {
+    if (!stage) return undefined;
+    
+    const stageMap: { [key: string]: MatchStage } = {
+      'Regular Season': MatchStage.REGULAR_SEASON,
+      'Group Play': MatchStage.GROUP_PLAY,
+      'Round 1': MatchStage.ROUND_1,
+      'Round 2': MatchStage.ROUND_2,
+      'Round 3': MatchStage.ROUND_3,
+      'Round 4': MatchStage.ROUND_4,
+      'Semi Finals': MatchStage.SEMI_FINALS,
+      'Finals': MatchStage.FINALS,
+      'Grand Finals': MatchStage.GRAND_FINALS,
+      'L1': MatchStage.L1,
+      'L2': MatchStage.L2,
+      'L3': MatchStage.L3,
+      'L4': MatchStage.L4,
+      'L5': MatchStage.L5,
+      'W1': MatchStage.W1,
+      'W2': MatchStage.W2,
+      'W3': MatchStage.W3,
+      'W4': MatchStage.W4,
+      'LF': MatchStage.LF,
+      'WF': MatchStage.WF
+    };
+    
+    return stageMap[stage] || undefined;
+  }
+
+  /**
+   * Map database event type values to GraphQL enum values
+   */
+  private mapEventTypeValue(type: string | null | undefined): EventType | undefined {
+    if (!type) return undefined;
+    
+    const typeMap: { [key: string]: EventType } = {
+      'league': EventType.LEAGUE,
+      'tournament': EventType.TOURNAMENT,
+      'League': EventType.LEAGUE,
+      'Tournament': EventType.TOURNAMENT
+    };
+    
+    return typeMap[type] || undefined;
+  }
+
+  /**
+   * Map database event tier values to GraphQL enum values
+   */
+  private mapEventTierValue(tier: string | null | undefined): EventTier | undefined {
+    if (!tier) return undefined;
+    
+    const tierMap: { [key: string]: EventTier } = {
+      'T1': EventTier.T1,
+      'T2': EventTier.T2,
+      'T3': EventTier.T3,
+      'T4': EventTier.T4
+    };
+    
+    return tierMap[tier] || undefined;
+  }
+
+  /**
+   * Map database event status values to GraphQL enum values
+   */
+  private mapEventStatusValue(status: string | null | undefined): EventStatus | undefined {
+    if (!status) return undefined;
+    
+    const statusMap: { [key: string]: EventStatus } = {
+      'draft': EventStatus.DRAFT,
+      'open': EventStatus.OPEN,
+      'registration_closed': EventStatus.REGISTRATION_CLOSED,
+      'in_progress': EventStatus.IN_PROGRESS,
+      'completed': EventStatus.COMPLETED,
+      'cancelled': EventStatus.CANCELLED
+    };
+    
+    return statusMap[status] || undefined;
   }
 
   // Singleton instance
