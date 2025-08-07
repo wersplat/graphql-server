@@ -5,26 +5,27 @@ console.log('🔨 Building GraphQL server...');
 
 // Copy schema files
 try {
-  // Copy the original schema file
-  const srcPath = path.join(__dirname, '..', 'src', 'schema.graphql');
-  const destPath = path.join(__dirname, '..', 'dist', 'schema.graphql');
+  // Copy the clean schema file (this is what index.ts uses)
+  const cleanSrcPath = path.join(__dirname, '..', 'src', 'schema-clean.graphql');
+  const cleanDestPath = path.join(__dirname, '..', 'dist', 'schema-clean.graphql');
   
   // Ensure dist directory exists
-  const distDir = path.dirname(destPath);
+  const distDir = path.dirname(cleanDestPath);
   if (!fs.existsSync(distDir)) {
     fs.mkdirSync(distDir, { recursive: true });
   }
   
-  fs.copyFileSync(srcPath, destPath);
-  console.log('✅ Original schema file copied successfully');
+  if (fs.existsSync(cleanSrcPath)) {
+    fs.copyFileSync(cleanSrcPath, cleanDestPath);
+    console.log('✅ Clean schema file copied successfully');
+  } else {
+    console.log('❌ Clean schema file not found!');
+    process.exit(1);
+  }
   
-  // Copy the generated schema file
+  // Copy the generated schema file (for reference/backup)
   const generatedSrcPath = path.join(__dirname, '..', 'src', 'schema-generated.graphql');
   const generatedDestPath = path.join(__dirname, '..', 'dist', 'schema-generated.graphql');
-
-  // Copy the Schema Cleaned schema file
-  const schemaCleanedSrcPath = path.join(__dirname, '..', 'src', 'schema-clean.graphql');
-  const schemaCleanedDestPath = path.join(__dirname, '..', 'dist', 'schema-clean.graphql');
   
   if (fs.existsSync(generatedSrcPath)) {
     fs.copyFileSync(generatedSrcPath, generatedDestPath);
@@ -33,11 +34,15 @@ try {
     console.log('⚠️  Generated schema file not found, skipping...');
   }
 
-  if (fs.existsSync(schemaCleanedSrcPath)) {
-    fs.copyFileSync(schemaCleanedSrcPath, schemaCleanedDestPath);
-    console.log('✅ Schema Clean file copied successfully');
+  // Copy the original schema file (for reference/backup)
+  const originalSrcPath = path.join(__dirname, '..', 'src', 'schema.graphql');
+  const originalDestPath = path.join(__dirname, '..', 'dist', 'schema.graphql');
+  
+  if (fs.existsSync(originalSrcPath)) {
+    fs.copyFileSync(originalSrcPath, originalDestPath);
+    console.log('✅ Original schema file copied successfully');
   } else {
-    console.log('⚠️  Schema Clean file not found, skipping...');
+    console.log('⚠️  Original schema file not found, skipping...');
   }
   
 } catch (error) {

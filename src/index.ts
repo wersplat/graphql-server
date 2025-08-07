@@ -22,7 +22,7 @@ import { User, Player } from './types/User';
 import { Match, Team, Event, PlayerMatchStats } from './types/Match';
 
 // Load GraphQL schema
-const typeDefs = readFileSync(join(__dirname, 'schema-generated.graphql'), 'utf8');
+const typeDefs = readFileSync(join(__dirname, 'schema-clean.graphql'), 'utf8');
 
 // Merge resolvers
 const resolvers = {
