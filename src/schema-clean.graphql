@@ -1,0 +1,1108 @@
+# Clean GraphQL Schema for Bodega Cats GC API
+# 
+# This schema provides a clean, flattened GraphQL API that removes the verbose
+# Relay-style structure from pg_graphql and provides simple, readable responses.
+
+"""
+Custom scalar for handling date and time values in ISO 8601 format.
+"""
+scalar DateTime
+
+"""
+Custom scalar for handling UUID values.
+"""
+scalar UUID
+
+"""
+Custom scalar for handling JSON values.
+"""
+scalar JSON
+
+"""
+Custom scalar for handling BigInt values.
+"""
+scalar BigInt
+
+"""
+Custom scalar for handling BigFloat values.
+"""
+scalar BigFloat
+
+"""
+Pagination input for queries that support pagination.
+"""
+input PaginationInput {
+  "Number of items to return (default: 20, max: 100)"
+  limit: Int = 20
+  "Number of items to skip for pagination"
+  offset: Int = 0
+}
+
+"""
+Pagination info for responses that support pagination.
+"""
+type PaginationInfo {
+  "Total number of items available"
+  total: Int!
+  "Current page number"
+  page: Int!
+  "Number of items per page"
+  limit: Int!
+  "Whether there are more items available"
+  hasMore: Boolean!
+}
+
+"""
+Player position on the court.
+"""
+enum PlayerPosition {
+  POINT_GUARD
+  SHOOTING_GUARD
+  LOCK
+  POWER_FORWARD
+  CENTER
+}
+
+"""
+Salary tier indicating player value.
+"""
+enum SalaryTier {
+  S
+  A
+  B
+  C
+  D
+}
+
+"""
+Event tier indicating event importance.
+"""
+enum EventTier {
+  T1
+  T2
+  T3
+  T4
+}
+
+"""
+Event status.
+"""
+enum EventStatus {
+  UPCOMING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+"""
+Match stage in tournament progression.
+"""
+enum MatchStage {
+  REGULAR_SEASON
+  GROUP_PLAY
+  ROUND_1
+  ROUND_2
+  ROUND_3
+  ROUND_4
+  SEMI_FINALS
+  FINALS
+  GRAND_FINALS
+  L1
+  L2
+  L3
+  L4
+  L5
+  W1
+  W2
+  W3
+  W4
+  LF
+  WF
+}
+
+"""
+Application role for users.
+"""
+enum AppRole {
+  ADMIN
+  LEAGUE_STAFF
+  USER
+  EDITOR
+  ANALYST
+  TEAM_STAFF
+  PLAYER
+}
+
+"""
+Geographic region.
+"""
+type Region {
+  "Unique identifier"
+  id: ID!
+  "Region name"
+  name: String!
+}
+
+"""
+Team information.
+"""
+type Team {
+  "Unique identifier"
+  id: ID!
+  "Team name"
+  name: String!
+  "Team logo URL"
+  logoUrl: String
+  "Region ID"
+  regionId: String
+  "Current ranking points"
+  currentRp: Int
+  "ELO rating"
+  eloRating: Float
+  "Global rank"
+  globalRank: Int
+  "Leaderboard tier"
+  leaderboardTier: String
+  "When the team was created"
+  createdAt: DateTime
+  "Player rank score"
+  playerRankScore: Float
+  "Total money won"
+  moneyWon: Int
+  "Associated region"
+  region: Region
+}
+
+"""
+Player statistics for a specific match.
+"""
+type PlayerMatchStats {
+  "Unique identifier"
+  id: ID!
+  "Player ID"
+  playerId: String!
+  "Match ID"
+  matchId: String!
+  "Team ID"
+  teamId: String!
+  "Points scored"
+  points: Int
+  "Assists"
+  assists: Int
+  "Rebounds"
+  rebounds: Int
+  "Steals"
+  steals: Int
+  "Blocks"
+  blocks: Int
+  "Turnovers"
+  turnovers: Int
+  "Fouls"
+  fouls: Int
+  "Performance score"
+  ps: Int
+  "When the stats were created"
+  createdAt: DateTime
+  "Field goals made"
+  fgm: Int
+  "Field goals attempted"
+  fga: Int
+  "Three points made"
+  threePointsMade: Int
+  "Three points attempted"
+  threePointsAttempted: Int
+  "Free throws made"
+  ftm: Int
+  "Free throws attempted"
+  fta: Int
+  "Plus/minus"
+  plusMinus: Int
+  "Player name"
+  playerName: String
+  "When the stats were last updated"
+  updatedAt: DateTime
+  "Associated player"
+  player: Player
+  "Associated match"
+  match: Match
+  "Associated team"
+  team: Team
+}
+
+"""
+Player profile with gaming statistics.
+"""
+type Player {
+  "Unique identifier"
+  id: ID!
+  "Gaming handle/username"
+  gamertag: String!
+  "Alternate gamertag"
+  alternateGamertag: String
+  "Discord ID"
+  discordId: String
+  "Current ranking points"
+  playerRp: Int
+  "Player position"
+  position: PlayerPosition
+  "Region ID"
+  regionId: String
+  "Salary tier"
+  salaryTier: SalaryTier
+  "Whether the player is a rookie"
+  isRookie: Boolean
+  "Monthly value"
+  monthlyValue: Int
+  "Performance score"
+  performanceScore: Float
+  "Player rank score"
+  playerRankScore: Float
+  "Current team ID"
+  currentTeamId: String
+  "Twitter ID"
+  twitterId: String
+  "When the player was created"
+  createdAt: DateTime
+  "Associated team"
+  team: Team
+  "Associated region"
+  region: Region
+}
+
+"""
+Event information.
+"""
+type Event {
+  "Unique identifier"
+  id: ID!
+  "Event name"
+  name: String!
+  "Event type"
+  type: String
+  "Whether the event is global"
+  isGlobal: Boolean
+  "Region ID"
+  regionId: String
+  "Start date"
+  startDate: DateTime
+  "End date"
+  endDate: DateTime
+  "Maximum ranking points"
+  maxRp: Int
+  "Decay days"
+  decayDays: Int
+  "Whether the event has been processed"
+  processed: Boolean
+  "Event description"
+  description: String
+  "Banner URL"
+  bannerUrl: String
+  "Rules URL"
+  rulesUrl: String
+  "When the event was processed"
+  processedAt: DateTime
+  "Event status"
+  status: String
+  "Event tier"
+  tier: EventTier
+  "Season number"
+  seasonNumber: Int
+  "Prize pool"
+  prizePool: Int
+  "Associated region"
+  region: Region
+}
+
+"""
+Match information.
+"""
+type Match {
+  "Unique identifier"
+  id: ID!
+  "Event ID"
+  eventId: String
+  "Team A ID"
+  teamAId: String
+  "Team B ID"
+  teamBId: String
+  "Winner ID"
+  winnerId: String
+  "Team A score"
+  scoreA: Int
+  "Team B score"
+  scoreB: Int
+  "When the match was played"
+  playedAt: DateTime
+  "Boxscore URL"
+  boxscoreUrl: String
+  "Team A name"
+  teamAName: String
+  "Match stage"
+  stage: MatchStage
+  "Game number"
+  gameNumber: Int
+  "Team B name"
+  teamBName: String
+  "Winner name"
+  winnerName: String
+  "Associated event"
+  event: Event
+  "Team A"
+  teamA: Team
+  "Team B"
+  teamB: Team
+  "Winner team"
+  winner: Team
+  "Player statistics for this match"
+  playerStats: [PlayerMatchStats!]!
+}
+
+"""
+User profile.
+"""
+type User {
+  "Unique identifier"
+  id: ID!
+  "Email address"
+  email: String
+  "User role"
+  role: String!
+  "When the user was created"
+  createdAt: DateTime
+  "When the user was last updated"
+  updatedAt: DateTime
+  "Application role"
+  appRole: AppRole
+}
+
+"""
+Team roster information.
+"""
+type TeamRoster {
+  "Unique identifier"
+  id: ID!
+  "Team ID"
+  teamId: String
+  "Player ID"
+  playerId: String
+  "Whether the player is captain"
+  isCaptain: Boolean
+  "Whether the player is player-coach"
+  isPlayerCoach: Boolean
+  "When the player joined"
+  joinedAt: DateTime
+  "When the player left"
+  leftAt: DateTime
+  "Event ID"
+  eventId: String
+  "Associated team"
+  team: Team
+  "Associated player"
+  player: Player
+  "Associated event"
+  event: Event
+}
+
+"""
+Event group information.
+"""
+type EventGroup {
+  "Unique identifier"
+  id: ID!
+  "Event ID"
+  eventId: String!
+  "Group name"
+  name: String!
+  "Group description"
+  description: String
+  "Maximum number of teams"
+  maxTeams: Int
+  "When the group was created"
+  createdAt: DateTime
+  "When the group was last updated"
+  updatedAt: DateTime
+  "Group status"
+  status: String
+  "Number of teams that advance"
+  advancementCount: Int
+  "Sort order"
+  sortOrder: Int
+  "Associated event"
+  event: Event
+}
+
+"""
+Event group member information.
+"""
+type EventGroupMember {
+  "Unique identifier"
+  id: ID!
+  "Group ID"
+  groupId: String!
+  "Team ID"
+  teamId: String!
+  "Team seed"
+  seed: Int
+  "When the team joined the group"
+  createdAt: DateTime
+  "Associated group"
+  group: EventGroup
+  "Associated team"
+  team: Team
+}
+
+"""
+Group match information.
+"""
+type GroupMatch {
+  "Unique identifier"
+  id: ID!
+  "Group ID"
+  groupId: String!
+  "Match ID"
+  matchId: String!
+  "Round number"
+  round: Int
+  "Match number"
+  matchNumber: Int
+  "When the match was created"
+  createdAt: DateTime
+  "Associated group"
+  group: EventGroup
+  "Associated match"
+  match: Match
+}
+
+"""
+Group standings information.
+"""
+type GroupStandings {
+  "Unique identifier"
+  id: ID!
+  "Group ID"
+  groupId: String!
+  "Team ID"
+  teamId: String!
+  "Number of matches played"
+  matchesPlayed: Int
+  "Number of wins"
+  wins: Int
+  "Number of losses"
+  losses: Int
+  "Points for"
+  pointsFor: Int
+  "Points against"
+  pointsAgainst: Int
+  "Point differential"
+  pointDifferential: Int
+  "Position in group"
+  position: Int
+  "When the standings were last updated"
+  updatedAt: DateTime
+  "Associated group"
+  group: EventGroup
+  "Associated team"
+  team: Team
+}
+
+"""
+Ranking points information.
+"""
+type RankingPoints {
+  "Unique identifier"
+  id: ID!
+  "Team ID"
+  teamId: String
+  "Points source"
+  source: String
+  "Event ID"
+  eventId: String
+  "Points awarded"
+  points: Int
+  "When points were awarded"
+  awardedAt: DateTime
+  "When points expire"
+  expiresAt: DateTime
+  "Associated team"
+  team: Team
+  "Associated event"
+  event: Event
+}
+
+"""
+RP transaction information.
+"""
+type RPTransaction {
+  "Unique identifier"
+  id: ID!
+  "Team ID"
+  teamId: String
+  "Event ID"
+  eventId: String
+  "Transaction amount"
+  amount: Int
+  "Transaction description"
+  description: String
+  "Transaction type"
+  type: String
+  "When the transaction was created"
+  createdAt: DateTime
+  "When the transaction was last updated"
+  updatedAt: DateTime
+  "Associated team"
+  team: Team
+  "Associated event"
+  event: Event
+}
+
+"""
+Player RP transaction information.
+"""
+type PlayerRPTransaction {
+  "Unique identifier"
+  id: ID!
+  "Player ID"
+  playerId: String
+  "Event ID"
+  eventId: String
+  "Match ID"
+  matchId: String
+  "Transaction amount"
+  amount: Int
+  "Transaction description"
+  description: String
+  "Transaction type"
+  type: String
+  "When the transaction was created"
+  createdAt: DateTime
+  "When the transaction was last updated"
+  updatedAt: DateTime
+  "Associated player"
+  player: Player
+  "Associated event"
+  event: Event
+  "Associated match"
+  match: Match
+}
+
+"""
+Match points information.
+"""
+type MatchPoints {
+  "Unique identifier"
+  id: ID!
+  "Match ID"
+  matchId: String!
+  "Team ID"
+  teamId: String!
+  "Group ID"
+  groupId: String
+  "Points earned"
+  pointsEarned: Int
+  "Point type"
+  pointType: String
+  "When the points were created"
+  createdAt: DateTime
+  "When the points were last updated"
+  updatedAt: DateTime
+  "Associated match"
+  match: Match
+  "Associated team"
+  team: Team
+  "Associated group"
+  group: EventGroup
+}
+
+"""
+Match MVP information.
+"""
+type MatchMVP {
+  "Match ID"
+  matchId: String!
+  "Player ID"
+  playerId: String!
+  "Associated match"
+  match: Match
+  "Associated player"
+  player: Player
+}
+
+"""
+Match submission information.
+"""
+type MatchSubmission {
+  "Unique identifier"
+  id: ID!
+  "Event ID"
+  eventId: String
+  "Match ID"
+  matchId: String
+  "Team A ID"
+  teamAId: String
+  "Team A name"
+  teamAName: String
+  "Team B ID"
+  teamBId: String
+  "Team B name"
+  teamBName: String
+  "Review status"
+  reviewStatus: String
+  "Reviewed by"
+  reviewedBy: String
+  "When the submission was reviewed"
+  reviewedAt: DateTime
+  "When the submission was created"
+  createdAt: DateTime
+  "Associated event"
+  event: Event
+  "Associated match"
+  match: Match
+  "Team A"
+  teamA: Team
+  "Team B"
+  teamB: Team
+}
+
+"""
+Upcoming match information.
+"""
+type UpcomingMatch {
+  "Unique identifier"
+  id: ID!
+  "Event ID"
+  eventId: String!
+  "Team A ID"
+  teamAId: String
+  "Team B ID"
+  teamBId: String
+  "When the match is scheduled"
+  scheduledAt: DateTime
+  "Match venue"
+  venue: String
+  "Stream URL"
+  streamUrl: String
+  "Match notes"
+  notes: String
+  "Match status"
+  status: String
+  "When the match was created"
+  createdAt: DateTime
+  "When the match was last updated"
+  updatedAt: DateTime
+  "Group ID"
+  groupId: String
+  "Round number"
+  round: Int
+  "Match number"
+  matchNumber: Int
+  "Team A logo"
+  teamALogo: String
+  "Team B logo"
+  teamBLogo: String
+  "Associated event"
+  event: Event
+  "Team A"
+  teamA: Team
+  "Team B"
+  teamB: Team
+  "Associated group"
+  group: EventGroup
+}
+
+"""
+Awards race information.
+"""
+type AwardsRace {
+  "Unique identifier"
+  id: ID!
+  "Event ID"
+  eventId: String
+  "Team ID"
+  teamId: String!
+  "Player ID"
+  playerId: String
+  "Award type"
+  awardType: String
+  "Current rank"
+  rank: Int
+  "RP bonus"
+  rpBonus: Int
+  "Whether this is the award winner"
+  awardWinner: Boolean
+  "When the race entry was created"
+  createdAt: DateTime
+  "Associated event"
+  event: Event
+  "Associated team"
+  team: Team
+  "Associated player"
+  player: Player
+}
+
+"""
+Update race information.
+"""
+type UpdateRace {
+  "Unique identifier"
+  id: Int!
+  "Race ID"
+  raceId: String
+  "Update type"
+  updateType: String
+  "Update details"
+  updateDetails: JSON
+  "Previous rank"
+  previousRank: Int
+  "New rank"
+  newRank: Int
+  "When the update was made"
+  updatedAt: DateTime
+  "Updated by"
+  updatedBy: String
+  "Associated race"
+  race: AwardsRace
+}
+
+"""
+Draft pool information.
+"""
+type DraftPool {
+  "Player ID"
+  playerId: String!
+  "When the player declared"
+  declaredAt: DateTime
+  "Player status"
+  status: String
+  "Season"
+  season: String
+  "Draft rating"
+  draftRating: Int
+  "Draft notes"
+  draftNotes: String
+  "Event ID"
+  eventId: String
+  "When the entry was created"
+  createdAt: DateTime
+  "When the entry was last updated"
+  updatedAt: DateTime
+  "Associated player"
+  player: Player
+  "Associated event"
+  event: Event
+}
+
+"""
+Event results information.
+"""
+type EventResults {
+  "Unique identifier"
+  id: ID!
+  "Event ID"
+  eventId: String!
+  "Team ID"
+  teamId: String!
+  "Placement"
+  placement: Int
+  "RP awarded"
+  rpAwarded: Int
+  "Bonus RP"
+  bonusRp: Int
+  "Total RP"
+  totalRp: Int
+  "When the results were awarded"
+  awardedAt: DateTime
+  "Prize amount"
+  prizeAmount: Int
+  "Winner banner URL"
+  winnerBannerUrl: String
+  "Associated event"
+  event: Event
+  "Associated team"
+  team: Team
+}
+
+"""
+Teams pot tracker information.
+"""
+type TeamsPotTracker {
+  "Unique identifier"
+  id: ID!
+  "Event ID"
+  eventId: String
+  "Team ID"
+  teamId: String
+  "Placement"
+  placement: Int
+  "Prize amount"
+  prizeAmount: Int
+  "When the entry was created"
+  createdAt: DateTime
+  "Associated event"
+  event: Event
+  "Associated team"
+  team: Team
+}
+
+"""
+Paginated response wrapper.
+"""
+type PaginatedResponse {
+  "List of items"
+  items: [JSON!]!
+  "Pagination information"
+  pagination: PaginationInfo!
+}
+
+"""
+Query root type.
+"""
+type Query {
+  # Player queries
+  "Get a single player by ID"
+  player(id: ID!): Player
+  "Get a list of players with pagination"
+  players(pagination: PaginationInput): PaginatedResponse!
+  
+  # Team queries
+  "Get a single team by ID"
+  team(id: ID!): Team
+  "Get a list of teams with pagination"
+  teams(pagination: PaginationInput): PaginatedResponse!
+  
+  # Match queries
+  "Get a single match by ID"
+  match(id: ID!): Match
+  "Get a list of matches with pagination"
+  matches(pagination: PaginationInput): PaginatedResponse!
+  
+  # Event queries
+  "Get a single event by ID"
+  event(id: ID!): Event
+  "Get a list of events with pagination"
+  events(pagination: PaginationInput): PaginatedResponse!
+  
+  # Player stats queries
+  "Get player match statistics"
+  playerMatchStats(matchId: ID!): [PlayerMatchStats!]!
+  
+  # Team roster queries
+  "Get team roster"
+  teamRoster(teamId: ID!): [TeamRoster!]!
+  
+  # Event group queries
+  "Get event groups"
+  eventGroups(eventId: ID!): [EventGroup!]!
+  "Get event group members"
+  eventGroupMembers(groupId: ID!): [EventGroupMember!]!
+  
+  # Group match queries
+  "Get group matches"
+  groupMatches(groupId: ID!): [GroupMatch!]!
+  
+  # Group standings queries
+  "Get group standings"
+  groupStandings(groupId: ID!): [GroupStandings!]!
+  
+  # Ranking points queries
+  "Get ranking points"
+  rankingPoints(teamId: ID!): [RankingPoints!]!
+  
+  # RP transaction queries
+  "Get RP transactions"
+  rpTransactions(teamId: ID!): [RPTransaction!]!
+  "Get player RP transactions"
+  playerRpTransactions(playerId: ID!): [PlayerRPTransaction!]!
+  
+  # Match points queries
+  "Get match points"
+  matchPoints(matchId: ID!): [MatchPoints!]!
+  
+  # Match MVP queries
+  "Get match MVP"
+  matchMVP(matchId: ID!): MatchMVP
+  
+  # Match submission queries
+  "Get match submissions"
+  matchSubmissions(pagination: PaginationInput): PaginatedResponse!
+  
+  # Upcoming match queries
+  "Get upcoming matches"
+  upcomingMatches(pagination: PaginationInput): PaginatedResponse!
+  
+  # Awards race queries
+  "Get awards race"
+  awardsRace(pagination: PaginationInput): PaginatedResponse!
+  
+  # Update race queries
+  "Get update race"
+  updateRace(pagination: PaginationInput): PaginatedResponse!
+  
+  # Draft pool queries
+  "Get draft pool"
+  draftPool(pagination: PaginationInput): PaginatedResponse!
+  
+  # Event results queries
+  "Get event results"
+  eventResults(pagination: PaginationInput): PaginatedResponse!
+  
+  # Teams pot tracker queries
+  "Get teams pot tracker"
+  teamsPotTracker(pagination: PaginationInput): PaginatedResponse!
+  
+  # User queries
+  "Get a single user by ID"
+  user(id: ID!): User
+  "Get a list of users with pagination"
+  users(pagination: PaginationInput): PaginatedResponse!
+  
+  # Region queries
+  "Get a single region by ID"
+  region(id: ID!): Region
+  "Get a list of regions"
+  regions: [Region!]!
+}
+
+"""
+Mutation root type.
+"""
+type Mutation {
+  # Player mutations
+  "Create a new player"
+  createPlayer(input: JSON!): Player!
+  "Update an existing player"
+  updatePlayer(id: ID!, input: JSON!): Player!
+  "Delete a player"
+  deletePlayer(id: ID!): Boolean!
+  
+  # Team mutations
+  "Create a new team"
+  createTeam(input: JSON!): Team!
+  "Update an existing team"
+  updateTeam(id: ID!, input: JSON!): Team!
+  "Delete a team"
+  deleteTeam(id: ID!): Boolean!
+  
+  # Match mutations
+  "Create a new match"
+  createMatch(input: JSON!): Match!
+  "Update an existing match"
+  updateMatch(id: ID!, input: JSON!): Match!
+  "Delete a match"
+  deleteMatch(id: ID!): Boolean!
+  
+  # Event mutations
+  "Create a new event"
+  createEvent(input: JSON!): Event!
+  "Update an existing event"
+  updateEvent(id: ID!, input: JSON!): Event!
+  "Delete an event"
+  deleteEvent(id: ID!): Boolean!
+  
+  # Player stats mutations
+  "Create player match statistics"
+  createPlayerMatchStats(input: JSON!): PlayerMatchStats!
+  "Update player match statistics"
+  updatePlayerMatchStats(id: ID!, input: JSON!): PlayerMatchStats!
+  "Delete player match statistics"
+  deletePlayerMatchStats(id: ID!): Boolean!
+  
+  # Team roster mutations
+  "Add player to team roster"
+  addPlayerToRoster(input: JSON!): TeamRoster!
+  "Remove player from team roster"
+  removePlayerFromRoster(id: ID!): Boolean!
+  
+  # Event group mutations
+  "Create an event group"
+  createEventGroup(input: JSON!): EventGroup!
+  "Update an event group"
+  updateEventGroup(id: ID!, input: JSON!): EventGroup!
+  "Delete an event group"
+  deleteEventGroup(id: ID!): Boolean!
+  
+  # Event group member mutations
+  "Add team to event group"
+  addTeamToGroup(input: JSON!): EventGroupMember!
+  "Remove team from event group"
+  removeTeamFromGroup(id: ID!): Boolean!
+  
+  # Group match mutations
+  "Create a group match"
+  createGroupMatch(input: JSON!): GroupMatch!
+  "Update a group match"
+  updateGroupMatch(id: ID!, input: JSON!): GroupMatch!
+  "Delete a group match"
+  deleteGroupMatch(id: ID!): Boolean!
+  
+  # Group standings mutations
+  "Update group standings"
+  updateGroupStandings(input: JSON!): GroupStandings!
+  
+  # Ranking points mutations
+  "Award ranking points"
+  awardRankingPoints(input: JSON!): RankingPoints!
+  
+  # RP transaction mutations
+  "Create RP transaction"
+  createRpTransaction(input: JSON!): RPTransaction!
+  "Create player RP transaction"
+  createPlayerRpTransaction(input: JSON!): PlayerRPTransaction!
+  
+  # Match points mutations
+  "Award match points"
+  awardMatchPoints(input: JSON!): MatchPoints!
+  
+  # Match MVP mutations
+  "Set match MVP"
+  setMatchMVP(input: JSON!): MatchMVP!
+  
+  # Match submission mutations
+  "Submit match result"
+  submitMatch(input: JSON!): MatchSubmission!
+  "Review match submission"
+  reviewMatchSubmission(id: ID!, input: JSON!): MatchSubmission!
+  
+  # Upcoming match mutations
+  "Create upcoming match"
+  createUpcomingMatch(input: JSON!): UpcomingMatch!
+  "Update upcoming match"
+  updateUpcomingMatch(id: ID!, input: JSON!): UpcomingMatch!
+  "Delete upcoming match"
+  deleteUpcomingMatch(id: ID!): Boolean!
+  
+  # Awards race mutations
+  "Create awards race entry"
+  createAwardsRace(input: JSON!): AwardsRace!
+  "Update awards race entry"
+  updateAwardsRace(id: ID!, input: JSON!): AwardsRace!
+  "Delete awards race entry"
+  deleteAwardsRace(id: ID!): Boolean!
+  
+  # Update race mutations
+  "Create update race entry"
+  createUpdateRace(input: JSON!): UpdateRace!
+  
+  # Draft pool mutations
+  "Add player to draft pool"
+  addToDraftPool(input: JSON!): DraftPool!
+  "Update draft pool entry"
+  updateDraftPool(playerId: ID!, input: JSON!): DraftPool!
+  "Remove from draft pool"
+  removeFromDraftPool(playerId: ID!): Boolean!
+  
+  # Event results mutations
+  "Create event results"
+  createEventResults(input: JSON!): EventResults!
+  "Update event results"
+  updateEventResults(id: ID!, input: JSON!): EventResults!
+  "Delete event results"
+  deleteEventResults(id: ID!): Boolean!
+  
+  # Teams pot tracker mutations
+  "Create pot tracker entry"
+  createPotTrackerEntry(input: JSON!): TeamsPotTracker!
+  "Update pot tracker entry"
+  updatePotTrackerEntry(id: ID!, input: JSON!): TeamsPotTracker!
+  "Delete pot tracker entry"
+  deletePotTrackerEntry(id: ID!): Boolean!
+}
