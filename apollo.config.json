@@ -1,0 +1,7 @@
+{
+  "client": {
+    "service": "Bodega-Cats-GC-Graphql@current",
+    "includes": ["./src/**/*.js"],
+    "excludes": ["**/__tests__/**"]
+  }
+}
