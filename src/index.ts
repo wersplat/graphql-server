@@ -155,8 +155,48 @@ async function startServer() {
 
   // Security middleware
   app.use(helmet({
-    contentSecurityPolicy: false, // Disable CSP for GraphQL playground
-    crossOriginEmbedderPolicy: false
+    crossOriginEmbedderPolicy: false,
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: [
+          "'self'", 
+          "'unsafe-inline'", 
+          "'unsafe-eval'",
+          "https://embeddable-sandbox.cdn.apollographql.com",
+          "https://apollo-server-landing-page.cdn.apollographql.com"
+        ],
+        styleSrc: [
+          "'self'", 
+          "'unsafe-inline'",
+          "https://fonts.googleapis.com",
+          "https://apollo-server-landing-page.cdn.apollographql.com"
+        ],
+        fontSrc: [
+          "'self'",
+          "https://fonts.gstatic.com"
+        ],
+        imgSrc: [
+          "'self'", 
+          "data:", 
+          "https:",
+          "https://apollo-server-landing-page.cdn.apollographql.com"
+        ],
+        connectSrc: [
+          "'self'",
+          "https://apollo-server-landing-page.cdn.apollographql.com",
+          "https://sandbox.embed.apollographql.com"
+        ],
+        frameSrc: [
+          "'self'",
+          "https://sandbox.embed.apollographql.com"
+        ],
+        manifestSrc: [
+          "'self'",
+          "https://apollo-server-landing-page.cdn.apollographql.com"
+        ],
+      },
+    },
   }));
 
   // CORS middleware
@@ -165,6 +205,9 @@ async function startServer() {
   // Body parsing middleware
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+  // Serve static files
+  app.use(express.static(join(__dirname, '../public')));
 
   // Handle malformed URI requests
   app.use((req, res, next) => {

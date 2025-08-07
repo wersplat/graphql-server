@@ -111,9 +111,43 @@ async function startCleanServer() {
     crossOriginEmbedderPolicy: false,
     contentSecurityPolicy: {
       directives: {
-        imgSrc: ["'self'", "data:", "https:"],
-        scriptSrc: ["'self'", "'unsafe-inline'"],
-        styleSrc: ["'self'", "'unsafe-inline'"],
+        defaultSrc: ["'self'"],
+        scriptSrc: [
+          "'self'", 
+          "'unsafe-inline'", 
+          "'unsafe-eval'",
+          "https://embeddable-sandbox.cdn.apollographql.com",
+          "https://apollo-server-landing-page.cdn.apollographql.com"
+        ],
+        styleSrc: [
+          "'self'", 
+          "'unsafe-inline'",
+          "https://fonts.googleapis.com",
+          "https://apollo-server-landing-page.cdn.apollographql.com"
+        ],
+        fontSrc: [
+          "'self'",
+          "https://fonts.gstatic.com"
+        ],
+        imgSrc: [
+          "'self'", 
+          "data:", 
+          "https:",
+          "https://apollo-server-landing-page.cdn.apollographql.com"
+        ],
+        connectSrc: [
+          "'self'",
+          "https://apollo-server-landing-page.cdn.apollographql.com",
+          "https://sandbox.embed.apollographql.com"
+        ],
+        frameSrc: [
+          "'self'",
+          "https://sandbox.embed.apollographql.com"
+        ],
+        manifestSrc: [
+          "'self'",
+          "https://apollo-server-landing-page.cdn.apollographql.com"
+        ],
       },
     },
   }));
@@ -127,6 +161,9 @@ async function startCleanServer() {
   // Body parsing middleware
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+  // Serve static files
+  app.use(express.static(join(__dirname, '../public')));
 
   // Create Apollo Server with clean schema
   const server = new ApolloServer({
