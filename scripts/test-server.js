@@ -27,12 +27,11 @@ async function testServer() {
     // Test 2: Root endpoint
     console.log('\n2. Testing root endpoint...');
     const rootResponse = await fetch(SERVER_URL);
-    const rootData = await rootResponse.json();
     
     if (rootResponse.ok) {
-      console.log('✅ Root endpoint working:', rootData.message);
+      console.log('✅ Root endpoint working (serving HTML)');
     } else {
-      console.log('❌ Root endpoint failed:', rootData);
+      console.log('❌ Root endpoint failed:', rootResponse.status);
     }
 
     // Test 3: GraphQL query

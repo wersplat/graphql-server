@@ -1,4 +1,5 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { PlayerPosition } from '../types/User';
 
 export class PgGraphQLService {
   private client: SupabaseClient;
@@ -118,7 +119,7 @@ export class PgGraphQLService {
       currentRp: player.player_rp || 0,
       peakRp: player.player_rp || 0,
       tier: this.calculateTier(player.player_rp || 0),
-      position: player.position,
+      position: this.mapPositionValue(player.position),
       salaryTier: player.salary_tier,
       teamName: player.teams?.name || undefined,
       isVerified: false,
@@ -206,7 +207,7 @@ export class PgGraphQLService {
         currentRp: player.player_rp || 0,
         peakRp: player.player_rp || 0,
         tier: this.calculateTier(player.player_rp || 0),
-        position: player.position,
+        position: this.mapPositionValue(player.position),
         salaryTier: player.salary_tier,
         teamName: player.teams?.name || undefined,
         isVerified: false,
@@ -825,6 +826,23 @@ export class PgGraphQLService {
     if (match.winnerId) return 'completed';
     if (match.scoreA !== null || match.scoreB !== null) return 'in_progress';
     return 'scheduled';
+  }
+
+  /**
+   * Map database position values to GraphQL enum values
+   */
+  private mapPositionValue(position: string | null | undefined): PlayerPosition | undefined {
+    if (!position) return undefined;
+    
+    const positionMap: { [key: string]: PlayerPosition } = {
+      'Point Guard': PlayerPosition.POINT_GUARD,
+      'Shooting Guard': PlayerPosition.SHOOTING_GUARD,
+      'Power Forward': PlayerPosition.POWER_FORWARD,
+      'Center': PlayerPosition.CENTER,
+      'Lock': PlayerPosition.LOCK
+    };
+    
+    return positionMap[position] || undefined;
   }
 
   // Singleton instance

@@ -81,11 +81,19 @@ const corsOptions = {
     'https://admin.bodegacatsgc.gg',
     'https://global.bodegacatsgc.gg',
     'https://graphql.bodegacatsgc.gg',
-    'https://studio.apollographql.com'
+    'https://studio.apollographql.com',
+    'http://localhost:3000',
+    'http://localhost:4000'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'apollo-require-preflight']
+  allowedHeaders: [
+    'Content-Type', 
+    'Authorization', 
+    'apollo-require-preflight',
+    'x-apollo-operation-name',
+    'x-apollo-operation-type'
+  ]
 };
 
 async function startServer() {
@@ -122,6 +130,21 @@ async function startServer() {
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+  // Handle malformed URI requests
+  app.use((req, res, next) => {
+    try {
+      // This will throw an error if the URL is malformed
+      decodeURIComponent(req.url);
+      next();
+    } catch (error) {
+      console.warn('Malformed URI request:', req.url);
+      res.status(400).json({
+        error: 'Bad Request',
+        message: 'Invalid URL format'
+      });
+    }
+  });
+
   // Create Apollo Server
   const server = new ApolloServer({
     typeDefs,
@@ -143,7 +166,10 @@ async function startServer() {
         }
       };
     },
-    introspection: true
+    introspection: true,
+    csrfPrevention: process.env.NODE_ENV === 'production' ? {
+      requestHeaders: ['content-type', 'x-apollo-operation-name', 'apollo-require-preflight']
+    } : false
   });
 
   // Start the server
