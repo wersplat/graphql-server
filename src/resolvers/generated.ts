@@ -1,5 +1,5 @@
 // Auto-generated resolvers from GraphQL introspection
-// Generated on: 2025-08-07T07:29:37.170Z
+// Generated on: 2025-08-07T08:08:33.036Z
 
 import { Match } from '../types/Match';
 import { User } from '../types/User';
