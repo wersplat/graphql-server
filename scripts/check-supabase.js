@@ -27,7 +27,7 @@ async function checkDatabase() {
     // Try to get users
     console.log('\n👥 Users:');
     const { data: users, error: usersError } = await supabase
-      .from('users')
+      .from('profiles')
       .select('*')
       .limit(3);
     
