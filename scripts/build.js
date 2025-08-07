@@ -21,12 +21,23 @@ try {
   // Copy the generated schema file
   const generatedSrcPath = path.join(__dirname, '..', 'src', 'schema-generated.graphql');
   const generatedDestPath = path.join(__dirname, '..', 'dist', 'schema-generated.graphql');
+
+  // Copy the Schema Cleaned schema file
+  const schemaCleanedSrcPath = path.join(__dirname, '..', 'src', 'schema-clean.graphql');
+  const schemaCleanedDestPath = path.join(__dirname, '..', 'dist', 'schema-clean.graphql');
   
   if (fs.existsSync(generatedSrcPath)) {
     fs.copyFileSync(generatedSrcPath, generatedDestPath);
     console.log('✅ Generated schema file copied successfully');
   } else {
     console.log('⚠️  Generated schema file not found, skipping...');
+  }
+
+  if (fs.existsSync(schemaCleanedSrcPath)) {
+    fs.copyFileSync(schemaCleanedSrcPath, schemaCleanedDestPath);
+    console.log('✅ Schema Clean file copied successfully');
+  } else {
+    console.log('⚠️  Schema Clean file not found, skipping...');
   }
   
 } catch (error) {
