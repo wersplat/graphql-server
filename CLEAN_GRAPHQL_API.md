@@ -16,6 +16,7 @@ The Clean GraphQL API provides a simplified, flattened interface that removes th
 ## Comparison: Verbose vs Clean
 
 ### Verbose pg_graphql Query
+
 ```graphql
 query GetPlayers {
   playersCollection {
@@ -41,6 +42,7 @@ query GetPlayers {
 ```
 
 ### Clean GraphQL Query
+
 ```graphql
 query GetPlayers {
   players(pagination: { limit: 20, offset: 0 }) {
@@ -67,6 +69,7 @@ query GetPlayers {
 ## Available Queries
 
 ### Players
+
 ```graphql
 # Get a single player
 query GetPlayer($id: ID!) {
@@ -129,6 +132,7 @@ query GetPlayers($pagination: PaginationInput) {
 ```
 
 ### Teams
+
 ```graphql
 # Get a single team
 query GetTeam($id: ID!) {
@@ -175,6 +179,7 @@ query GetTeams($pagination: PaginationInput) {
 ```
 
 ### Matches
+
 ```graphql
 # Get a single match with player stats
 query GetMatch($id: ID!) {
@@ -282,6 +287,7 @@ query GetMatches($pagination: PaginationInput) {
 ```
 
 ### Events
+
 ```graphql
 # Get a single event
 query GetEvent($id: ID!) {
@@ -336,6 +342,7 @@ query GetEvents($pagination: PaginationInput) {
 ```
 
 ### Player Match Statistics
+
 ```graphql
 # Get player stats for a specific match
 query GetPlayerMatchStats($matchId: ID!) {
@@ -379,6 +386,7 @@ query GetPlayerMatchStats($matchId: ID!) {
 ```
 
 ### Team Rosters
+
 ```graphql
 # Get team roster
 query GetTeamRoster($teamId: ID!) {
@@ -413,6 +421,7 @@ query GetTeamRoster($teamId: ID!) {
 ```
 
 ### Event Groups
+
 ```graphql
 # Get event groups
 query GetEventGroups($eventId: ID!) {
@@ -438,6 +447,7 @@ query GetEventGroups($eventId: ID!) {
 ```
 
 ### Regions
+
 ```graphql
 # Get all regions
 query GetRegions {
@@ -485,17 +495,20 @@ The clean API automatically maps database field names to camelCase:
 ## Running the Clean Server
 
 ### Development
+
 ```bash
 npm run dev:clean
 ```
 
 ### Production
+
 ```bash
 npm run build
 npm run start:clean
 ```
 
 ### Environment Variables
+
 ```bash
 SUPABASE_URL=your_supabase_url
 SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -548,6 +561,7 @@ To migrate from the verbose pg_graphql API to the clean API:
 ### Example Migration
 
 **Before (Verbose):**
+
 ```graphql
 query {
   playersCollection {
@@ -568,6 +582,7 @@ query {
 ```
 
 **After (Clean):**
+
 ```graphql
 query {
   players {

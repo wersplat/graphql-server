@@ -12,6 +12,7 @@
     "test": "jest",
     "test:server": "node scripts/test-server.js",
     "test:pg-graphql": "node scripts/test-pg-graphql.js",
+    "test:clean-server": "node scripts/test-clean-server.js",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "type-check": "tsc --noEmit"

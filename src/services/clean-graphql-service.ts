@@ -838,7 +838,7 @@ export class CleanGraphQLService {
   /**
    * Transform player data from pg_graphql format to clean format
    */
-  private transformPlayer(node: any) {
+  private transformPlayer(node: any): any {
     return {
       id: node.id,
       gamertag: node.gamertag,
@@ -863,7 +863,7 @@ export class CleanGraphQLService {
   /**
    * Transform team data from pg_graphql format to clean format
    */
-  private transformTeam(node: any) {
+  private transformTeam(node: any): any {
     return {
       id: node.id,
       name: node.name,
@@ -883,7 +883,7 @@ export class CleanGraphQLService {
   /**
    * Transform match data from pg_graphql format to clean format
    */
-  private transformMatch(node: any) {
+  private transformMatch(node: any): any {
     return {
       id: node.id,
       eventId: node.event_id,
@@ -911,7 +911,7 @@ export class CleanGraphQLService {
   /**
    * Transform event data from pg_graphql format to clean format
    */
-  private transformEvent(node: any) {
+  private transformEvent(node: any): any {
     return {
       id: node.id,
       name: node.name,
@@ -938,7 +938,7 @@ export class CleanGraphQLService {
   /**
    * Transform player match stats data from pg_graphql format to clean format
    */
-  private transformPlayerMatchStats(node: any) {
+  private transformPlayerMatchStats(node: any): any {
     return {
       id: node.id,
       playerId: node.player_id,
@@ -971,7 +971,7 @@ export class CleanGraphQLService {
   /**
    * Transform team roster data from pg_graphql format to clean format
    */
-  private transformTeamRoster(node: any) {
+  private transformTeamRoster(node: any): any {
     return {
       id: node.id,
       teamId: node.team_id,
@@ -990,7 +990,7 @@ export class CleanGraphQLService {
   /**
    * Transform event group data from pg_graphql format to clean format
    */
-  private transformEventGroup(node: any) {
+  private transformEventGroup(node: any): any {
     return {
       id: node.id,
       eventId: node.event_id,
@@ -1009,7 +1009,7 @@ export class CleanGraphQLService {
   /**
    * Transform region data from pg_graphql format to clean format
    */
-  private transformRegion(node: any) {
+  private transformRegion(node: any): any {
     return {
       id: node.id,
       name: node.name
