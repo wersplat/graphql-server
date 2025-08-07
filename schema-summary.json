@@ -1,0 +1,13 @@
+{
+  "totalTypes": 378,
+  "queries": 34,
+  "mutations": 132,
+  "subscriptions": 0,
+  "directives": 2,
+  "mainTypes": [
+    "players",
+    "matches",
+    "teams",
+    "events"
+  ]
+}

@@ -1,0 +1,11840 @@
+# Auto-generated GraphQL Schema from pg_graphql introspection
+# Generated on: 2025-08-07T07:29:37.138Z
+# 
+# This schema is automatically generated from the Supabase pg_graphql schema.
+# Manual edits may be overwritten when regenerating.
+
+"""
+Custom scalar for handling date and time values in ISO 8601 format.
+"""
+scalar DateTime
+
+"""
+Custom scalar for handling UUID values.
+"""
+scalar UUID
+
+"""
+Custom scalar for handling JSON values.
+"""
+scalar JSON
+
+"""
+Custom scalar for handling JSON object values.
+"""
+scalar JSONObject
+
+"""
+Custom scalar for handling big integers.
+"""
+scalar BigInt
+
+"""
+Custom scalar for handling big floats.
+"""
+scalar BigFloat
+
+"""
+Custom scalar for handling time values.
+"""
+scalar Time
+
+"""
+Custom scalar for handling timestamp with timezone values.
+"""
+scalar Timestamptz
+
+"""
+Boolean expression comparing fields on type "BigFloat"
+"""
+input BigFloatFilterInput {
+  """
+  eq
+  """
+  eq: BigFloat
+  """
+  gt
+  """
+  gt: BigFloat
+  """
+  gte
+  """
+  gte: BigFloat
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  lt
+  """
+  lt: BigFloat
+  """
+  lte
+  """
+  lte: BigFloat
+  """
+  neq
+  """
+  neq: BigFloat
+}
+
+"""
+Boolean expression comparing fields on type "BigFloatList"
+"""
+input BigFloatListFilterInput {
+  """
+  containedBy
+  """
+  containedBy: [String]
+  """
+  contains
+  """
+  contains: [String]
+  """
+  eq
+  """
+  eq: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  overlaps
+  """
+  overlaps: [String]
+}
+
+"""
+Boolean expression comparing fields on type "BigInt"
+"""
+input BigIntFilterInput {
+  """
+  eq
+  """
+  eq: BigInt
+  """
+  gt
+  """
+  gt: BigInt
+  """
+  gte
+  """
+  gte: BigInt
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  lt
+  """
+  lt: BigInt
+  """
+  lte
+  """
+  lte: BigInt
+  """
+  neq
+  """
+  neq: BigInt
+}
+
+"""
+Boolean expression comparing fields on type "BigIntList"
+"""
+input BigIntListFilterInput {
+  """
+  containedBy
+  """
+  containedBy: [String]
+  """
+  contains
+  """
+  contains: [String]
+  """
+  eq
+  """
+  eq: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  overlaps
+  """
+  overlaps: [String]
+}
+
+"""
+Boolean expression comparing fields on type "Boolean"
+"""
+input BooleanFilterInput {
+  """
+  eq
+  """
+  eq: Boolean
+  """
+  is
+  """
+  is: FilterIs
+}
+
+"""
+Boolean expression comparing fields on type "BooleanList"
+"""
+input BooleanListFilterInput {
+  """
+  containedBy
+  """
+  containedBy: [String]
+  """
+  contains
+  """
+  contains: [String]
+  """
+  eq
+  """
+  eq: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  overlaps
+  """
+  overlaps: [String]
+}
+
+"""
+Boolean expression comparing fields on type "Date"
+"""
+input DateFilterInput {
+  """
+  eq
+  """
+  eq: Date
+  """
+  gt
+  """
+  gt: Date
+  """
+  gte
+  """
+  gte: Date
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  lt
+  """
+  lt: Date
+  """
+  lte
+  """
+  lte: Date
+  """
+  neq
+  """
+  neq: Date
+}
+
+"""
+Boolean expression comparing fields on type "DateList"
+"""
+input DateListFilterInput {
+  """
+  containedBy
+  """
+  containedBy: [String]
+  """
+  contains
+  """
+  contains: [String]
+  """
+  eq
+  """
+  eq: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  overlaps
+  """
+  overlaps: [String]
+}
+
+"""
+Boolean expression comparing fields on type "Datetime"
+"""
+input DatetimeFilterInput {
+  """
+  eq
+  """
+  eq: Datetime
+  """
+  gt
+  """
+  gt: Datetime
+  """
+  gte
+  """
+  gte: Datetime
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  lt
+  """
+  lt: Datetime
+  """
+  lte
+  """
+  lte: Datetime
+  """
+  neq
+  """
+  neq: Datetime
+}
+
+"""
+Boolean expression comparing fields on type "DatetimeList"
+"""
+input DatetimeListFilterInput {
+  """
+  containedBy
+  """
+  containedBy: [String]
+  """
+  contains
+  """
+  contains: [String]
+  """
+  eq
+  """
+  eq: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  overlaps
+  """
+  overlaps: [String]
+}
+
+"""
+Enum for FilterIs
+"""
+enum FilterIs {
+  """
+  NULL
+  """
+  NULL
+  """
+  NOT_NULL
+  """
+  NOT_NULL
+}
+
+"""
+Boolean expression comparing fields on type "Float"
+"""
+input FloatFilterInput {
+  """
+  eq
+  """
+  eq: Float
+  """
+  gt
+  """
+  gt: Float
+  """
+  gte
+  """
+  gte: Float
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  lt
+  """
+  lt: Float
+  """
+  lte
+  """
+  lte: Float
+  """
+  neq
+  """
+  neq: Float
+}
+
+"""
+Boolean expression comparing fields on type "FloatList"
+"""
+input FloatListFilterInput {
+  """
+  containedBy
+  """
+  containedBy: [String]
+  """
+  contains
+  """
+  contains: [String]
+  """
+  eq
+  """
+  eq: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  overlaps
+  """
+  overlaps: [String]
+}
+
+"""
+Boolean expression comparing fields on type "ID"
+"""
+input IDFilterInput {
+  """
+  eq
+  """
+  eq: ID
+}
+
+"""
+Boolean expression comparing fields on type "Int"
+"""
+input IntFilterInput {
+  """
+  eq
+  """
+  eq: Int
+  """
+  gt
+  """
+  gt: Int
+  """
+  gte
+  """
+  gte: Int
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  lt
+  """
+  lt: Int
+  """
+  lte
+  """
+  lte: Int
+  """
+  neq
+  """
+  neq: Int
+}
+
+"""
+Boolean expression comparing fields on type "IntList"
+"""
+input IntListFilterInput {
+  """
+  containedBy
+  """
+  containedBy: [String]
+  """
+  contains
+  """
+  contains: [String]
+  """
+  eq
+  """
+  eq: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  overlaps
+  """
+  overlaps: [String]
+}
+
+"""
+The root type for creating and mutating data
+"""
+type Mutation {
+  """
+  add_player_to_team_roster
+  """
+  add_player_to_team_roster: Opaque
+  """
+  adjust_team_rp
+  """
+  adjust_team_rp: Opaque
+  """
+  apply_rp_decay
+  """
+  apply_rp_decay: Opaque
+  """
+  assign_role
+  """
+  assign_role: Boolean
+  """
+  calculate_defensive_mvp_score
+  """
+  calculate_defensive_mvp_score: Float
+  """
+  calculate_hybrid_score
+  """
+  calculate_hybrid_score: BigFloat
+  """
+  calculate_normalized_elo
+  """
+  calculate_normalized_elo: BigFloat
+  """
+  calculate_normalized_rp
+  """
+  calculate_normalized_rp: BigFloat
+  """
+  calculate_offensive_mvp_score
+  """
+  calculate_offensive_mvp_score: Float
+  """
+  calculate_rookie_score
+  """
+  calculate_rookie_score: Float
+  """
+  calculate_team_total_money_won
+  """
+  calculate_team_total_money_won: Int
+  """
+  complete_upcoming_match
+  """
+  complete_upcoming_match: UUID
+  """
+  Deletes zero or more records from the `awards_race` collection
+  """
+  deleteFromawards_raceCollection: awards_raceDeleteResponse!
+  """
+  Deletes zero or more records from the `draft_pool` collection
+  """
+  deleteFromdraft_poolCollection: draft_poolDeleteResponse!
+  """
+  Deletes zero or more records from the `event_group_members` collection
+  """
+  deleteFromevent_group_membersCollection: event_group_membersDeleteResponse!
+  """
+  Deletes zero or more records from the `event_groups` collection
+  """
+  deleteFromevent_groupsCollection: event_groupsDeleteResponse!
+  """
+  Deletes zero or more records from the `event_results` collection
+  """
+  deleteFromevent_resultsCollection: event_resultsDeleteResponse!
+  """
+  Deletes zero or more records from the `events` collection
+  """
+  deleteFromeventsCollection: eventsDeleteResponse!
+  """
+  Deletes zero or more records from the `group_matches` collection
+  """
+  deleteFromgroup_matchesCollection: group_matchesDeleteResponse!
+  """
+  Deletes zero or more records from the `group_standings` collection
+  """
+  deleteFromgroup_standingsCollection: group_standingsDeleteResponse!
+  """
+  Deletes zero or more records from the `kv_store_10f5458b` collection
+  """
+  deleteFromkv_store_10f5458bCollection: kv_store_10f5458bDeleteResponse!
+  """
+  Deletes zero or more records from the `league_seasons` collection
+  """
+  deleteFromleague_seasonsCollection: league_seasonsDeleteResponse!
+  """
+  Deletes zero or more records from the `match_mvp` collection
+  """
+  deleteFrommatch_mvpCollection: match_mvpDeleteResponse!
+  """
+  Deletes zero or more records from the `match_points` collection
+  """
+  deleteFrommatch_pointsCollection: match_pointsDeleteResponse!
+  """
+  Deletes zero or more records from the `match_submissions` collection
+  """
+  deleteFrommatch_submissionsCollection: match_submissionsDeleteResponse!
+  """
+  Deletes zero or more records from the `matches` collection
+  """
+  deleteFrommatchesCollection: matchesDeleteResponse!
+  """
+  Deletes zero or more records from the `notifications` collection
+  """
+  deleteFromnotificationsCollection: notificationsDeleteResponse!
+  """
+  Deletes zero or more records from the `player_rp_transactions` collection
+  """
+  deleteFromplayer_rp_transactionsCollection: player_rp_transactionsDeleteResponse!
+  """
+  Deletes zero or more records from the `player_salary_tiers` collection
+  """
+  deleteFromplayer_salary_tiersCollection: player_salary_tiersDeleteResponse!
+  """
+  Deletes zero or more records from the `player_stats` collection
+  """
+  deleteFromplayer_statsCollection: player_statsDeleteResponse!
+  """
+  Deletes zero or more records from the `players` collection
+  """
+  deleteFromplayersCollection: playersDeleteResponse!
+  """
+  Deletes zero or more records from the `profiles` collection
+  """
+  deleteFromprofilesCollection: profilesDeleteResponse!
+  """
+  Deletes zero or more records from the `ranking_points` collection
+  """
+  deleteFromranking_pointsCollection: ranking_pointsDeleteResponse!
+  """
+  Deletes zero or more records from the `regions` collection
+  """
+  deleteFromregionsCollection: regionsDeleteResponse!
+  """
+  Deletes zero or more records from the `role_permissions` collection
+  """
+  deleteFromrole_permissionsCollection: role_permissionsDeleteResponse!
+  """
+  Deletes zero or more records from the `rp_transactions` collection
+  """
+  deleteFromrp_transactionsCollection: rp_transactionsDeleteResponse!
+  """
+  Deletes zero or more records from the `salary_tiers` collection
+  """
+  deleteFromsalary_tiersCollection: salary_tiersDeleteResponse!
+  """
+  Deletes zero or more records from the `team_match_stats` collection
+  """
+  deleteFromteam_match_statsCollection: team_match_statsDeleteResponse!
+  """
+  Deletes zero or more records from the `team_rosters` collection
+  """
+  deleteFromteam_rostersCollection: team_rostersDeleteResponse!
+  """
+  Deletes zero or more records from the `teams` collection
+  """
+  deleteFromteamsCollection: teamsDeleteResponse!
+  """
+  Deletes zero or more records from the `teams_pot_tracker` collection
+  """
+  deleteFromteams_pot_trackerCollection: teams_pot_trackerDeleteResponse!
+  """
+  Deletes zero or more records from the `upcoming_matches` collection
+  """
+  deleteFromupcoming_matchesCollection: upcoming_matchesDeleteResponse!
+  """
+  Deletes zero or more records from the `update_race` collection
+  """
+  deleteFromupdate_raceCollection: update_raceDeleteResponse!
+  """
+  Deletes zero or more records from the `user_roles` collection
+  """
+  deleteFromuser_rolesCollection: user_rolesDeleteResponse!
+  """
+  generate_bracket_matches
+  """
+  generate_bracket_matches: Opaque
+  """
+  generate_group_matches
+  """
+  generate_group_matches: Opaque
+  """
+  has_permission
+  """
+  has_permission: Boolean
+  """
+  has_role
+  """
+  has_role: Boolean
+  """
+  initialize_new_season
+  """
+  initialize_new_season: Opaque
+  """
+  initialize_user_roles
+  """
+  initialize_user_roles: Opaque
+  """
+  Adds one or more `awards_race` records to the collection
+  """
+  insertIntoawards_raceCollection: awards_raceInsertResponse
+  """
+  Adds one or more `draft_pool` records to the collection
+  """
+  insertIntodraft_poolCollection: draft_poolInsertResponse
+  """
+  Adds one or more `event_group_members` records to the collection
+  """
+  insertIntoevent_group_membersCollection: event_group_membersInsertResponse
+  """
+  Adds one or more `event_groups` records to the collection
+  """
+  insertIntoevent_groupsCollection: event_groupsInsertResponse
+  """
+  Adds one or more `event_results` records to the collection
+  """
+  insertIntoevent_resultsCollection: event_resultsInsertResponse
+  """
+  Adds one or more `events` records to the collection
+  """
+  insertIntoeventsCollection: eventsInsertResponse
+  """
+  Adds one or more `group_matches` records to the collection
+  """
+  insertIntogroup_matchesCollection: group_matchesInsertResponse
+  """
+  Adds one or more `group_standings` records to the collection
+  """
+  insertIntogroup_standingsCollection: group_standingsInsertResponse
+  """
+  Adds one or more `kv_store_10f5458b` records to the collection
+  """
+  insertIntokv_store_10f5458bCollection: kv_store_10f5458bInsertResponse
+  """
+  Adds one or more `league_seasons` records to the collection
+  """
+  insertIntoleague_seasonsCollection: league_seasonsInsertResponse
+  """
+  Adds one or more `match_mvp` records to the collection
+  """
+  insertIntomatch_mvpCollection: match_mvpInsertResponse
+  """
+  Adds one or more `match_points` records to the collection
+  """
+  insertIntomatch_pointsCollection: match_pointsInsertResponse
+  """
+  Adds one or more `match_submissions` records to the collection
+  """
+  insertIntomatch_submissionsCollection: match_submissionsInsertResponse
+  """
+  Adds one or more `matches` records to the collection
+  """
+  insertIntomatchesCollection: matchesInsertResponse
+  """
+  Adds one or more `notifications` records to the collection
+  """
+  insertIntonotificationsCollection: notificationsInsertResponse
+  """
+  Adds one or more `player_rp_transactions` records to the collection
+  """
+  insertIntoplayer_rp_transactionsCollection: player_rp_transactionsInsertResponse
+  """
+  Adds one or more `player_salary_tiers` records to the collection
+  """
+  insertIntoplayer_salary_tiersCollection: player_salary_tiersInsertResponse
+  """
+  Adds one or more `player_stats` records to the collection
+  """
+  insertIntoplayer_statsCollection: player_statsInsertResponse
+  """
+  Adds one or more `players` records to the collection
+  """
+  insertIntoplayersCollection: playersInsertResponse
+  """
+  Adds one or more `profiles` records to the collection
+  """
+  insertIntoprofilesCollection: profilesInsertResponse
+  """
+  Adds one or more `ranking_points` records to the collection
+  """
+  insertIntoranking_pointsCollection: ranking_pointsInsertResponse
+  """
+  Adds one or more `regions` records to the collection
+  """
+  insertIntoregionsCollection: regionsInsertResponse
+  """
+  Adds one or more `role_permissions` records to the collection
+  """
+  insertIntorole_permissionsCollection: role_permissionsInsertResponse
+  """
+  Adds one or more `rp_transactions` records to the collection
+  """
+  insertIntorp_transactionsCollection: rp_transactionsInsertResponse
+  """
+  Adds one or more `salary_tiers` records to the collection
+  """
+  insertIntosalary_tiersCollection: salary_tiersInsertResponse
+  """
+  Adds one or more `team_match_stats` records to the collection
+  """
+  insertIntoteam_match_statsCollection: team_match_statsInsertResponse
+  """
+  Adds one or more `team_rosters` records to the collection
+  """
+  insertIntoteam_rostersCollection: team_rostersInsertResponse
+  """
+  Adds one or more `teams` records to the collection
+  """
+  insertIntoteamsCollection: teamsInsertResponse
+  """
+  Adds one or more `teams_pot_tracker` records to the collection
+  """
+  insertIntoteams_pot_trackerCollection: teams_pot_trackerInsertResponse
+  """
+  Adds one or more `upcoming_matches` records to the collection
+  """
+  insertIntoupcoming_matchesCollection: upcoming_matchesInsertResponse
+  """
+  Adds one or more `update_race` records to the collection
+  """
+  insertIntoupdate_raceCollection: update_raceInsertResponse
+  """
+  Adds one or more `user_roles` records to the collection
+  """
+  insertIntouser_rolesCollection: user_rolesInsertResponse
+  """
+  is_league_admin
+  """
+  is_league_admin: Boolean
+  """
+  promote_to_league_admin
+  """
+  promote_to_league_admin: Boolean
+  """
+  recalculate_all_rankings
+  """
+  recalculate_all_rankings: Opaque
+  """
+  record_match_forfeit
+  """
+  record_match_forfeit: Opaque
+  """
+  remove_role
+  """
+  remove_role: Boolean
+  """
+  schedule_rp_decay
+  """
+  schedule_rp_decay: Opaque
+  """
+  select_award_winner
+  """
+  select_award_winner: Opaque
+  """
+  sync_user_roles_for_user
+  """
+  sync_user_roles_for_user: Opaque
+  """
+  update_all_teams_money_won
+  """
+  update_all_teams_money_won: Opaque
+  """
+  update_awards_race
+  """
+  update_awards_race: Opaque
+  """
+  update_elo_after_match
+  """
+  update_elo_after_match: Opaque
+  """
+  update_existing_draft_pool_records
+  """
+  update_existing_draft_pool_records: Opaque
+  """
+  update_player_ps
+  """
+  update_player_ps: Opaque
+  """
+  update_player_rank_score
+  """
+  update_player_rank_score: Opaque
+  """
+  update_player_rankings
+  """
+  update_player_rankings: Opaque
+  """
+  update_team_money_won
+  """
+  update_team_money_won: Opaque
+  """
+  update_team_rankings
+  """
+  update_team_rankings: Opaque
+  """
+  update_user_claims
+  """
+  update_user_claims: Boolean
+  """
+  Updates zero or more records in the `awards_race` collection
+  """
+  updateawards_raceCollection: awards_raceUpdateResponse!
+  """
+  Updates zero or more records in the `draft_pool` collection
+  """
+  updatedraft_poolCollection: draft_poolUpdateResponse!
+  """
+  Updates zero or more records in the `event_group_members` collection
+  """
+  updateevent_group_membersCollection: event_group_membersUpdateResponse!
+  """
+  Updates zero or more records in the `event_groups` collection
+  """
+  updateevent_groupsCollection: event_groupsUpdateResponse!
+  """
+  Updates zero or more records in the `event_results` collection
+  """
+  updateevent_resultsCollection: event_resultsUpdateResponse!
+  """
+  Updates zero or more records in the `events` collection
+  """
+  updateeventsCollection: eventsUpdateResponse!
+  """
+  Updates zero or more records in the `group_matches` collection
+  """
+  updategroup_matchesCollection: group_matchesUpdateResponse!
+  """
+  Updates zero or more records in the `group_standings` collection
+  """
+  updategroup_standingsCollection: group_standingsUpdateResponse!
+  """
+  Updates zero or more records in the `kv_store_10f5458b` collection
+  """
+  updatekv_store_10f5458bCollection: kv_store_10f5458bUpdateResponse!
+  """
+  Updates zero or more records in the `league_seasons` collection
+  """
+  updateleague_seasonsCollection: league_seasonsUpdateResponse!
+  """
+  Updates zero or more records in the `match_mvp` collection
+  """
+  updatematch_mvpCollection: match_mvpUpdateResponse!
+  """
+  Updates zero or more records in the `match_points` collection
+  """
+  updatematch_pointsCollection: match_pointsUpdateResponse!
+  """
+  Updates zero or more records in the `match_submissions` collection
+  """
+  updatematch_submissionsCollection: match_submissionsUpdateResponse!
+  """
+  Updates zero or more records in the `matches` collection
+  """
+  updatematchesCollection: matchesUpdateResponse!
+  """
+  Updates zero or more records in the `notifications` collection
+  """
+  updatenotificationsCollection: notificationsUpdateResponse!
+  """
+  Updates zero or more records in the `player_rp_transactions` collection
+  """
+  updateplayer_rp_transactionsCollection: player_rp_transactionsUpdateResponse!
+  """
+  Updates zero or more records in the `player_salary_tiers` collection
+  """
+  updateplayer_salary_tiersCollection: player_salary_tiersUpdateResponse!
+  """
+  Updates zero or more records in the `player_stats` collection
+  """
+  updateplayer_statsCollection: player_statsUpdateResponse!
+  """
+  Updates zero or more records in the `players` collection
+  """
+  updateplayersCollection: playersUpdateResponse!
+  """
+  Updates zero or more records in the `profiles` collection
+  """
+  updateprofilesCollection: profilesUpdateResponse!
+  """
+  Updates zero or more records in the `ranking_points` collection
+  """
+  updateranking_pointsCollection: ranking_pointsUpdateResponse!
+  """
+  Updates zero or more records in the `regions` collection
+  """
+  updateregionsCollection: regionsUpdateResponse!
+  """
+  Updates zero or more records in the `role_permissions` collection
+  """
+  updaterole_permissionsCollection: role_permissionsUpdateResponse!
+  """
+  Updates zero or more records in the `rp_transactions` collection
+  """
+  updaterp_transactionsCollection: rp_transactionsUpdateResponse!
+  """
+  Updates zero or more records in the `salary_tiers` collection
+  """
+  updatesalary_tiersCollection: salary_tiersUpdateResponse!
+  """
+  Updates zero or more records in the `team_match_stats` collection
+  """
+  updateteam_match_statsCollection: team_match_statsUpdateResponse!
+  """
+  Updates zero or more records in the `team_rosters` collection
+  """
+  updateteam_rostersCollection: team_rostersUpdateResponse!
+  """
+  Updates zero or more records in the `teams` collection
+  """
+  updateteamsCollection: teamsUpdateResponse!
+  """
+  Updates zero or more records in the `teams_pot_tracker` collection
+  """
+  updateteams_pot_trackerCollection: teams_pot_trackerUpdateResponse!
+  """
+  Updates zero or more records in the `upcoming_matches` collection
+  """
+  updateupcoming_matchesCollection: upcoming_matchesUpdateResponse!
+  """
+  Updates zero or more records in the `update_race` collection
+  """
+  updateupdate_raceCollection: update_raceUpdateResponse!
+  """
+  Updates zero or more records in the `user_roles` collection
+  """
+  updateuser_rolesCollection: user_rolesUpdateResponse!
+}
+
+"""
+Boolean expression comparing fields on type "Opaque"
+"""
+input OpaqueFilterInput {
+  """
+  eq
+  """
+  eq: Opaque
+  """
+  is
+  """
+  is: FilterIs
+}
+
+"""
+Defines a per-field sorting order
+"""
+enum OrderByDirection {
+  """
+  Ascending order, nulls first
+  """
+  AscNullsFirst
+  """
+  Ascending order, nulls last
+  """
+  AscNullsLast
+  """
+  Descending order, nulls first
+  """
+  DescNullsFirst
+  """
+  Descending order, nulls last
+  """
+  DescNullsLast
+}
+
+"""
+Type for PageInfo
+"""
+type PageInfo {
+  """
+  endCursor
+  """
+  endCursor: String
+  """
+  hasNextPage
+  """
+  hasNextPage: Boolean!
+  """
+  hasPreviousPage
+  """
+  hasPreviousPage: Boolean!
+  """
+  startCursor
+  """
+  startCursor: String
+}
+
+"""
+The root type for querying data
+"""
+type Query {
+  """
+  A pagable collection of type `awards_race`
+  """
+  awards_raceCollection: awards_raceConnection
+  """
+  custom_jwt
+  """
+  custom_jwt: JSON
+  """
+  A pagable collection of type `draft_pool`
+  """
+  draft_poolCollection: draft_poolConnection
+  """
+  A pagable collection of type `event_group_members`
+  """
+  event_group_membersCollection: event_group_membersConnection
+  """
+  A pagable collection of type `event_groups`
+  """
+  event_groupsCollection: event_groupsConnection
+  """
+  A pagable collection of type `event_results`
+  """
+  event_resultsCollection: event_resultsConnection
+  """
+  A pagable collection of type `events`
+  """
+  eventsCollection: eventsConnection
+  """
+  A pagable collection of type `group_matches`
+  """
+  group_matchesCollection: group_matchesConnection
+  """
+  A pagable collection of type `group_standings`
+  """
+  group_standingsCollection: group_standingsConnection
+  """
+  A pagable collection of type `kv_store_10f5458b`
+  """
+  kv_store_10f5458bCollection: kv_store_10f5458bConnection
+  """
+  A pagable collection of type `league_seasons`
+  """
+  league_seasonsCollection: league_seasonsConnection
+  """
+  A pagable collection of type `match_mvp`
+  """
+  match_mvpCollection: match_mvpConnection
+  """
+  A pagable collection of type `match_points`
+  """
+  match_pointsCollection: match_pointsConnection
+  """
+  A pagable collection of type `match_submissions`
+  """
+  match_submissionsCollection: match_submissionsConnection
+  """
+  A pagable collection of type `matches`
+  """
+  matchesCollection: matchesConnection
+  """
+  Retrieve a record by its `ID`
+  """
+  node: Node
+  """
+  A pagable collection of type `notifications`
+  """
+  notificationsCollection: notificationsConnection
+  """
+  A pagable collection of type `player_rp_transactions`
+  """
+  player_rp_transactionsCollection: player_rp_transactionsConnection
+  """
+  A pagable collection of type `player_salary_tiers`
+  """
+  player_salary_tiersCollection: player_salary_tiersConnection
+  """
+  A pagable collection of type `player_stats`
+  """
+  player_statsCollection: player_statsConnection
+  """
+  A pagable collection of type `players`
+  """
+  playersCollection: playersConnection
+  """
+  A pagable collection of type `profiles`
+  """
+  profilesCollection: profilesConnection
+  """
+  A pagable collection of type `ranking_points`
+  """
+  ranking_pointsCollection: ranking_pointsConnection
+  """
+  A pagable collection of type `regions`
+  """
+  regionsCollection: regionsConnection
+  """
+  A pagable collection of type `role_permissions`
+  """
+  role_permissionsCollection: role_permissionsConnection
+  """
+  A pagable collection of type `rp_transactions`
+  """
+  rp_transactionsCollection: rp_transactionsConnection
+  """
+  A pagable collection of type `salary_tiers`
+  """
+  salary_tiersCollection: salary_tiersConnection
+  """
+  A pagable collection of type `team_match_stats`
+  """
+  team_match_statsCollection: team_match_statsConnection
+  """
+  A pagable collection of type `team_rosters`
+  """
+  team_rostersCollection: team_rostersConnection
+  """
+  A pagable collection of type `teams`
+  """
+  teamsCollection: teamsConnection
+  """
+  A pagable collection of type `teams_pot_tracker`
+  """
+  teams_pot_trackerCollection: teams_pot_trackerConnection
+  """
+  A pagable collection of type `upcoming_matches`
+  """
+  upcoming_matchesCollection: upcoming_matchesConnection
+  """
+  A pagable collection of type `update_race`
+  """
+  update_raceCollection: update_raceConnection
+  """
+  A pagable collection of type `user_roles`
+  """
+  user_rolesCollection: user_rolesConnection
+}
+
+"""
+Boolean expression comparing fields on type "String"
+"""
+input StringFilterInput {
+  """
+  eq
+  """
+  eq: String
+  """
+  gt
+  """
+  gt: String
+  """
+  gte
+  """
+  gte: String
+  """
+  ilike
+  """
+  ilike: String
+  """
+  in
+  """
+  in: [String]
+  """
+  iregex
+  """
+  iregex: String
+  """
+  is
+  """
+  is: FilterIs
+  """
+  like
+  """
+  like: String
+  """
+  lt
+  """
+  lt: String
+  """
+  lte
+  """
+  lte: String
+  """
+  neq
+  """
+  neq: String
+  """
+  regex
+  """
+  regex: String
+  """
+  startsWith
+  """
+  startsWith: String
+}
+
+"""
+Boolean expression comparing fields on type "StringList"
+"""
+input StringListFilterInput {
+  """
+  containedBy
+  """
+  containedBy: [String]
+  """
+  contains
+  """
+  contains: [String]
+  """
+  eq
+  """
+  eq: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  overlaps
+  """
+  overlaps: [String]
+}
+
+"""
+Boolean expression comparing fields on type "Time"
+"""
+input TimeFilterInput {
+  """
+  eq
+  """
+  eq: Time
+  """
+  gt
+  """
+  gt: Time
+  """
+  gte
+  """
+  gte: Time
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  lt
+  """
+  lt: Time
+  """
+  lte
+  """
+  lte: Time
+  """
+  neq
+  """
+  neq: Time
+}
+
+"""
+Boolean expression comparing fields on type "TimeList"
+"""
+input TimeListFilterInput {
+  """
+  containedBy
+  """
+  containedBy: [String]
+  """
+  contains
+  """
+  contains: [String]
+  """
+  eq
+  """
+  eq: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  overlaps
+  """
+  overlaps: [String]
+}
+
+"""
+Boolean expression comparing fields on type "UUID"
+"""
+input UUIDFilterInput {
+  """
+  eq
+  """
+  eq: UUID
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  neq
+  """
+  neq: UUID
+}
+
+"""
+Boolean expression comparing fields on type "UUIDList"
+"""
+input UUIDListFilterInput {
+  """
+  containedBy
+  """
+  containedBy: [String]
+  """
+  contains
+  """
+  contains: [String]
+  """
+  eq
+  """
+  eq: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  overlaps
+  """
+  overlaps: [String]
+}
+
+"""
+Enum for app_role
+"""
+enum app_role {
+  """
+  admin
+  """
+  admin
+  """
+  league_staff
+  """
+  league_staff
+  """
+  user
+  """
+  user
+  """
+  editor
+  """
+  editor
+  """
+  analyst
+  """
+  analyst
+  """
+  team_staff
+  """
+  team_staff
+  """
+  player
+  """
+  player
+}
+
+"""
+Boolean expression comparing fields on type "app_role"
+"""
+input app_roleFilterInput {
+  """
+  eq
+  """
+  eq: app_role
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  neq
+  """
+  neq: app_role
+}
+
+"""
+Enum for award_types
+"""
+enum award_types {
+  """
+  Offensive MVP
+  """
+  Offensive MVP
+  """
+  Defensive MVP
+  """
+  Defensive MVP
+  """
+  Rookie of Tournament
+  """
+  Rookie of Tournament
+}
+
+"""
+Boolean expression comparing fields on type "award_types"
+"""
+input award_typesFilterInput {
+  """
+  eq
+  """
+  eq: award_types
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  neq
+  """
+  neq: award_types
+}
+
+"""
+Type for awards_race
+"""
+type awards_race {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID!
+  """
+  player_id
+  """
+  player_id: UUID
+  """
+  award_type
+  """
+  award_type: award_types
+  """
+  rank
+  """
+  rank: Int
+  """
+  rp_bonus
+  """
+  rp_bonus: BigInt
+  """
+  award_winner
+  """
+  award_winner: Boolean
+  """
+  created_at
+  """
+  created_at: Datetime!
+  """
+  players
+  """
+  players: players
+  """
+  teams
+  """
+  teams: teams
+  """
+  events
+  """
+  events: events
+  """
+  update_raceCollection
+  """
+  update_raceCollection: update_raceConnection
+}
+
+"""
+Type for awards_raceConnection
+"""
+type awards_raceConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for awards_raceDeleteResponse
+"""
+type awards_raceDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for awards_raceEdge
+"""
+type awards_raceEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: awards_race!
+}
+
+"""
+Input type for awards_raceFilter
+"""
+input awards_raceFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  event_id
+  """
+  event_id: UUIDFilter
+  """
+  team_id
+  """
+  team_id: UUIDFilter
+  """
+  player_id
+  """
+  player_id: UUIDFilter
+  """
+  award_type
+  """
+  award_type: award_typesFilter
+  """
+  rank
+  """
+  rank: IntFilter
+  """
+  rp_bonus
+  """
+  rp_bonus: BigIntFilter
+  """
+  award_winner
+  """
+  award_winner: BooleanFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: awards_raceFilter
+}
+
+"""
+Input type for awards_raceInsertInput
+"""
+input awards_raceInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  player_id
+  """
+  player_id: UUID
+  """
+  award_type
+  """
+  award_type: award_types
+  """
+  rank
+  """
+  rank: Int
+  """
+  rp_bonus
+  """
+  rp_bonus: BigInt
+  """
+  award_winner
+  """
+  award_winner: Boolean
+  """
+  created_at
+  """
+  created_at: Datetime
+}
+
+"""
+Type for awards_raceInsertResponse
+"""
+type awards_raceInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for awards_raceOrderBy
+"""
+input awards_raceOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  event_id
+  """
+  event_id: OrderByDirection
+  """
+  team_id
+  """
+  team_id: OrderByDirection
+  """
+  player_id
+  """
+  player_id: OrderByDirection
+  """
+  award_type
+  """
+  award_type: OrderByDirection
+  """
+  rank
+  """
+  rank: OrderByDirection
+  """
+  rp_bonus
+  """
+  rp_bonus: OrderByDirection
+  """
+  award_winner
+  """
+  award_winner: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+}
+
+"""
+Input type for awards_raceUpdateInput
+"""
+input awards_raceUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  player_id
+  """
+  player_id: UUID
+  """
+  award_type
+  """
+  award_type: award_types
+  """
+  rank
+  """
+  rank: Int
+  """
+  rp_bonus
+  """
+  rp_bonus: BigInt
+  """
+  award_winner
+  """
+  award_winner: Boolean
+  """
+  created_at
+  """
+  created_at: Datetime
+}
+
+"""
+Type for awards_raceUpdateResponse
+"""
+type awards_raceUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for draft_pool
+"""
+type draft_pool {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  player_id
+  """
+  player_id: UUID!
+  """
+  declared_at
+  """
+  declared_at: Datetime
+  """
+  status
+  """
+  status: String
+  """
+  season
+  """
+  season: String
+  """
+  draft_rating
+  """
+  draft_rating: Int
+  """
+  draft_notes
+  """
+  draft_notes: String
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  events
+  """
+  events: events
+  """
+  players
+  """
+  players: players
+}
+
+"""
+Type for draft_poolConnection
+"""
+type draft_poolConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for draft_poolDeleteResponse
+"""
+type draft_poolDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for draft_poolEdge
+"""
+type draft_poolEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: draft_pool!
+}
+
+"""
+Input type for draft_poolFilter
+"""
+input draft_poolFilterInput {
+  """
+  player_id
+  """
+  player_id: UUIDFilter
+  """
+  declared_at
+  """
+  declared_at: DatetimeFilter
+  """
+  status
+  """
+  status: StringFilter
+  """
+  season
+  """
+  season: StringFilter
+  """
+  draft_rating
+  """
+  draft_rating: IntFilter
+  """
+  draft_notes
+  """
+  draft_notes: StringFilter
+  """
+  event_id
+  """
+  event_id: UUIDFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  updated_at
+  """
+  updated_at: DatetimeFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: draft_poolFilter
+}
+
+"""
+Input type for draft_poolInsertInput
+"""
+input draft_poolInsertInputInput {
+  """
+  player_id
+  """
+  player_id: UUID
+  """
+  declared_at
+  """
+  declared_at: Datetime
+  """
+  status
+  """
+  status: String
+  """
+  season
+  """
+  season: String
+  """
+  draft_rating
+  """
+  draft_rating: Int
+  """
+  draft_notes
+  """
+  draft_notes: String
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for draft_poolInsertResponse
+"""
+type draft_poolInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for draft_poolOrderBy
+"""
+input draft_poolOrderByInput {
+  """
+  player_id
+  """
+  player_id: OrderByDirection
+  """
+  declared_at
+  """
+  declared_at: OrderByDirection
+  """
+  status
+  """
+  status: OrderByDirection
+  """
+  season
+  """
+  season: OrderByDirection
+  """
+  draft_rating
+  """
+  draft_rating: OrderByDirection
+  """
+  draft_notes
+  """
+  draft_notes: OrderByDirection
+  """
+  event_id
+  """
+  event_id: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+  """
+  updated_at
+  """
+  updated_at: OrderByDirection
+}
+
+"""
+Input type for draft_poolUpdateInput
+"""
+input draft_poolUpdateInputInput {
+  """
+  player_id
+  """
+  player_id: UUID
+  """
+  declared_at
+  """
+  declared_at: Datetime
+  """
+  status
+  """
+  status: String
+  """
+  season
+  """
+  season: String
+  """
+  draft_rating
+  """
+  draft_rating: Int
+  """
+  draft_notes
+  """
+  draft_notes: String
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for draft_poolUpdateResponse
+"""
+type draft_poolUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for event_group_members
+"""
+type event_group_members {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  group_id
+  """
+  group_id: UUID!
+  """
+  team_id
+  """
+  team_id: UUID!
+  """
+  seed
+  """
+  seed: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  event_groups
+  """
+  event_groups: event_groups
+  """
+  teams
+  """
+  teams: teams
+}
+
+"""
+Type for event_group_membersConnection
+"""
+type event_group_membersConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for event_group_membersDeleteResponse
+"""
+type event_group_membersDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for event_group_membersEdge
+"""
+type event_group_membersEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: event_group_members!
+}
+
+"""
+Input type for event_group_membersFilter
+"""
+input event_group_membersFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  group_id
+  """
+  group_id: UUIDFilter
+  """
+  team_id
+  """
+  team_id: UUIDFilter
+  """
+  seed
+  """
+  seed: IntFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: event_group_membersFilter
+}
+
+"""
+Input type for event_group_membersInsertInput
+"""
+input event_group_membersInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  group_id
+  """
+  group_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  seed
+  """
+  seed: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+}
+
+"""
+Type for event_group_membersInsertResponse
+"""
+type event_group_membersInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for event_group_membersOrderBy
+"""
+input event_group_membersOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  group_id
+  """
+  group_id: OrderByDirection
+  """
+  team_id
+  """
+  team_id: OrderByDirection
+  """
+  seed
+  """
+  seed: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+}
+
+"""
+Input type for event_group_membersUpdateInput
+"""
+input event_group_membersUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  group_id
+  """
+  group_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  seed
+  """
+  seed: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+}
+
+"""
+Type for event_group_membersUpdateResponse
+"""
+type event_group_membersUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for event_groups
+"""
+type event_groups {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  event_id
+  """
+  event_id: UUID!
+  """
+  name
+  """
+  name: String!
+  """
+  description
+  """
+  description: String
+  """
+  max_teams
+  """
+  max_teams: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  status
+  """
+  status: String
+  """
+  advancement_count
+  """
+  advancement_count: Int
+  """
+  sort_order
+  """
+  sort_order: Int
+  """
+  events
+  """
+  events: events
+  """
+  event_group_membersCollection
+  """
+  event_group_membersCollection: event_group_membersConnection
+  """
+  group_matchesCollection
+  """
+  group_matchesCollection: group_matchesConnection
+  """
+  group_standingsCollection
+  """
+  group_standingsCollection: group_standingsConnection
+  """
+  upcoming_matchesCollection
+  """
+  upcoming_matchesCollection: upcoming_matchesConnection
+  """
+  match_pointsCollection
+  """
+  match_pointsCollection: match_pointsConnection
+}
+
+"""
+Type for event_groupsConnection
+"""
+type event_groupsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for event_groupsDeleteResponse
+"""
+type event_groupsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for event_groupsEdge
+"""
+type event_groupsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: event_groups!
+}
+
+"""
+Input type for event_groupsFilter
+"""
+input event_groupsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  event_id
+  """
+  event_id: UUIDFilter
+  """
+  name
+  """
+  name: StringFilter
+  """
+  description
+  """
+  description: StringFilter
+  """
+  max_teams
+  """
+  max_teams: IntFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  updated_at
+  """
+  updated_at: DatetimeFilter
+  """
+  status
+  """
+  status: StringFilter
+  """
+  advancement_count
+  """
+  advancement_count: IntFilter
+  """
+  sort_order
+  """
+  sort_order: IntFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: event_groupsFilter
+}
+
+"""
+Input type for event_groupsInsertInput
+"""
+input event_groupsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  name
+  """
+  name: String
+  """
+  description
+  """
+  description: String
+  """
+  max_teams
+  """
+  max_teams: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  status
+  """
+  status: String
+  """
+  advancement_count
+  """
+  advancement_count: Int
+  """
+  sort_order
+  """
+  sort_order: Int
+}
+
+"""
+Type for event_groupsInsertResponse
+"""
+type event_groupsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for event_groupsOrderBy
+"""
+input event_groupsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  event_id
+  """
+  event_id: OrderByDirection
+  """
+  name
+  """
+  name: OrderByDirection
+  """
+  description
+  """
+  description: OrderByDirection
+  """
+  max_teams
+  """
+  max_teams: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+  """
+  updated_at
+  """
+  updated_at: OrderByDirection
+  """
+  status
+  """
+  status: OrderByDirection
+  """
+  advancement_count
+  """
+  advancement_count: OrderByDirection
+  """
+  sort_order
+  """
+  sort_order: OrderByDirection
+}
+
+"""
+Input type for event_groupsUpdateInput
+"""
+input event_groupsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  name
+  """
+  name: String
+  """
+  description
+  """
+  description: String
+  """
+  max_teams
+  """
+  max_teams: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  status
+  """
+  status: String
+  """
+  advancement_count
+  """
+  advancement_count: Int
+  """
+  sort_order
+  """
+  sort_order: Int
+}
+
+"""
+Type for event_groupsUpdateResponse
+"""
+type event_groupsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for event_results
+"""
+type event_results {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  event_id
+  """
+  event_id: UUID!
+  """
+  team_id
+  """
+  team_id: UUID!
+  """
+  placement
+  """
+  placement: Int
+  """
+  rp_awarded
+  """
+  rp_awarded: Int
+  """
+  bonus_rp
+  """
+  bonus_rp: Int
+  """
+  total_rp
+  """
+  total_rp: Int
+  """
+  awarded_at
+  """
+  awarded_at: Date
+  """
+  prize_amount
+  """
+  prize_amount: Int
+  """
+  winner_banner_url
+  """
+  winner_banner_url: String
+  """
+  events
+  """
+  events: events
+  """
+  teams
+  """
+  teams: teams
+}
+
+"""
+Type for event_resultsConnection
+"""
+type event_resultsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for event_resultsDeleteResponse
+"""
+type event_resultsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for event_resultsEdge
+"""
+type event_resultsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: event_results!
+}
+
+"""
+Input type for event_resultsFilter
+"""
+input event_resultsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  event_id
+  """
+  event_id: UUIDFilter
+  """
+  team_id
+  """
+  team_id: UUIDFilter
+  """
+  placement
+  """
+  placement: IntFilter
+  """
+  rp_awarded
+  """
+  rp_awarded: IntFilter
+  """
+  bonus_rp
+  """
+  bonus_rp: IntFilter
+  """
+  total_rp
+  """
+  total_rp: IntFilter
+  """
+  awarded_at
+  """
+  awarded_at: DateFilter
+  """
+  prize_amount
+  """
+  prize_amount: IntFilter
+  """
+  winner_banner_url
+  """
+  winner_banner_url: StringFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: event_resultsFilter
+}
+
+"""
+Input type for event_resultsInsertInput
+"""
+input event_resultsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  placement
+  """
+  placement: Int
+  """
+  rp_awarded
+  """
+  rp_awarded: Int
+  """
+  bonus_rp
+  """
+  bonus_rp: Int
+  """
+  awarded_at
+  """
+  awarded_at: Date
+  """
+  prize_amount
+  """
+  prize_amount: Int
+  """
+  winner_banner_url
+  """
+  winner_banner_url: String
+}
+
+"""
+Type for event_resultsInsertResponse
+"""
+type event_resultsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for event_resultsOrderBy
+"""
+input event_resultsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  event_id
+  """
+  event_id: OrderByDirection
+  """
+  team_id
+  """
+  team_id: OrderByDirection
+  """
+  placement
+  """
+  placement: OrderByDirection
+  """
+  rp_awarded
+  """
+  rp_awarded: OrderByDirection
+  """
+  bonus_rp
+  """
+  bonus_rp: OrderByDirection
+  """
+  total_rp
+  """
+  total_rp: OrderByDirection
+  """
+  awarded_at
+  """
+  awarded_at: OrderByDirection
+  """
+  prize_amount
+  """
+  prize_amount: OrderByDirection
+  """
+  winner_banner_url
+  """
+  winner_banner_url: OrderByDirection
+}
+
+"""
+Input type for event_resultsUpdateInput
+"""
+input event_resultsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  placement
+  """
+  placement: Int
+  """
+  rp_awarded
+  """
+  rp_awarded: Int
+  """
+  bonus_rp
+  """
+  bonus_rp: Int
+  """
+  awarded_at
+  """
+  awarded_at: Date
+  """
+  prize_amount
+  """
+  prize_amount: Int
+  """
+  winner_banner_url
+  """
+  winner_banner_url: String
+}
+
+"""
+Type for event_resultsUpdateResponse
+"""
+type event_resultsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Enum for event_tier
+"""
+enum event_tier {
+  """
+  T1
+  """
+  T1
+  """
+  T2
+  """
+  T2
+  """
+  T3
+  """
+  T3
+  """
+  T4
+  """
+  T4
+}
+
+"""
+Boolean expression comparing fields on type "event_tier"
+"""
+input event_tierFilterInput {
+  """
+  eq
+  """
+  eq: event_tier
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  neq
+  """
+  neq: event_tier
+}
+
+"""
+Enum for event_type
+"""
+enum event_type {
+  """
+  League
+  """
+  League
+  """
+  Tournament
+  """
+  Tournament
+}
+
+"""
+Boolean expression comparing fields on type "event_type"
+"""
+input event_typeFilterInput {
+  """
+  eq
+  """
+  eq: event_type
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  neq
+  """
+  neq: event_type
+}
+
+"""
+Type for events
+"""
+type events {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  name
+  """
+  name: String!
+  """
+  type
+  """
+  type: String
+  """
+  is_global
+  """
+  is_global: Boolean
+  """
+  region_id
+  """
+  region_id: UUID
+  """
+  start_date
+  """
+  start_date: Date
+  """
+  end_date
+  """
+  end_date: Date
+  """
+  max_rp
+  """
+  max_rp: Int
+  """
+  decay_days
+  """
+  decay_days: Int
+  """
+  processed
+  """
+  processed: Boolean
+  """
+  description
+  """
+  description: String
+  """
+  banner_url
+  """
+  banner_url: String
+  """
+  rules_url
+  """
+  rules_url: String
+  """
+  processed_at
+  """
+  processed_at: Datetime
+  """
+  status
+  """
+  status: String
+  """
+  tier
+  """
+  tier: event_tier
+  """
+  season_number
+  """
+  season_number: Int
+  """
+  prize_pool
+  """
+  prize_pool: Int
+  """
+  regions
+  """
+  regions: regions
+  """
+  draft_poolCollection
+  """
+  draft_poolCollection: draft_poolConnection
+  """
+  event_resultsCollection
+  """
+  event_resultsCollection: event_resultsConnection
+  """
+  matchesCollection
+  """
+  matchesCollection: matchesConnection
+  """
+  ranking_pointsCollection
+  """
+  ranking_pointsCollection: ranking_pointsConnection
+  """
+  rp_transactionsCollection
+  """
+  rp_transactionsCollection: rp_transactionsConnection
+  """
+  team_rostersCollection
+  """
+  team_rostersCollection: team_rostersConnection
+  """
+  event_groupsCollection
+  """
+  event_groupsCollection: event_groupsConnection
+  """
+  upcoming_matchesCollection
+  """
+  upcoming_matchesCollection: upcoming_matchesConnection
+  """
+  player_rp_transactionsCollection
+  """
+  player_rp_transactionsCollection: player_rp_transactionsConnection
+  """
+  awards_raceCollection
+  """
+  awards_raceCollection: awards_raceConnection
+  """
+  teams_pot_trackerCollection
+  """
+  teams_pot_trackerCollection: teams_pot_trackerConnection
+  """
+  league_seasonsCollection
+  """
+  league_seasonsCollection: league_seasonsConnection
+  """
+  match_submissionsCollection
+  """
+  match_submissionsCollection: match_submissionsConnection
+}
+
+"""
+Type for eventsConnection
+"""
+type eventsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for eventsDeleteResponse
+"""
+type eventsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for eventsEdge
+"""
+type eventsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: events!
+}
+
+"""
+Input type for eventsFilter
+"""
+input eventsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  name
+  """
+  name: StringFilter
+  """
+  type
+  """
+  type: StringFilter
+  """
+  is_global
+  """
+  is_global: BooleanFilter
+  """
+  region_id
+  """
+  region_id: UUIDFilter
+  """
+  start_date
+  """
+  start_date: DateFilter
+  """
+  end_date
+  """
+  end_date: DateFilter
+  """
+  max_rp
+  """
+  max_rp: IntFilter
+  """
+  decay_days
+  """
+  decay_days: IntFilter
+  """
+  processed
+  """
+  processed: BooleanFilter
+  """
+  description
+  """
+  description: StringFilter
+  """
+  banner_url
+  """
+  banner_url: StringFilter
+  """
+  rules_url
+  """
+  rules_url: StringFilter
+  """
+  processed_at
+  """
+  processed_at: DatetimeFilter
+  """
+  status
+  """
+  status: StringFilter
+  """
+  tier
+  """
+  tier: event_tierFilter
+  """
+  season_number
+  """
+  season_number: IntFilter
+  """
+  prize_pool
+  """
+  prize_pool: IntFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: eventsFilter
+}
+
+"""
+Input type for eventsInsertInput
+"""
+input eventsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  name
+  """
+  name: String
+  """
+  type
+  """
+  type: String
+  """
+  is_global
+  """
+  is_global: Boolean
+  """
+  region_id
+  """
+  region_id: UUID
+  """
+  start_date
+  """
+  start_date: Date
+  """
+  end_date
+  """
+  end_date: Date
+  """
+  max_rp
+  """
+  max_rp: Int
+  """
+  decay_days
+  """
+  decay_days: Int
+  """
+  processed
+  """
+  processed: Boolean
+  """
+  description
+  """
+  description: String
+  """
+  banner_url
+  """
+  banner_url: String
+  """
+  rules_url
+  """
+  rules_url: String
+  """
+  processed_at
+  """
+  processed_at: Datetime
+  """
+  status
+  """
+  status: String
+  """
+  tier
+  """
+  tier: event_tier
+  """
+  season_number
+  """
+  season_number: Int
+  """
+  prize_pool
+  """
+  prize_pool: Int
+}
+
+"""
+Type for eventsInsertResponse
+"""
+type eventsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for eventsOrderBy
+"""
+input eventsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  name
+  """
+  name: OrderByDirection
+  """
+  type
+  """
+  type: OrderByDirection
+  """
+  is_global
+  """
+  is_global: OrderByDirection
+  """
+  region_id
+  """
+  region_id: OrderByDirection
+  """
+  start_date
+  """
+  start_date: OrderByDirection
+  """
+  end_date
+  """
+  end_date: OrderByDirection
+  """
+  max_rp
+  """
+  max_rp: OrderByDirection
+  """
+  decay_days
+  """
+  decay_days: OrderByDirection
+  """
+  processed
+  """
+  processed: OrderByDirection
+  """
+  description
+  """
+  description: OrderByDirection
+  """
+  banner_url
+  """
+  banner_url: OrderByDirection
+  """
+  rules_url
+  """
+  rules_url: OrderByDirection
+  """
+  processed_at
+  """
+  processed_at: OrderByDirection
+  """
+  status
+  """
+  status: OrderByDirection
+  """
+  tier
+  """
+  tier: OrderByDirection
+  """
+  season_number
+  """
+  season_number: OrderByDirection
+  """
+  prize_pool
+  """
+  prize_pool: OrderByDirection
+}
+
+"""
+Input type for eventsUpdateInput
+"""
+input eventsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  name
+  """
+  name: String
+  """
+  type
+  """
+  type: String
+  """
+  is_global
+  """
+  is_global: Boolean
+  """
+  region_id
+  """
+  region_id: UUID
+  """
+  start_date
+  """
+  start_date: Date
+  """
+  end_date
+  """
+  end_date: Date
+  """
+  max_rp
+  """
+  max_rp: Int
+  """
+  decay_days
+  """
+  decay_days: Int
+  """
+  processed
+  """
+  processed: Boolean
+  """
+  description
+  """
+  description: String
+  """
+  banner_url
+  """
+  banner_url: String
+  """
+  rules_url
+  """
+  rules_url: String
+  """
+  processed_at
+  """
+  processed_at: Datetime
+  """
+  status
+  """
+  status: String
+  """
+  tier
+  """
+  tier: event_tier
+  """
+  season_number
+  """
+  season_number: Int
+  """
+  prize_pool
+  """
+  prize_pool: Int
+}
+
+"""
+Type for eventsUpdateResponse
+"""
+type eventsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for group_matches
+"""
+type group_matches {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  group_id
+  """
+  group_id: UUID!
+  """
+  match_id
+  """
+  match_id: UUID!
+  """
+  round
+  """
+  round: Int!
+  """
+  match_number
+  """
+  match_number: Int!
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  event_groups
+  """
+  event_groups: event_groups
+  """
+  matches
+  """
+  matches: matches
+}
+
+"""
+Type for group_matchesConnection
+"""
+type group_matchesConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for group_matchesDeleteResponse
+"""
+type group_matchesDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for group_matchesEdge
+"""
+type group_matchesEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: group_matches!
+}
+
+"""
+Input type for group_matchesFilter
+"""
+input group_matchesFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  group_id
+  """
+  group_id: UUIDFilter
+  """
+  match_id
+  """
+  match_id: UUIDFilter
+  """
+  round
+  """
+  round: IntFilter
+  """
+  match_number
+  """
+  match_number: IntFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: group_matchesFilter
+}
+
+"""
+Input type for group_matchesInsertInput
+"""
+input group_matchesInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  group_id
+  """
+  group_id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  round
+  """
+  round: Int
+  """
+  match_number
+  """
+  match_number: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+}
+
+"""
+Type for group_matchesInsertResponse
+"""
+type group_matchesInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for group_matchesOrderBy
+"""
+input group_matchesOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  group_id
+  """
+  group_id: OrderByDirection
+  """
+  match_id
+  """
+  match_id: OrderByDirection
+  """
+  round
+  """
+  round: OrderByDirection
+  """
+  match_number
+  """
+  match_number: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+}
+
+"""
+Input type for group_matchesUpdateInput
+"""
+input group_matchesUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  group_id
+  """
+  group_id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  round
+  """
+  round: Int
+  """
+  match_number
+  """
+  match_number: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+}
+
+"""
+Type for group_matchesUpdateResponse
+"""
+type group_matchesUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for group_standings
+"""
+type group_standings {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  group_id
+  """
+  group_id: UUID!
+  """
+  team_id
+  """
+  team_id: UUID!
+  """
+  matches_played
+  """
+  matches_played: Int
+  """
+  wins
+  """
+  wins: Int
+  """
+  losses
+  """
+  losses: Int
+  """
+  points_for
+  """
+  points_for: Int
+  """
+  points_against
+  """
+  points_against: Int
+  """
+  point_differential
+  """
+  point_differential: Int
+  """
+  position
+  """
+  position: Int
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  event_groups
+  """
+  event_groups: event_groups
+  """
+  teams
+  """
+  teams: teams
+}
+
+"""
+Type for group_standingsConnection
+"""
+type group_standingsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for group_standingsDeleteResponse
+"""
+type group_standingsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for group_standingsEdge
+"""
+type group_standingsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: group_standings!
+}
+
+"""
+Input type for group_standingsFilter
+"""
+input group_standingsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  group_id
+  """
+  group_id: UUIDFilter
+  """
+  team_id
+  """
+  team_id: UUIDFilter
+  """
+  matches_played
+  """
+  matches_played: IntFilter
+  """
+  wins
+  """
+  wins: IntFilter
+  """
+  losses
+  """
+  losses: IntFilter
+  """
+  points_for
+  """
+  points_for: IntFilter
+  """
+  points_against
+  """
+  points_against: IntFilter
+  """
+  point_differential
+  """
+  point_differential: IntFilter
+  """
+  position
+  """
+  position: IntFilter
+  """
+  updated_at
+  """
+  updated_at: DatetimeFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: group_standingsFilter
+}
+
+"""
+Input type for group_standingsInsertInput
+"""
+input group_standingsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  group_id
+  """
+  group_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  matches_played
+  """
+  matches_played: Int
+  """
+  wins
+  """
+  wins: Int
+  """
+  losses
+  """
+  losses: Int
+  """
+  points_for
+  """
+  points_for: Int
+  """
+  points_against
+  """
+  points_against: Int
+  """
+  position
+  """
+  position: Int
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for group_standingsInsertResponse
+"""
+type group_standingsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for group_standingsOrderBy
+"""
+input group_standingsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  group_id
+  """
+  group_id: OrderByDirection
+  """
+  team_id
+  """
+  team_id: OrderByDirection
+  """
+  matches_played
+  """
+  matches_played: OrderByDirection
+  """
+  wins
+  """
+  wins: OrderByDirection
+  """
+  losses
+  """
+  losses: OrderByDirection
+  """
+  points_for
+  """
+  points_for: OrderByDirection
+  """
+  points_against
+  """
+  points_against: OrderByDirection
+  """
+  point_differential
+  """
+  point_differential: OrderByDirection
+  """
+  position
+  """
+  position: OrderByDirection
+  """
+  updated_at
+  """
+  updated_at: OrderByDirection
+}
+
+"""
+Input type for group_standingsUpdateInput
+"""
+input group_standingsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  group_id
+  """
+  group_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  matches_played
+  """
+  matches_played: Int
+  """
+  wins
+  """
+  wins: Int
+  """
+  losses
+  """
+  losses: Int
+  """
+  points_for
+  """
+  points_for: Int
+  """
+  points_against
+  """
+  points_against: Int
+  """
+  position
+  """
+  position: Int
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for group_standingsUpdateResponse
+"""
+type group_standingsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for kv_store_10f5458b
+"""
+type kv_store_10f5458b {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  key
+  """
+  key: String!
+  """
+  value
+  """
+  value: JSON!
+}
+
+"""
+Type for kv_store_10f5458bConnection
+"""
+type kv_store_10f5458bConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for kv_store_10f5458bDeleteResponse
+"""
+type kv_store_10f5458bDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for kv_store_10f5458bEdge
+"""
+type kv_store_10f5458bEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: kv_store_10f5458b!
+}
+
+"""
+Input type for kv_store_10f5458bFilter
+"""
+input kv_store_10f5458bFilterInput {
+  """
+  key
+  """
+  key: StringFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: kv_store_10f5458bFilter
+}
+
+"""
+Input type for kv_store_10f5458bInsertInput
+"""
+input kv_store_10f5458bInsertInputInput {
+  """
+  key
+  """
+  key: String
+  """
+  value
+  """
+  value: JSON
+}
+
+"""
+Type for kv_store_10f5458bInsertResponse
+"""
+type kv_store_10f5458bInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for kv_store_10f5458bOrderBy
+"""
+input kv_store_10f5458bOrderByInput {
+  """
+  key
+  """
+  key: OrderByDirection
+}
+
+"""
+Input type for kv_store_10f5458bUpdateInput
+"""
+input kv_store_10f5458bUpdateInputInput {
+  """
+  key
+  """
+  key: String
+  """
+  value
+  """
+  value: JSON
+}
+
+"""
+Type for kv_store_10f5458bUpdateResponse
+"""
+type kv_store_10f5458bUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for league_seasons
+"""
+type league_seasons {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: BigInt!
+  """
+  league_name
+  """
+  league_name: leagues!
+  """
+  season_number
+  """
+  season_number: Int!
+  """
+  start_date
+  """
+  start_date: Datetime!
+  """
+  end_date
+  """
+  end_date: Datetime!
+  """
+  is_active
+  """
+  is_active: Boolean
+  """
+  created_at
+  """
+  created_at: Datetime!
+  """
+  updated_at
+  """
+  updated_at: Datetime!
+  """
+  event
+  """
+  event: UUID
+  """
+  events
+  """
+  events: events
+}
+
+"""
+Type for league_seasonsConnection
+"""
+type league_seasonsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for league_seasonsDeleteResponse
+"""
+type league_seasonsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for league_seasonsEdge
+"""
+type league_seasonsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: league_seasons!
+}
+
+"""
+Input type for league_seasonsFilter
+"""
+input league_seasonsFilterInput {
+  """
+  id
+  """
+  id: BigIntFilter
+  """
+  league_name
+  """
+  league_name: leaguesFilter
+  """
+  season_number
+  """
+  season_number: IntFilter
+  """
+  start_date
+  """
+  start_date: DatetimeFilter
+  """
+  end_date
+  """
+  end_date: DatetimeFilter
+  """
+  is_active
+  """
+  is_active: BooleanFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  updated_at
+  """
+  updated_at: DatetimeFilter
+  """
+  event
+  """
+  event: UUIDFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: league_seasonsFilter
+}
+
+"""
+Input type for league_seasonsInsertInput
+"""
+input league_seasonsInsertInputInput {
+  """
+  league_name
+  """
+  league_name: leagues
+  """
+  season_number
+  """
+  season_number: Int
+  """
+  start_date
+  """
+  start_date: Datetime
+  """
+  end_date
+  """
+  end_date: Datetime
+  """
+  is_active
+  """
+  is_active: Boolean
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  event
+  """
+  event: UUID
+}
+
+"""
+Type for league_seasonsInsertResponse
+"""
+type league_seasonsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for league_seasonsOrderBy
+"""
+input league_seasonsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  league_name
+  """
+  league_name: OrderByDirection
+  """
+  season_number
+  """
+  season_number: OrderByDirection
+  """
+  start_date
+  """
+  start_date: OrderByDirection
+  """
+  end_date
+  """
+  end_date: OrderByDirection
+  """
+  is_active
+  """
+  is_active: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+  """
+  updated_at
+  """
+  updated_at: OrderByDirection
+  """
+  event
+  """
+  event: OrderByDirection
+}
+
+"""
+Input type for league_seasonsUpdateInput
+"""
+input league_seasonsUpdateInputInput {
+  """
+  league_name
+  """
+  league_name: leagues
+  """
+  season_number
+  """
+  season_number: Int
+  """
+  start_date
+  """
+  start_date: Datetime
+  """
+  end_date
+  """
+  end_date: Datetime
+  """
+  is_active
+  """
+  is_active: Boolean
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  event
+  """
+  event: UUID
+}
+
+"""
+Type for league_seasonsUpdateResponse
+"""
+type league_seasonsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Enum for leagues
+"""
+enum leagues {
+  """
+  UPA
+  """
+  UPA
+  """
+  UPA College
+  """
+  UPA College
+  """
+  WR
+  """
+  WR
+  """
+  MPBA
+  """
+  MPBA
+  """
+  Rising Stars
+  """
+  Rising Stars
+  """
+  Staten Island Basketball Association
+  """
+  Staten Island Basketball Association
+  """
+  Hall Of Fame League
+  """
+  Hall Of Fame League
+  """
+  Dunk League
+  """
+  Dunk League
+  """
+  Road to 25K
+  """
+  Road to 25K
+}
+
+"""
+Boolean expression comparing fields on type "leagues"
+"""
+input leaguesFilterInput {
+  """
+  eq
+  """
+  eq: leagues
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  neq
+  """
+  neq: leagues
+}
+
+"""
+Type for match_mvp
+"""
+type match_mvp {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  match_id
+  """
+  match_id: UUID!
+  """
+  player_id
+  """
+  player_id: UUID!
+  """
+  matches
+  """
+  matches: matches
+  """
+  players
+  """
+  players: players
+}
+
+"""
+Type for match_mvpConnection
+"""
+type match_mvpConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for match_mvpDeleteResponse
+"""
+type match_mvpDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for match_mvpEdge
+"""
+type match_mvpEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: match_mvp!
+}
+
+"""
+Input type for match_mvpFilter
+"""
+input match_mvpFilterInput {
+  """
+  match_id
+  """
+  match_id: UUIDFilter
+  """
+  player_id
+  """
+  player_id: UUIDFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: match_mvpFilter
+}
+
+"""
+Input type for match_mvpInsertInput
+"""
+input match_mvpInsertInputInput {
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  player_id
+  """
+  player_id: UUID
+}
+
+"""
+Type for match_mvpInsertResponse
+"""
+type match_mvpInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for match_mvpOrderBy
+"""
+input match_mvpOrderByInput {
+  """
+  match_id
+  """
+  match_id: OrderByDirection
+  """
+  player_id
+  """
+  player_id: OrderByDirection
+}
+
+"""
+Input type for match_mvpUpdateInput
+"""
+input match_mvpUpdateInputInput {
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  player_id
+  """
+  player_id: UUID
+}
+
+"""
+Type for match_mvpUpdateResponse
+"""
+type match_mvpUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for match_points
+"""
+type match_points {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  match_id
+  """
+  match_id: UUID!
+  """
+  team_id
+  """
+  team_id: UUID!
+  """
+  group_id
+  """
+  group_id: UUID
+  """
+  points_earned
+  """
+  points_earned: Int!
+  """
+  point_type
+  """
+  point_type: String!
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  matches
+  """
+  matches: matches
+  """
+  teams
+  """
+  teams: teams
+  """
+  event_groups
+  """
+  event_groups: event_groups
+}
+
+"""
+Type for match_pointsConnection
+"""
+type match_pointsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for match_pointsDeleteResponse
+"""
+type match_pointsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for match_pointsEdge
+"""
+type match_pointsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: match_points!
+}
+
+"""
+Input type for match_pointsFilter
+"""
+input match_pointsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  match_id
+  """
+  match_id: UUIDFilter
+  """
+  team_id
+  """
+  team_id: UUIDFilter
+  """
+  group_id
+  """
+  group_id: UUIDFilter
+  """
+  points_earned
+  """
+  points_earned: IntFilter
+  """
+  point_type
+  """
+  point_type: StringFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  updated_at
+  """
+  updated_at: DatetimeFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: match_pointsFilter
+}
+
+"""
+Input type for match_pointsInsertInput
+"""
+input match_pointsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  group_id
+  """
+  group_id: UUID
+  """
+  points_earned
+  """
+  points_earned: Int
+  """
+  point_type
+  """
+  point_type: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for match_pointsInsertResponse
+"""
+type match_pointsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for match_pointsOrderBy
+"""
+input match_pointsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  match_id
+  """
+  match_id: OrderByDirection
+  """
+  team_id
+  """
+  team_id: OrderByDirection
+  """
+  group_id
+  """
+  group_id: OrderByDirection
+  """
+  points_earned
+  """
+  points_earned: OrderByDirection
+  """
+  point_type
+  """
+  point_type: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+  """
+  updated_at
+  """
+  updated_at: OrderByDirection
+}
+
+"""
+Input type for match_pointsUpdateInput
+"""
+input match_pointsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  group_id
+  """
+  group_id: UUID
+  """
+  points_earned
+  """
+  points_earned: Int
+  """
+  point_type
+  """
+  point_type: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for match_pointsUpdateResponse
+"""
+type match_pointsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for match_submissions
+"""
+type match_submissions {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  team_a_id
+  """
+  team_a_id: UUID
+  """
+  team_a_name
+  """
+  team_a_name: String
+  """
+  team_b_id
+  """
+  team_b_id: UUID
+  """
+  team_b_name
+  """
+  team_b_name: String
+  """
+  review_status
+  """
+  review_status: String
+  """
+  reviewed_by
+  """
+  reviewed_by: String
+  """
+  reviewed_at
+  """
+  reviewed_at: Datetime
+  """
+  created_at
+  """
+  created_at: Datetime!
+  """
+  events
+  """
+  events: events
+  """
+  matches
+  """
+  matches: matches
+  """
+  teams
+  """
+  teams: teams
+  """
+  teams
+  """
+  teams: teams
+  """
+  teams
+  """
+  teams: teams
+  """
+  teams
+  """
+  teams: teams
+}
+
+"""
+Type for match_submissionsConnection
+"""
+type match_submissionsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for match_submissionsDeleteResponse
+"""
+type match_submissionsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for match_submissionsEdge
+"""
+type match_submissionsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: match_submissions!
+}
+
+"""
+Input type for match_submissionsFilter
+"""
+input match_submissionsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  event_id
+  """
+  event_id: UUIDFilter
+  """
+  match_id
+  """
+  match_id: UUIDFilter
+  """
+  team_a_id
+  """
+  team_a_id: UUIDFilter
+  """
+  team_a_name
+  """
+  team_a_name: StringFilter
+  """
+  team_b_id
+  """
+  team_b_id: UUIDFilter
+  """
+  team_b_name
+  """
+  team_b_name: StringFilter
+  """
+  review_status
+  """
+  review_status: StringFilter
+  """
+  reviewed_by
+  """
+  reviewed_by: StringFilter
+  """
+  reviewed_at
+  """
+  reviewed_at: DatetimeFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: match_submissionsFilter
+}
+
+"""
+Input type for match_submissionsInsertInput
+"""
+input match_submissionsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  team_a_id
+  """
+  team_a_id: UUID
+  """
+  team_a_name
+  """
+  team_a_name: String
+  """
+  team_b_id
+  """
+  team_b_id: UUID
+  """
+  team_b_name
+  """
+  team_b_name: String
+  """
+  review_status
+  """
+  review_status: String
+  """
+  reviewed_by
+  """
+  reviewed_by: String
+  """
+  reviewed_at
+  """
+  reviewed_at: Datetime
+  """
+  created_at
+  """
+  created_at: Datetime
+}
+
+"""
+Type for match_submissionsInsertResponse
+"""
+type match_submissionsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for match_submissionsOrderBy
+"""
+input match_submissionsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  event_id
+  """
+  event_id: OrderByDirection
+  """
+  match_id
+  """
+  match_id: OrderByDirection
+  """
+  team_a_id
+  """
+  team_a_id: OrderByDirection
+  """
+  team_a_name
+  """
+  team_a_name: OrderByDirection
+  """
+  team_b_id
+  """
+  team_b_id: OrderByDirection
+  """
+  team_b_name
+  """
+  team_b_name: OrderByDirection
+  """
+  review_status
+  """
+  review_status: OrderByDirection
+  """
+  reviewed_by
+  """
+  reviewed_by: OrderByDirection
+  """
+  reviewed_at
+  """
+  reviewed_at: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+}
+
+"""
+Input type for match_submissionsUpdateInput
+"""
+input match_submissionsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  team_a_id
+  """
+  team_a_id: UUID
+  """
+  team_a_name
+  """
+  team_a_name: String
+  """
+  team_b_id
+  """
+  team_b_id: UUID
+  """
+  team_b_name
+  """
+  team_b_name: String
+  """
+  review_status
+  """
+  review_status: String
+  """
+  reviewed_by
+  """
+  reviewed_by: String
+  """
+  reviewed_at
+  """
+  reviewed_at: Datetime
+  """
+  created_at
+  """
+  created_at: Datetime
+}
+
+"""
+Type for match_submissionsUpdateResponse
+"""
+type match_submissionsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for matches
+"""
+type matches {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  event_id
+  """
+  event_id: UUID!
+  """
+  team_a_id
+  """
+  team_a_id: UUID
+  """
+  team_b_id
+  """
+  team_b_id: UUID
+  """
+  winner_id
+  """
+  winner_id: UUID
+  """
+  score_a
+  """
+  score_a: Int
+  """
+  score_b
+  """
+  score_b: Int
+  """
+  played_at
+  """
+  played_at: Datetime
+  """
+  boxscore_url
+  """
+  boxscore_url: String
+  """
+  team_a_name
+  """
+  team_a_name: String
+  """
+  stage
+  """
+  stage: stage
+  """
+  game_number
+  """
+  game_number: Int
+  """
+  team_b_name
+  """
+  team_b_name: String
+  """
+  winner_name
+  """
+  winner_name: String
+  """
+  events
+  """
+  events: events
+  """
+  teams
+  """
+  teams: teams
+  """
+  teams
+  """
+  teams: teams
+  """
+  teams
+  """
+  teams: teams
+  """
+  teams
+  """
+  teams: teams
+  """
+  teams
+  """
+  teams: teams
+  """
+  teams
+  """
+  teams: teams
+  """
+  player_statsCollection
+  """
+  player_statsCollection: player_statsConnection
+  """
+  team_match_statsCollection
+  """
+  team_match_statsCollection: team_match_statsConnection
+  """
+  match_mvp
+  """
+  match_mvp: match_mvp
+  """
+  group_matchesCollection
+  """
+  group_matchesCollection: group_matchesConnection
+  """
+  match_pointsCollection
+  """
+  match_pointsCollection: match_pointsConnection
+  """
+  player_rp_transactionsCollection
+  """
+  player_rp_transactionsCollection: player_rp_transactionsConnection
+  """
+  match_submissionsCollection
+  """
+  match_submissionsCollection: match_submissionsConnection
+}
+
+"""
+Type for matchesConnection
+"""
+type matchesConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for matchesDeleteResponse
+"""
+type matchesDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for matchesEdge
+"""
+type matchesEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: matches!
+}
+
+"""
+Input type for matchesFilter
+"""
+input matchesFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  event_id
+  """
+  event_id: UUIDFilter
+  """
+  team_a_id
+  """
+  team_a_id: UUIDFilter
+  """
+  team_b_id
+  """
+  team_b_id: UUIDFilter
+  """
+  winner_id
+  """
+  winner_id: UUIDFilter
+  """
+  score_a
+  """
+  score_a: IntFilter
+  """
+  score_b
+  """
+  score_b: IntFilter
+  """
+  played_at
+  """
+  played_at: DatetimeFilter
+  """
+  boxscore_url
+  """
+  boxscore_url: StringFilter
+  """
+  team_a_name
+  """
+  team_a_name: StringFilter
+  """
+  stage
+  """
+  stage: stageFilter
+  """
+  game_number
+  """
+  game_number: IntFilter
+  """
+  team_b_name
+  """
+  team_b_name: StringFilter
+  """
+  winner_name
+  """
+  winner_name: StringFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: matchesFilter
+}
+
+"""
+Input type for matchesInsertInput
+"""
+input matchesInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  team_a_id
+  """
+  team_a_id: UUID
+  """
+  team_b_id
+  """
+  team_b_id: UUID
+  """
+  winner_id
+  """
+  winner_id: UUID
+  """
+  score_a
+  """
+  score_a: Int
+  """
+  score_b
+  """
+  score_b: Int
+  """
+  played_at
+  """
+  played_at: Datetime
+  """
+  boxscore_url
+  """
+  boxscore_url: String
+  """
+  team_a_name
+  """
+  team_a_name: String
+  """
+  stage
+  """
+  stage: stage
+  """
+  game_number
+  """
+  game_number: Int
+  """
+  team_b_name
+  """
+  team_b_name: String
+  """
+  winner_name
+  """
+  winner_name: String
+}
+
+"""
+Type for matchesInsertResponse
+"""
+type matchesInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for matchesOrderBy
+"""
+input matchesOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  event_id
+  """
+  event_id: OrderByDirection
+  """
+  team_a_id
+  """
+  team_a_id: OrderByDirection
+  """
+  team_b_id
+  """
+  team_b_id: OrderByDirection
+  """
+  winner_id
+  """
+  winner_id: OrderByDirection
+  """
+  score_a
+  """
+  score_a: OrderByDirection
+  """
+  score_b
+  """
+  score_b: OrderByDirection
+  """
+  played_at
+  """
+  played_at: OrderByDirection
+  """
+  boxscore_url
+  """
+  boxscore_url: OrderByDirection
+  """
+  team_a_name
+  """
+  team_a_name: OrderByDirection
+  """
+  stage
+  """
+  stage: OrderByDirection
+  """
+  game_number
+  """
+  game_number: OrderByDirection
+  """
+  team_b_name
+  """
+  team_b_name: OrderByDirection
+  """
+  winner_name
+  """
+  winner_name: OrderByDirection
+}
+
+"""
+Input type for matchesUpdateInput
+"""
+input matchesUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  team_a_id
+  """
+  team_a_id: UUID
+  """
+  team_b_id
+  """
+  team_b_id: UUID
+  """
+  winner_id
+  """
+  winner_id: UUID
+  """
+  score_a
+  """
+  score_a: Int
+  """
+  score_b
+  """
+  score_b: Int
+  """
+  played_at
+  """
+  played_at: Datetime
+  """
+  boxscore_url
+  """
+  boxscore_url: String
+  """
+  team_a_name
+  """
+  team_a_name: String
+  """
+  stage
+  """
+  stage: stage
+  """
+  game_number
+  """
+  game_number: Int
+  """
+  team_b_name
+  """
+  team_b_name: String
+  """
+  winner_name
+  """
+  winner_name: String
+}
+
+"""
+Type for matchesUpdateResponse
+"""
+type matchesUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for notifications
+"""
+type notifications {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  user_id
+  """
+  user_id: UUID
+  """
+  title
+  """
+  title: String!
+  """
+  message
+  """
+  message: String!
+  """
+  type
+  """
+  type: String!
+  """
+  read
+  """
+  read: Boolean!
+  """
+  created_at
+  """
+  created_at: Datetime!
+  """
+  updated_at
+  """
+  updated_at: Datetime!
+}
+
+"""
+Type for notificationsConnection
+"""
+type notificationsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for notificationsDeleteResponse
+"""
+type notificationsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for notificationsEdge
+"""
+type notificationsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: notifications!
+}
+
+"""
+Input type for notificationsFilter
+"""
+input notificationsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  user_id
+  """
+  user_id: UUIDFilter
+  """
+  title
+  """
+  title: StringFilter
+  """
+  message
+  """
+  message: StringFilter
+  """
+  type
+  """
+  type: StringFilter
+  """
+  read
+  """
+  read: BooleanFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  updated_at
+  """
+  updated_at: DatetimeFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: notificationsFilter
+}
+
+"""
+Input type for notificationsInsertInput
+"""
+input notificationsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  user_id
+  """
+  user_id: UUID
+  """
+  title
+  """
+  title: String
+  """
+  message
+  """
+  message: String
+  """
+  type
+  """
+  type: String
+  """
+  read
+  """
+  read: Boolean
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for notificationsInsertResponse
+"""
+type notificationsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for notificationsOrderBy
+"""
+input notificationsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  user_id
+  """
+  user_id: OrderByDirection
+  """
+  title
+  """
+  title: OrderByDirection
+  """
+  message
+  """
+  message: OrderByDirection
+  """
+  type
+  """
+  type: OrderByDirection
+  """
+  read
+  """
+  read: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+  """
+  updated_at
+  """
+  updated_at: OrderByDirection
+}
+
+"""
+Input type for notificationsUpdateInput
+"""
+input notificationsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  user_id
+  """
+  user_id: UUID
+  """
+  title
+  """
+  title: String
+  """
+  message
+  """
+  message: String
+  """
+  type
+  """
+  type: String
+  """
+  read
+  """
+  read: Boolean
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for notificationsUpdateResponse
+"""
+type notificationsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Enum for player_position
+"""
+enum player_position {
+  """
+  Point Guard
+  """
+  Point Guard
+  """
+  Shooting Guard
+  """
+  Shooting Guard
+  """
+  Lock
+  """
+  Lock
+  """
+  Power Forward
+  """
+  Power Forward
+  """
+  Center
+  """
+  Center
+}
+
+"""
+Boolean expression comparing fields on type "player_position"
+"""
+input player_positionFilterInput {
+  """
+  eq
+  """
+  eq: player_position
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  neq
+  """
+  neq: player_position
+}
+
+"""
+Type for player_rp_transactions
+"""
+type player_rp_transactions {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  player_id
+  """
+  player_id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  amount
+  """
+  amount: Int!
+  """
+  description
+  """
+  description: String!
+  """
+  type
+  """
+  type: String!
+  """
+  created_at
+  """
+  created_at: Datetime!
+  """
+  updated_at
+  """
+  updated_at: Datetime!
+  """
+  players
+  """
+  players: players
+  """
+  events
+  """
+  events: events
+  """
+  matches
+  """
+  matches: matches
+}
+
+"""
+Type for player_rp_transactionsConnection
+"""
+type player_rp_transactionsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for player_rp_transactionsDeleteResponse
+"""
+type player_rp_transactionsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for player_rp_transactionsEdge
+"""
+type player_rp_transactionsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: player_rp_transactions!
+}
+
+"""
+Input type for player_rp_transactionsFilter
+"""
+input player_rp_transactionsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  player_id
+  """
+  player_id: UUIDFilter
+  """
+  event_id
+  """
+  event_id: UUIDFilter
+  """
+  match_id
+  """
+  match_id: UUIDFilter
+  """
+  amount
+  """
+  amount: IntFilter
+  """
+  description
+  """
+  description: StringFilter
+  """
+  type
+  """
+  type: StringFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  updated_at
+  """
+  updated_at: DatetimeFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: player_rp_transactionsFilter
+}
+
+"""
+Input type for player_rp_transactionsInsertInput
+"""
+input player_rp_transactionsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  player_id
+  """
+  player_id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  amount
+  """
+  amount: Int
+  """
+  description
+  """
+  description: String
+  """
+  type
+  """
+  type: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for player_rp_transactionsInsertResponse
+"""
+type player_rp_transactionsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for player_rp_transactionsOrderBy
+"""
+input player_rp_transactionsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  player_id
+  """
+  player_id: OrderByDirection
+  """
+  event_id
+  """
+  event_id: OrderByDirection
+  """
+  match_id
+  """
+  match_id: OrderByDirection
+  """
+  amount
+  """
+  amount: OrderByDirection
+  """
+  description
+  """
+  description: OrderByDirection
+  """
+  type
+  """
+  type: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+  """
+  updated_at
+  """
+  updated_at: OrderByDirection
+}
+
+"""
+Input type for player_rp_transactionsUpdateInput
+"""
+input player_rp_transactionsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  player_id
+  """
+  player_id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  amount
+  """
+  amount: Int
+  """
+  description
+  """
+  description: String
+  """
+  type
+  """
+  type: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for player_rp_transactionsUpdateResponse
+"""
+type player_rp_transactionsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for player_salary_tiers
+"""
+type player_salary_tiers {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: Int!
+  """
+  tier_name
+  """
+  tier_name: String!
+  """
+  min_value
+  """
+  min_value: BigFloat
+  """
+  max_value
+  """
+  max_value: BigFloat
+  """
+  multiplier
+  """
+  multiplier: BigFloat!
+}
+
+"""
+Type for player_salary_tiersConnection
+"""
+type player_salary_tiersConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for player_salary_tiersDeleteResponse
+"""
+type player_salary_tiersDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for player_salary_tiersEdge
+"""
+type player_salary_tiersEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: player_salary_tiers!
+}
+
+"""
+Input type for player_salary_tiersFilter
+"""
+input player_salary_tiersFilterInput {
+  """
+  id
+  """
+  id: IntFilter
+  """
+  tier_name
+  """
+  tier_name: StringFilter
+  """
+  min_value
+  """
+  min_value: BigFloatFilter
+  """
+  max_value
+  """
+  max_value: BigFloatFilter
+  """
+  multiplier
+  """
+  multiplier: BigFloatFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: player_salary_tiersFilter
+}
+
+"""
+Input type for player_salary_tiersInsertInput
+"""
+input player_salary_tiersInsertInputInput {
+  """
+  tier_name
+  """
+  tier_name: String
+  """
+  min_value
+  """
+  min_value: BigFloat
+  """
+  max_value
+  """
+  max_value: BigFloat
+  """
+  multiplier
+  """
+  multiplier: BigFloat
+}
+
+"""
+Type for player_salary_tiersInsertResponse
+"""
+type player_salary_tiersInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for player_salary_tiersOrderBy
+"""
+input player_salary_tiersOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  tier_name
+  """
+  tier_name: OrderByDirection
+  """
+  min_value
+  """
+  min_value: OrderByDirection
+  """
+  max_value
+  """
+  max_value: OrderByDirection
+  """
+  multiplier
+  """
+  multiplier: OrderByDirection
+}
+
+"""
+Input type for player_salary_tiersUpdateInput
+"""
+input player_salary_tiersUpdateInputInput {
+  """
+  tier_name
+  """
+  tier_name: String
+  """
+  min_value
+  """
+  min_value: BigFloat
+  """
+  max_value
+  """
+  max_value: BigFloat
+  """
+  multiplier
+  """
+  multiplier: BigFloat
+}
+
+"""
+Type for player_salary_tiersUpdateResponse
+"""
+type player_salary_tiersUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for player_stats
+"""
+type player_stats {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  player_id
+  """
+  player_id: UUID!
+  """
+  match_id
+  """
+  match_id: UUID!
+  """
+  team_id
+  """
+  team_id: UUID!
+  """
+  points
+  """
+  points: Int
+  """
+  assists
+  """
+  assists: Int
+  """
+  rebounds
+  """
+  rebounds: Int
+  """
+  steals
+  """
+  steals: Int
+  """
+  blocks
+  """
+  blocks: Int
+  """
+  turnovers
+  """
+  turnovers: Int
+  """
+  fouls
+  """
+  fouls: Int
+  """
+  ps
+  """
+  ps: Float
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  fgm
+  """
+  fgm: Int
+  """
+  fga
+  """
+  fga: Int
+  """
+  three_points_made
+  """
+  three_points_made: Int
+  """
+  three_points_attempted
+  """
+  three_points_attempted: Int
+  """
+  ftm
+  """
+  ftm: Int
+  """
+  fta
+  """
+  fta: Int
+  """
+  plus_minus
+  """
+  plus_minus: Int
+  """
+  player_name
+  """
+  player_name: String
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  matches
+  """
+  matches: matches
+  """
+  players
+  """
+  players: players
+  """
+  teams
+  """
+  teams: teams
+  """
+  players
+  """
+  players: players
+}
+
+"""
+Type for player_statsConnection
+"""
+type player_statsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for player_statsDeleteResponse
+"""
+type player_statsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for player_statsEdge
+"""
+type player_statsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: player_stats!
+}
+
+"""
+Input type for player_statsFilter
+"""
+input player_statsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  player_id
+  """
+  player_id: UUIDFilter
+  """
+  match_id
+  """
+  match_id: UUIDFilter
+  """
+  team_id
+  """
+  team_id: UUIDFilter
+  """
+  points
+  """
+  points: IntFilter
+  """
+  assists
+  """
+  assists: IntFilter
+  """
+  rebounds
+  """
+  rebounds: IntFilter
+  """
+  steals
+  """
+  steals: IntFilter
+  """
+  blocks
+  """
+  blocks: IntFilter
+  """
+  turnovers
+  """
+  turnovers: IntFilter
+  """
+  fouls
+  """
+  fouls: IntFilter
+  """
+  ps
+  """
+  ps: FloatFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  fgm
+  """
+  fgm: IntFilter
+  """
+  fga
+  """
+  fga: IntFilter
+  """
+  three_points_made
+  """
+  three_points_made: IntFilter
+  """
+  three_points_attempted
+  """
+  three_points_attempted: IntFilter
+  """
+  ftm
+  """
+  ftm: IntFilter
+  """
+  fta
+  """
+  fta: IntFilter
+  """
+  plus_minus
+  """
+  plus_minus: IntFilter
+  """
+  player_name
+  """
+  player_name: StringFilter
+  """
+  updated_at
+  """
+  updated_at: DatetimeFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: player_statsFilter
+}
+
+"""
+Input type for player_statsInsertInput
+"""
+input player_statsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  player_id
+  """
+  player_id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  points
+  """
+  points: Int
+  """
+  assists
+  """
+  assists: Int
+  """
+  rebounds
+  """
+  rebounds: Int
+  """
+  steals
+  """
+  steals: Int
+  """
+  blocks
+  """
+  blocks: Int
+  """
+  turnovers
+  """
+  turnovers: Int
+  """
+  fouls
+  """
+  fouls: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  fgm
+  """
+  fgm: Int
+  """
+  fga
+  """
+  fga: Int
+  """
+  three_points_made
+  """
+  three_points_made: Int
+  """
+  three_points_attempted
+  """
+  three_points_attempted: Int
+  """
+  ftm
+  """
+  ftm: Int
+  """
+  fta
+  """
+  fta: Int
+  """
+  plus_minus
+  """
+  plus_minus: Int
+  """
+  player_name
+  """
+  player_name: String
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for player_statsInsertResponse
+"""
+type player_statsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for player_statsOrderBy
+"""
+input player_statsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  player_id
+  """
+  player_id: OrderByDirection
+  """
+  match_id
+  """
+  match_id: OrderByDirection
+  """
+  team_id
+  """
+  team_id: OrderByDirection
+  """
+  points
+  """
+  points: OrderByDirection
+  """
+  assists
+  """
+  assists: OrderByDirection
+  """
+  rebounds
+  """
+  rebounds: OrderByDirection
+  """
+  steals
+  """
+  steals: OrderByDirection
+  """
+  blocks
+  """
+  blocks: OrderByDirection
+  """
+  turnovers
+  """
+  turnovers: OrderByDirection
+  """
+  fouls
+  """
+  fouls: OrderByDirection
+  """
+  ps
+  """
+  ps: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+  """
+  fgm
+  """
+  fgm: OrderByDirection
+  """
+  fga
+  """
+  fga: OrderByDirection
+  """
+  three_points_made
+  """
+  three_points_made: OrderByDirection
+  """
+  three_points_attempted
+  """
+  three_points_attempted: OrderByDirection
+  """
+  ftm
+  """
+  ftm: OrderByDirection
+  """
+  fta
+  """
+  fta: OrderByDirection
+  """
+  plus_minus
+  """
+  plus_minus: OrderByDirection
+  """
+  player_name
+  """
+  player_name: OrderByDirection
+  """
+  updated_at
+  """
+  updated_at: OrderByDirection
+}
+
+"""
+Input type for player_statsUpdateInput
+"""
+input player_statsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  player_id
+  """
+  player_id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  points
+  """
+  points: Int
+  """
+  assists
+  """
+  assists: Int
+  """
+  rebounds
+  """
+  rebounds: Int
+  """
+  steals
+  """
+  steals: Int
+  """
+  blocks
+  """
+  blocks: Int
+  """
+  turnovers
+  """
+  turnovers: Int
+  """
+  fouls
+  """
+  fouls: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  fgm
+  """
+  fgm: Int
+  """
+  fga
+  """
+  fga: Int
+  """
+  three_points_made
+  """
+  three_points_made: Int
+  """
+  three_points_attempted
+  """
+  three_points_attempted: Int
+  """
+  ftm
+  """
+  ftm: Int
+  """
+  fta
+  """
+  fta: Int
+  """
+  plus_minus
+  """
+  plus_minus: Int
+  """
+  player_name
+  """
+  player_name: String
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for player_statsUpdateResponse
+"""
+type player_statsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for players
+"""
+type players {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  gamertag
+  """
+  gamertag: String!
+  """
+  position
+  """
+  position: player_position
+  """
+  region_id
+  """
+  region_id: UUID
+  """
+  current_team_id
+  """
+  current_team_id: UUID
+  """
+  performance_score
+  """
+  performance_score: Float
+  """
+  player_rp
+  """
+  player_rp: Int
+  """
+  player_rank_score
+  """
+  player_rank_score: Float
+  """
+  salary_tier
+  """
+  salary_tier: salary_tier
+  """
+  monthly_value
+  """
+  monthly_value: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  is_rookie
+  """
+  is_rookie: Boolean
+  """
+  discord_id
+  """
+  discord_id: String
+  """
+  twitter_id
+  """
+  twitter_id: String
+  """
+  alternate_gamertag
+  """
+  alternate_gamertag: String
+  """
+  teams
+  """
+  teams: teams
+  """
+  regions
+  """
+  regions: regions
+  """
+  draft_pool
+  """
+  draft_pool: draft_pool
+  """
+  player_statsCollection
+  """
+  player_statsCollection: player_statsConnection
+  """
+  team_rostersCollection
+  """
+  team_rostersCollection: team_rostersConnection
+  """
+  match_mvpCollection
+  """
+  match_mvpCollection: match_mvpConnection
+  """
+  player_statsCollection
+  """
+  player_statsCollection: player_statsConnection
+  """
+  player_rp_transactionsCollection
+  """
+  player_rp_transactionsCollection: player_rp_transactionsConnection
+  """
+  awards_raceCollection
+  """
+  awards_raceCollection: awards_raceConnection
+}
+
+"""
+Type for playersConnection
+"""
+type playersConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for playersDeleteResponse
+"""
+type playersDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for playersEdge
+"""
+type playersEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: players!
+}
+
+"""
+Input type for playersFilter
+"""
+input playersFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  gamertag
+  """
+  gamertag: StringFilter
+  """
+  position
+  """
+  position: player_positionFilter
+  """
+  region_id
+  """
+  region_id: UUIDFilter
+  """
+  current_team_id
+  """
+  current_team_id: UUIDFilter
+  """
+  performance_score
+  """
+  performance_score: FloatFilter
+  """
+  player_rp
+  """
+  player_rp: IntFilter
+  """
+  player_rank_score
+  """
+  player_rank_score: FloatFilter
+  """
+  salary_tier
+  """
+  salary_tier: salary_tierFilter
+  """
+  monthly_value
+  """
+  monthly_value: IntFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  is_rookie
+  """
+  is_rookie: BooleanFilter
+  """
+  discord_id
+  """
+  discord_id: StringFilter
+  """
+  twitter_id
+  """
+  twitter_id: StringFilter
+  """
+  alternate_gamertag
+  """
+  alternate_gamertag: StringFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: playersFilter
+}
+
+"""
+Input type for playersInsertInput
+"""
+input playersInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  gamertag
+  """
+  gamertag: String
+  """
+  position
+  """
+  position: player_position
+  """
+  region_id
+  """
+  region_id: UUID
+  """
+  current_team_id
+  """
+  current_team_id: UUID
+  """
+  performance_score
+  """
+  performance_score: Float
+  """
+  player_rp
+  """
+  player_rp: Int
+  """
+  player_rank_score
+  """
+  player_rank_score: Float
+  """
+  salary_tier
+  """
+  salary_tier: salary_tier
+  """
+  monthly_value
+  """
+  monthly_value: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  is_rookie
+  """
+  is_rookie: Boolean
+  """
+  discord_id
+  """
+  discord_id: String
+  """
+  twitter_id
+  """
+  twitter_id: String
+  """
+  alternate_gamertag
+  """
+  alternate_gamertag: String
+}
+
+"""
+Type for playersInsertResponse
+"""
+type playersInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for playersOrderBy
+"""
+input playersOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  gamertag
+  """
+  gamertag: OrderByDirection
+  """
+  position
+  """
+  position: OrderByDirection
+  """
+  region_id
+  """
+  region_id: OrderByDirection
+  """
+  current_team_id
+  """
+  current_team_id: OrderByDirection
+  """
+  performance_score
+  """
+  performance_score: OrderByDirection
+  """
+  player_rp
+  """
+  player_rp: OrderByDirection
+  """
+  player_rank_score
+  """
+  player_rank_score: OrderByDirection
+  """
+  salary_tier
+  """
+  salary_tier: OrderByDirection
+  """
+  monthly_value
+  """
+  monthly_value: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+  """
+  is_rookie
+  """
+  is_rookie: OrderByDirection
+  """
+  discord_id
+  """
+  discord_id: OrderByDirection
+  """
+  twitter_id
+  """
+  twitter_id: OrderByDirection
+  """
+  alternate_gamertag
+  """
+  alternate_gamertag: OrderByDirection
+}
+
+"""
+Input type for playersUpdateInput
+"""
+input playersUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  gamertag
+  """
+  gamertag: String
+  """
+  position
+  """
+  position: player_position
+  """
+  region_id
+  """
+  region_id: UUID
+  """
+  current_team_id
+  """
+  current_team_id: UUID
+  """
+  performance_score
+  """
+  performance_score: Float
+  """
+  player_rp
+  """
+  player_rp: Int
+  """
+  player_rank_score
+  """
+  player_rank_score: Float
+  """
+  salary_tier
+  """
+  salary_tier: salary_tier
+  """
+  monthly_value
+  """
+  monthly_value: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  is_rookie
+  """
+  is_rookie: Boolean
+  """
+  discord_id
+  """
+  discord_id: String
+  """
+  twitter_id
+  """
+  twitter_id: String
+  """
+  alternate_gamertag
+  """
+  alternate_gamertag: String
+}
+
+"""
+Type for playersUpdateResponse
+"""
+type playersUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for profiles
+"""
+type profiles {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  email
+  """
+  email: String
+  """
+  role
+  """
+  role: String!
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  app_role
+  """
+  app_role: app_role
+}
+
+"""
+Type for profilesConnection
+"""
+type profilesConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for profilesDeleteResponse
+"""
+type profilesDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for profilesEdge
+"""
+type profilesEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: profiles!
+}
+
+"""
+Input type for profilesFilter
+"""
+input profilesFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  email
+  """
+  email: StringFilter
+  """
+  role
+  """
+  role: StringFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  updated_at
+  """
+  updated_at: DatetimeFilter
+  """
+  app_role
+  """
+  app_role: app_roleFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: profilesFilter
+}
+
+"""
+Input type for profilesInsertInput
+"""
+input profilesInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  email
+  """
+  email: String
+  """
+  role
+  """
+  role: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  app_role
+  """
+  app_role: app_role
+}
+
+"""
+Type for profilesInsertResponse
+"""
+type profilesInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for profilesOrderBy
+"""
+input profilesOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  email
+  """
+  email: OrderByDirection
+  """
+  role
+  """
+  role: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+  """
+  updated_at
+  """
+  updated_at: OrderByDirection
+  """
+  app_role
+  """
+  app_role: OrderByDirection
+}
+
+"""
+Input type for profilesUpdateInput
+"""
+input profilesUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  email
+  """
+  email: String
+  """
+  role
+  """
+  role: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  app_role
+  """
+  app_role: app_role
+}
+
+"""
+Type for profilesUpdateResponse
+"""
+type profilesUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for ranking_points
+"""
+type ranking_points {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  source
+  """
+  source: String
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  points
+  """
+  points: Int
+  """
+  awarded_at
+  """
+  awarded_at: Date
+  """
+  expires_at
+  """
+  expires_at: Date
+  """
+  events
+  """
+  events: events
+  """
+  teams
+  """
+  teams: teams
+}
+
+"""
+Type for ranking_pointsConnection
+"""
+type ranking_pointsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for ranking_pointsDeleteResponse
+"""
+type ranking_pointsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for ranking_pointsEdge
+"""
+type ranking_pointsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: ranking_points!
+}
+
+"""
+Input type for ranking_pointsFilter
+"""
+input ranking_pointsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  team_id
+  """
+  team_id: UUIDFilter
+  """
+  source
+  """
+  source: StringFilter
+  """
+  event_id
+  """
+  event_id: UUIDFilter
+  """
+  points
+  """
+  points: IntFilter
+  """
+  awarded_at
+  """
+  awarded_at: DateFilter
+  """
+  expires_at
+  """
+  expires_at: DateFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: ranking_pointsFilter
+}
+
+"""
+Input type for ranking_pointsInsertInput
+"""
+input ranking_pointsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  source
+  """
+  source: String
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  points
+  """
+  points: Int
+  """
+  awarded_at
+  """
+  awarded_at: Date
+  """
+  expires_at
+  """
+  expires_at: Date
+}
+
+"""
+Type for ranking_pointsInsertResponse
+"""
+type ranking_pointsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for ranking_pointsOrderBy
+"""
+input ranking_pointsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  team_id
+  """
+  team_id: OrderByDirection
+  """
+  source
+  """
+  source: OrderByDirection
+  """
+  event_id
+  """
+  event_id: OrderByDirection
+  """
+  points
+  """
+  points: OrderByDirection
+  """
+  awarded_at
+  """
+  awarded_at: OrderByDirection
+  """
+  expires_at
+  """
+  expires_at: OrderByDirection
+}
+
+"""
+Input type for ranking_pointsUpdateInput
+"""
+input ranking_pointsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  source
+  """
+  source: String
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  points
+  """
+  points: Int
+  """
+  awarded_at
+  """
+  awarded_at: Date
+  """
+  expires_at
+  """
+  expires_at: Date
+}
+
+"""
+Type for ranking_pointsUpdateResponse
+"""
+type ranking_pointsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for regions
+"""
+type regions {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  name
+  """
+  name: String!
+  """
+  eventsCollection
+  """
+  eventsCollection: eventsConnection
+  """
+  playersCollection
+  """
+  playersCollection: playersConnection
+  """
+  teamsCollection
+  """
+  teamsCollection: teamsConnection
+}
+
+"""
+Type for regionsConnection
+"""
+type regionsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for regionsDeleteResponse
+"""
+type regionsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for regionsEdge
+"""
+type regionsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: regions!
+}
+
+"""
+Input type for regionsFilter
+"""
+input regionsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  name
+  """
+  name: StringFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: regionsFilter
+}
+
+"""
+Input type for regionsInsertInput
+"""
+input regionsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  name
+  """
+  name: String
+}
+
+"""
+Type for regionsInsertResponse
+"""
+type regionsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for regionsOrderBy
+"""
+input regionsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  name
+  """
+  name: OrderByDirection
+}
+
+"""
+Input type for regionsUpdateInput
+"""
+input regionsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  name
+  """
+  name: String
+}
+
+"""
+Type for regionsUpdateResponse
+"""
+type regionsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for role_permissions
+"""
+type role_permissions {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: BigInt!
+  """
+  permission
+  """
+  permission: String!
+  """
+  role
+  """
+  role: app_role
+}
+
+"""
+Type for role_permissionsConnection
+"""
+type role_permissionsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for role_permissionsDeleteResponse
+"""
+type role_permissionsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for role_permissionsEdge
+"""
+type role_permissionsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: role_permissions!
+}
+
+"""
+Input type for role_permissionsFilter
+"""
+input role_permissionsFilterInput {
+  """
+  id
+  """
+  id: BigIntFilter
+  """
+  permission
+  """
+  permission: StringFilter
+  """
+  role
+  """
+  role: app_roleFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: role_permissionsFilter
+}
+
+"""
+Input type for role_permissionsInsertInput
+"""
+input role_permissionsInsertInputInput {
+  """
+  permission
+  """
+  permission: String
+  """
+  role
+  """
+  role: app_role
+}
+
+"""
+Type for role_permissionsInsertResponse
+"""
+type role_permissionsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for role_permissionsOrderBy
+"""
+input role_permissionsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  permission
+  """
+  permission: OrderByDirection
+  """
+  role
+  """
+  role: OrderByDirection
+}
+
+"""
+Input type for role_permissionsUpdateInput
+"""
+input role_permissionsUpdateInputInput {
+  """
+  permission
+  """
+  permission: String
+  """
+  role
+  """
+  role: app_role
+}
+
+"""
+Type for role_permissionsUpdateResponse
+"""
+type role_permissionsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for rp_transactions
+"""
+type rp_transactions {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  amount
+  """
+  amount: Int!
+  """
+  description
+  """
+  description: String!
+  """
+  type
+  """
+  type: String!
+  """
+  created_at
+  """
+  created_at: Datetime!
+  """
+  updated_at
+  """
+  updated_at: Datetime!
+  """
+  events
+  """
+  events: events
+  """
+  teams
+  """
+  teams: teams
+}
+
+"""
+Type for rp_transactionsConnection
+"""
+type rp_transactionsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for rp_transactionsDeleteResponse
+"""
+type rp_transactionsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for rp_transactionsEdge
+"""
+type rp_transactionsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: rp_transactions!
+}
+
+"""
+Input type for rp_transactionsFilter
+"""
+input rp_transactionsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  team_id
+  """
+  team_id: UUIDFilter
+  """
+  event_id
+  """
+  event_id: UUIDFilter
+  """
+  amount
+  """
+  amount: IntFilter
+  """
+  description
+  """
+  description: StringFilter
+  """
+  type
+  """
+  type: StringFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  updated_at
+  """
+  updated_at: DatetimeFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: rp_transactionsFilter
+}
+
+"""
+Input type for rp_transactionsInsertInput
+"""
+input rp_transactionsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  amount
+  """
+  amount: Int
+  """
+  description
+  """
+  description: String
+  """
+  type
+  """
+  type: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for rp_transactionsInsertResponse
+"""
+type rp_transactionsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for rp_transactionsOrderBy
+"""
+input rp_transactionsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  team_id
+  """
+  team_id: OrderByDirection
+  """
+  event_id
+  """
+  event_id: OrderByDirection
+  """
+  amount
+  """
+  amount: OrderByDirection
+  """
+  description
+  """
+  description: OrderByDirection
+  """
+  type
+  """
+  type: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+  """
+  updated_at
+  """
+  updated_at: OrderByDirection
+}
+
+"""
+Input type for rp_transactionsUpdateInput
+"""
+input rp_transactionsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  amount
+  """
+  amount: Int
+  """
+  description
+  """
+  description: String
+  """
+  type
+  """
+  type: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+}
+
+"""
+Type for rp_transactionsUpdateResponse
+"""
+type rp_transactionsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Enum for salary_tier
+"""
+enum salary_tier {
+  """
+  S
+  """
+  S
+  """
+  A
+  """
+  A
+  """
+  B
+  """
+  B
+  """
+  C
+  """
+  C
+  """
+  D
+  """
+  D
+}
+
+"""
+Boolean expression comparing fields on type "salary_tier"
+"""
+input salary_tierFilterInput {
+  """
+  eq
+  """
+  eq: salary_tier
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  neq
+  """
+  neq: salary_tier
+}
+
+"""
+Type for salary_tiers
+"""
+type salary_tiers {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: BigInt!
+  """
+  salary_tier
+  """
+  salary_tier: salary_tier!
+  """
+  label
+  """
+  label: String
+  """
+  multiplier
+  """
+  multiplier: BigFloat!
+  """
+  min_rating
+  """
+  min_rating: Int
+  """
+  max_rating
+  """
+  max_rating: Int
+  """
+  description
+  """
+  description: String
+}
+
+"""
+Type for salary_tiersConnection
+"""
+type salary_tiersConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for salary_tiersDeleteResponse
+"""
+type salary_tiersDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for salary_tiersEdge
+"""
+type salary_tiersEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: salary_tiers!
+}
+
+"""
+Input type for salary_tiersFilter
+"""
+input salary_tiersFilterInput {
+  """
+  id
+  """
+  id: BigIntFilter
+  """
+  salary_tier
+  """
+  salary_tier: salary_tierFilter
+  """
+  label
+  """
+  label: StringFilter
+  """
+  multiplier
+  """
+  multiplier: BigFloatFilter
+  """
+  min_rating
+  """
+  min_rating: IntFilter
+  """
+  max_rating
+  """
+  max_rating: IntFilter
+  """
+  description
+  """
+  description: StringFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: salary_tiersFilter
+}
+
+"""
+Input type for salary_tiersInsertInput
+"""
+input salary_tiersInsertInputInput {
+  """
+  salary_tier
+  """
+  salary_tier: salary_tier
+  """
+  label
+  """
+  label: String
+  """
+  multiplier
+  """
+  multiplier: BigFloat
+  """
+  min_rating
+  """
+  min_rating: Int
+  """
+  max_rating
+  """
+  max_rating: Int
+  """
+  description
+  """
+  description: String
+}
+
+"""
+Type for salary_tiersInsertResponse
+"""
+type salary_tiersInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for salary_tiersOrderBy
+"""
+input salary_tiersOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  salary_tier
+  """
+  salary_tier: OrderByDirection
+  """
+  label
+  """
+  label: OrderByDirection
+  """
+  multiplier
+  """
+  multiplier: OrderByDirection
+  """
+  min_rating
+  """
+  min_rating: OrderByDirection
+  """
+  max_rating
+  """
+  max_rating: OrderByDirection
+  """
+  description
+  """
+  description: OrderByDirection
+}
+
+"""
+Input type for salary_tiersUpdateInput
+"""
+input salary_tiersUpdateInputInput {
+  """
+  salary_tier
+  """
+  salary_tier: salary_tier
+  """
+  label
+  """
+  label: String
+  """
+  multiplier
+  """
+  multiplier: BigFloat
+  """
+  min_rating
+  """
+  min_rating: Int
+  """
+  max_rating
+  """
+  max_rating: Int
+  """
+  description
+  """
+  description: String
+}
+
+"""
+Type for salary_tiersUpdateResponse
+"""
+type salary_tiersUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Enum for stage
+"""
+enum stage {
+  """
+  Regular Season
+  """
+  Regular Season
+  """
+  Group Play
+  """
+  Group Play
+  """
+  Round 1
+  """
+  Round 1
+  """
+  Round 2
+  """
+  Round 2
+  """
+  Round 3
+  """
+  Round 3
+  """
+  Round 4
+  """
+  Round 4
+  """
+  Semi Finals
+  """
+  Semi Finals
+  """
+  Finals
+  """
+  Finals
+  """
+  Grand Finals
+  """
+  Grand Finals
+  """
+  L1
+  """
+  L1
+  """
+  L2
+  """
+  L2
+  """
+  L3
+  """
+  L3
+  """
+  L4
+  """
+  L4
+  """
+  L5
+  """
+  L5
+  """
+  W1
+  """
+  W1
+  """
+  W2
+  """
+  W2
+  """
+  W3
+  """
+  W3
+  """
+  W4
+  """
+  W4
+  """
+  LF
+  """
+  LF
+  """
+  WF
+  """
+  WF
+}
+
+"""
+Boolean expression comparing fields on type "stage"
+"""
+input stageFilterInput {
+  """
+  eq
+  """
+  eq: stage
+  """
+  in
+  """
+  in: [String]
+  """
+  is
+  """
+  is: FilterIs
+  """
+  neq
+  """
+  neq: stage
+}
+
+"""
+Type for team_match_stats
+"""
+type team_match_stats {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  match_id
+  """
+  match_id: UUID!
+  """
+  team_id
+  """
+  team_id: UUID!
+  """
+  points
+  """
+  points: Int!
+  """
+  rebounds
+  """
+  rebounds: Int!
+  """
+  assists
+  """
+  assists: Int!
+  """
+  steals
+  """
+  steals: Int!
+  """
+  blocks
+  """
+  blocks: Int!
+  """
+  turnovers
+  """
+  turnovers: Int!
+  """
+  field_goals_made
+  """
+  field_goals_made: Int!
+  """
+  field_goals_attempted
+  """
+  field_goals_attempted: Int!
+  """
+  three_points_made
+  """
+  three_points_made: Int!
+  """
+  three_points_attempted
+  """
+  three_points_attempted: Int!
+  """
+  free_throws_made
+  """
+  free_throws_made: Int!
+  """
+  free_throws_attempted
+  """
+  free_throws_attempted: Int!
+  """
+  fouls
+  """
+  fouls: Int
+  """
+  plus_minus
+  """
+  plus_minus: Int
+  """
+  matches
+  """
+  matches: matches
+  """
+  teams
+  """
+  teams: teams
+}
+
+"""
+Type for team_match_statsConnection
+"""
+type team_match_statsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for team_match_statsDeleteResponse
+"""
+type team_match_statsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for team_match_statsEdge
+"""
+type team_match_statsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: team_match_stats!
+}
+
+"""
+Input type for team_match_statsFilter
+"""
+input team_match_statsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  match_id
+  """
+  match_id: UUIDFilter
+  """
+  team_id
+  """
+  team_id: UUIDFilter
+  """
+  points
+  """
+  points: IntFilter
+  """
+  rebounds
+  """
+  rebounds: IntFilter
+  """
+  assists
+  """
+  assists: IntFilter
+  """
+  steals
+  """
+  steals: IntFilter
+  """
+  blocks
+  """
+  blocks: IntFilter
+  """
+  turnovers
+  """
+  turnovers: IntFilter
+  """
+  field_goals_made
+  """
+  field_goals_made: IntFilter
+  """
+  field_goals_attempted
+  """
+  field_goals_attempted: IntFilter
+  """
+  three_points_made
+  """
+  three_points_made: IntFilter
+  """
+  three_points_attempted
+  """
+  three_points_attempted: IntFilter
+  """
+  free_throws_made
+  """
+  free_throws_made: IntFilter
+  """
+  free_throws_attempted
+  """
+  free_throws_attempted: IntFilter
+  """
+  fouls
+  """
+  fouls: IntFilter
+  """
+  plus_minus
+  """
+  plus_minus: IntFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: team_match_statsFilter
+}
+
+"""
+Input type for team_match_statsInsertInput
+"""
+input team_match_statsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  points
+  """
+  points: Int
+  """
+  rebounds
+  """
+  rebounds: Int
+  """
+  assists
+  """
+  assists: Int
+  """
+  steals
+  """
+  steals: Int
+  """
+  blocks
+  """
+  blocks: Int
+  """
+  turnovers
+  """
+  turnovers: Int
+  """
+  field_goals_made
+  """
+  field_goals_made: Int
+  """
+  field_goals_attempted
+  """
+  field_goals_attempted: Int
+  """
+  three_points_made
+  """
+  three_points_made: Int
+  """
+  three_points_attempted
+  """
+  three_points_attempted: Int
+  """
+  free_throws_made
+  """
+  free_throws_made: Int
+  """
+  free_throws_attempted
+  """
+  free_throws_attempted: Int
+  """
+  fouls
+  """
+  fouls: Int
+  """
+  plus_minus
+  """
+  plus_minus: Int
+}
+
+"""
+Type for team_match_statsInsertResponse
+"""
+type team_match_statsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for team_match_statsOrderBy
+"""
+input team_match_statsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  match_id
+  """
+  match_id: OrderByDirection
+  """
+  team_id
+  """
+  team_id: OrderByDirection
+  """
+  points
+  """
+  points: OrderByDirection
+  """
+  rebounds
+  """
+  rebounds: OrderByDirection
+  """
+  assists
+  """
+  assists: OrderByDirection
+  """
+  steals
+  """
+  steals: OrderByDirection
+  """
+  blocks
+  """
+  blocks: OrderByDirection
+  """
+  turnovers
+  """
+  turnovers: OrderByDirection
+  """
+  field_goals_made
+  """
+  field_goals_made: OrderByDirection
+  """
+  field_goals_attempted
+  """
+  field_goals_attempted: OrderByDirection
+  """
+  three_points_made
+  """
+  three_points_made: OrderByDirection
+  """
+  three_points_attempted
+  """
+  three_points_attempted: OrderByDirection
+  """
+  free_throws_made
+  """
+  free_throws_made: OrderByDirection
+  """
+  free_throws_attempted
+  """
+  free_throws_attempted: OrderByDirection
+  """
+  fouls
+  """
+  fouls: OrderByDirection
+  """
+  plus_minus
+  """
+  plus_minus: OrderByDirection
+}
+
+"""
+Input type for team_match_statsUpdateInput
+"""
+input team_match_statsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  match_id
+  """
+  match_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  points
+  """
+  points: Int
+  """
+  rebounds
+  """
+  rebounds: Int
+  """
+  assists
+  """
+  assists: Int
+  """
+  steals
+  """
+  steals: Int
+  """
+  blocks
+  """
+  blocks: Int
+  """
+  turnovers
+  """
+  turnovers: Int
+  """
+  field_goals_made
+  """
+  field_goals_made: Int
+  """
+  field_goals_attempted
+  """
+  field_goals_attempted: Int
+  """
+  three_points_made
+  """
+  three_points_made: Int
+  """
+  three_points_attempted
+  """
+  three_points_attempted: Int
+  """
+  free_throws_made
+  """
+  free_throws_made: Int
+  """
+  free_throws_attempted
+  """
+  free_throws_attempted: Int
+  """
+  fouls
+  """
+  fouls: Int
+  """
+  plus_minus
+  """
+  plus_minus: Int
+}
+
+"""
+Type for team_match_statsUpdateResponse
+"""
+type team_match_statsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for team_rosters
+"""
+type team_rosters {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  player_id
+  """
+  player_id: UUID
+  """
+  is_captain
+  """
+  is_captain: Boolean
+  """
+  is_player_coach
+  """
+  is_player_coach: Boolean
+  """
+  joined_at
+  """
+  joined_at: Datetime
+  """
+  left_at
+  """
+  left_at: Datetime
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  events
+  """
+  events: events
+  """
+  players
+  """
+  players: players
+  """
+  teams
+  """
+  teams: teams
+}
+
+"""
+Type for team_rostersConnection
+"""
+type team_rostersConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for team_rostersDeleteResponse
+"""
+type team_rostersDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for team_rostersEdge
+"""
+type team_rostersEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: team_rosters!
+}
+
+"""
+Input type for team_rostersFilter
+"""
+input team_rostersFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  team_id
+  """
+  team_id: UUIDFilter
+  """
+  player_id
+  """
+  player_id: UUIDFilter
+  """
+  is_captain
+  """
+  is_captain: BooleanFilter
+  """
+  is_player_coach
+  """
+  is_player_coach: BooleanFilter
+  """
+  joined_at
+  """
+  joined_at: DatetimeFilter
+  """
+  left_at
+  """
+  left_at: DatetimeFilter
+  """
+  event_id
+  """
+  event_id: UUIDFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: team_rostersFilter
+}
+
+"""
+Input type for team_rostersInsertInput
+"""
+input team_rostersInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  player_id
+  """
+  player_id: UUID
+  """
+  is_captain
+  """
+  is_captain: Boolean
+  """
+  is_player_coach
+  """
+  is_player_coach: Boolean
+  """
+  joined_at
+  """
+  joined_at: Datetime
+  """
+  left_at
+  """
+  left_at: Datetime
+  """
+  event_id
+  """
+  event_id: UUID
+}
+
+"""
+Type for team_rostersInsertResponse
+"""
+type team_rostersInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for team_rostersOrderBy
+"""
+input team_rostersOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  team_id
+  """
+  team_id: OrderByDirection
+  """
+  player_id
+  """
+  player_id: OrderByDirection
+  """
+  is_captain
+  """
+  is_captain: OrderByDirection
+  """
+  is_player_coach
+  """
+  is_player_coach: OrderByDirection
+  """
+  joined_at
+  """
+  joined_at: OrderByDirection
+  """
+  left_at
+  """
+  left_at: OrderByDirection
+  """
+  event_id
+  """
+  event_id: OrderByDirection
+}
+
+"""
+Input type for team_rostersUpdateInput
+"""
+input team_rostersUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  player_id
+  """
+  player_id: UUID
+  """
+  is_captain
+  """
+  is_captain: Boolean
+  """
+  is_player_coach
+  """
+  is_player_coach: Boolean
+  """
+  joined_at
+  """
+  joined_at: Datetime
+  """
+  left_at
+  """
+  left_at: Datetime
+  """
+  event_id
+  """
+  event_id: UUID
+}
+
+"""
+Type for team_rostersUpdateResponse
+"""
+type team_rostersUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for teams
+"""
+type teams {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  name
+  """
+  name: String!
+  """
+  logo_url
+  """
+  logo_url: String
+  """
+  region_id
+  """
+  region_id: UUID
+  """
+  current_rp
+  """
+  current_rp: Int
+  """
+  elo_rating
+  """
+  elo_rating: Float
+  """
+  global_rank
+  """
+  global_rank: Int
+  """
+  leaderboard_tier
+  """
+  leaderboard_tier: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  player_rank_score
+  """
+  player_rank_score: Float
+  """
+  money_won
+  """
+  money_won: Int
+  """
+  regions
+  """
+  regions: regions
+  """
+  event_resultsCollection
+  """
+  event_resultsCollection: event_resultsConnection
+  """
+  matchesCollection
+  """
+  matchesCollection: matchesConnection
+  """
+  matchesCollection
+  """
+  matchesCollection: matchesConnection
+  """
+  matchesCollection
+  """
+  matchesCollection: matchesConnection
+  """
+  player_statsCollection
+  """
+  player_statsCollection: player_statsConnection
+  """
+  playersCollection
+  """
+  playersCollection: playersConnection
+  """
+  ranking_pointsCollection
+  """
+  ranking_pointsCollection: ranking_pointsConnection
+  """
+  rp_transactionsCollection
+  """
+  rp_transactionsCollection: rp_transactionsConnection
+  """
+  team_rostersCollection
+  """
+  team_rostersCollection: team_rostersConnection
+  """
+  team_match_statsCollection
+  """
+  team_match_statsCollection: team_match_statsConnection
+  """
+  event_group_membersCollection
+  """
+  event_group_membersCollection: event_group_membersConnection
+  """
+  group_standingsCollection
+  """
+  group_standingsCollection: group_standingsConnection
+  """
+  upcoming_matchesCollection
+  """
+  upcoming_matchesCollection: upcoming_matchesConnection
+  """
+  upcoming_matchesCollection
+  """
+  upcoming_matchesCollection: upcoming_matchesConnection
+  """
+  match_pointsCollection
+  """
+  match_pointsCollection: match_pointsConnection
+  """
+  matchesCollection
+  """
+  matchesCollection: matchesConnection
+  """
+  matchesCollection
+  """
+  matchesCollection: matchesConnection
+  """
+  matchesCollection
+  """
+  matchesCollection: matchesConnection
+  """
+  awards_raceCollection
+  """
+  awards_raceCollection: awards_raceConnection
+  """
+  teams_pot_trackerCollection
+  """
+  teams_pot_trackerCollection: teams_pot_trackerConnection
+  """
+  match_submissionsCollection
+  """
+  match_submissionsCollection: match_submissionsConnection
+  """
+  match_submissionsCollection
+  """
+  match_submissionsCollection: match_submissionsConnection
+  """
+  match_submissionsCollection
+  """
+  match_submissionsCollection: match_submissionsConnection
+  """
+  match_submissionsCollection
+  """
+  match_submissionsCollection: match_submissionsConnection
+}
+
+"""
+Type for teamsConnection
+"""
+type teamsConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for teamsDeleteResponse
+"""
+type teamsDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for teamsEdge
+"""
+type teamsEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: teams!
+}
+
+"""
+Input type for teamsFilter
+"""
+input teamsFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  name
+  """
+  name: StringFilter
+  """
+  logo_url
+  """
+  logo_url: StringFilter
+  """
+  region_id
+  """
+  region_id: UUIDFilter
+  """
+  current_rp
+  """
+  current_rp: IntFilter
+  """
+  elo_rating
+  """
+  elo_rating: FloatFilter
+  """
+  global_rank
+  """
+  global_rank: IntFilter
+  """
+  leaderboard_tier
+  """
+  leaderboard_tier: StringFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  player_rank_score
+  """
+  player_rank_score: FloatFilter
+  """
+  money_won
+  """
+  money_won: IntFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: teamsFilter
+}
+
+"""
+Input type for teamsInsertInput
+"""
+input teamsInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  name
+  """
+  name: String
+  """
+  logo_url
+  """
+  logo_url: String
+  """
+  region_id
+  """
+  region_id: UUID
+  """
+  current_rp
+  """
+  current_rp: Int
+  """
+  elo_rating
+  """
+  elo_rating: Float
+  """
+  global_rank
+  """
+  global_rank: Int
+  """
+  leaderboard_tier
+  """
+  leaderboard_tier: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  player_rank_score
+  """
+  player_rank_score: Float
+  """
+  money_won
+  """
+  money_won: Int
+}
+
+"""
+Type for teamsInsertResponse
+"""
+type teamsInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for teamsOrderBy
+"""
+input teamsOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  name
+  """
+  name: OrderByDirection
+  """
+  logo_url
+  """
+  logo_url: OrderByDirection
+  """
+  region_id
+  """
+  region_id: OrderByDirection
+  """
+  current_rp
+  """
+  current_rp: OrderByDirection
+  """
+  elo_rating
+  """
+  elo_rating: OrderByDirection
+  """
+  global_rank
+  """
+  global_rank: OrderByDirection
+  """
+  leaderboard_tier
+  """
+  leaderboard_tier: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+  """
+  player_rank_score
+  """
+  player_rank_score: OrderByDirection
+  """
+  money_won
+  """
+  money_won: OrderByDirection
+}
+
+"""
+Input type for teamsUpdateInput
+"""
+input teamsUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  name
+  """
+  name: String
+  """
+  logo_url
+  """
+  logo_url: String
+  """
+  region_id
+  """
+  region_id: UUID
+  """
+  current_rp
+  """
+  current_rp: Int
+  """
+  elo_rating
+  """
+  elo_rating: Float
+  """
+  global_rank
+  """
+  global_rank: Int
+  """
+  leaderboard_tier
+  """
+  leaderboard_tier: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  player_rank_score
+  """
+  player_rank_score: Float
+  """
+  money_won
+  """
+  money_won: Int
+}
+
+"""
+Type for teamsUpdateResponse
+"""
+type teamsUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for teams_pot_tracker
+"""
+type teams_pot_tracker {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  placement
+  """
+  placement: Int
+  """
+  prize_amount
+  """
+  prize_amount: Int
+  """
+  created_at
+  """
+  created_at: Datetime!
+  """
+  events
+  """
+  events: events
+  """
+  teams
+  """
+  teams: teams
+}
+
+"""
+Type for teams_pot_trackerConnection
+"""
+type teams_pot_trackerConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for teams_pot_trackerDeleteResponse
+"""
+type teams_pot_trackerDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for teams_pot_trackerEdge
+"""
+type teams_pot_trackerEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: teams_pot_tracker!
+}
+
+"""
+Input type for teams_pot_trackerFilter
+"""
+input teams_pot_trackerFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  event_id
+  """
+  event_id: UUIDFilter
+  """
+  team_id
+  """
+  team_id: UUIDFilter
+  """
+  placement
+  """
+  placement: IntFilter
+  """
+  prize_amount
+  """
+  prize_amount: IntFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: teams_pot_trackerFilter
+}
+
+"""
+Input type for teams_pot_trackerInsertInput
+"""
+input teams_pot_trackerInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  placement
+  """
+  placement: Int
+  """
+  prize_amount
+  """
+  prize_amount: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+}
+
+"""
+Type for teams_pot_trackerInsertResponse
+"""
+type teams_pot_trackerInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for teams_pot_trackerOrderBy
+"""
+input teams_pot_trackerOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  event_id
+  """
+  event_id: OrderByDirection
+  """
+  team_id
+  """
+  team_id: OrderByDirection
+  """
+  placement
+  """
+  placement: OrderByDirection
+  """
+  prize_amount
+  """
+  prize_amount: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+}
+
+"""
+Input type for teams_pot_trackerUpdateInput
+"""
+input teams_pot_trackerUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  team_id
+  """
+  team_id: UUID
+  """
+  placement
+  """
+  placement: Int
+  """
+  prize_amount
+  """
+  prize_amount: Int
+  """
+  created_at
+  """
+  created_at: Datetime
+}
+
+"""
+Type for teams_pot_trackerUpdateResponse
+"""
+type teams_pot_trackerUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for upcoming_matches
+"""
+type upcoming_matches {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: UUID!
+  """
+  event_id
+  """
+  event_id: UUID!
+  """
+  team_a_id
+  """
+  team_a_id: UUID
+  """
+  team_b_id
+  """
+  team_b_id: UUID
+  """
+  scheduled_at
+  """
+  scheduled_at: Datetime!
+  """
+  venue
+  """
+  venue: String
+  """
+  stream_url
+  """
+  stream_url: String
+  """
+  notes
+  """
+  notes: String
+  """
+  status
+  """
+  status: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  group_id
+  """
+  group_id: UUID
+  """
+  round
+  """
+  round: Int
+  """
+  match_number
+  """
+  match_number: Int
+  """
+  team_a_logo
+  """
+  team_a_logo: String
+  """
+  team_b_logo
+  """
+  team_b_logo: String
+  """
+  events
+  """
+  events: events
+  """
+  teams
+  """
+  teams: teams
+  """
+  teams
+  """
+  teams: teams
+  """
+  event_groups
+  """
+  event_groups: event_groups
+}
+
+"""
+Type for upcoming_matchesConnection
+"""
+type upcoming_matchesConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for upcoming_matchesDeleteResponse
+"""
+type upcoming_matchesDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for upcoming_matchesEdge
+"""
+type upcoming_matchesEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: upcoming_matches!
+}
+
+"""
+Input type for upcoming_matchesFilter
+"""
+input upcoming_matchesFilterInput {
+  """
+  id
+  """
+  id: UUIDFilter
+  """
+  event_id
+  """
+  event_id: UUIDFilter
+  """
+  team_a_id
+  """
+  team_a_id: UUIDFilter
+  """
+  team_b_id
+  """
+  team_b_id: UUIDFilter
+  """
+  scheduled_at
+  """
+  scheduled_at: DatetimeFilter
+  """
+  venue
+  """
+  venue: StringFilter
+  """
+  stream_url
+  """
+  stream_url: StringFilter
+  """
+  notes
+  """
+  notes: StringFilter
+  """
+  status
+  """
+  status: StringFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  updated_at
+  """
+  updated_at: DatetimeFilter
+  """
+  group_id
+  """
+  group_id: UUIDFilter
+  """
+  round
+  """
+  round: IntFilter
+  """
+  match_number
+  """
+  match_number: IntFilter
+  """
+  team_a_logo
+  """
+  team_a_logo: StringFilter
+  """
+  team_b_logo
+  """
+  team_b_logo: StringFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: upcoming_matchesFilter
+}
+
+"""
+Input type for upcoming_matchesInsertInput
+"""
+input upcoming_matchesInsertInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  team_a_id
+  """
+  team_a_id: UUID
+  """
+  team_b_id
+  """
+  team_b_id: UUID
+  """
+  scheduled_at
+  """
+  scheduled_at: Datetime
+  """
+  venue
+  """
+  venue: String
+  """
+  stream_url
+  """
+  stream_url: String
+  """
+  notes
+  """
+  notes: String
+  """
+  status
+  """
+  status: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  group_id
+  """
+  group_id: UUID
+  """
+  round
+  """
+  round: Int
+  """
+  match_number
+  """
+  match_number: Int
+  """
+  team_a_logo
+  """
+  team_a_logo: String
+  """
+  team_b_logo
+  """
+  team_b_logo: String
+}
+
+"""
+Type for upcoming_matchesInsertResponse
+"""
+type upcoming_matchesInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for upcoming_matchesOrderBy
+"""
+input upcoming_matchesOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  event_id
+  """
+  event_id: OrderByDirection
+  """
+  team_a_id
+  """
+  team_a_id: OrderByDirection
+  """
+  team_b_id
+  """
+  team_b_id: OrderByDirection
+  """
+  scheduled_at
+  """
+  scheduled_at: OrderByDirection
+  """
+  venue
+  """
+  venue: OrderByDirection
+  """
+  stream_url
+  """
+  stream_url: OrderByDirection
+  """
+  notes
+  """
+  notes: OrderByDirection
+  """
+  status
+  """
+  status: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+  """
+  updated_at
+  """
+  updated_at: OrderByDirection
+  """
+  group_id
+  """
+  group_id: OrderByDirection
+  """
+  round
+  """
+  round: OrderByDirection
+  """
+  match_number
+  """
+  match_number: OrderByDirection
+  """
+  team_a_logo
+  """
+  team_a_logo: OrderByDirection
+  """
+  team_b_logo
+  """
+  team_b_logo: OrderByDirection
+}
+
+"""
+Input type for upcoming_matchesUpdateInput
+"""
+input upcoming_matchesUpdateInputInput {
+  """
+  id
+  """
+  id: UUID
+  """
+  event_id
+  """
+  event_id: UUID
+  """
+  team_a_id
+  """
+  team_a_id: UUID
+  """
+  team_b_id
+  """
+  team_b_id: UUID
+  """
+  scheduled_at
+  """
+  scheduled_at: Datetime
+  """
+  venue
+  """
+  venue: String
+  """
+  stream_url
+  """
+  stream_url: String
+  """
+  notes
+  """
+  notes: String
+  """
+  status
+  """
+  status: String
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  group_id
+  """
+  group_id: UUID
+  """
+  round
+  """
+  round: Int
+  """
+  match_number
+  """
+  match_number: Int
+  """
+  team_a_logo
+  """
+  team_a_logo: String
+  """
+  team_b_logo
+  """
+  team_b_logo: String
+}
+
+"""
+Type for upcoming_matchesUpdateResponse
+"""
+type upcoming_matchesUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for update_race
+"""
+type update_race {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: BigInt!
+  """
+  race_id
+  """
+  race_id: UUID
+  """
+  update_type
+  """
+  update_type: String!
+  """
+  update_details
+  """
+  update_details: JSON
+  """
+  previous_rank
+  """
+  previous_rank: Int
+  """
+  new_rank
+  """
+  new_rank: Int
+  """
+  updated_at
+  """
+  updated_at: Datetime!
+  """
+  updated_by
+  """
+  updated_by: String
+  """
+  awards_race
+  """
+  awards_race: awards_race
+}
+
+"""
+Type for update_raceConnection
+"""
+type update_raceConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for update_raceDeleteResponse
+"""
+type update_raceDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for update_raceEdge
+"""
+type update_raceEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: update_race!
+}
+
+"""
+Input type for update_raceFilter
+"""
+input update_raceFilterInput {
+  """
+  id
+  """
+  id: BigIntFilter
+  """
+  race_id
+  """
+  race_id: UUIDFilter
+  """
+  update_type
+  """
+  update_type: StringFilter
+  """
+  previous_rank
+  """
+  previous_rank: IntFilter
+  """
+  new_rank
+  """
+  new_rank: IntFilter
+  """
+  updated_at
+  """
+  updated_at: DatetimeFilter
+  """
+  updated_by
+  """
+  updated_by: StringFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: update_raceFilter
+}
+
+"""
+Input type for update_raceInsertInput
+"""
+input update_raceInsertInputInput {
+  """
+  race_id
+  """
+  race_id: UUID
+  """
+  update_type
+  """
+  update_type: String
+  """
+  update_details
+  """
+  update_details: JSON
+  """
+  previous_rank
+  """
+  previous_rank: Int
+  """
+  new_rank
+  """
+  new_rank: Int
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  updated_by
+  """
+  updated_by: String
+}
+
+"""
+Type for update_raceInsertResponse
+"""
+type update_raceInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for update_raceOrderBy
+"""
+input update_raceOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  race_id
+  """
+  race_id: OrderByDirection
+  """
+  update_type
+  """
+  update_type: OrderByDirection
+  """
+  previous_rank
+  """
+  previous_rank: OrderByDirection
+  """
+  new_rank
+  """
+  new_rank: OrderByDirection
+  """
+  updated_at
+  """
+  updated_at: OrderByDirection
+  """
+  updated_by
+  """
+  updated_by: OrderByDirection
+}
+
+"""
+Input type for update_raceUpdateInput
+"""
+input update_raceUpdateInputInput {
+  """
+  race_id
+  """
+  race_id: UUID
+  """
+  update_type
+  """
+  update_type: String
+  """
+  update_details
+  """
+  update_details: JSON
+  """
+  previous_rank
+  """
+  previous_rank: Int
+  """
+  new_rank
+  """
+  new_rank: Int
+  """
+  updated_at
+  """
+  updated_at: Datetime
+  """
+  updated_by
+  """
+  updated_by: String
+}
+
+"""
+Type for update_raceUpdateResponse
+"""
+type update_raceUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for user_roles
+"""
+type user_roles {
+  """
+  Globally Unique Record Identifier
+  """
+  nodeId: ID!
+  """
+  id
+  """
+  id: BigInt!
+  """
+  user_id
+  """
+  user_id: UUID!
+  """
+  created_at
+  """
+  created_at: Datetime!
+  """
+  role
+  """
+  role: app_role
+  """
+  role_name
+  """
+  role_name: String
+}
+
+"""
+Type for user_rolesConnection
+"""
+type user_rolesConnection {
+  """
+  edges
+  """
+  edges: [String]!
+  """
+  pageInfo
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+Type for user_rolesDeleteResponse
+"""
+type user_rolesDeleteResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Type for user_rolesEdge
+"""
+type user_rolesEdge {
+  """
+  cursor
+  """
+  cursor: String!
+  """
+  node
+  """
+  node: user_roles!
+}
+
+"""
+Input type for user_rolesFilter
+"""
+input user_rolesFilterInput {
+  """
+  id
+  """
+  id: BigIntFilter
+  """
+  user_id
+  """
+  user_id: UUIDFilter
+  """
+  created_at
+  """
+  created_at: DatetimeFilter
+  """
+  role
+  """
+  role: app_roleFilter
+  """
+  role_name
+  """
+  role_name: StringFilter
+  """
+  nodeId
+  """
+  nodeId: IDFilter
+  """
+  Returns true only if all its inner filters are true, otherwise returns false
+  """
+  and: [String]
+  """
+  Returns true if at least one of its inner filters is true, otherwise returns false
+  """
+  or: [String]
+  """
+  Negates a filter
+  """
+  not: user_rolesFilter
+}
+
+"""
+Input type for user_rolesInsertInput
+"""
+input user_rolesInsertInputInput {
+  """
+  user_id
+  """
+  user_id: UUID
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  role
+  """
+  role: app_role
+  """
+  role_name
+  """
+  role_name: String
+}
+
+"""
+Type for user_rolesInsertResponse
+"""
+type user_rolesInsertResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
+"""
+Input type for user_rolesOrderBy
+"""
+input user_rolesOrderByInput {
+  """
+  id
+  """
+  id: OrderByDirection
+  """
+  user_id
+  """
+  user_id: OrderByDirection
+  """
+  created_at
+  """
+  created_at: OrderByDirection
+  """
+  role
+  """
+  role: OrderByDirection
+  """
+  role_name
+  """
+  role_name: OrderByDirection
+}
+
+"""
+Input type for user_rolesUpdateInput
+"""
+input user_rolesUpdateInputInput {
+  """
+  user_id
+  """
+  user_id: UUID
+  """
+  created_at
+  """
+  created_at: Datetime
+  """
+  role
+  """
+  role: app_role
+  """
+  role_name
+  """
+  role_name: String
+}
+
+"""
+Type for user_rolesUpdateResponse
+"""
+type user_rolesUpdateResponse {
+  """
+  Count of the records impacted by the mutation
+  """
+  affectedCount: Int!
+  """
+  Array of records impacted by the mutation
+  """
+  records: [String]!
+}
+
