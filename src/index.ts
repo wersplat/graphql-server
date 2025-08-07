@@ -14,8 +14,8 @@ import dotenv from 'dotenv';
 // Load environment variables
 dotenv.config();
 
-// Import resolvers
-import { Query as GeneratedQuery, Mutation as GeneratedMutation } from './resolvers/generated';
+// Import clean resolvers
+import { cleanResolvers } from './resolvers/clean-resolvers';
 
 // Import types
 import { User, Player } from './types/User';
@@ -24,15 +24,8 @@ import { Match, Team, Event, PlayerMatchStats } from './types/Match';
 // Load GraphQL schema
 const typeDefs = readFileSync(join(__dirname, 'schema-clean.graphql'), 'utf8');
 
-// Merge resolvers
-const resolvers = {
-  Query: {
-    ...GeneratedQuery
-  },
-  Mutation: {
-    ...GeneratedMutation
-  }
-};
+// Use clean resolvers
+const resolvers = cleanResolvers;
 
 // Custom scalar resolvers
 const scalarResolvers = {
