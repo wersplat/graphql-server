@@ -14,29 +14,23 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Import resolvers
-import { userResolvers } from './resolvers/user';
-import { matchResolvers } from './resolvers/match';
+import { Query as GeneratedQuery, Mutation as GeneratedMutation } from './resolvers/generated';
 
 // Import types
 import { User, Player } from './types/User';
 import { Match, Team, Event, PlayerMatchStats } from './types/Match';
 
 // Load GraphQL schema
-const typeDefs = readFileSync(join(__dirname, 'schema.graphql'), 'utf8');
+const typeDefs = readFileSync(join(__dirname, 'schema-generated.graphql'), 'utf8');
 
 // Merge resolvers
 const resolvers = {
   Query: {
-    ...userResolvers.Query,
-    ...matchResolvers.Query
+    ...GeneratedQuery
   },
   Mutation: {
-    ...userResolvers.Mutation,
-    ...matchResolvers.Mutation
-  },
-  User: userResolvers.User,
-  Player: userResolvers.Player,
-  Match: matchResolvers.Match
+    ...GeneratedMutation
+  }
 };
 
 // Custom scalar resolvers
@@ -59,6 +53,48 @@ const scalarResolvers = {
     }
   },
   UUID: {
+    __serialize(value: any) {
+      return value;
+    },
+    __parseValue(value: any) {
+      return value;
+    },
+    __parseLiteral(ast: any) {
+      if (ast.kind === 'StringValue') {
+        return ast.value;
+      }
+      return null;
+    }
+  },
+  JSON: {
+    __serialize(value: any) {
+      return value;
+    },
+    __parseValue(value: any) {
+      return value;
+    },
+    __parseLiteral(ast: any) {
+      if (ast.kind === 'StringValue') {
+        return JSON.parse(ast.value);
+      }
+      return null;
+    }
+  },
+  BigInt: {
+    __serialize(value: any) {
+      return value;
+    },
+    __parseValue(value: any) {
+      return value;
+    },
+    __parseLiteral(ast: any) {
+      if (ast.kind === 'StringValue') {
+        return ast.value;
+      }
+      return null;
+    }
+  },
+  BigFloat: {
     __serialize(value: any) {
       return value;
     },
