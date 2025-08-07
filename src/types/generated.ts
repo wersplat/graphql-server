@@ -1,16 +1,151 @@
 // Auto-generated TypeScript types from GraphQL introspection
-// Generated on: 2025-08-07T07:29:37.102Z
+// Generated on: 2025-08-07T07:38:52.043Z
+
+// Common filter types used by pg_graphql
+export interface StringFilter {
+  eq?: string;
+  neq?: string;
+  gt?: string;
+  gte?: string;
+  lt?: string;
+  lte?: string;
+  in?: string[];
+  like?: string;
+  ilike?: string;
+  is?: FilterIs;
+}
+
+export interface IntFilter {
+  eq?: number;
+  neq?: number;
+  gt?: number;
+  gte?: number;
+  lt?: number;
+  lte?: number;
+  in?: number[];
+  is?: FilterIs;
+}
+
+export interface FloatFilter {
+  eq?: number;
+  neq?: number;
+  gt?: number;
+  gte?: number;
+  lt?: number;
+  lte?: number;
+  in?: number[];
+  is?: FilterIs;
+}
+
+export interface BooleanFilter {
+  eq?: boolean;
+  neq?: boolean;
+  is?: FilterIs;
+}
+
+export interface UUIDFilter {
+  eq?: string;
+  neq?: string;
+  in?: string[];
+  is?: FilterIs;
+}
+
+export interface DateTimeFilter {
+  eq?: Date;
+  neq?: Date;
+  gt?: Date;
+  gte?: Date;
+  lt?: Date;
+  lte?: Date;
+  in?: Date[];
+  is?: FilterIs;
+}
+
+export interface DateFilter {
+  eq?: Date;
+  neq?: Date;
+  gt?: Date;
+  gte?: Date;
+  lt?: Date;
+  lte?: Date;
+  in?: Date[];
+  is?: FilterIs;
+}
+
+export interface BigIntFilter {
+  eq?: string;
+  neq?: string;
+  gt?: string;
+  gte?: string;
+  lt?: string;
+  lte?: string;
+  in?: string[];
+  is?: FilterIs;
+}
+
+export interface BigFloatFilter {
+  eq?: string;
+  neq?: string;
+  gt?: string;
+  gte?: string;
+  lt?: string;
+  lte?: string;
+  in?: string[];
+  is?: FilterIs;
+}
+
+export interface IDFilter {
+  eq?: string;
+  neq?: string;
+  in?: string[];
+  is?: FilterIs;
+}
+
+// NOTE: FilterIs is already declared below. Remove this duplicate to fix the error.
+export interface player_positionFilter {
+  eq?: player_position;
+  neq?: player_position;
+  in?: player_position[];
+  is?: FilterIs;
+}
+
+export interface stageFilter {
+  eq?: stage;
+  neq?: stage;
+  in?: stage[];
+  is?: FilterIs;
+}
+
+export interface salary_tierFilter {
+  eq?: salary_tier;
+  neq?: salary_tier;
+  in?: salary_tier[];
+  is?: FilterIs;
+}
+
+export interface app_roleFilter {
+  eq?: app_role;
+  neq?: app_role;
+  in?: app_role[];
+  is?: FilterIs;
+}
+
+// Common interface for Node types
+export interface Node {
+  id: string;
+}
+
 
 export enum FilterIs {
   NULL = 'NULL',
-  NOT_NULL = 'NOT_NULL',
+  NOT_NULL = 'NOT_NULL'
 }
 
 export enum OrderByDirection {
   ASCNULLSFIRST = 'AscNullsFirst',
   ASCNULLSLAST = 'AscNullsLast',
   DESCNULLSFIRST = 'DescNullsFirst',
-  DESCNULLSLAST = 'DescNullsLast',
+  DESCNULLSLAST = 'DescNullsLast'
 }
 
 export enum app_role {
@@ -20,45 +155,45 @@ export enum app_role {
   EDITOR = 'editor',
   ANALYST = 'analyst',
   TEAM_STAFF = 'team_staff',
-  PLAYER = 'player',
+  PLAYER = 'player'
 }
 
 export enum award_types {
-  OFFENSIVE MVP = 'Offensive MVP',
-  DEFENSIVE MVP = 'Defensive MVP',
-  ROOKIE OF TOURNAMENT = 'Rookie of Tournament',
+  OFFENSIVE_MVP = 'Offensive MVP',
+  DEFENSIVE_MVP = 'Defensive MVP',
+  ROOKIE_OF_TOURNAMENT = 'Rookie of Tournament'
 }
 
 export enum event_tier {
   T1 = 'T1',
   T2 = 'T2',
   T3 = 'T3',
-  T4 = 'T4',
+  T4 = 'T4'
 }
 
 export enum event_type {
   LEAGUE = 'League',
-  TOURNAMENT = 'Tournament',
+  TOURNAMENT = 'Tournament'
 }
 
 export enum leagues {
   UPA = 'UPA',
-  UPA COLLEGE = 'UPA College',
+  UPA_COLLEGE = 'UPA College',
   WR = 'WR',
   MPBA = 'MPBA',
-  RISING STARS = 'Rising Stars',
-  STATEN ISLAND BASKETBALL ASSOCIATION = 'Staten Island Basketball Association',
-  HALL OF FAME LEAGUE = 'Hall Of Fame League',
-  DUNK LEAGUE = 'Dunk League',
-  ROAD TO 25K = 'Road to 25K',
+  RISING_STARS = 'Rising Stars',
+  STATEN_ISLAND_BASKETBALL_ASSOCIATION = 'Staten Island Basketball Association',
+  HALL_OF_FAME_LEAGUE = 'Hall Of Fame League',
+  DUNK_LEAGUE = 'Dunk League',
+  ROAD_TO_25K = 'Road to 25K'
 }
 
 export enum player_position {
-  POINT GUARD = 'Point Guard',
-  SHOOTING GUARD = 'Shooting Guard',
+  POINT_GUARD = 'Point Guard',
+  SHOOTING_GUARD = 'Shooting Guard',
   LOCK = 'Lock',
-  POWER FORWARD = 'Power Forward',
-  CENTER = 'Center',
+  POWER_FORWARD = 'Power Forward',
+  CENTER = 'Center'
 }
 
 export enum salary_tier {
@@ -66,19 +201,19 @@ export enum salary_tier {
   A = 'A',
   B = 'B',
   C = 'C',
-  D = 'D',
+  D = 'D'
 }
 
 export enum stage {
-  REGULAR SEASON = 'Regular Season',
-  GROUP PLAY = 'Group Play',
-  ROUND 1 = 'Round 1',
-  ROUND 2 = 'Round 2',
-  ROUND 3 = 'Round 3',
-  ROUND 4 = 'Round 4',
-  SEMI FINALS = 'Semi Finals',
+  REGULAR_SEASON = 'Regular Season',
+  GROUP_PLAY = 'Group Play',
+  ROUND_1 = 'Round 1',
+  ROUND_2 = 'Round 2',
+  ROUND_3 = 'Round 3',
+  ROUND_4 = 'Round 4',
+  SEMI_FINALS = 'Semi Finals',
   FINALS = 'Finals',
-  GRAND FINALS = 'Grand Finals',
+  GRAND_FINALS = 'Grand Finals',
   L1 = 'L1',
   L2 = 'L2',
   L3 = 'L3',
@@ -89,7 +224,7 @@ export enum stage {
   W3 = 'W3',
   W4 = 'W4',
   LF = 'LF',
-  WF = 'WF',
+  WF = 'WF'
 }
 
 
@@ -775,9 +910,6 @@ export interface match_submissions {
   events?: events;
   matches?: matches;
   teams?: teams;
-  teams?: teams;
-  teams?: teams;
-  teams?: teams;
 }
 
 export interface match_submissionsConnection {
@@ -822,11 +954,6 @@ export interface matches {
   team_b_name?: string;
   winner_name?: string;
   events?: events;
-  teams?: teams;
-  teams?: teams;
-  teams?: teams;
-  teams?: teams;
-  teams?: teams;
   teams?: teams;
   player_statsCollection?: player_statsConnection;
   team_match_statsCollection?: team_match_statsConnection;
@@ -1001,7 +1128,6 @@ export interface player_stats {
   matches?: matches;
   players?: players;
   teams?: teams;
-  players?: players;
 }
 
 export interface player_statsConnection {
@@ -1052,7 +1178,6 @@ export interface players {
   player_statsCollection?: player_statsConnection;
   team_rostersCollection?: team_rostersConnection;
   match_mvpCollection?: match_mvpConnection;
-  player_statsCollection?: player_statsConnection;
   player_rp_transactionsCollection?: player_rp_transactionsConnection;
   awards_raceCollection?: awards_raceConnection;
 }
@@ -1400,8 +1525,6 @@ export interface teams {
   regions?: regions;
   event_resultsCollection?: event_resultsConnection;
   matchesCollection?: matchesConnection;
-  matchesCollection?: matchesConnection;
-  matchesCollection?: matchesConnection;
   player_statsCollection?: player_statsConnection;
   playersCollection?: playersConnection;
   ranking_pointsCollection?: ranking_pointsConnection;
@@ -1411,16 +1534,9 @@ export interface teams {
   event_group_membersCollection?: event_group_membersConnection;
   group_standingsCollection?: group_standingsConnection;
   upcoming_matchesCollection?: upcoming_matchesConnection;
-  upcoming_matchesCollection?: upcoming_matchesConnection;
   match_pointsCollection?: match_pointsConnection;
-  matchesCollection?: matchesConnection;
-  matchesCollection?: matchesConnection;
-  matchesCollection?: matchesConnection;
   awards_raceCollection?: awards_raceConnection;
   teams_pot_trackerCollection?: teams_pot_trackerConnection;
-  match_submissionsCollection?: match_submissionsConnection;
-  match_submissionsCollection?: match_submissionsConnection;
-  match_submissionsCollection?: match_submissionsConnection;
   match_submissionsCollection?: match_submissionsConnection;
 }
 
@@ -1505,7 +1621,6 @@ export interface upcoming_matches {
   team_a_logo?: string;
   team_b_logo?: string;
   events?: events;
-  teams?: teams;
   teams?: teams;
   event_groups?: event_groups;
 }
@@ -1608,18 +1723,18 @@ export interface user_rolesUpdateResponse {
 }
 
 
-export interface BigFloatFilterInput {
+export interface BigFloatFilter {
   eq?: string;
   gt?: string;
   gte?: string;
-  in?: any[];
+  in?: string[];
   is?: FilterIs;
   lt?: string;
   lte?: string;
   neq?: string;
 }
 
-export interface BigFloatListFilterInput {
+export interface BigFloatListFilter {
   containedBy?: any[];
   contains?: any[];
   eq?: any[];
@@ -1627,18 +1742,18 @@ export interface BigFloatListFilterInput {
   overlaps?: any[];
 }
 
-export interface BigIntFilterInput {
+export interface BigIntFilter {
   eq?: string;
   gt?: string;
   gte?: string;
-  in?: any[];
+  in?: string[];
   is?: FilterIs;
   lt?: string;
   lte?: string;
   neq?: string;
 }
 
-export interface BigIntListFilterInput {
+export interface BigIntListFilter {
   containedBy?: any[];
   contains?: any[];
   eq?: any[];
@@ -1646,12 +1761,12 @@ export interface BigIntListFilterInput {
   overlaps?: any[];
 }
 
-export interface BooleanFilterInput {
+export interface BooleanFilter {
   eq?: boolean;
   is?: FilterIs;
 }
 
-export interface BooleanListFilterInput {
+export interface BooleanListFilter {
   containedBy?: any[];
   contains?: any[];
   eq?: any[];
@@ -1659,18 +1774,18 @@ export interface BooleanListFilterInput {
   overlaps?: any[];
 }
 
-export interface DateFilterInput {
+export interface DateFilter {
   eq?: Date;
   gt?: Date;
   gte?: Date;
-  in?: any[];
+  in?: Date[];
   is?: FilterIs;
   lt?: Date;
   lte?: Date;
   neq?: Date;
 }
 
-export interface DateListFilterInput {
+export interface DateListFilter {
   containedBy?: any[];
   contains?: any[];
   eq?: any[];
@@ -1678,7 +1793,7 @@ export interface DateListFilterInput {
   overlaps?: any[];
 }
 
-export interface DatetimeFilterInput {
+export interface DatetimeFilter {
   eq?: any;
   gt?: any;
   gte?: any;
@@ -1689,7 +1804,7 @@ export interface DatetimeFilterInput {
   neq?: any;
 }
 
-export interface DatetimeListFilterInput {
+export interface DatetimeListFilter {
   containedBy?: any[];
   contains?: any[];
   eq?: any[];
@@ -1697,18 +1812,18 @@ export interface DatetimeListFilterInput {
   overlaps?: any[];
 }
 
-export interface FloatFilterInput {
+export interface FloatFilter {
   eq?: number;
   gt?: number;
   gte?: number;
-  in?: any[];
+  in?: number[];
   is?: FilterIs;
   lt?: number;
   lte?: number;
   neq?: number;
 }
 
-export interface FloatListFilterInput {
+export interface FloatListFilter {
   containedBy?: any[];
   contains?: any[];
   eq?: any[];
@@ -1716,22 +1831,22 @@ export interface FloatListFilterInput {
   overlaps?: any[];
 }
 
-export interface IDFilterInput {
+export interface IDFilter {
   eq?: string;
 }
 
-export interface IntFilterInput {
+export interface IntFilter {
   eq?: number;
   gt?: number;
   gte?: number;
-  in?: any[];
+  in?: number[];
   is?: FilterIs;
   lt?: number;
   lte?: number;
   neq?: number;
 }
 
-export interface IntListFilterInput {
+export interface IntListFilter {
   containedBy?: any[];
   contains?: any[];
   eq?: any[];
@@ -1739,17 +1854,17 @@ export interface IntListFilterInput {
   overlaps?: any[];
 }
 
-export interface OpaqueFilterInput {
+export interface OpaqueFilter {
   eq?: any;
   is?: FilterIs;
 }
 
-export interface StringFilterInput {
+export interface StringFilter {
   eq?: string;
   gt?: string;
   gte?: string;
   ilike?: string;
-  in?: any[];
+  in?: string[];
   iregex?: string;
   is?: FilterIs;
   like?: string;
@@ -1760,7 +1875,7 @@ export interface StringFilterInput {
   startsWith?: string;
 }
 
-export interface StringListFilterInput {
+export interface StringListFilter {
   containedBy?: any[];
   contains?: any[];
   eq?: any[];
@@ -1768,7 +1883,7 @@ export interface StringListFilterInput {
   overlaps?: any[];
 }
 
-export interface TimeFilterInput {
+export interface TimeFilter {
   eq?: string;
   gt?: string;
   gte?: string;
@@ -1779,7 +1894,7 @@ export interface TimeFilterInput {
   neq?: string;
 }
 
-export interface TimeListFilterInput {
+export interface TimeListFilter {
   containedBy?: any[];
   contains?: any[];
   eq?: any[];
@@ -1787,14 +1902,14 @@ export interface TimeListFilterInput {
   overlaps?: any[];
 }
 
-export interface UUIDFilterInput {
+export interface UUIDFilter {
   eq?: string;
-  in?: any[];
+  in?: string[];
   is?: FilterIs;
   neq?: string;
 }
 
-export interface UUIDListFilterInput {
+export interface UUIDListFilter {
   containedBy?: any[];
   contains?: any[];
   eq?: any[];
@@ -1802,21 +1917,21 @@ export interface UUIDListFilterInput {
   overlaps?: any[];
 }
 
-export interface app_roleFilterInput {
+export interface app_roleFilter {
   eq?: app_role;
-  in?: any[];
+  in?: app_role[];
   is?: FilterIs;
   neq?: app_role;
 }
 
-export interface award_typesFilterInput {
+export interface award_typesFilter {
   eq?: award_types;
   in?: any[];
   is?: FilterIs;
   neq?: award_types;
 }
 
-export interface awards_raceFilterInput {
+export interface awards_raceFilter {
   id?: UUIDFilter;
   event_id?: UUIDFilter;
   team_id?: UUIDFilter;
@@ -1832,7 +1947,7 @@ export interface awards_raceFilterInput {
   not?: awards_raceFilter;
 }
 
-export interface awards_raceInsertInputInput {
+export interface awards_raceInsertInput {
   id?: string;
   event_id?: string;
   team_id?: string;
@@ -1844,7 +1959,7 @@ export interface awards_raceInsertInputInput {
   created_at?: any;
 }
 
-export interface awards_raceOrderByInput {
+export interface awards_raceOrderBy {
   id?: OrderByDirection;
   event_id?: OrderByDirection;
   team_id?: OrderByDirection;
@@ -1856,7 +1971,7 @@ export interface awards_raceOrderByInput {
   created_at?: OrderByDirection;
 }
 
-export interface awards_raceUpdateInputInput {
+export interface awards_raceUpdateInput {
   id?: string;
   event_id?: string;
   team_id?: string;
@@ -1868,7 +1983,7 @@ export interface awards_raceUpdateInputInput {
   created_at?: any;
 }
 
-export interface draft_poolFilterInput {
+export interface draft_poolFilter {
   player_id?: UUIDFilter;
   declared_at?: DatetimeFilter;
   status?: StringFilter;
@@ -1884,7 +1999,7 @@ export interface draft_poolFilterInput {
   not?: draft_poolFilter;
 }
 
-export interface draft_poolInsertInputInput {
+export interface draft_poolInsertInput {
   player_id?: string;
   declared_at?: any;
   status?: string;
@@ -1896,7 +2011,7 @@ export interface draft_poolInsertInputInput {
   updated_at?: any;
 }
 
-export interface draft_poolOrderByInput {
+export interface draft_poolOrderBy {
   player_id?: OrderByDirection;
   declared_at?: OrderByDirection;
   status?: OrderByDirection;
@@ -1908,7 +2023,7 @@ export interface draft_poolOrderByInput {
   updated_at?: OrderByDirection;
 }
 
-export interface draft_poolUpdateInputInput {
+export interface draft_poolUpdateInput {
   player_id?: string;
   declared_at?: any;
   status?: string;
@@ -1920,7 +2035,7 @@ export interface draft_poolUpdateInputInput {
   updated_at?: any;
 }
 
-export interface event_group_membersFilterInput {
+export interface event_group_membersFilter {
   id?: UUIDFilter;
   group_id?: UUIDFilter;
   team_id?: UUIDFilter;
@@ -1932,7 +2047,7 @@ export interface event_group_membersFilterInput {
   not?: event_group_membersFilter;
 }
 
-export interface event_group_membersInsertInputInput {
+export interface event_group_membersInsertInput {
   id?: string;
   group_id?: string;
   team_id?: string;
@@ -1940,7 +2055,7 @@ export interface event_group_membersInsertInputInput {
   created_at?: any;
 }
 
-export interface event_group_membersOrderByInput {
+export interface event_group_membersOrderBy {
   id?: OrderByDirection;
   group_id?: OrderByDirection;
   team_id?: OrderByDirection;
@@ -1948,7 +2063,7 @@ export interface event_group_membersOrderByInput {
   created_at?: OrderByDirection;
 }
 
-export interface event_group_membersUpdateInputInput {
+export interface event_group_membersUpdateInput {
   id?: string;
   group_id?: string;
   team_id?: string;
@@ -1956,7 +2071,7 @@ export interface event_group_membersUpdateInputInput {
   created_at?: any;
 }
 
-export interface event_groupsFilterInput {
+export interface event_groupsFilter {
   id?: UUIDFilter;
   event_id?: UUIDFilter;
   name?: StringFilter;
@@ -1973,7 +2088,7 @@ export interface event_groupsFilterInput {
   not?: event_groupsFilter;
 }
 
-export interface event_groupsInsertInputInput {
+export interface event_groupsInsertInput {
   id?: string;
   event_id?: string;
   name?: string;
@@ -1986,7 +2101,7 @@ export interface event_groupsInsertInputInput {
   sort_order?: number;
 }
 
-export interface event_groupsOrderByInput {
+export interface event_groupsOrderBy {
   id?: OrderByDirection;
   event_id?: OrderByDirection;
   name?: OrderByDirection;
@@ -1999,7 +2114,7 @@ export interface event_groupsOrderByInput {
   sort_order?: OrderByDirection;
 }
 
-export interface event_groupsUpdateInputInput {
+export interface event_groupsUpdateInput {
   id?: string;
   event_id?: string;
   name?: string;
@@ -2012,7 +2127,7 @@ export interface event_groupsUpdateInputInput {
   sort_order?: number;
 }
 
-export interface event_resultsFilterInput {
+export interface event_resultsFilter {
   id?: UUIDFilter;
   event_id?: UUIDFilter;
   team_id?: UUIDFilter;
@@ -2029,7 +2144,7 @@ export interface event_resultsFilterInput {
   not?: event_resultsFilter;
 }
 
-export interface event_resultsInsertInputInput {
+export interface event_resultsInsertInput {
   id?: string;
   event_id?: string;
   team_id?: string;
@@ -2041,7 +2156,7 @@ export interface event_resultsInsertInputInput {
   winner_banner_url?: string;
 }
 
-export interface event_resultsOrderByInput {
+export interface event_resultsOrderBy {
   id?: OrderByDirection;
   event_id?: OrderByDirection;
   team_id?: OrderByDirection;
@@ -2054,7 +2169,7 @@ export interface event_resultsOrderByInput {
   winner_banner_url?: OrderByDirection;
 }
 
-export interface event_resultsUpdateInputInput {
+export interface event_resultsUpdateInput {
   id?: string;
   event_id?: string;
   team_id?: string;
@@ -2066,21 +2181,21 @@ export interface event_resultsUpdateInputInput {
   winner_banner_url?: string;
 }
 
-export interface event_tierFilterInput {
+export interface event_tierFilter {
   eq?: event_tier;
   in?: any[];
   is?: FilterIs;
   neq?: event_tier;
 }
 
-export interface event_typeFilterInput {
+export interface event_typeFilter {
   eq?: event_type;
   in?: any[];
   is?: FilterIs;
   neq?: event_type;
 }
 
-export interface eventsFilterInput {
+export interface eventsFilter {
   id?: UUIDFilter;
   name?: StringFilter;
   type?: StringFilter;
@@ -2105,7 +2220,7 @@ export interface eventsFilterInput {
   not?: eventsFilter;
 }
 
-export interface eventsInsertInputInput {
+export interface eventsInsertInput {
   id?: string;
   name?: string;
   type?: string;
@@ -2126,7 +2241,7 @@ export interface eventsInsertInputInput {
   prize_pool?: number;
 }
 
-export interface eventsOrderByInput {
+export interface eventsOrderBy {
   id?: OrderByDirection;
   name?: OrderByDirection;
   type?: OrderByDirection;
@@ -2147,7 +2262,7 @@ export interface eventsOrderByInput {
   prize_pool?: OrderByDirection;
 }
 
-export interface eventsUpdateInputInput {
+export interface eventsUpdateInput {
   id?: string;
   name?: string;
   type?: string;
@@ -2168,7 +2283,7 @@ export interface eventsUpdateInputInput {
   prize_pool?: number;
 }
 
-export interface group_matchesFilterInput {
+export interface group_matchesFilter {
   id?: UUIDFilter;
   group_id?: UUIDFilter;
   match_id?: UUIDFilter;
@@ -2181,7 +2296,7 @@ export interface group_matchesFilterInput {
   not?: group_matchesFilter;
 }
 
-export interface group_matchesInsertInputInput {
+export interface group_matchesInsertInput {
   id?: string;
   group_id?: string;
   match_id?: string;
@@ -2190,7 +2305,7 @@ export interface group_matchesInsertInputInput {
   created_at?: any;
 }
 
-export interface group_matchesOrderByInput {
+export interface group_matchesOrderBy {
   id?: OrderByDirection;
   group_id?: OrderByDirection;
   match_id?: OrderByDirection;
@@ -2199,7 +2314,7 @@ export interface group_matchesOrderByInput {
   created_at?: OrderByDirection;
 }
 
-export interface group_matchesUpdateInputInput {
+export interface group_matchesUpdateInput {
   id?: string;
   group_id?: string;
   match_id?: string;
@@ -2208,7 +2323,7 @@ export interface group_matchesUpdateInputInput {
   created_at?: any;
 }
 
-export interface group_standingsFilterInput {
+export interface group_standingsFilter {
   id?: UUIDFilter;
   group_id?: UUIDFilter;
   team_id?: UUIDFilter;
@@ -2226,7 +2341,7 @@ export interface group_standingsFilterInput {
   not?: group_standingsFilter;
 }
 
-export interface group_standingsInsertInputInput {
+export interface group_standingsInsertInput {
   id?: string;
   group_id?: string;
   team_id?: string;
@@ -2239,7 +2354,7 @@ export interface group_standingsInsertInputInput {
   updated_at?: any;
 }
 
-export interface group_standingsOrderByInput {
+export interface group_standingsOrderBy {
   id?: OrderByDirection;
   group_id?: OrderByDirection;
   team_id?: OrderByDirection;
@@ -2253,7 +2368,7 @@ export interface group_standingsOrderByInput {
   updated_at?: OrderByDirection;
 }
 
-export interface group_standingsUpdateInputInput {
+export interface group_standingsUpdateInput {
   id?: string;
   group_id?: string;
   team_id?: string;
@@ -2266,7 +2381,7 @@ export interface group_standingsUpdateInputInput {
   updated_at?: any;
 }
 
-export interface kv_store_10f5458bFilterInput {
+export interface kv_store_10f5458bFilter {
   key?: StringFilter;
   nodeId?: IDFilter;
   and?: any[];
@@ -2274,21 +2389,21 @@ export interface kv_store_10f5458bFilterInput {
   not?: kv_store_10f5458bFilter;
 }
 
-export interface kv_store_10f5458bInsertInputInput {
+export interface kv_store_10f5458bInsertInput {
   key?: string;
   value?: any;
 }
 
-export interface kv_store_10f5458bOrderByInput {
+export interface kv_store_10f5458bOrderBy {
   key?: OrderByDirection;
 }
 
-export interface kv_store_10f5458bUpdateInputInput {
+export interface kv_store_10f5458bUpdateInput {
   key?: string;
   value?: any;
 }
 
-export interface league_seasonsFilterInput {
+export interface league_seasonsFilter {
   id?: BigIntFilter;
   league_name?: leaguesFilter;
   season_number?: IntFilter;
@@ -2304,7 +2419,7 @@ export interface league_seasonsFilterInput {
   not?: league_seasonsFilter;
 }
 
-export interface league_seasonsInsertInputInput {
+export interface league_seasonsInsertInput {
   league_name?: leagues;
   season_number?: number;
   start_date?: any;
@@ -2315,7 +2430,7 @@ export interface league_seasonsInsertInputInput {
   event?: string;
 }
 
-export interface league_seasonsOrderByInput {
+export interface league_seasonsOrderBy {
   id?: OrderByDirection;
   league_name?: OrderByDirection;
   season_number?: OrderByDirection;
@@ -2327,7 +2442,7 @@ export interface league_seasonsOrderByInput {
   event?: OrderByDirection;
 }
 
-export interface league_seasonsUpdateInputInput {
+export interface league_seasonsUpdateInput {
   league_name?: leagues;
   season_number?: number;
   start_date?: any;
@@ -2338,14 +2453,14 @@ export interface league_seasonsUpdateInputInput {
   event?: string;
 }
 
-export interface leaguesFilterInput {
+export interface leaguesFilter {
   eq?: leagues;
   in?: any[];
   is?: FilterIs;
   neq?: leagues;
 }
 
-export interface match_mvpFilterInput {
+export interface match_mvpFilter {
   match_id?: UUIDFilter;
   player_id?: UUIDFilter;
   nodeId?: IDFilter;
@@ -2354,22 +2469,22 @@ export interface match_mvpFilterInput {
   not?: match_mvpFilter;
 }
 
-export interface match_mvpInsertInputInput {
+export interface match_mvpInsertInput {
   match_id?: string;
   player_id?: string;
 }
 
-export interface match_mvpOrderByInput {
+export interface match_mvpOrderBy {
   match_id?: OrderByDirection;
   player_id?: OrderByDirection;
 }
 
-export interface match_mvpUpdateInputInput {
+export interface match_mvpUpdateInput {
   match_id?: string;
   player_id?: string;
 }
 
-export interface match_pointsFilterInput {
+export interface match_pointsFilter {
   id?: UUIDFilter;
   match_id?: UUIDFilter;
   team_id?: UUIDFilter;
@@ -2384,7 +2499,7 @@ export interface match_pointsFilterInput {
   not?: match_pointsFilter;
 }
 
-export interface match_pointsInsertInputInput {
+export interface match_pointsInsertInput {
   id?: string;
   match_id?: string;
   team_id?: string;
@@ -2395,7 +2510,7 @@ export interface match_pointsInsertInputInput {
   updated_at?: any;
 }
 
-export interface match_pointsOrderByInput {
+export interface match_pointsOrderBy {
   id?: OrderByDirection;
   match_id?: OrderByDirection;
   team_id?: OrderByDirection;
@@ -2406,7 +2521,7 @@ export interface match_pointsOrderByInput {
   updated_at?: OrderByDirection;
 }
 
-export interface match_pointsUpdateInputInput {
+export interface match_pointsUpdateInput {
   id?: string;
   match_id?: string;
   team_id?: string;
@@ -2417,7 +2532,7 @@ export interface match_pointsUpdateInputInput {
   updated_at?: any;
 }
 
-export interface match_submissionsFilterInput {
+export interface match_submissionsFilter {
   id?: UUIDFilter;
   event_id?: UUIDFilter;
   match_id?: UUIDFilter;
@@ -2435,7 +2550,7 @@ export interface match_submissionsFilterInput {
   not?: match_submissionsFilter;
 }
 
-export interface match_submissionsInsertInputInput {
+export interface match_submissionsInsertInput {
   id?: string;
   event_id?: string;
   match_id?: string;
@@ -2449,7 +2564,7 @@ export interface match_submissionsInsertInputInput {
   created_at?: any;
 }
 
-export interface match_submissionsOrderByInput {
+export interface match_submissionsOrderBy {
   id?: OrderByDirection;
   event_id?: OrderByDirection;
   match_id?: OrderByDirection;
@@ -2463,7 +2578,7 @@ export interface match_submissionsOrderByInput {
   created_at?: OrderByDirection;
 }
 
-export interface match_submissionsUpdateInputInput {
+export interface match_submissionsUpdateInput {
   id?: string;
   event_id?: string;
   match_id?: string;
@@ -2477,7 +2592,7 @@ export interface match_submissionsUpdateInputInput {
   created_at?: any;
 }
 
-export interface matchesFilterInput {
+export interface matchesFilter {
   id?: UUIDFilter;
   event_id?: UUIDFilter;
   team_a_id?: UUIDFilter;
@@ -2498,7 +2613,7 @@ export interface matchesFilterInput {
   not?: matchesFilter;
 }
 
-export interface matchesInsertInputInput {
+export interface matchesInsertInput {
   id?: string;
   event_id?: string;
   team_a_id?: string;
@@ -2515,7 +2630,7 @@ export interface matchesInsertInputInput {
   winner_name?: string;
 }
 
-export interface matchesOrderByInput {
+export interface matchesOrderBy {
   id?: OrderByDirection;
   event_id?: OrderByDirection;
   team_a_id?: OrderByDirection;
@@ -2532,7 +2647,7 @@ export interface matchesOrderByInput {
   winner_name?: OrderByDirection;
 }
 
-export interface matchesUpdateInputInput {
+export interface matchesUpdateInput {
   id?: string;
   event_id?: string;
   team_a_id?: string;
@@ -2549,7 +2664,7 @@ export interface matchesUpdateInputInput {
   winner_name?: string;
 }
 
-export interface notificationsFilterInput {
+export interface notificationsFilter {
   id?: UUIDFilter;
   user_id?: UUIDFilter;
   title?: StringFilter;
@@ -2564,7 +2679,7 @@ export interface notificationsFilterInput {
   not?: notificationsFilter;
 }
 
-export interface notificationsInsertInputInput {
+export interface notificationsInsertInput {
   id?: string;
   user_id?: string;
   title?: string;
@@ -2575,7 +2690,7 @@ export interface notificationsInsertInputInput {
   updated_at?: any;
 }
 
-export interface notificationsOrderByInput {
+export interface notificationsOrderBy {
   id?: OrderByDirection;
   user_id?: OrderByDirection;
   title?: OrderByDirection;
@@ -2586,7 +2701,7 @@ export interface notificationsOrderByInput {
   updated_at?: OrderByDirection;
 }
 
-export interface notificationsUpdateInputInput {
+export interface notificationsUpdateInput {
   id?: string;
   user_id?: string;
   title?: string;
@@ -2597,14 +2712,14 @@ export interface notificationsUpdateInputInput {
   updated_at?: any;
 }
 
-export interface player_positionFilterInput {
+export interface player_positionFilter {
   eq?: player_position;
-  in?: any[];
+  in?: player_position[];
   is?: FilterIs;
   neq?: player_position;
 }
 
-export interface player_rp_transactionsFilterInput {
+export interface player_rp_transactionsFilter {
   id?: UUIDFilter;
   player_id?: UUIDFilter;
   event_id?: UUIDFilter;
@@ -2620,7 +2735,7 @@ export interface player_rp_transactionsFilterInput {
   not?: player_rp_transactionsFilter;
 }
 
-export interface player_rp_transactionsInsertInputInput {
+export interface player_rp_transactionsInsertInput {
   id?: string;
   player_id?: string;
   event_id?: string;
@@ -2632,7 +2747,7 @@ export interface player_rp_transactionsInsertInputInput {
   updated_at?: any;
 }
 
-export interface player_rp_transactionsOrderByInput {
+export interface player_rp_transactionsOrderBy {
   id?: OrderByDirection;
   player_id?: OrderByDirection;
   event_id?: OrderByDirection;
@@ -2644,7 +2759,7 @@ export interface player_rp_transactionsOrderByInput {
   updated_at?: OrderByDirection;
 }
 
-export interface player_rp_transactionsUpdateInputInput {
+export interface player_rp_transactionsUpdateInput {
   id?: string;
   player_id?: string;
   event_id?: string;
@@ -2656,7 +2771,7 @@ export interface player_rp_transactionsUpdateInputInput {
   updated_at?: any;
 }
 
-export interface player_salary_tiersFilterInput {
+export interface player_salary_tiersFilter {
   id?: IntFilter;
   tier_name?: StringFilter;
   min_value?: BigFloatFilter;
@@ -2668,14 +2783,14 @@ export interface player_salary_tiersFilterInput {
   not?: player_salary_tiersFilter;
 }
 
-export interface player_salary_tiersInsertInputInput {
+export interface player_salary_tiersInsertInput {
   tier_name?: string;
   min_value?: string;
   max_value?: string;
   multiplier?: string;
 }
 
-export interface player_salary_tiersOrderByInput {
+export interface player_salary_tiersOrderBy {
   id?: OrderByDirection;
   tier_name?: OrderByDirection;
   min_value?: OrderByDirection;
@@ -2683,14 +2798,14 @@ export interface player_salary_tiersOrderByInput {
   multiplier?: OrderByDirection;
 }
 
-export interface player_salary_tiersUpdateInputInput {
+export interface player_salary_tiersUpdateInput {
   tier_name?: string;
   min_value?: string;
   max_value?: string;
   multiplier?: string;
 }
 
-export interface player_statsFilterInput {
+export interface player_statsFilter {
   id?: UUIDFilter;
   player_id?: UUIDFilter;
   match_id?: UUIDFilter;
@@ -2719,7 +2834,7 @@ export interface player_statsFilterInput {
   not?: player_statsFilter;
 }
 
-export interface player_statsInsertInputInput {
+export interface player_statsInsertInput {
   id?: string;
   player_id?: string;
   match_id?: string;
@@ -2743,7 +2858,7 @@ export interface player_statsInsertInputInput {
   updated_at?: any;
 }
 
-export interface player_statsOrderByInput {
+export interface player_statsOrderBy {
   id?: OrderByDirection;
   player_id?: OrderByDirection;
   match_id?: OrderByDirection;
@@ -2768,7 +2883,7 @@ export interface player_statsOrderByInput {
   updated_at?: OrderByDirection;
 }
 
-export interface player_statsUpdateInputInput {
+export interface player_statsUpdateInput {
   id?: string;
   player_id?: string;
   match_id?: string;
@@ -2792,7 +2907,7 @@ export interface player_statsUpdateInputInput {
   updated_at?: any;
 }
 
-export interface playersFilterInput {
+export interface playersFilter {
   id?: UUIDFilter;
   gamertag?: StringFilter;
   position?: player_positionFilter;
@@ -2814,7 +2929,7 @@ export interface playersFilterInput {
   not?: playersFilter;
 }
 
-export interface playersInsertInputInput {
+export interface playersInsertInput {
   id?: string;
   gamertag?: string;
   position?: player_position;
@@ -2832,7 +2947,7 @@ export interface playersInsertInputInput {
   alternate_gamertag?: string;
 }
 
-export interface playersOrderByInput {
+export interface playersOrderBy {
   id?: OrderByDirection;
   gamertag?: OrderByDirection;
   position?: OrderByDirection;
@@ -2850,7 +2965,7 @@ export interface playersOrderByInput {
   alternate_gamertag?: OrderByDirection;
 }
 
-export interface playersUpdateInputInput {
+export interface playersUpdateInput {
   id?: string;
   gamertag?: string;
   position?: player_position;
@@ -2868,7 +2983,7 @@ export interface playersUpdateInputInput {
   alternate_gamertag?: string;
 }
 
-export interface profilesFilterInput {
+export interface profilesFilter {
   id?: UUIDFilter;
   email?: StringFilter;
   role?: StringFilter;
@@ -2881,7 +2996,7 @@ export interface profilesFilterInput {
   not?: profilesFilter;
 }
 
-export interface profilesInsertInputInput {
+export interface profilesInsertInput {
   id?: string;
   email?: string;
   role?: string;
@@ -2890,7 +3005,7 @@ export interface profilesInsertInputInput {
   app_role?: app_role;
 }
 
-export interface profilesOrderByInput {
+export interface profilesOrderBy {
   id?: OrderByDirection;
   email?: OrderByDirection;
   role?: OrderByDirection;
@@ -2899,7 +3014,7 @@ export interface profilesOrderByInput {
   app_role?: OrderByDirection;
 }
 
-export interface profilesUpdateInputInput {
+export interface profilesUpdateInput {
   id?: string;
   email?: string;
   role?: string;
@@ -2908,7 +3023,7 @@ export interface profilesUpdateInputInput {
   app_role?: app_role;
 }
 
-export interface ranking_pointsFilterInput {
+export interface ranking_pointsFilter {
   id?: UUIDFilter;
   team_id?: UUIDFilter;
   source?: StringFilter;
@@ -2922,7 +3037,7 @@ export interface ranking_pointsFilterInput {
   not?: ranking_pointsFilter;
 }
 
-export interface ranking_pointsInsertInputInput {
+export interface ranking_pointsInsertInput {
   id?: string;
   team_id?: string;
   source?: string;
@@ -2932,7 +3047,7 @@ export interface ranking_pointsInsertInputInput {
   expires_at?: Date;
 }
 
-export interface ranking_pointsOrderByInput {
+export interface ranking_pointsOrderBy {
   id?: OrderByDirection;
   team_id?: OrderByDirection;
   source?: OrderByDirection;
@@ -2942,7 +3057,7 @@ export interface ranking_pointsOrderByInput {
   expires_at?: OrderByDirection;
 }
 
-export interface ranking_pointsUpdateInputInput {
+export interface ranking_pointsUpdateInput {
   id?: string;
   team_id?: string;
   source?: string;
@@ -2952,7 +3067,7 @@ export interface ranking_pointsUpdateInputInput {
   expires_at?: Date;
 }
 
-export interface regionsFilterInput {
+export interface regionsFilter {
   id?: UUIDFilter;
   name?: StringFilter;
   nodeId?: IDFilter;
@@ -2961,22 +3076,22 @@ export interface regionsFilterInput {
   not?: regionsFilter;
 }
 
-export interface regionsInsertInputInput {
+export interface regionsInsertInput {
   id?: string;
   name?: string;
 }
 
-export interface regionsOrderByInput {
+export interface regionsOrderBy {
   id?: OrderByDirection;
   name?: OrderByDirection;
 }
 
-export interface regionsUpdateInputInput {
+export interface regionsUpdateInput {
   id?: string;
   name?: string;
 }
 
-export interface role_permissionsFilterInput {
+export interface role_permissionsFilter {
   id?: BigIntFilter;
   permission?: StringFilter;
   role?: app_roleFilter;
@@ -2986,23 +3101,23 @@ export interface role_permissionsFilterInput {
   not?: role_permissionsFilter;
 }
 
-export interface role_permissionsInsertInputInput {
+export interface role_permissionsInsertInput {
   permission?: string;
   role?: app_role;
 }
 
-export interface role_permissionsOrderByInput {
+export interface role_permissionsOrderBy {
   id?: OrderByDirection;
   permission?: OrderByDirection;
   role?: OrderByDirection;
 }
 
-export interface role_permissionsUpdateInputInput {
+export interface role_permissionsUpdateInput {
   permission?: string;
   role?: app_role;
 }
 
-export interface rp_transactionsFilterInput {
+export interface rp_transactionsFilter {
   id?: UUIDFilter;
   team_id?: UUIDFilter;
   event_id?: UUIDFilter;
@@ -3017,7 +3132,7 @@ export interface rp_transactionsFilterInput {
   not?: rp_transactionsFilter;
 }
 
-export interface rp_transactionsInsertInputInput {
+export interface rp_transactionsInsertInput {
   id?: string;
   team_id?: string;
   event_id?: string;
@@ -3028,7 +3143,7 @@ export interface rp_transactionsInsertInputInput {
   updated_at?: any;
 }
 
-export interface rp_transactionsOrderByInput {
+export interface rp_transactionsOrderBy {
   id?: OrderByDirection;
   team_id?: OrderByDirection;
   event_id?: OrderByDirection;
@@ -3039,7 +3154,7 @@ export interface rp_transactionsOrderByInput {
   updated_at?: OrderByDirection;
 }
 
-export interface rp_transactionsUpdateInputInput {
+export interface rp_transactionsUpdateInput {
   id?: string;
   team_id?: string;
   event_id?: string;
@@ -3050,14 +3165,14 @@ export interface rp_transactionsUpdateInputInput {
   updated_at?: any;
 }
 
-export interface salary_tierFilterInput {
+export interface salary_tierFilter {
   eq?: salary_tier;
-  in?: any[];
+  in?: salary_tier[];
   is?: FilterIs;
   neq?: salary_tier;
 }
 
-export interface salary_tiersFilterInput {
+export interface salary_tiersFilter {
   id?: BigIntFilter;
   salary_tier?: salary_tierFilter;
   label?: StringFilter;
@@ -3071,7 +3186,7 @@ export interface salary_tiersFilterInput {
   not?: salary_tiersFilter;
 }
 
-export interface salary_tiersInsertInputInput {
+export interface salary_tiersInsertInput {
   salary_tier?: salary_tier;
   label?: string;
   multiplier?: string;
@@ -3080,7 +3195,7 @@ export interface salary_tiersInsertInputInput {
   description?: string;
 }
 
-export interface salary_tiersOrderByInput {
+export interface salary_tiersOrderBy {
   id?: OrderByDirection;
   salary_tier?: OrderByDirection;
   label?: OrderByDirection;
@@ -3090,7 +3205,7 @@ export interface salary_tiersOrderByInput {
   description?: OrderByDirection;
 }
 
-export interface salary_tiersUpdateInputInput {
+export interface salary_tiersUpdateInput {
   salary_tier?: salary_tier;
   label?: string;
   multiplier?: string;
@@ -3099,14 +3214,14 @@ export interface salary_tiersUpdateInputInput {
   description?: string;
 }
 
-export interface stageFilterInput {
+export interface stageFilter {
   eq?: stage;
-  in?: any[];
+  in?: stage[];
   is?: FilterIs;
   neq?: stage;
 }
 
-export interface team_match_statsFilterInput {
+export interface team_match_statsFilter {
   id?: UUIDFilter;
   match_id?: UUIDFilter;
   team_id?: UUIDFilter;
@@ -3130,7 +3245,7 @@ export interface team_match_statsFilterInput {
   not?: team_match_statsFilter;
 }
 
-export interface team_match_statsInsertInputInput {
+export interface team_match_statsInsertInput {
   id?: string;
   match_id?: string;
   team_id?: string;
@@ -3150,7 +3265,7 @@ export interface team_match_statsInsertInputInput {
   plus_minus?: number;
 }
 
-export interface team_match_statsOrderByInput {
+export interface team_match_statsOrderBy {
   id?: OrderByDirection;
   match_id?: OrderByDirection;
   team_id?: OrderByDirection;
@@ -3170,7 +3285,7 @@ export interface team_match_statsOrderByInput {
   plus_minus?: OrderByDirection;
 }
 
-export interface team_match_statsUpdateInputInput {
+export interface team_match_statsUpdateInput {
   id?: string;
   match_id?: string;
   team_id?: string;
@@ -3190,7 +3305,7 @@ export interface team_match_statsUpdateInputInput {
   plus_minus?: number;
 }
 
-export interface team_rostersFilterInput {
+export interface team_rostersFilter {
   id?: UUIDFilter;
   team_id?: UUIDFilter;
   player_id?: UUIDFilter;
@@ -3205,7 +3320,7 @@ export interface team_rostersFilterInput {
   not?: team_rostersFilter;
 }
 
-export interface team_rostersInsertInputInput {
+export interface team_rostersInsertInput {
   id?: string;
   team_id?: string;
   player_id?: string;
@@ -3216,7 +3331,7 @@ export interface team_rostersInsertInputInput {
   event_id?: string;
 }
 
-export interface team_rostersOrderByInput {
+export interface team_rostersOrderBy {
   id?: OrderByDirection;
   team_id?: OrderByDirection;
   player_id?: OrderByDirection;
@@ -3227,7 +3342,7 @@ export interface team_rostersOrderByInput {
   event_id?: OrderByDirection;
 }
 
-export interface team_rostersUpdateInputInput {
+export interface team_rostersUpdateInput {
   id?: string;
   team_id?: string;
   player_id?: string;
@@ -3238,7 +3353,7 @@ export interface team_rostersUpdateInputInput {
   event_id?: string;
 }
 
-export interface teamsFilterInput {
+export interface teamsFilter {
   id?: UUIDFilter;
   name?: StringFilter;
   logo_url?: StringFilter;
@@ -3256,7 +3371,7 @@ export interface teamsFilterInput {
   not?: teamsFilter;
 }
 
-export interface teamsInsertInputInput {
+export interface teamsInsertInput {
   id?: string;
   name?: string;
   logo_url?: string;
@@ -3270,7 +3385,7 @@ export interface teamsInsertInputInput {
   money_won?: number;
 }
 
-export interface teamsOrderByInput {
+export interface teamsOrderBy {
   id?: OrderByDirection;
   name?: OrderByDirection;
   logo_url?: OrderByDirection;
@@ -3284,7 +3399,7 @@ export interface teamsOrderByInput {
   money_won?: OrderByDirection;
 }
 
-export interface teamsUpdateInputInput {
+export interface teamsUpdateInput {
   id?: string;
   name?: string;
   logo_url?: string;
@@ -3298,7 +3413,7 @@ export interface teamsUpdateInputInput {
   money_won?: number;
 }
 
-export interface teams_pot_trackerFilterInput {
+export interface teams_pot_trackerFilter {
   id?: UUIDFilter;
   event_id?: UUIDFilter;
   team_id?: UUIDFilter;
@@ -3311,7 +3426,7 @@ export interface teams_pot_trackerFilterInput {
   not?: teams_pot_trackerFilter;
 }
 
-export interface teams_pot_trackerInsertInputInput {
+export interface teams_pot_trackerInsertInput {
   id?: string;
   event_id?: string;
   team_id?: string;
@@ -3320,7 +3435,7 @@ export interface teams_pot_trackerInsertInputInput {
   created_at?: any;
 }
 
-export interface teams_pot_trackerOrderByInput {
+export interface teams_pot_trackerOrderBy {
   id?: OrderByDirection;
   event_id?: OrderByDirection;
   team_id?: OrderByDirection;
@@ -3329,7 +3444,7 @@ export interface teams_pot_trackerOrderByInput {
   created_at?: OrderByDirection;
 }
 
-export interface teams_pot_trackerUpdateInputInput {
+export interface teams_pot_trackerUpdateInput {
   id?: string;
   event_id?: string;
   team_id?: string;
@@ -3338,7 +3453,7 @@ export interface teams_pot_trackerUpdateInputInput {
   created_at?: any;
 }
 
-export interface upcoming_matchesFilterInput {
+export interface upcoming_matchesFilter {
   id?: UUIDFilter;
   event_id?: UUIDFilter;
   team_a_id?: UUIDFilter;
@@ -3361,7 +3476,7 @@ export interface upcoming_matchesFilterInput {
   not?: upcoming_matchesFilter;
 }
 
-export interface upcoming_matchesInsertInputInput {
+export interface upcoming_matchesInsertInput {
   id?: string;
   event_id?: string;
   team_a_id?: string;
@@ -3380,7 +3495,7 @@ export interface upcoming_matchesInsertInputInput {
   team_b_logo?: string;
 }
 
-export interface upcoming_matchesOrderByInput {
+export interface upcoming_matchesOrderBy {
   id?: OrderByDirection;
   event_id?: OrderByDirection;
   team_a_id?: OrderByDirection;
@@ -3399,7 +3514,7 @@ export interface upcoming_matchesOrderByInput {
   team_b_logo?: OrderByDirection;
 }
 
-export interface upcoming_matchesUpdateInputInput {
+export interface upcoming_matchesUpdateInput {
   id?: string;
   event_id?: string;
   team_a_id?: string;
@@ -3418,7 +3533,7 @@ export interface upcoming_matchesUpdateInputInput {
   team_b_logo?: string;
 }
 
-export interface update_raceFilterInput {
+export interface update_raceFilter {
   id?: BigIntFilter;
   race_id?: UUIDFilter;
   update_type?: StringFilter;
@@ -3432,7 +3547,7 @@ export interface update_raceFilterInput {
   not?: update_raceFilter;
 }
 
-export interface update_raceInsertInputInput {
+export interface update_raceInsertInput {
   race_id?: string;
   update_type?: string;
   update_details?: any;
@@ -3442,7 +3557,7 @@ export interface update_raceInsertInputInput {
   updated_by?: string;
 }
 
-export interface update_raceOrderByInput {
+export interface update_raceOrderBy {
   id?: OrderByDirection;
   race_id?: OrderByDirection;
   update_type?: OrderByDirection;
@@ -3452,7 +3567,7 @@ export interface update_raceOrderByInput {
   updated_by?: OrderByDirection;
 }
 
-export interface update_raceUpdateInputInput {
+export interface update_raceUpdateInput {
   race_id?: string;
   update_type?: string;
   update_details?: any;
@@ -3462,7 +3577,7 @@ export interface update_raceUpdateInputInput {
   updated_by?: string;
 }
 
-export interface user_rolesFilterInput {
+export interface user_rolesFilter {
   id?: BigIntFilter;
   user_id?: UUIDFilter;
   created_at?: DatetimeFilter;
@@ -3474,14 +3589,14 @@ export interface user_rolesFilterInput {
   not?: user_rolesFilter;
 }
 
-export interface user_rolesInsertInputInput {
+export interface user_rolesInsertInput {
   user_id?: string;
   created_at?: any;
   role?: app_role;
   role_name?: string;
 }
 
-export interface user_rolesOrderByInput {
+export interface user_rolesOrderBy {
   id?: OrderByDirection;
   user_id?: OrderByDirection;
   created_at?: OrderByDirection;
@@ -3489,7 +3604,7 @@ export interface user_rolesOrderByInput {
   role_name?: OrderByDirection;
 }
 
-export interface user_rolesUpdateInputInput {
+export interface user_rolesUpdateInput {
   user_id?: string;
   created_at?: any;
   role?: app_role;
