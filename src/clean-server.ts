@@ -154,8 +154,25 @@ async function startCleanServer() {
 
   // CORS configuration
   app.use(cors({
-    origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000', 'http://localhost:3001'],
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || [
+      'https://dashboard.bodegacatsgc.gg',
+      'https://admin.bodegacatsgc.gg',
+      'https://api.bodegacatsgc.gg',
+      'https://data.bodegacatsgc.gg',
+      'https://graphql.bodegacatsgc.gg',
+      'https://studio.apollographql.com',
+      'http://localhost:3000',
+      'http://localhost:4000'
+    ],
     credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: [
+      'Content-Type', 
+      'Authorization', 
+      'apollo-require-preflight',
+      'x-apollo-operation-name',
+      'x-apollo-operation-type'
+    ]
   }));
 
   // Body parsing middleware
@@ -183,16 +200,29 @@ async function startCleanServer() {
         },
       };
     },
-    introspection: process.env.NODE_ENV !== 'production',
+    introspection: true, // Always enable introspection for development
+    csrfPrevention: false, // Disable CSRF for easier testing
   });
 
   await server.start();
 
   // Serve Apollo Studio Sandbox for GET requests to /graphql
   app.get('/graphql', (req, res) => {
-    // Force HTTPS for production deployments
-    const protocol = process.env.NODE_ENV === 'production' ? 'https' : req.protocol;
-    const endpoint = protocol + '://' + req.get('host') + '/graphql';
+    // Determine the correct protocol and host
+    let protocol = req.protocol;
+    let host = req.get('host');
+    
+    // Force HTTPS for production or when X-Forwarded-Proto is https
+    if (process.env.NODE_ENV === 'production' || req.get('X-Forwarded-Proto') === 'https') {
+      protocol = 'https';
+    }
+    
+    // Handle Railway/Heroku style forwarding
+    if (req.get('X-Forwarded-Host')) {
+      host = req.get('X-Forwarded-Host');
+    }
+    
+    const endpoint = protocol + '://' + host + '/graphql';
     const studioUrl = `https://studio.apollographql.com/sandbox/explorer?endpoint=${encodeURIComponent(endpoint)}`;
     
     res.send(`
@@ -358,7 +388,22 @@ async function startCleanServer() {
 
   // Serve Apollo Studio Explorer
   app.get('/studio', (req, res) => {
-    res.redirect('https://studio.apollographql.com/sandbox/explorer?endpoint=' + encodeURIComponent(req.protocol + '://' + req.get('host') + '/graphql'));
+    // Determine the correct protocol and host
+    let protocol = req.protocol;
+    let host = req.get('host');
+    
+    // Force HTTPS for production or when X-Forwarded-Proto is https
+    if (process.env.NODE_ENV === 'production' || req.get('X-Forwarded-Proto') === 'https') {
+      protocol = 'https';
+    }
+    
+    // Handle Railway/Heroku style forwarding
+    if (req.get('X-Forwarded-Host')) {
+      host = req.get('X-Forwarded-Host');
+    }
+    
+    const endpoint = protocol + '://' + host + '/graphql';
+    res.redirect('https://studio.apollographql.com/sandbox/explorer?endpoint=' + encodeURIComponent(endpoint));
   });
 
   // Error handling middleware
