@@ -23,24 +23,30 @@
   "author": "Bodega Cats GC",
   "license": "MIT",
   "dependencies": {
-    "@apollo/server": "^4.9.5",
+    "@apollo/server": "^4.12.2",
     "@supabase/supabase-js": "^2.38.4",
+    "@types/uuid": "^10.0.0",
+    "body-parser": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "graphql": "^16.8.1",
+    "express": "^4.21.2",
+    "graphql": "^16.11.0",
     "graphql-tag": "^2.12.6",
-    "helmet": "^7.1.0"
+    "helmet": "^7.1.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.32.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^20.10.0",
     "@typescript-eslint/eslint-plugin": "^6.13.0",
     "@typescript-eslint/parser": "^6.13.0",
-    "eslint": "^8.54.0",
+    "eslint": "^8.57.1",
+    "globals": "^16.3.0",
     "tsx": "^4.6.0",
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "typescript-eslint": "^8.39.0"
   },
   "engines": {
     "node": ">=18.0.0"

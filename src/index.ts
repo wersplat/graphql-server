@@ -3,6 +3,7 @@ import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import express from 'express';
+import bodyParser from 'body-parser';
 import http from 'http';
 import cors from 'cors';
 import helmet from 'helmet';
