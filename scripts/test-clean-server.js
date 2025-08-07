@@ -15,7 +15,7 @@ async function testCleanServer() {
     stdio: 'pipe',
     env: {
       ...process.env,
-      PORT: '4001', // Use a different port to avoid conflicts
+      PORT: '4000', // Use the standard port
       NODE_ENV: 'test'
     }
   });
@@ -54,7 +54,7 @@ async function testCleanServer() {
   try {
     // Test health endpoint
     console.log('🏥 Testing health endpoint...');
-    const healthResponse = await fetch('http://localhost:4001/health');
+    const healthResponse = await fetch('http://localhost:4000/health');
     const healthData = await healthResponse.json();
     
     if (healthResponse.ok && healthData.status === 'ok') {
@@ -65,7 +65,7 @@ async function testCleanServer() {
 
     // Test root endpoint
     console.log('\n🏠 Testing root endpoint...');
-    const rootResponse = await fetch('http://localhost:4001/');
+    const rootResponse = await fetch('http://localhost:4000/');
     const rootData = await rootResponse.json();
     
     if (rootResponse.ok && rootData.message) {
@@ -77,7 +77,7 @@ async function testCleanServer() {
 
     // Test GraphQL endpoint with introspection
     console.log('\n📊 Testing GraphQL endpoint...');
-    const graphqlResponse = await fetch('http://localhost:4001/graphql', {
+    const graphqlResponse = await fetch('http://localhost:4000/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ async function testCleanServer() {
 
     // Test a simple query
     console.log('\n🔍 Testing simple query...');
-    const queryResponse = await fetch('http://localhost:4001/graphql', {
+    const queryResponse = await fetch('http://localhost:4000/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
