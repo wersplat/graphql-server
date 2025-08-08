@@ -10,6 +10,7 @@ import helmet from 'helmet';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import dotenv from 'dotenv';
+import type { GraphQLContext } from './types/Context';
 
 // Load environment variables
 dotenv.config();
@@ -143,6 +144,9 @@ async function startServer() {
   }
   
   console.log('✅ Environment variables validated');
+  if (!process.env.ADMIN_API_TOKEN && !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    console.warn('ℹ️ Neither ADMIN_API_TOKEN nor SUPABASE_SERVICE_ROLE_KEY is set. Admin mutations may fail.');
+  }
   
   const app = express();
   const httpServer = http.createServer(app);
@@ -219,7 +223,7 @@ async function startServer() {
   });
 
   // Create Apollo Server
-  const server = new ApolloServer({
+  const server = new ApolloServer<GraphQLContext>({
     typeDefs,
     resolvers: {
       ...resolvers,
@@ -294,14 +298,14 @@ async function startServer() {
         const { parseAuth } = await import('./auth');
         const { supabaseForRequest, pgGraphQLFetch, dataBackend, adminBackend } = await import('./gateways');
         const auth = await parseAuth(req.headers.authorization);
-        const ctx = {
+        const ctx: GraphQLContext = {
           ...auth,
           supabase: supabaseForRequest(auth),
           pg: pgGraphQLFetch(auth),
           dataApi: dataBackend(auth),
           adminApi: adminBackend(auth),
           headers: req.headers,
-        } as any;
+        };
         return ctx;
       }
     })

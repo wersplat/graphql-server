@@ -9,6 +9,7 @@ import helmet from 'helmet';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import dotenv from 'dotenv';
+import type { GraphQLContext } from './types/Context';
 
 // Load environment variables
 dotenv.config();
@@ -183,7 +184,7 @@ async function startCleanServer() {
   app.use(express.static(join(__dirname, '../public')));
 
   // Create Apollo Server with clean schema
-  const server = new ApolloServer({
+  const server = new ApolloServer<GraphQLContext>({
     typeDefs,
     resolvers,
     plugins: [
@@ -353,12 +354,18 @@ async function startCleanServer() {
   // Apply Apollo Server middleware
   app.use('/graphql', expressMiddleware(server, {
     context: async ({ req }) => {
-      // Add any context you need here (auth, etc.)
-      return {
-        req,
-        // Add authentication context if needed
-        // user: await getUserFromToken(req.headers.authorization),
+      const { parseAuth } = await import('./auth');
+      const { supabaseForRequest, pgGraphQLFetch, dataBackend, adminBackend } = await import('./gateways');
+      const auth = await parseAuth(req.headers.authorization);
+      const ctx: GraphQLContext = {
+        ...auth,
+        supabase: supabaseForRequest(auth),
+        pg: pgGraphQLFetch(auth),
+        dataApi: dataBackend(auth),
+        adminApi: adminBackend(auth),
+        headers: req.headers,
       };
+      return ctx;
     },
   }));
 

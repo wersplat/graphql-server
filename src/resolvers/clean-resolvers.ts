@@ -1,4 +1,5 @@
 import { CleanGraphQLService } from '../services/clean-graphql-service';
+import type { GraphQLContext } from '../types/Context';
 
 /**
  * Clean GraphQL Resolvers
@@ -10,7 +11,7 @@ import { CleanGraphQLService } from '../services/clean-graphql-service';
 export const cleanResolvers = {
   Query: {
     // Player queries
-    player: async (_: any, { id }: { id: string }, ctx: any) => {
+    player: async (_: any, { id }: { id: string }, ctx: GraphQLContext) => {
       try {
         // Public read via pg_graphql to honor RLS (uses caller token if present)
         const q = `
@@ -28,7 +29,7 @@ export const cleanResolvers = {
       }
     },
 
-    players: async (_: any, { pagination }: { pagination?: { limit?: number; offset?: number } }, ctx: any) => {
+    players: async (_: any, { pagination }: { pagination?: { limit?: number; offset?: number } }, ctx: GraphQLContext) => {
       try {
         const limit = pagination?.limit || 20;
         const offset = pagination?.offset || 0;
@@ -58,7 +59,7 @@ export const cleanResolvers = {
     },
 
     // Team queries
-    team: async (_: any, { id }: { id: string }, ctx: any) => {
+    team: async (_: any, { id }: { id: string }, ctx: GraphQLContext) => {
       try {
         const q = `
           query GetTeam($id: UUID!) {
@@ -75,7 +76,7 @@ export const cleanResolvers = {
       }
     },
 
-    teams: async (_: any, { pagination }: { pagination?: { limit?: number; offset?: number } }, ctx: any) => {
+    teams: async (_: any, { pagination }: { pagination?: { limit?: number; offset?: number } }, ctx: GraphQLContext) => {
       try {
         const limit = pagination?.limit || 20;
         const offset = pagination?.offset || 0;
@@ -108,7 +109,7 @@ export const cleanResolvers = {
     },
 
     // Match queries
-    match: async (_: any, { id }: { id: string }, ctx: any) => {
+    match: async (_: any, { id }: { id: string }, ctx: GraphQLContext) => {
       try {
         const q = `
           query GetMatch($id: UUID!) {
@@ -142,7 +143,7 @@ export const cleanResolvers = {
       }
     },
 
-    matches: async (_: any, { pagination }: { pagination?: { limit?: number; offset?: number } }, ctx: any) => {
+    matches: async (_: any, { pagination }: { pagination?: { limit?: number; offset?: number } }, ctx: GraphQLContext) => {
       try {
         const limit = pagination?.limit || 20;
         const offset = pagination?.offset || 0;
@@ -187,7 +188,7 @@ export const cleanResolvers = {
     },
 
     // Event queries
-    event: async (_: any, { id }: { id: string }, ctx: any) => {
+    event: async (_: any, { id }: { id: string }, ctx: GraphQLContext) => {
       try {
         const q = `
           query GetEvent($id: UUID!) {
@@ -215,7 +216,7 @@ export const cleanResolvers = {
       }
     },
 
-    events: async (_: any, { pagination }: { pagination?: { limit?: number; offset?: number } }, ctx: any) => {
+    events: async (_: any, { pagination }: { pagination?: { limit?: number; offset?: number } }, ctx: GraphQLContext) => {
       try {
         const limit = pagination?.limit || 20;
         const offset = pagination?.offset || 0;
@@ -263,7 +264,7 @@ export const cleanResolvers = {
     },
 
     // Team roster queries
-    teamRoster: async (_: any, { teamId }: { teamId: string }, ctx: any) => {
+    teamRoster: async (_: any, { teamId }: { teamId: string }, ctx: GraphQLContext) => {
       try {
         const q = `
           query TeamRoster($teamId: UUID!) {
@@ -310,7 +311,7 @@ export const cleanResolvers = {
     },
 
     // Placeholder queries for other entities (to be implemented)
-    eventGroupMembers: async (_: any, { groupId }: { groupId: string }, ctx: any) => {
+    eventGroupMembers: async (_: any, { groupId }: { groupId: string }, ctx: GraphQLContext) => {
       const q = `
         query($groupId: UUID!) {
           event_group_membersCollection(filter: { group_id: { eq: $groupId } }) {
@@ -328,7 +329,7 @@ export const cleanResolvers = {
       }));
     },
 
-    groupMatches: async (_: any, { groupId }: { groupId: string }, ctx: any) => {
+    groupMatches: async (_: any, { groupId }: { groupId: string }, ctx: GraphQLContext) => {
       const q = `
         query($groupId: UUID!) {
           group_matchesCollection(filter: { group_id: { eq: $groupId } }) {
@@ -347,7 +348,7 @@ export const cleanResolvers = {
       }));
     },
 
-    groupStandings: async (_: any, { groupId }: { groupId: string }, ctx: any) => {
+    groupStandings: async (_: any, { groupId }: { groupId: string }, ctx: GraphQLContext) => {
       const q = `
         query($groupId: UUID!) {
           group_standingsCollection(filter: { group_id: { eq: $groupId } }) {
@@ -371,7 +372,7 @@ export const cleanResolvers = {
       }));
     },
 
-    rankingPoints: async (_: any, { teamId }: { teamId: string }, ctx: any) => {
+    rankingPoints: async (_: any, { teamId }: { teamId: string }, ctx: GraphQLContext) => {
       const q = `
         query($teamId: UUID!) {
           ranking_pointsCollection(filter: { team_id: { eq: $teamId } }) {
@@ -391,7 +392,7 @@ export const cleanResolvers = {
       }));
     },
 
-    rpTransactions: async (_: any, { teamId }: { teamId: string }, ctx: any) => {
+    rpTransactions: async (_: any, { teamId }: { teamId: string }, ctx: GraphQLContext) => {
       const q = `
         query($teamId: UUID!) {
           rp_transactionsCollection(filter: { team_id: { eq: $teamId } }) {
@@ -412,7 +413,7 @@ export const cleanResolvers = {
       }));
     },
 
-    playerRpTransactions: async (_: any, { playerId }: { playerId: string }, ctx: any) => {
+    playerRpTransactions: async (_: any, { playerId }: { playerId: string }, ctx: GraphQLContext) => {
       const q = `
         query($playerId: UUID!) {
           player_rp_transactionsCollection(filter: { player_id: { eq: $playerId } }) {
@@ -434,7 +435,7 @@ export const cleanResolvers = {
       }));
     },
 
-    matchPoints: async (_: any, { matchId }: { matchId: string }, ctx: any) => {
+    matchPoints: async (_: any, { matchId }: { matchId: string }, ctx: GraphQLContext) => {
       const q = `
         query($matchId: UUID!) {
           match_pointsCollection(filter: { match_id: { eq: $matchId } }) {
@@ -455,7 +456,7 @@ export const cleanResolvers = {
       }));
     },
 
-    matchMVP: async (_: any, { matchId }: { matchId: string }, ctx: any) => {
+    matchMVP: async (_: any, { matchId }: { matchId: string }, ctx: GraphQLContext) => {
       const q = `
         query($matchId: UUID!) {
           match_mvpCollection(filter: { match_id: { eq: $matchId } }) {
@@ -468,7 +469,7 @@ export const cleanResolvers = {
       return node ? { matchId: node.match_id, playerId: node.player_id } : null;
     },
 
-    matchSubmissions: async (_: any, { pagination }: { pagination?: { limit?: number; offset?: number } }, ctx: any) => {
+    matchSubmissions: async (_: any, { pagination }: { pagination?: { limit?: number; offset?: number } }, ctx: GraphQLContext) => {
       const limit = pagination?.limit || 20;
       const q = `
         query($first: Int!) {
@@ -500,7 +501,7 @@ export const cleanResolvers = {
       };
     },
 
-    upcomingMatches: async (_: any, { pagination }: { pagination?: { limit?: number; offset?: number } }, ctx: any) => {
+    upcomingMatches: async (_: any, { pagination }: { pagination?: { limit?: number; offset?: number } }, ctx: GraphQLContext) => {
       const limit = pagination?.limit || 20;
       const q = `
         query($first: Int!) {
@@ -580,21 +581,21 @@ export const cleanResolvers = {
 
   Mutation: {
     // Player mutations
-    createPlayer: async (_: any, { input }: { input: any }, ctx: any) => {
+    createPlayer: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi('/players', { method: 'POST', body: JSON.stringify(input) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
 
-    updatePlayer: async (_: any, { id, input }: { id: string; input: any }, ctx: any) => {
+    updatePlayer: async (_: any, { id, input }: { id: string; input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi(`/players/${id}`, { method: 'PUT', body: JSON.stringify(input) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
 
-    deletePlayer: async (_: any, { id }: { id: string }, ctx: any) => {
+    deletePlayer: async (_: any, { id }: { id: string }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi(`/players/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
@@ -618,21 +619,21 @@ export const cleanResolvers = {
     },
 
     // Match mutations
-    createMatch: async (_: any, { input }: { input: any }, ctx: any) => {
+    createMatch: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi('/matches', { method: 'POST', body: JSON.stringify(input) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
 
-    updateMatch: async (_: any, { id, input }: { id: string; input: any }, ctx: any) => {
+    updateMatch: async (_: any, { id, input }: { id: string; input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi(`/matches/${id}`, { method: 'PUT', body: JSON.stringify(input) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
 
-    deleteMatch: async (_: any, { id }: { id: string }, ctx: any) => {
+    deleteMatch: async (_: any, { id }: { id: string }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi(`/matches/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
@@ -640,21 +641,21 @@ export const cleanResolvers = {
     },
 
     // Event mutations
-    createEvent: async (_: any, { input }: { input: any }, ctx: any) => {
+    createEvent: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi('/events', { method: 'POST', body: JSON.stringify(input) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
 
-    updateEvent: async (_: any, { id, input }: { id: string; input: any }, ctx: any) => {
+    updateEvent: async (_: any, { id, input }: { id: string; input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi(`/events/${id}`, { method: 'PUT', body: JSON.stringify(input) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
 
-    deleteEvent: async (_: any, { id }: { id: string }, ctx: any) => {
+    deleteEvent: async (_: any, { id }: { id: string }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi(`/events/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
@@ -678,14 +679,14 @@ export const cleanResolvers = {
     },
 
     // Team roster mutations
-    addPlayerToRoster: async (_: any, { input }: { input: any }, ctx: any) => {
+    addPlayerToRoster: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi('/rosters', { method: 'POST', body: JSON.stringify(input) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
 
-    removePlayerFromRoster: async (_: any, { id }: { id: string }, ctx: any) => {
+    removePlayerFromRoster: async (_: any, { id }: { id: string }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi(`/rosters/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
@@ -742,7 +743,7 @@ export const cleanResolvers = {
     },
 
     // Ranking points mutations
-    awardRankingPoints: async (_: any, { input }: { input: any }, ctx: any) => {
+    awardRankingPoints: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi('/ranking-points', { method: 'POST', body: JSON.stringify(input) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
@@ -750,14 +751,14 @@ export const cleanResolvers = {
     },
 
     // RP transaction mutations
-    createRpTransaction: async (_: any, { input }: { input: any }, ctx: any) => {
+    createRpTransaction: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi('/rp-transactions', { method: 'POST', body: JSON.stringify(input) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
 
-    createPlayerRpTransaction: async (_: any, { input }: { input: any }, ctx: any) => {
+    createPlayerRpTransaction: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi('/player-rp-transactions', { method: 'POST', body: JSON.stringify(input) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
@@ -765,7 +766,7 @@ export const cleanResolvers = {
     },
 
     // Match points mutations
-    awardMatchPoints: async (_: any, { input }: { input: any }, ctx: any) => {
+    awardMatchPoints: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi('/match-points', { method: 'POST', body: JSON.stringify(input) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
@@ -773,7 +774,7 @@ export const cleanResolvers = {
     },
 
     // Match MVP mutations
-    setMatchMVP: async (_: any, { input }: { input: any }, ctx: any) => {
+    setMatchMVP: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi('/match-mvp', { method: 'POST', body: JSON.stringify(input) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
@@ -781,7 +782,7 @@ export const cleanResolvers = {
     },
 
     // Match submission mutations
-    submitMatch: async (_: any, { input }: { input: any }, ctx: any) => {
+    submitMatch: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       // authenticated required
       if (ctx.role === 'anon') throw new Error('Unauthorized');
       const res = await ctx.dataApi('/submissions', { method: 'POST', body: JSON.stringify(input) });
@@ -789,7 +790,7 @@ export const cleanResolvers = {
       return await res.json();
     },
 
-    reviewMatchSubmission: async (_: any, { id, input }: { id: string; input: any }, ctx: any) => {
+    reviewMatchSubmission: async (_: any, { id, input }: { id: string; input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
       const res = await ctx.adminApi(`/submissions/${id}/review`, { method: 'POST', body: JSON.stringify(input) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
