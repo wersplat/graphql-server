@@ -357,6 +357,16 @@ async function startServer() {
     res.redirect('https://studio.apollographql.com/sandbox/explorer?endpoint=' + encodeURIComponent(req.protocol + '://' + req.get('host') + '/graphql'));
   });
 
+  // Sentry test endpoint (non-auth)
+  app.get('/sentry-test', (_req, res) => {
+    try {
+      Sentry.captureException(new Error('Sentry setup ping (server endpoint)'));
+      res.status(202).json({ ok: true });
+    } catch {
+      res.status(500).json({ ok: false });
+    }
+  });
+
   // Serve GraphQL Playground at root
   app.get('/', (req, res) => {
     res.send(`

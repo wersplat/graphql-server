@@ -1,3 +1,31 @@
+## Performance features
+
+- Response caching enabled via plugin with bounded cache
+- Cache-Control headers emitted (CDN-friendly)
+- Depth limit and query complexity guard (max 2000)
+- Per-request DataLoaders to reduce N+1s
+
+## Automatic Persisted Queries (APQ)
+
+The server supports APQ out of the box. To enable on the client:
+
+```ts
+import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
+import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries';
+import { sha256 } from 'crypto-hash';
+
+const link = createPersistedQueryLink({ sha256, useGETForHashedQueries: true })
+  .concat(new HttpLink({ uri: process.env.NEXT_PUBLIC_GRAPHQL_URL }));
+
+export const client = new ApolloClient({ cache: new InMemoryCache(), link });
+```
+
+When `useGETForHashedQueries` is true, CDNs can cache GETs. Ensure your CDN honors origin Cache-Control headers.
+
+## Structured logging & Sentry
+
+Set `SENTRY_DSN` to enable error tracing. For structured logs, run behind a log collector and emit JSON from your hosting platform.
+
 # Bodega Cats GC GraphQL Server
 
 A clean, simplified GraphQL API that transforms the verbose Relay-style schema from Supabase's `pg_graphql` into a frontend-friendly interface.
