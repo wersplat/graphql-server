@@ -14,6 +14,8 @@ import { join } from 'path';
 import dotenv from 'dotenv';
 import type { GraphQLContext } from './types/Context';
 import depthLimit from 'graphql-depth-limit';
+import { getComplexity, fieldExtensionsEstimator, simpleEstimator } from 'graphql-query-complexity';
+import * as Sentry from '@sentry/node';
 
 // Load environment variables
 dotenv.config();
@@ -134,6 +136,9 @@ async function startServer() {
   console.log('🚀 Starting Bodega Cats GC GraphQL Server...');
   console.log('📊 Environment:', process.env.NODE_ENV || 'development');
   console.log('🔧 Port:', process.env.PORT || 4000);
+  if (process.env.SENTRY_DSN) {
+    Sentry.init({ dsn: process.env.SENTRY_DSN, tracesSampleRate: 0.1 });
+  }
   
   // Check required environment variables
   const requiredEnvVars = ['SUPABASE_URL', 'SUPABASE_ANON_KEY', 'DATA_BASE_URL', 'ADMIN_BASE_URL'];
@@ -239,6 +244,33 @@ async function startServer() {
       ApolloServerPluginLandingPageProductionDefault(),
       ApolloServerPluginCacheControl({ defaultMaxAge: 60, calculateHttpHeaders: true }),
       responseCachePlugin(),
+      {
+        async requestDidStart() {
+          return {
+            async didResolveOperation(requestContext) {
+              try {
+                const complexity = getComplexity({
+                  schema: requestContext.schema,
+                  operationName: requestContext.request.operationName || undefined,
+                  query: requestContext.document!,
+                  variables: requestContext.request.variables,
+                  estimators: [
+                    fieldExtensionsEstimator(),
+                    simpleEstimator({ defaultComplexity: 1 }),
+                  ],
+                });
+                const maxComplexity = 2000; // conservative default
+                if (complexity > maxComplexity) {
+                  throw new Error(`Query is too complex: ${complexity}. Max allowed: ${maxComplexity}`);
+                }
+              } catch (err) {
+                // Re-throw to abort
+                throw err as Error;
+              }
+            },
+          };
+        },
+      },
     ],
     formatError: (formattedError, error) => {
       console.error('GraphQL Error:', formattedError);

@@ -26,6 +26,7 @@
     "@apollo/server": "^4.12.2",
     "@apollo/server-plugin-response-cache": "^4.1.1",
     "@apollo/utils.keyvaluecache": "^4.0.0",
+    "@sentry/node": "^10.2.0",
     "@supabase/supabase-js": "^2.38.4",
     "@types/uuid": "^10.0.0",
     "body-parser": "^2.2.0",
@@ -35,10 +36,12 @@
     "express": "^4.21.2",
     "graphql": "^16.11.0",
     "graphql-depth-limit": "^1.1.0",
+    "graphql-query-complexity": "^1.1.0",
     "graphql-tag": "^2.12.6",
     "helmet": "^7.1.0",
     "jose": "^5.9.3",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "zod": "^4.0.15"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",

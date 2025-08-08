@@ -1,4 +1,5 @@
 import { CleanGraphQLService } from '../services/clean-graphql-service';
+import { assertValid, playerCreateSchema, playerUpdateSchema, matchCreateSchema, awardRankingPointsSchema, addRosterSchema, submitMatchSchema, reviewMatchSubmissionSchema } from '../validation';
 import type { GraphQLContext } from '../types/Context';
 
 /**
@@ -586,14 +587,16 @@ export const cleanResolvers = {
     // Player mutations
     createPlayer: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
-      const res = await ctx.adminApi('/players', { method: 'POST', body: JSON.stringify(input) });
+      const valid = assertValid(playerCreateSchema, input);
+      const res = await ctx.adminApi('/players', { method: 'POST', body: JSON.stringify(valid) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
 
     updatePlayer: async (_: any, { id, input }: { id: string; input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
-      const res = await ctx.adminApi(`/players/${id}`, { method: 'PUT', body: JSON.stringify(input) });
+      const valid = assertValid(playerUpdateSchema, input);
+      const res = await ctx.adminApi(`/players/${id}`, { method: 'PUT', body: JSON.stringify(valid) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
@@ -624,7 +627,8 @@ export const cleanResolvers = {
     // Match mutations
     createMatch: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
-      const res = await ctx.adminApi('/matches', { method: 'POST', body: JSON.stringify(input) });
+      const valid = assertValid(matchCreateSchema, input);
+      const res = await ctx.adminApi('/matches', { method: 'POST', body: JSON.stringify(valid) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
@@ -684,7 +688,8 @@ export const cleanResolvers = {
     // Team roster mutations
     addPlayerToRoster: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
-      const res = await ctx.adminApi('/rosters', { method: 'POST', body: JSON.stringify(input) });
+      const valid = assertValid(addRosterSchema, input);
+      const res = await ctx.adminApi('/rosters', { method: 'POST', body: JSON.stringify(valid) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
@@ -748,7 +753,8 @@ export const cleanResolvers = {
     // Ranking points mutations
     awardRankingPoints: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
-      const res = await ctx.adminApi('/ranking-points', { method: 'POST', body: JSON.stringify(input) });
+      const valid = assertValid(awardRankingPointsSchema, input);
+      const res = await ctx.adminApi('/ranking-points', { method: 'POST', body: JSON.stringify(valid) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
@@ -788,14 +794,16 @@ export const cleanResolvers = {
     submitMatch: async (_: any, { input }: { input: any }, ctx: GraphQLContext) => {
       // authenticated required
       if (ctx.role === 'anon') throw new Error('Unauthorized');
-      const res = await ctx.dataApi('/submissions', { method: 'POST', body: JSON.stringify(input) });
+      const valid = assertValid(submitMatchSchema, input);
+      const res = await ctx.dataApi('/submissions', { method: 'POST', body: JSON.stringify(valid) });
       if (!res.ok) throw new Error(`Data API ${res.status}`);
       return await res.json();
     },
 
     reviewMatchSubmission: async (_: any, { id, input }: { id: string; input: any }, ctx: GraphQLContext) => {
       if (ctx.role !== 'admin') throw new Error('Forbidden');
-      const res = await ctx.adminApi(`/submissions/${id}/review`, { method: 'POST', body: JSON.stringify(input) });
+      const valid = assertValid(reviewMatchSubmissionSchema, input);
+      const res = await ctx.adminApi(`/submissions/${id}/review`, { method: 'POST', body: JSON.stringify(valid) });
       if (!res.ok) throw new Error(`Admin API ${res.status}`);
       return await res.json();
     },
