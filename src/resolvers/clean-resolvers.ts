@@ -38,21 +38,19 @@ export const cleanResolvers = {
           query GetPlayers($first: Int!) {
             playersCollection(first: $first) {
               edges { node { id gamertag region_id player_rp salary_tier position created_at current_team_id } }
-              totalCount
               pageInfo { hasNextPage }
             }
           }
         `;
         const data = await ctx.pg(q, { first: limit });
         const items = (data?.playersCollection?.edges || []).map((e: any) => e.node);
-        const totalCount = data?.playersCollection?.totalCount ?? items.length;
         return {
           items,
           pagination: {
-            total: totalCount,
+            total: items.length,
             page: Math.floor(offset / limit) + 1,
             limit,
-            hasMore: totalCount > items.length,
+            hasMore: Boolean(data?.playersCollection?.pageInfo?.hasNextPage),
           },
         };
       } catch (error) {
@@ -90,7 +88,6 @@ export const cleanResolvers = {
           query GetTeams($first: Int!) {
             teamsCollection(first: $first) {
               edges { node { id name logo_url region_id created_at } }
-              totalCount
               pageInfo { hasNextPage }
             }
           }
@@ -103,14 +100,13 @@ export const cleanResolvers = {
           regionId: e.node.region_id,
           createdAt: e.node.created_at,
         }));
-        const totalCount = data?.teamsCollection?.totalCount ?? items.length;
         return {
           items,
           pagination: {
-            total: totalCount,
+            total: items.length,
             page: Math.floor(offset / limit) + 1,
             limit,
-            hasMore: totalCount > items.length,
+            hasMore: Boolean(data?.teamsCollection?.pageInfo?.hasNextPage),
           },
         };
       } catch (error) {
@@ -162,7 +158,6 @@ export const cleanResolvers = {
           query GetMatches($first: Int!) {
             matchesCollection(first: $first) {
               edges { node { id event_id team_a_id team_b_id team_a_name team_b_name score_a score_b played_at stage game_number winner_id winner_name boxscore_url } }
-              totalCount
               pageInfo { hasNextPage }
             }
           }
@@ -184,14 +179,13 @@ export const cleanResolvers = {
           winnerName: e.node.winner_name,
           boxscoreUrl: e.node.boxscore_url,
         }));
-        const totalCount = data?.matchesCollection?.totalCount ?? items.length;
         return {
           items,
           pagination: {
-            total: totalCount,
+            total: items.length,
             page: Math.floor(offset / limit) + 1,
             limit,
-            hasMore: totalCount > items.length,
+            hasMore: Boolean(data?.matchesCollection?.pageInfo?.hasNextPage),
           },
         };
       } catch (error) {
@@ -268,25 +262,34 @@ export const cleanResolvers = {
 
     // Lightweight counts
     playersCount: async (_: any, _args: any, ctx: GraphQLContext) => {
-      const q = `
-        query { playersCollection(first: 1) { totalCount } }
-      `;
-      const data = await ctx.pg(q, {});
-      return data?.playersCollection?.totalCount ?? 0;
+      const { count, error } = await ctx.supabase
+        .from('players')
+        .select('*', { count: 'exact', head: true });
+      if (error) {
+        console.error('playersCount error:', error);
+        return 0;
+      }
+      return count || 0;
     },
     teamsCount: async (_: any, _args: any, ctx: GraphQLContext) => {
-      const q = `
-        query { teamsCollection(first: 1) { totalCount } }
-      `;
-      const data = await ctx.pg(q, {});
-      return data?.teamsCollection?.totalCount ?? 0;
+      const { count, error } = await ctx.supabase
+        .from('teams')
+        .select('*', { count: 'exact', head: true });
+      if (error) {
+        console.error('teamsCount error:', error);
+        return 0;
+      }
+      return count || 0;
     },
     matchesCount: async (_: any, _args: any, ctx: GraphQLContext) => {
-      const q = `
-        query { matchesCollection(first: 1) { totalCount } }
-      `;
-      const data = await ctx.pg(q, {});
-      return data?.matchesCollection?.totalCount ?? 0;
+      const { count, error } = await ctx.supabase
+        .from('matches')
+        .select('*', { count: 'exact', head: true });
+      if (error) {
+        console.error('matchesCount error:', error);
+        return 0;
+      }
+      return count || 0;
     },
 
     // Player stats queries
