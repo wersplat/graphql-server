@@ -257,6 +257,29 @@ export const cleanResolvers = {
       }
     },
 
+    // Lightweight counts
+    playersCount: async (_: any, _args: any, ctx: GraphQLContext) => {
+      const q = `
+        query { playersCollection(first: 1) { totalCount } }
+      `;
+      const data = await ctx.pg(q, {});
+      return data?.playersCollection?.totalCount ?? 0;
+    },
+    teamsCount: async (_: any, _args: any, ctx: GraphQLContext) => {
+      const q = `
+        query { teamsCollection(first: 1) { totalCount } }
+      `;
+      const data = await ctx.pg(q, {});
+      return data?.teamsCollection?.totalCount ?? 0;
+    },
+    matchesCount: async (_: any, _args: any, ctx: GraphQLContext) => {
+      const q = `
+        query { matchesCollection(first: 1) { totalCount } }
+      `;
+      const data = await ctx.pg(q, {});
+      return data?.matchesCollection?.totalCount ?? 0;
+    },
+
     // Player stats queries
     playerMatchStats: async (_: any, { matchId }: { matchId: string }) => {
       try {

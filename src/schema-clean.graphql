@@ -880,6 +880,11 @@ type Query {
   event(id: ID!): Event
   "Get a list of events with pagination"
   events(pagination: PaginationInput): PaginatedResponse!
+
+  # Lightweight counts for dashboards
+  playersCount: Int!
+  teamsCount: Int!
+  matchesCount: Int!
   
   # Player stats queries
   "Get player match statistics"
