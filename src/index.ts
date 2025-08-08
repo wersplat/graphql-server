@@ -1,7 +1,7 @@
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
-import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { ApolloServerPluginLandingPageProductionDefault } from '@apollo/server/plugin/landingPage/default';
 import express from 'express';
 import bodyParser from 'body-parser';
 import http from 'http';
@@ -227,7 +227,7 @@ async function startServer() {
     },
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
-      ApolloServerPluginLandingPageLocalDefault({ embed: true })
+      ApolloServerPluginLandingPageProductionDefault(),
     ],
     formatError: (formattedError, error) => {
       console.error('GraphQL Error:', formattedError);
@@ -254,137 +254,55 @@ async function startServer() {
     throw error;
   }
 
-  // Serve Apollo Studio Sandbox for GET requests to /graphql
-  app.get('/graphql', (req, res) => {
-    // Force HTTPS for production deployments
-    const protocol = process.env.NODE_ENV === 'production' ? 'https' : req.protocol;
-    const endpoint = protocol + '://' + req.get('host') + '/graphql';
-    const studioUrl = `https://studio.apollographql.com/sandbox/explorer?endpoint=${encodeURIComponent(endpoint)}`;
-    
-    res.send(`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>GraphQL Explorer - Bodega Cats GC</title>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <style>
-            body {
-              margin: 0;
-              padding: 0;
-              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-              min-height: 100vh;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            }
-            .container {
-              background: white;
-              border-radius: 16px;
-              padding: 40px;
-              text-align: center;
-              box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-              max-width: 500px;
-              width: 90%;
-            }
-            .logo {
-              font-size: 48px;
-              margin-bottom: 20px;
-            }
-            h1 {
-              color: #333;
-              margin-bottom: 10px;
-              font-size: 28px;
-            }
-            p {
-              color: #666;
-              margin-bottom: 30px;
-              line-height: 1.6;
-            }
-            .btn {
-              display: inline-block;
-              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-              color: white;
-              padding: 16px 32px;
-              border-radius: 8px;
-              text-decoration: none;
-              font-weight: 600;
-              font-size: 16px;
-              transition: transform 0.2s, box-shadow 0.2s;
-              box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            }
-            .btn:hover {
-              transform: translateY(-2px);
-              box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
-            }
-            .endpoint {
-              background: #f8f9fa;
-              border: 1px solid #e9ecef;
-              border-radius: 8px;
-              padding: 16px;
-              margin-top: 20px;
-              font-family: 'Monaco', 'Menlo', monospace;
-              font-size: 14px;
-              color: #495057;
-              word-break: break-all;
-            }
-            .features {
-              margin-top: 30px;
-              text-align: left;
-            }
-            .features h3 {
-              color: #333;
-              margin-bottom: 15px;
-            }
-            .features ul {
-              color: #666;
-              line-height: 1.8;
-              padding-left: 20px;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="logo">🏀</div>
-            <h1>Bodega Cats GC GraphQL Explorer</h1>
-            <p>Interactive GraphQL playground with full schema documentation, query builder, and real-time execution.</p>
-            
-            <a href="${studioUrl}" target="_blank" class="btn">
-              🚀 Open GraphQL Explorer
-            </a>
-            
-            <div class="endpoint">
-              <strong>Endpoint:</strong> ${endpoint}
-            </div>
-            
-            <div class="features">
-              <h3>Features:</h3>
-              <ul>
-                <li>📚 Interactive schema documentation</li>
-                <li>🔍 Query builder with autocomplete</li>
-                <li>⚡ Real-time query execution</li>
-                <li>📊 Results visualization</li>
-                <li>💾 Query history and favorites</li>
-                <li>🔐 Variable support</li>
-              </ul>
-            </div>
-          </div>
-        </body>
-      </html>
-    `);
+  // Gate GET /graphql so only admins see landing page (otherwise 404 to hide surface)
+  const { parseAuth } = await import('./auth');
+  app.use('/graphql', async (req, res, next) => {
+    if (req.method === 'GET') {
+      const auth = await parseAuth(req.headers.authorization);
+      if (auth.role !== 'admin') {
+        res.status(404).end();
+        return;
+      }
+    }
+    return next();
   });
 
-  // Apply Apollo middleware for POST requests to /graphql
+  // Block POST introspection for non-admins
+  app.use('/graphql', async (req, res, next) => {
+    if (req.method === 'POST') {
+      try {
+        const query = typeof req.body?.query === 'string' ? req.body.query : '';
+        if (query.includes('__schema') || query.includes('__type')) {
+          const auth = await parseAuth(req.headers.authorization);
+          if (auth.role !== 'admin') {
+            res.status(403).json({ error: 'Forbidden' });
+            return;
+          }
+        }
+      } catch {
+        // fallthrough
+      }
+    }
+    return next();
+  });
+
+  // Apply Apollo middleware for /graphql
   app.use(
     '/graphql',
     expressMiddleware(server, {
       context: async ({ req }) => {
-        // Add authentication context here if needed
-        return {
-          user: req.headers.authorization ? { id: '1', isAdmin: true } : null,
-          headers: req.headers
-        };
+        const { parseAuth } = await import('./auth');
+        const { supabaseForRequest, pgGraphQLFetch, dataBackend, adminBackend } = await import('./gateways');
+        const auth = await parseAuth(req.headers.authorization);
+        const ctx = {
+          ...auth,
+          supabase: supabaseForRequest(auth),
+          pg: pgGraphQLFetch(auth),
+          dataApi: dataBackend(auth),
+          adminApi: adminBackend(auth),
+          headers: req.headers,
+        } as any;
+        return ctx;
       }
     })
   );
