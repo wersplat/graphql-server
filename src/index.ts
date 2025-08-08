@@ -297,12 +297,13 @@ async function startServer() {
     throw error;
   }
 
-  // Gate GET /graphql so only admins see landing page (otherwise 404 to hide surface)
+  // Gate GET /graphql so only authenticated users see landing page
   const { parseAuth } = await import('./auth');
   app.use('/graphql', async (req, res, next) => {
     if (req.method === 'GET') {
       const auth = await parseAuth(req.headers.authorization);
-      if (auth.role !== 'admin') {
+      // Allow authenticated users to access GraphQL endpoint
+      if (auth.role === 'anon') {
         res.status(404).end();
         return;
       }
@@ -310,14 +311,15 @@ async function startServer() {
     return next();
   });
 
-  // Block POST introspection for non-admins
+  // Block POST introspection for non-authenticated users
   app.use('/graphql', async (req, res, next) => {
     if (req.method === 'POST') {
       try {
         const query = typeof req.body?.query === 'string' ? req.body.query : '';
         if (query.includes('__schema') || query.includes('__type')) {
           const auth = await parseAuth(req.headers.authorization);
-          if (auth.role !== 'admin') {
+          // Allow authenticated users to introspect
+          if (auth.role === 'anon') {
             res.status(403).json({ error: 'Forbidden' });
             return;
           }
