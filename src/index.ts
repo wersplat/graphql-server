@@ -1,4 +1,6 @@
 import { ApolloServer } from '@apollo/server';
+import responseCachePlugin from '@apollo/server-plugin-response-cache';
+import { ApolloServerPluginCacheControl } from '@apollo/server/plugin/cacheControl';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { ApolloServerPluginLandingPageProductionDefault } from '@apollo/server/plugin/landingPage/default';
@@ -11,6 +13,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import dotenv from 'dotenv';
 import type { GraphQLContext } from './types/Context';
+import depthLimit from 'graphql-depth-limit';
 
 // Load environment variables
 dotenv.config();
@@ -133,7 +136,7 @@ async function startServer() {
   console.log('🔧 Port:', process.env.PORT || 4000);
   
   // Check required environment variables
-  const requiredEnvVars = ['SUPABASE_URL', 'SUPABASE_ANON_KEY'];
+  const requiredEnvVars = ['SUPABASE_URL', 'SUPABASE_ANON_KEY', 'DATA_BASE_URL', 'ADMIN_BASE_URL'];
   const missingEnvVars = requiredEnvVars.filter(varName => !process.env[varName]);
   
   if (missingEnvVars.length > 0) {
@@ -229,9 +232,13 @@ async function startServer() {
       ...resolvers,
       ...scalarResolvers
     },
+    cache: 'bounded',
+    validationRules: [depthLimit(10)],
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
       ApolloServerPluginLandingPageProductionDefault(),
+      ApolloServerPluginCacheControl({ defaultMaxAge: 60, calculateHttpHeaders: true }),
+      responseCachePlugin(),
     ],
     formatError: (formattedError, error) => {
       console.error('GraphQL Error:', formattedError);
@@ -297,6 +304,7 @@ async function startServer() {
       context: async ({ req }) => {
         const { parseAuth } = await import('./auth');
         const { supabaseForRequest, pgGraphQLFetch, dataBackend, adminBackend } = await import('./gateways');
+        const { createLoaders } = await import('./loaders');
         const auth = await parseAuth(req.headers.authorization);
         const ctx: GraphQLContext = {
           ...auth,
@@ -305,6 +313,7 @@ async function startServer() {
           dataApi: dataBackend(auth),
           adminApi: adminBackend(auth),
           headers: req.headers,
+          loaders: createLoaders(auth),
         };
         return ctx;
       }

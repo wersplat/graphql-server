@@ -13,7 +13,7 @@ export const cleanResolvers = {
     // Player queries
     player: async (_: any, { id }: { id: string }, ctx: GraphQLContext) => {
       try {
-        // Public read via pg_graphql to honor RLS (uses caller token if present)
+        if (ctx.loaders?.playerById) return ctx.loaders.playerById.load(id);
         const q = `
           query GetPlayer($id: UUID!) {
             playersCollection(filter: { id: { eq: $id } }) {
@@ -61,13 +61,16 @@ export const cleanResolvers = {
     // Team queries
     team: async (_: any, { id }: { id: string }, ctx: GraphQLContext) => {
       try {
-        const q = `
-          query GetTeam($id: UUID!) {
-            teamsCollection(filter: { id: { eq: $id } }) { edges { node { id name logo_url region_id created_at } } }
-          }
-        `;
-        const data = await ctx.pg(q, { id });
-        const t = data?.teamsCollection?.edges?.[0]?.node;
+        let t = ctx.loaders?.teamById ? await ctx.loaders.teamById.load(id) : null;
+        if (!t) {
+          const q = `
+            query GetTeam($id: UUID!) {
+              teamsCollection(filter: { id: { eq: $id } }) { edges { node { id name logo_url region_id created_at } } }
+            }
+          `;
+          const data = await ctx.pg(q, { id });
+          t = data?.teamsCollection?.edges?.[0]?.node;
+        }
         if (!t) return null;
         return { id: t.id, name: t.name, logoUrl: t.logo_url, regionId: t.region_id, createdAt: t.created_at };
       } catch (error) {
