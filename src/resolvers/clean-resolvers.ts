@@ -35,19 +35,21 @@ export const cleanResolvers = {
         const limit = Math.min(pagination?.limit || 5000, 5000);
         const offset = pagination?.offset || 0;
         const q = `
-          query GetPlayers($first: Int!) {
-            playersCollection(first: $first) {
+          query GetPlayers($first: Int!, $offset: Int!) {
+            playersCollection(first: $first, offset: $offset) {
               edges { node { id gamertag region_id player_rp salary_tier position created_at current_team_id } }
               pageInfo { hasNextPage }
+              totalCount
             }
           }
         `;
-        const data = await ctx.pg(q, { first: limit });
+        const data = await ctx.pg(q, { first: limit, offset });
         const items = (data?.playersCollection?.edges || []).map((e: any) => e.node);
+        const totalCount = data?.playersCollection?.totalCount || items.length;
         return {
           items,
           pagination: {
-            total: items.length,
+            total: totalCount,
             page: Math.floor(offset / limit) + 1,
             limit,
             hasMore: Boolean(data?.playersCollection?.pageInfo?.hasNextPage),
@@ -85,14 +87,15 @@ export const cleanResolvers = {
         const limit = Math.min(pagination?.limit || 5000, 5000);
         const offset = pagination?.offset || 0;
         const q = `
-          query GetTeams($first: Int!) {
-            teamsCollection(first: $first) {
+          query GetTeams($first: Int!, $offset: Int!) {
+            teamsCollection(first: $first, offset: $offset) {
               edges { node { id name logo_url region_id created_at } }
               pageInfo { hasNextPage }
+              totalCount
             }
           }
         `;
-        const data = await ctx.pg(q, { first: limit });
+        const data = await ctx.pg(q, { first: limit, offset });
         const items = (data?.teamsCollection?.edges || []).map((e: any) => ({
           id: e.node.id,
           name: e.node.name,
@@ -100,10 +103,11 @@ export const cleanResolvers = {
           regionId: e.node.region_id,
           createdAt: e.node.created_at,
         }));
+        const totalCount = data?.teamsCollection?.totalCount || items.length;
         return {
           items,
           pagination: {
-            total: items.length,
+            total: totalCount,
             page: Math.floor(offset / limit) + 1,
             limit,
             hasMore: Boolean(data?.teamsCollection?.pageInfo?.hasNextPage),
@@ -155,14 +159,15 @@ export const cleanResolvers = {
         const limit = Math.min(pagination?.limit || 5000, 5000);
         const offset = pagination?.offset || 0;
         const q = `
-          query GetMatches($first: Int!) {
-            matchesCollection(first: $first) {
+          query GetMatches($first: Int!, $offset: Int!) {
+            matchesCollection(first: $first, offset: $offset) {
               edges { node { id event_id team_a_id team_b_id team_a_name team_b_name score_a score_b played_at stage game_number winner_id winner_name boxscore_url } }
               pageInfo { hasNextPage }
+              totalCount
             }
           }
         `;
-        const data = await ctx.pg(q, { first: limit });
+        const data = await ctx.pg(q, { first: limit, offset });
         const items = (data?.matchesCollection?.edges || []).map((e: any) => ({
           id: e.node.id,
           eventId: e.node.event_id,
@@ -179,10 +184,11 @@ export const cleanResolvers = {
           winnerName: e.node.winner_name,
           boxscoreUrl: e.node.boxscore_url,
         }));
+        const totalCount = data?.matchesCollection?.totalCount || items.length;
         return {
           items,
           pagination: {
-            total: items.length,
+            total: totalCount,
             page: Math.floor(offset / limit) + 1,
             limit,
             hasMore: Boolean(data?.matchesCollection?.pageInfo?.hasNextPage),
