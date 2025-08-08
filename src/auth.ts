@@ -61,8 +61,15 @@ export async function parseAuth(authorizationHeader?: string): Promise<AuthConte
   const appMeta = (payload['app_metadata'] as any) || {};
   const userMeta = (payload['user_metadata'] as any) || {};
   const hasura = (payload['https://hasura.io/jwt/claims'] as any) || {};
-  const adminHint = appMeta.role || userMeta.role || hasura['x-hasura-default-role'];
-  const role: AuthRole = adminHint === 'admin' ? 'admin' : baseRole;
+
+  // Support both singular role and array roles on app/user metadata and Hasura allowed roles
+  const singularRole = appMeta.role || userMeta.role || hasura['x-hasura-default-role'];
+  const appRoles: string[] = Array.isArray(appMeta.roles) ? appMeta.roles : [];
+  const userRoles: string[] = Array.isArray(userMeta.roles) ? userMeta.roles : [];
+  const hasuraRoles: string[] = Array.isArray(hasura['x-hasura-allowed-roles']) ? hasura['x-hasura-allowed-roles'] : [];
+  const allRoles = [singularRole, ...appRoles, ...userRoles, ...hasuraRoles].filter(Boolean);
+  const isAdmin = allRoles.includes('admin');
+  const role: AuthRole = isAdmin ? 'admin' : baseRole;
 
   return { role, token, user: payload as JWTPayload };
 }
