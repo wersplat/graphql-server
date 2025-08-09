@@ -33,11 +33,14 @@ A clean, simplified GraphQL API that transforms the verbose Relay-style schema f
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 18+
 - Supabase project with `pg_graphql` extension enabled
 
 ### Environment Setup
+
 Create a `.env` file:
+
 ```bash
 SUPABASE_URL=your_supabase_url
 SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -47,6 +50,7 @@ ALLOWED_ORIGINS=http://localhost:3000,https://yourdomain.com
 ```
 
 ### Installation & Development
+
 ```bash
 # Install dependencies
 npm install
@@ -70,16 +74,19 @@ npm start
 ## 🎯 Clean GraphQL API Features
 
 ### ✅ **Simplified Data Access**
+
 - No more `edges.node` nesting
 - Clean, flattened response structure
 - Simple pagination with `limit`/`offset`
 
 ### ✅ **Better Field Names**
+
 - camelCase instead of snake_case
 - `playerRp` instead of `player_rp`
 - `logoUrl` instead of `logo_url`
 
 ### ✅ **Simple Pagination**
+
 ```graphql
 query GetPlayers {
   players(pagination: { limit: 20, offset: 0 }) {
@@ -106,6 +113,7 @@ query GetPlayers {
 ## 🔄 Migration from Verbose API
 
 ### Before (Verbose pg_graphql)
+
 ```graphql
 query GetPlayers {
   playersCollection {
@@ -131,6 +139,7 @@ query GetPlayers {
 ```
 
 ### After (Clean API)
+
 ```graphql
 query GetPlayers {
   players(pagination: { limit: 20, offset: 0 }) {
@@ -166,6 +175,7 @@ query GetPlayers {
 ## 🛠️ Development
 
 ### Project Structure
+
 ```
 graphql-server/
 ├── src/
@@ -184,11 +194,13 @@ graphql-server/
 ## 🚨 Troubleshooting
 
 ### Common Issues
+
 1. **Port Conflicts**: Make sure port 4000 is available
 2. **Environment Variables**: Verify Supabase URL and API key are correct
 3. **Build Errors**: Run `npm run build` to check for TypeScript errors
 
 ### Debug Mode
+
 Set `NODE_ENV=development` to enable detailed error messages and GraphQL introspection.
 
 ## 📞 Support

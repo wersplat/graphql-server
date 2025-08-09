@@ -6,7 +6,7 @@ The Clean GraphQL API provides a simplified, flattened interface that removes th
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - Supabase project with `pg_graphql` extension enabled
 - Environment variables configured
 
@@ -35,11 +35,13 @@ npm run build
 ### Running the Clean Server
 
 #### Development Mode
+
 ```bash
 npm run dev:clean
 ```
 
 #### Production Mode
+
 ```bash
 npm run start:clean
 ```
@@ -60,6 +62,7 @@ npm run test:clean-server
 ## 🔍 Example Queries
 
 ### Get Players with Pagination
+
 ```graphql
 query GetPlayers {
   players(pagination: { limit: 10, offset: 0 }) {
@@ -85,6 +88,7 @@ query GetPlayers {
 ```
 
 ### Get a Single Player
+
 ```graphql
 query GetPlayer($id: ID!) {
   player(id: $id) {
@@ -108,6 +112,7 @@ query GetPlayer($id: ID!) {
 ```
 
 ### Get Teams
+
 ```graphql
 query GetTeams {
   teams(pagination: { limit: 20, offset: 0 }) {
@@ -132,6 +137,7 @@ query GetTeams {
 ```
 
 ### Get Matches with Player Stats
+
 ```graphql
 query GetMatches {
   matches(pagination: { limit: 10, offset: 0 }) {
@@ -163,6 +169,7 @@ query GetMatches {
 ## 🔄 Migration from Verbose API
 
 ### Before (Verbose pg_graphql)
+
 ```graphql
 query GetPlayers {
   playersCollection {
@@ -188,6 +195,7 @@ query GetPlayers {
 ```
 
 ### After (Clean API)
+
 ```graphql
 query GetPlayers {
   players(pagination: { limit: 20, offset: 0 }) {
@@ -228,6 +236,7 @@ query GetPlayers {
 ## 🛠️ Development
 
 ### Project Structure
+
 ```
 graphql-server/
 ├── src/
@@ -244,6 +253,7 @@ graphql-server/
 ```
 
 ### Available Scripts
+
 - `npm run dev:clean` - Start development server
 - `npm run start:clean` - Start production server
 - `npm run test:clean-server` - Test the clean server

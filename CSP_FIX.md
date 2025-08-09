@@ -5,6 +5,7 @@
 The Apollo GraphQL playground was being blocked by Content Security Policy headers, causing these errors:
 
 ### Initial Issues
+
 ```
 Refused to load the stylesheet 'https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap' because it violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'".
 
@@ -14,6 +15,7 @@ Uncaught TypeError: window.EmbeddedSandbox is not a constructor
 ```
 
 ### Additional Issues
+
 ```
 Refused to frame 'https://sandbox.embed.apollographql.com/' because it violates the following Content Security Policy directive: "default-src 'self'".
 
@@ -33,11 +35,13 @@ Uncaught TypeError: window.EmbeddedSandbox is not a constructor
 Updated the CSP configuration in both `src/index.ts` and `src/clean-server.ts` to allow the necessary external resources:
 
 ### Additional Fixes
+
 - Added `frameSrc` directive to allow Apollo's sandbox iframe
 - Added static file serving for favicon and other assets
 - Copied favicon.ico from frontend to prevent 404 errors
 
 ### Before (Too Restrictive)
+
 ```javascript
 app.use(helmet({
   contentSecurityPolicy: false, // Disabled CSP entirely
@@ -46,6 +50,7 @@ app.use(helmet({
 ```
 
 ### After (Properly Configured)
+
 ```javascript
 app.use(helmet({
   crossOriginEmbedderPolicy: false,
