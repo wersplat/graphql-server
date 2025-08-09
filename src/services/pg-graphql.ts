@@ -125,7 +125,17 @@ export class PgGraphQLService {
       teamName: player.teams?.name || undefined,
       isVerified: false,
       createdAt: new Date(player.created_at),
-      updatedAt: new Date(player.created_at)
+      updatedAt: new Date(player.created_at),
+      current_teams: player.teams ? {
+        id: player.teams.id,
+        name: player.teams.name,
+        description: undefined,
+        logoUrl: player.teams.logo_url,
+        region: player.teams.region_id,
+        isActive: true,
+        createdAt: new Date(player.teams.created_at),
+        updatedAt: new Date(player.teams.created_at)
+      } : undefined
     };
   }
 
@@ -213,7 +223,17 @@ export class PgGraphQLService {
         teamName: player.teams?.name || undefined,
         isVerified: false,
         createdAt: new Date(player.created_at),
-        updatedAt: new Date(player.created_at)
+        updatedAt: new Date(player.created_at),
+        current_teams: player.teams ? {
+          id: player.teams.id,
+          name: player.teams.name,
+          description: undefined,
+          logoUrl: player.teams.logo_url,
+          region: player.teams.region_id,
+          isActive: true,
+          createdAt: new Date(player.teams.created_at),
+          updatedAt: new Date(player.teams.created_at)
+        } : undefined
       };
     });
   }

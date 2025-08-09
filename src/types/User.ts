@@ -1,3 +1,5 @@
+import { Team } from './Match';
+
 export interface User {
   id: string;
   username: string;
@@ -26,6 +28,7 @@ export interface Player {
   createdAt: Date;
   updatedAt?: Date;
   user: User;
+  current_teams?: Team;
 }
 
 export enum PlayerPosition {

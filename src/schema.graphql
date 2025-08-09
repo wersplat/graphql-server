@@ -88,6 +88,8 @@ type Player {
   updatedAt: DateTime
   "Associated user account"
   user: User!
+  "Current team information"
+  current_teams: Team
 }
 
 """
