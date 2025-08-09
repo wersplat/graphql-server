@@ -1,3 +1,5 @@
+import { Player, PlayerPosition, SalaryTier, PlayerTier } from './User';
+
 export interface Match {
   id: string;
   eventId?: string | undefined;
@@ -133,44 +135,198 @@ export interface PlayerMatchStats {
   updatedAt?: Date;
 }
 
+// =============================================================================
+// PHASE 1: ENHANCED INPUT TYPES
+// =============================================================================
+
 export interface MatchInput {
-  eventId?: string;
+  eventId: string;
+  gameNumber: number;
+  scheduledAt: Date;
+  stage: MatchStage;
   teamAId: string;
-  teamBId: string;
   teamAName: string;
+  teamBId: string;
   teamBName: string;
-  stage?: MatchStage;
-  gameNumber?: number;
-  scheduledAt?: Date;
+  venue?: string;
+  streamUrl?: string;
+  notes?: string;
 }
 
 export interface MatchUpdateInput {
+  eventId?: string;
+  gameNumber?: number;
+  scheduledAt?: Date;
+  stage?: MatchStage;
+  teamAId?: string;
+  teamAName?: string;
+  teamBId?: string;
+  teamBName?: string;
+  venue?: string;
+  streamUrl?: string;
+  notes?: string;
   status?: MatchStatus;
+  startedAt?: Date;
+  endedAt?: Date;
   scoreA?: number;
   scoreB?: number;
   winnerId?: string;
-  playedAt?: Date;
+  winnerName?: string;
   boxscoreUrl?: string;
-  stage?: MatchStage;
-  gameNumber?: number;
 }
 
 export interface PlayerMatchStatsInput {
   playerId: string;
   teamId: string;
-  points?: number;
-  assists?: number;
-  rebounds?: number;
-  steals?: number;
-  blocks?: number;
-  turnovers?: number;
-  fouls?: number;
-  fgm?: number;
-  fga?: number;
-  threePointsMade?: number;
-  threePointsAttempted?: number;
-  ftm?: number;
-  fta?: number;
-  plusMinus?: number;
-  minutesPlayed?: number;
+  points: number;
+  assists: number;
+  rebounds: number;
+  steals: number;
+  blocks: number;
+  turnovers: number;
+  fouls: number;
+  fgm: number;
+  fga: number;
+  threePointsMade: number;
+  threePointsAttempted: number;
+  ftm: number;
+  fta: number;
+  plusMinus: number;
+  minutesPlayed: number;
+}
+
+// =============================================================================
+// PHASE 1: NEW INPUT TYPES
+// =============================================================================
+
+export interface PlayerInput {
+  userId: string;
+  gamertag: string;
+  region?: string;
+  position?: PlayerPosition;
+  salaryTier?: SalaryTier;
+  teamName?: string;
+  isVerified?: boolean;
+}
+
+export interface PlayerUpdateInput {
+  gamertag?: string;
+  region?: string;
+  currentRp?: number;
+  peakRp?: number;
+  tier?: PlayerTier;
+  position?: PlayerPosition;
+  salaryTier?: SalaryTier;
+  teamName?: string;
+  isVerified?: boolean;
+}
+
+export interface TeamInput {
+  name: string;
+  description?: string;
+  logoUrl?: string;
+  region?: string;
+  isActive?: boolean;
+}
+
+export interface TeamUpdateInput {
+  name?: string;
+  description?: string;
+  logoUrl?: string;
+  region?: string;
+  isActive?: boolean;
+}
+
+export interface EventInput {
+  name: string;
+  description?: string;
+  eventType: EventType;
+  tier: EventTier;
+  startDate: Date;
+  endDate: Date;
+  entryFee?: number;
+  maxParticipants?: number;
+  createdBy: string;
+}
+
+export interface EventUpdateInput {
+  name?: string;
+  description?: string;
+  eventType?: EventType;
+  tier?: EventTier;
+  startDate?: Date;
+  endDate?: Date;
+  entryFee?: number;
+  maxParticipants?: number;
+  status?: EventStatus;
+}
+
+export interface UserInput {
+  username: string;
+  email: string;
+  fullName?: string;
+  isActive?: boolean;
+  isAdmin?: boolean;
+  discordId?: string;
+}
+
+export interface UserUpdateInput {
+  username?: string;
+  email?: string;
+  fullName?: string;
+  isActive?: boolean;
+  isAdmin?: boolean;
+  discordId?: string;
+}
+
+// =============================================================================
+// PHASE 1: ANALYTICS TYPES
+// =============================================================================
+
+export interface DashboardStats {
+  totalPlayers: number;
+  totalTeams: number;
+  totalMatches: number;
+  totalEvents: number;
+  activePlayers: number;
+  activeTeams: number;
+  completedMatches: number;
+  upcomingEvents: number;
+  averagePlayerRP: number;
+  averageTeamSize: number;
+  topPerformingPlayer?: Player;
+  mostActiveTeam?: Team;
+  recentMatches: Match[];
+  recentPlayers: Player[];
+}
+
+export interface LeaderboardEntry {
+  rank: number;
+  player: Player;
+  wins: number;
+  losses: number;
+  winRate: number;
+  totalMatches: number;
+  averagePoints: number;
+  averageAssists: number;
+  averageRebounds: number;
+}
+
+export enum LeaderboardSortBy {
+  CURRENT_RP = 'CURRENT_RP',
+  PEAK_RP = 'PEAK_RP',
+  WINS = 'WINS',
+  WIN_RATE = 'WIN_RATE',
+  AVERAGE_POINTS = 'AVERAGE_POINTS',
+  AVERAGE_ASSISTS = 'AVERAGE_ASSISTS',
+  AVERAGE_REBOUNDS = 'AVERAGE_REBOUNDS'
+}
+
+export enum TimeRange {
+  LAST_7_DAYS = 'LAST_7_DAYS',
+  LAST_30_DAYS = 'LAST_30_DAYS',
+  LAST_90_DAYS = 'LAST_90_DAYS',
+  LAST_6_MONTHS = 'LAST_6_MONTHS',
+  LAST_YEAR = 'LAST_YEAR',
+  ALL_TIME = 'ALL_TIME'
 } 

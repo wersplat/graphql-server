@@ -20,18 +20,95 @@ import * as Sentry from '@sentry/node';
 // Load environment variables
 dotenv.config();
 
-// Import clean resolvers
-import { cleanResolvers } from './resolvers/clean-resolvers';
+// Import Phase 1 resolvers
+import { Query, Mutation } from './resolvers/phase1-resolvers';
 
 // Import types
 import { User, Player } from './types/User';
 import { Match, Team, Event, PlayerMatchStats } from './types/Match';
 
 // Load GraphQL schema
-const typeDefs = readFileSync(join(__dirname, 'schema-clean.graphql'), 'utf8');
+const typeDefs = readFileSync(join(__dirname, 'schema.graphql'), 'utf8');
 
-// Use clean resolvers
-const resolvers = cleanResolvers;
+// Use Phase 1 resolvers
+const resolvers = {
+  Query,
+  Mutation,
+  // Add scalar resolvers
+  DateTime: {
+    __serialize(value: any) {
+      if (value instanceof Date) {
+        return value.toISOString();
+      }
+      return value;
+    },
+    __parseValue(value: any) {
+      return new Date(value);
+    },
+    __parseLiteral(ast: any) {
+      if (ast.kind === 'StringValue') {
+        return new Date(ast.value);
+      }
+      return null;
+    }
+  },
+  UUID: {
+    __serialize(value: any) {
+      return value;
+    },
+    __parseValue(value: any) {
+      return value;
+    },
+    __parseLiteral(ast: any) {
+      if (ast.kind === 'StringValue') {
+        return ast.value;
+      }
+      return null;
+    }
+  },
+  JSON: {
+    __serialize(value: any) {
+      return value;
+    },
+    __parseValue(value: any) {
+      return value;
+    },
+    __parseLiteral(ast: any) {
+      if (ast.kind === 'StringValue') {
+        return JSON.parse(ast.value);
+      }
+      return null;
+    }
+  },
+  BigInt: {
+    __serialize(value: any) {
+      return value;
+    },
+    __parseValue(value: any) {
+      return value;
+    },
+    __parseLiteral(ast: any) {
+      if (ast.kind === 'StringValue') {
+        return ast.value;
+      }
+      return null;
+    }
+  },
+  BigFloat: {
+    __serialize(value: any) {
+      return value;
+    },
+    __parseValue(value: any) {
+      return value;
+    },
+    __parseLiteral(ast: any) {
+      if (ast.kind === 'StringValue') {
+        return ast.value;
+      }
+      return null;
+    }
+  }
+};
 
 // Custom scalar resolvers
 const scalarResolvers = {
