@@ -14,6 +14,21 @@ Custom scalar for handling UUID values.
 scalar UUID
 
 """
+Custom scalar for handling JSON values.
+"""
+scalar JSON
+
+"""
+Custom scalar for handling BigInt values.
+"""
+scalar BigInt
+
+"""
+Custom scalar for handling BigFloat values.
+"""
+scalar BigFloat
+
+"""
 Represents a user in the Bodega Cats GC platform.
 Users can have associated player profiles with gaming statistics.
 """
