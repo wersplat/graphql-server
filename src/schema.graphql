@@ -1168,7 +1168,7 @@ input UserUpdateInput {
 
 """
 Root query type for the Bodega Cats GC GraphQL API.
-Provides access to all read operations for users, matches, teams, events, and players.
+Provides access to all read operations for users, matches, teams, events, players, leagues, achievements, and analytics.
 """
 type Query {
   # User queries
