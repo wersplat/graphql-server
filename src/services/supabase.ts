@@ -507,11 +507,488 @@ export class SupabaseService {
     return data || [];
   }
 
+  // League operations
+  async getLeague(id: string) {
+    const { data, error } = await this.client
+      .from('leagues_info')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching league:', error);
+      throw new Error(`Failed to fetch league: ${error.message}`);
+    }
+
+    return data;
+  }
+
+  async getLeagues(limit = 10, offset = 0) {
+    const { data, error } = await this.client
+      .from('leagues_info')
+      .select('*')
+      .range(offset, offset + limit - 1)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching leagues:', error);
+      throw new Error(`Failed to fetch leagues: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  // League Season operations
+  async getLeagueSeason(id: string) {
+    const { data, error } = await this.client
+      .from('league_seasons')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching league season:', error);
+      throw new Error(`Failed to fetch league season: ${error.message}`);
+    }
+
+    return data;
+  }
+
+  async getLeagueSeasons(filters: any = {}, limit = 10, offset = 0) {
+    let query = this.client.from('league_seasons').select('*');
+
+    if (filters.leagueId) {
+      query = query.eq('league_id', filters.leagueId);
+    }
+    if (typeof filters.isActive === 'boolean') {
+      query = query.eq('is_active', filters.isActive);
+    }
+
+    const { data, error } = await query
+      .range(offset, offset + limit - 1)
+      .order('start_date', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching league seasons:', error);
+      throw new Error(`Failed to fetch league seasons: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  // City Crew operations
+  async getCityCrew(id: string) {
+    const { data, error } = await this.client
+      .from('city_crews')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching city crew:', error);
+      throw new Error(`Failed to fetch city crew: ${error.message}`);
+    }
+
+    return data;
+  }
+
+  async getCityCrews(limit = 10, offset = 0) {
+    const { data, error } = await this.client
+      .from('city_crews')
+      .select('*')
+      .range(offset, offset + limit - 1)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching city crews:', error);
+      throw new Error(`Failed to fetch city crews: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  // Achievement operations
+  async getAchievement(id: string) {
+    const { data, error } = await this.client
+      .from('achievements')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching achievement:', error);
+      throw new Error(`Failed to fetch achievement: ${error.message}`);
+    }
+
+    return data;
+  }
+
+  async getAchievements(filters: any = {}, limit = 20, offset = 0) {
+    let query = this.client.from('achievements').select('*');
+
+    if (filters.category) {
+      query = query.eq('category', filters.category);
+    }
+    if (filters.rarity) {
+      query = query.eq('rarity', filters.rarity);
+    }
+    if (filters.tier) {
+      query = query.eq('tier', filters.tier);
+    }
+
+    const { data, error } = await query
+      .range(offset, offset + limit - 1)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching achievements:', error);
+      throw new Error(`Failed to fetch achievements: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  // Achievement Rule operations
+  async getAchievementRule(id: string) {
+    const { data, error } = await this.client
+      .from('achievement_rules')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching achievement rule:', error);
+      throw new Error(`Failed to fetch achievement rule: ${error.message}`);
+    }
+
+    return data;
+  }
+
+  async getAchievementRules(filters: any = {}, limit = 20, offset = 0) {
+    let query = this.client.from('achievement_rules').select('*');
+
+    if (typeof filters.isActive === 'boolean') {
+      query = query.eq('is_active', filters.isActive);
+    }
+    if (filters.gameYear) {
+      query = query.eq('game_year', filters.gameYear);
+    }
+    if (filters.leagueId) {
+      query = query.eq('league_id', filters.leagueId);
+    }
+
+    const { data, error } = await query
+      .range(offset, offset + limit - 1)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching achievement rules:', error);
+      throw new Error(`Failed to fetch achievement rules: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  // Player Award operations
+  async getPlayerAwards(playerId: string, filters: any = {}, limit = 20, offset = 0) {
+    let query = this.client.from('player_awards').select('*').eq('player_id', playerId);
+
+    if (filters.category) {
+      query = query.eq('category', filters.category);
+    }
+    if (filters.rarity) {
+      query = query.eq('rarity', filters.rarity);
+    }
+
+    const { data, error } = await query
+      .range(offset, offset + limit - 1)
+      .order('awarded_at', { ascending: false, nullsFirst: false });
+
+    if (error) {
+      console.error('Error fetching player awards:', error);
+      throw new Error(`Failed to fetch player awards: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  // Conference and Division operations
+  async getLeagueConference(id: string) {
+    const { data, error } = await this.client
+      .from('lg_conf')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching league conference:', error);
+      throw new Error(`Failed to fetch league conference: ${error.message}`);
+    }
+
+    return data;
+  }
+
+  async getLeagueConferences(limit = 10, offset = 0) {
+    const { data, error } = await this.client
+      .from('lg_conf')
+      .select('*')
+      .range(offset, offset + limit - 1)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching league conferences:', error);
+      throw new Error(`Failed to fetch league conferences: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  async getLeagueDivision(id: string) {
+    const { data, error } = await this.client
+      .from('lg_divisions')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching league division:', error);
+      throw new Error(`Failed to fetch league division: ${error.message}`);
+    }
+
+    return data;
+  }
+
+  async getLeagueDivisions(filters: any = {}, limit = 10, offset = 0) {
+    let query = this.client.from('lg_divisions').select('*');
+
+    if (filters.conferenceId) {
+      query = query.eq('conference_id', filters.conferenceId);
+    }
+
+    const { data, error } = await query
+      .range(offset, offset + limit - 1)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching league divisions:', error);
+      throw new Error(`Failed to fetch league divisions: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  // Player Stats operations
+  async getPlayerStats(playerId: string) {
+    const { data, error } = await this.client
+      .from('player_stats')
+      .select('*')
+      .eq('player_id', playerId)
+      .single();
+
+    if (error) {
+      console.error('Error fetching player stats:', error);
+      throw new Error(`Failed to fetch player stats: ${error.message}`);
+    }
+
+    return data;
+  }
+
+  async getPlayerStatsByLeagueSeason(playerId: string, leagueId?: string, seasonId?: string) {
+    let query = this.client
+      .from('player_stats_by_league_season')
+      .select('*')
+      .eq('player_id', playerId);
+
+    if (leagueId) {
+      query = query.eq('league_id', leagueId);
+    }
+    if (seasonId) {
+      query = query.eq('season_id', seasonId);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+      console.error('Error fetching player league season stats:', error);
+      throw new Error(`Failed to fetch player league season stats: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  // Tournament operations
+  async getTournament(id: string) {
+    const { data, error } = await this.client
+      .from('tournaments')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching tournament:', error);
+      throw new Error(`Failed to fetch tournament: ${error.message}`);
+    }
+
+    return data;
+  }
+
+  async getTournaments(filters: any = {}, limit = 10, offset = 0) {
+    let query = this.client.from('tournaments').select('*');
+
+    if (filters.status) {
+      query = query.eq('status', filters.status);
+    }
+    if (filters.tier) {
+      query = query.eq('tier', filters.tier);
+    }
+
+    const { data, error } = await query
+      .range(offset, offset + limit - 1)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching tournaments:', error);
+      throw new Error(`Failed to fetch tournaments: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  // Analytics Marts (read-only views)
+  async getPlayerPerformanceMart(playerId?: string, limit = 20, offset = 0) {
+    let query = this.client.from('player_performance_mart').select('*');
+
+    if (playerId) {
+      query = query.eq('player_id', playerId);
+    }
+
+    const { data, error } = await query
+      .range(offset, offset + limit - 1)
+      .order('performance_score', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching player performance mart:', error);
+      throw new Error(`Failed to fetch player performance mart: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  async getTeamAnalyticsMart(teamId?: string, limit = 20, offset = 0) {
+    let query = this.client.from('team_analytics_mart').select('*');
+
+    if (teamId) {
+      query = query.eq('team_id', teamId);
+    }
+
+    const { data, error } = await query
+      .range(offset, offset + limit - 1)
+      .order('win_percentage', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching team analytics mart:', error);
+      throw new Error(`Failed to fetch team analytics mart: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  async getMatchAnalyticsMart(matchId?: string, limit = 20, offset = 0) {
+    let query = this.client.from('match_analytics_mart').select('*');
+
+    if (matchId) {
+      query = query.eq('match_id', matchId);
+    }
+
+    const { data, error } = await query
+      .range(offset, offset + limit - 1)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching match analytics mart:', error);
+      throw new Error(`Failed to fetch match analytics mart: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  async getLeagueResults(leagueId?: string, seasonId?: string, limit = 20, offset = 0) {
+    let query = this.client.from('league_results').select('*');
+
+    if (leagueId) {
+      query = query.eq('league_id', leagueId);
+    }
+    if (seasonId) {
+      query = query.eq('season_id', seasonId);
+    }
+
+    const { data, error } = await query
+      .range(offset, offset + limit - 1)
+      .order('points', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching league results:', error);
+      throw new Error(`Failed to fetch league results: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  async getTournamentResults(tournamentId?: string, limit = 20, offset = 0) {
+    let query = this.client.from('tournament_results').select('*');
+
+    if (tournamentId) {
+      query = query.eq('tournament_id', tournamentId);
+    }
+
+    const { data, error } = await query
+      .range(offset, offset + limit - 1)
+      .order('placement', { ascending: true });
+
+    if (error) {
+      console.error('Error fetching tournament results:', error);
+      throw new Error(`Failed to fetch tournament results: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  // Team Roster operations
+  async getTeamRosterCurrent(teamId: string) {
+    const { data, error } = await this.client
+      .from('team_roster_current')
+      .select('*')
+      .eq('team_id', teamId);
+
+    if (error) {
+      console.error('Error fetching current team roster:', error);
+      throw new Error(`Failed to fetch current team roster: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
+  async getTeamRosterHistory(teamId: string, limit = 20, offset = 0) {
+    const { data, error } = await this.client
+      .from('team_roster_history')
+      .select('*')
+      .eq('team_id', teamId)
+      .range(offset, offset + limit - 1)
+      .order('joined_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching team roster history:', error);
+      throw new Error(`Failed to fetch team roster history: ${error.message}`);
+    }
+
+    return data || [];
+  }
+
   // Health check
   async healthCheck() {
     try {
       const { data, error } = await this.client
-        .from('users')
+        .from('players')
         .select('count')
         .limit(1);
 
