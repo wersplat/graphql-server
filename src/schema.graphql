@@ -2970,10 +2970,12 @@ type Query {
 
   "Get league season performance data"
   getLeagueSeasonPerformanceMart(
-    "Filter by specific season ID"
+    "Filter by specific season ID (UUID)"
     seasonId: String
-    "Filter by league ID"
+    "Filter by league ID (UUID)"
     leagueId: String
+    "Filter by season number"
+    seasonNumber: Int
     "Maximum number of records to return"
     limit: Int = 20
     "Number of records to skip for pagination"
