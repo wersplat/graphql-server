@@ -1,7 +1,5 @@
 schema: 
   - "src/schema.graphql"
-documents: 
-  - "src/schema.graphql"
 extensions:
   languageService:
     useSchemaFileDefinitions: true
