@@ -1668,6 +1668,954 @@ type TournamentMvps {
   awardDetails: JSON
 }
 
+"""
+League results - comprehensive league team performance and standings.
+"""
+type LeagueResults {
+  "Team ID"
+  teamId: ID
+  "Team name"
+  teamName: String
+  "Logo URL"
+  logoUrl: String
+  "League ID"
+  leagueId: ID
+  "League name"
+  leagueName: String
+  "Season ID"
+  seasonId: ID
+  "Season number"
+  seasonNumber: Int
+  "Game year"
+  year: String
+  "Wins"
+  wins: Int
+  "Losses"
+  losses: Int
+  "Win percentage"
+  winPercentage: Float
+  "Points for"
+  pointsFor: Int
+  "Points against"
+  pointsAgainst: Int
+  "Point differential"
+  pointDifferential: Int
+  "Average points"
+  avgPoints: Float
+  "Average assists"
+  avgAssists: Float
+  "Average rebounds"
+  avgRebounds: Float
+  "Average steals"
+  avgSteals: Float
+  "Average blocks"
+  avgBlocks: Float
+  "Average turnovers"
+  avgTurnovers: Float
+  "Field goal percentage"
+  fgPercentage: Float
+  "Three point percentage"
+  threePtPercentage: Float
+  "Conference name"
+  conferenceName: String
+  "Current RP"
+  currentRp: Float
+  "ELO rating"
+  eloRating: Float
+  "Roster"
+  roster: JSON
+  "Stat leaders"
+  statLeaders: JSON
+  "Team rankings"
+  teamRankings: JSON
+}
+
+"""
+League calendar - league season schedule and status information.
+"""
+type LeagueCalendar {
+  "League ID"
+  leagueId: ID
+  "League name"
+  leagueName: String
+  "League logo"
+  leagueLogo: String
+  "League website"
+  leagueWebsite: String
+  "Season ID"
+  seasonId: ID
+  "Season number"
+  seasonNumber: Int
+  "Game year"
+  gameYear: String
+  "Start date"
+  startDate: String
+  "End date"
+  endDate: String
+  "Is active"
+  isActive: Boolean
+  "League status"
+  leagueStatus: String
+  "Champion ID"
+  championId: ID
+  "Champion name"
+  championName: String
+  "Champion logo"
+  championLogo: String
+  "Championship date"
+  championshipDate: String
+  "Total matches"
+  totalMatches: Int
+  "Tournament count"
+  tournamentCount: Int
+  "Last match date"
+  lastMatchDate: String
+  "Next match time"
+  nextMatchTime: String
+  "Upcoming matches count"
+  upcomingMatchesCount: Int
+  "Discord link"
+  discordLink: String
+  "Twitch URL"
+  twitchUrl: String
+  "Twitter ID"
+  twitterId: String
+  "Sort order"
+  sortOrder: Int
+}
+
+"""
+League division standings - division-level team standings and performance.
+"""
+type LeagueDivisionStandings {
+  "Team ID"
+  teamId: ID
+  "Team name"
+  teamName: String
+  "Team logo"
+  teamLogo: String
+  "League name"
+  leagueName: String
+  "Season ID"
+  seasonId: ID
+  "Season number"
+  seasonNumber: Int
+  "Game year"
+  gameYear: String
+  "Division ID"
+  divisionId: ID
+  "Division name"
+  divisionName: String
+  "Division abbreviation"
+  divisionAbbr: String
+  "Division logo"
+  divisionLogo: String
+  "Division rank"
+  divisionRank: Int
+  "Overall rank"
+  overallRank: Int
+  "Division display order"
+  divisionDisplayOrder: Int
+  "Conference IDs"
+  conferenceIds: [ID]
+  "Conference names"
+  conferenceNames: [String]
+  "Conference abbreviations"
+  conferenceAbbrs: [String]
+  "Wins"
+  wins: Int
+  "Losses"
+  losses: Int
+  "Games played"
+  gamesPlayed: Int
+  "Win percentage"
+  winPercentage: Float
+  "Points for"
+  pointsFor: Int
+  "Points against"
+  pointsAgainst: Int
+  "Point differential per game"
+  pointDifferentialPerGame: Float
+  "Last 5 streak"
+  last5Streak: String
+}
+
+"""
+Tournament calendar - tournament schedule and information.
+"""
+type TournamentCalendar {
+  "Tournament ID"
+  id: ID
+  "Tournament name"
+  tournamentName: String
+  "Description"
+  description: String
+  "Organizer name"
+  organizerName: String
+  "Organizer logo URL"
+  organizerLogoUrl: String
+  "League logo"
+  leagueLogo: String
+  "Game year"
+  gameYear: String
+  "Start date"
+  startDate: String
+  "End date"
+  endDate: String
+  "Status"
+  status: String
+  "Tournament status"
+  tournamentStatus: String
+  "Tier"
+  tier: String
+  "Prize pool"
+  prizePool: Float
+  "Banner URL"
+  bannerUrl: String
+  "Champion ID"
+  champion: ID
+  "Champion name"
+  championName: String
+  "Champion logo"
+  championLogo: String
+  "Runner up ID"
+  runnerUp: ID
+  "Runner up name"
+  runnerUpName: String
+  "Runner up logo"
+  runnerUpLogo: String
+  "Third place ID"
+  thirdPlaceId: ID
+  "Third place name"
+  thirdPlaceName: String
+  "Third place logo"
+  thirdPlaceLogo: String
+  "Next match time"
+  nextMatchTime: String
+  "Upcoming matches count"
+  upcomingMatchesCount: Int
+  "Sort order"
+  sortOrder: Int
+}
+
+"""
+Tournament results - tournament team performance and results.
+"""
+type TournamentResults {
+  "Team ID"
+  teamId: ID
+  "Team name"
+  teamName: String
+  "Logo URL"
+  logoUrl: String
+  "Tournament ID"
+  tournamentId: ID
+  "Tournament name"
+  tournamentName: String
+  "Organizer ID"
+  organizerId: ID
+  "Organizer name"
+  organizerName: String
+  "Game year"
+  gameYear: String
+  "Placement"
+  placement: Int
+  "Wins"
+  wins: Int
+  "Losses"
+  losses: Int
+  "Points for"
+  pointsFor: Int
+  "Points against"
+  pointsAgainst: Int
+  "Point differential"
+  pointDifferential: Int
+  "Prize money"
+  prizeMoney: Float
+  "RP earned"
+  rpEarned: Float
+  "Tournament tier"
+  tournamentTier: String
+  "Roster"
+  roster: JSON
+}
+
+"""
+Tournament player stats - player statistics in tournaments.
+"""
+type TournamentPlayerStats {
+  "Player ID"
+  playerId: ID
+  "Gamertag"
+  gamertag: String
+  "Team ID"
+  teamId: ID
+  "Team name"
+  teamName: String
+  "Tournament ID"
+  tournamentId: ID
+  "Tournament name"
+  tournamentName: String
+  "Game year"
+  gameYear: String
+  "Games played"
+  gamesPlayed: Int
+  "Total points"
+  totalPoints: Int
+  "Total assists"
+  totalAssists: Int
+  "Total rebounds"
+  totalRebounds: Int
+  "Total steals"
+  totalSteals: Int
+  "Total blocks"
+  totalBlocks: Int
+  "Average points"
+  avgPoints: Float
+  "Average assists"
+  avgAssists: Float
+  "Average rebounds"
+  avgRebounds: Float
+  "Field goal percentage"
+  fgPct: Float
+  "Three point percentage"
+  threePtPct: Float
+  "Free throw percentage"
+  ftPct: Float
+}
+
+"""
+Tournament team stats - team statistics in tournaments.
+"""
+type TournamentTeamStats {
+  "Team ID"
+  teamId: ID
+  "Team name"
+  teamName: String
+  "Tournament ID"
+  tournamentId: ID
+  "Tournament name"
+  tournamentName: String
+  "Game year"
+  gameYear: String
+  "Games played"
+  gamesPlayed: Int
+  "Wins"
+  wins: Int
+  "Losses"
+  losses: Int
+  "Points for"
+  pointsFor: Int
+  "Points against"
+  pointsAgainst: Int
+  "Point differential"
+  pointDifferential: Int
+  "Average points"
+  avgPoints: Float
+  "Field goal percentage"
+  fgPct: Float
+  "Three point percentage"
+  threePtPct: Float
+}
+
+"""
+League open player stats - player statistics in league open play.
+"""
+type LeagueOpenPlayerStats {
+  "Player ID"
+  playerId: ID
+  "Gamertag"
+  gamertag: String
+  "Position"
+  position: String
+  "Team ID"
+  teamId: ID
+  "Team name"
+  teamName: String
+  "League ID"
+  leagueId: ID
+  "League name"
+  leagueName: String
+  "Season ID"
+  seasonId: ID
+  "Season number"
+  seasonNumber: Int
+  "Game year"
+  gameYear: String
+  "Games played"
+  gamesPlayed: Int
+  "Average points"
+  avgPoints: Float
+  "Average assists"
+  avgAssists: Float
+  "Average rebounds"
+  avgRebounds: Float
+  "Average steals"
+  avgSteals: Float
+  "Average blocks"
+  avgBlocks: Float
+  "Average turnovers"
+  avgTurnovers: Float
+  "Average fouls"
+  avgFouls: Float
+  "Average plus minus"
+  avgPlusMinus: Float
+  "Average performance score"
+  avgPerformanceScore: Float
+  "Total points"
+  totalPoints: Int
+  "Total assists"
+  totalAssists: Int
+  "Total rebounds"
+  totalRebounds: Int
+  "Total steals"
+  totalSteals: Int
+  "Total blocks"
+  totalBlocks: Int
+  "Total turnovers"
+  totalTurnovers: Int
+  "Total fouls"
+  totalFouls: Int
+  "Total plus minus"
+  totalPlusMinus: Int
+  "Total performance score"
+  totalPerformanceScore: Float
+  "Field goal percentage"
+  fgPct: Float
+  "Three point percentage"
+  threePtPct: Float
+  "Free throw percentage"
+  ftPct: Float
+  "Total field goals made"
+  totalFgm: Int
+  "Total field goals attempted"
+  totalFga: Int
+  "Total three pointers made"
+  total3pm: Int
+  "Total three pointers attempted"
+  total3pa: Int
+  "Total free throws made"
+  totalFtm: Int
+  "Total free throws attempted"
+  totalFta: Int
+}
+
+"""
+League playoff player stats - player statistics in league playoffs.
+"""
+type LeaguePlayoffPlayerStats {
+  "Player ID"
+  playerId: ID
+  "Gamertag"
+  gamertag: String
+  "Position"
+  position: String
+  "Team ID"
+  teamId: ID
+  "Team name"
+  teamName: String
+  "League ID"
+  leagueId: ID
+  "League name"
+  leagueName: String
+  "Season ID"
+  seasonId: ID
+  "Season number"
+  seasonNumber: Int
+  "Game year"
+  gameYear: String
+  "Games played"
+  gamesPlayed: Int
+  "Average points"
+  avgPoints: Float
+  "Average assists"
+  avgAssists: Float
+  "Average rebounds"
+  avgRebounds: Float
+  "Average steals"
+  avgSteals: Float
+  "Average blocks"
+  avgBlocks: Float
+  "Average turnovers"
+  avgTurnovers: Float
+  "Average fouls"
+  avgFouls: Float
+  "Average plus minus"
+  avgPlusMinus: Float
+  "Average performance score"
+  avgPerformanceScore: Float
+  "Total points"
+  totalPoints: Int
+  "Total assists"
+  totalAssists: Int
+  "Total rebounds"
+  totalRebounds: Int
+  "Total steals"
+  totalSteals: Int
+  "Total blocks"
+  totalBlocks: Int
+  "Total turnovers"
+  totalTurnovers: Int
+  "Total fouls"
+  totalFouls: Int
+  "Total plus minus"
+  totalPlusMinus: Int
+  "Total performance score"
+  totalPerformanceScore: Float
+  "Field goal percentage"
+  fgPct: Float
+  "Three point percentage"
+  threePtPct: Float
+  "Free throw percentage"
+  ftPct: Float
+  "Total field goals made"
+  totalFgm: Int
+  "Total field goals attempted"
+  totalFga: Int
+  "Total three pointers made"
+  total3pm: Int
+  "Total three pointers attempted"
+  total3pa: Int
+  "Total free throws made"
+  totalFtm: Int
+  "Total free throws attempted"
+  totalFta: Int
+}
+
+"""
+League regular season player stats - player statistics in league regular season.
+"""
+type LeagueRegularSeasonPlayerStats {
+  "Player ID"
+  playerId: ID
+  "Gamertag"
+  gamertag: String
+  "Position"
+  position: String
+  "Team ID"
+  teamId: ID
+  "Team name"
+  teamName: String
+  "League ID"
+  leagueId: ID
+  "League name"
+  leagueName: String
+  "Season ID"
+  seasonId: ID
+  "Season number"
+  seasonNumber: Int
+  "Game year"
+  gameYear: String
+  "Games played"
+  gamesPlayed: Int
+  "Average points"
+  avgPoints: Float
+  "Average assists"
+  avgAssists: Float
+  "Average rebounds"
+  avgRebounds: Float
+  "Average steals"
+  avgSteals: Float
+  "Average blocks"
+  avgBlocks: Float
+  "Average turnovers"
+  avgTurnovers: Float
+  "Average fouls"
+  avgFouls: Float
+  "Average plus minus"
+  avgPlusMinus: Float
+  "Average performance score"
+  avgPerformanceScore: Float
+  "Total points"
+  totalPoints: Int
+  "Total assists"
+  totalAssists: Int
+  "Total rebounds"
+  totalRebounds: Int
+  "Total steals"
+  totalSteals: Int
+  "Total blocks"
+  totalBlocks: Int
+  "Total turnovers"
+  totalTurnovers: Int
+  "Total fouls"
+  totalFouls: Int
+  "Total plus minus"
+  totalPlusMinus: Int
+  "Total performance score"
+  totalPerformanceScore: Float
+  "Field goal percentage"
+  fgPct: Float
+  "Three point percentage"
+  threePtPct: Float
+  "Free throw percentage"
+  ftPct: Float
+  "Total field goals made"
+  totalFgm: Int
+  "Total field goals attempted"
+  totalFga: Int
+  "Total three pointers made"
+  total3pm: Int
+  "Total three pointers attempted"
+  total3pa: Int
+  "Total free throws made"
+  totalFtm: Int
+  "Total free throws attempted"
+  totalFta: Int
+}
+
+"""
+League season team rosters - team rosters for league seasons.
+"""
+type LeagueSeasonTeamRosters {
+  "Team ID"
+  teamId: ID
+  "Team name"
+  teamName: String
+  "League ID"
+  leagueId: ID
+  "League name"
+  leagueName: String
+  "Season ID"
+  seasonId: ID
+  "Season number"
+  seasonNumber: Int
+  "Game year"
+  gameYear: String
+  "Division ID"
+  divisionId: ID
+  "Division name"
+  divisionName: String
+  "Roster"
+  roster: JSON
+  "Player count"
+  playerCount: Int
+}
+
+"""
+League team rosters - current team rosters for leagues.
+"""
+type LeagueTeamRosters {
+  "Team ID"
+  teamId: ID
+  "Team name"
+  teamName: String
+  "League ID"
+  leagueId: ID
+  "League name"
+  leagueName: String
+  "Game year"
+  gameYear: String
+  "Division ID"
+  divisionId: ID
+  "Division name"
+  divisionName: String
+  "Roster"
+  roster: JSON
+  "Player count"
+  playerCount: Int
+}
+
+"""
+Tournament team rosters - team rosters for tournaments.
+"""
+type TournamentTeamRosters {
+  "Team ID"
+  teamId: ID
+  "Team name"
+  teamName: String
+  "Team logo"
+  teamLogo: String
+  "Tournament ID"
+  tournamentId: ID
+  "Tournament name"
+  tournamentName: String
+  "Game year"
+  gameYear: String
+  "Roster"
+  roster: JSON
+  "Player count"
+  playerCount: Int
+}
+
+"""
+Player league season stats mart - player statistics by league season.
+"""
+type PlayerLeagueSeasonStatsMart {
+  "Player ID"
+  playerId: ID
+  "Gamertag"
+  gamertag: String
+  "Season ID"
+  seasonId: ID
+  "Season team name"
+  seasonTeamName: String
+  "League name"
+  leagueName: String
+  "Season number"
+  seasonNumber: Int
+  "Game year"
+  gameYear: String
+  "Games played"
+  gamesPlayed: Int
+  "Total points"
+  totalPoints: Int
+  "Total assists"
+  totalAssists: Int
+  "Total rebounds"
+  totalRebounds: Int
+  "Average points"
+  avgPoints: Float
+  "Average assists"
+  avgAssists: Float
+  "Average rebounds"
+  avgRebounds: Float
+  "Season performance data"
+  seasonPerformanceData: JSON
+}
+
+"""
+Player performance by game year - player performance breakdown by year.
+"""
+type PlayerPerformanceByGameYear {
+  "Player ID"
+  playerId: ID
+  "Gamertag"
+  gamertag: String
+  "Game year"
+  gameYear: String
+  "Games played"
+  gamesPlayed: Int
+  "Total points"
+  totalPoints: Int
+  "Average points"
+  avgPoints: Float
+  "Yearly performance data"
+  yearlyPerformanceData: JSON
+}
+
+"""
+Player public profile - public player profile information.
+"""
+type PlayerPublicProfile {
+  "Player ID"
+  playerId: ID
+  "Gamertag"
+  gamertag: String
+  "Team name"
+  teamName: String
+  "Position"
+  position: String
+  "Profile data"
+  profileData: JSON
+  "Career statistics"
+  careerStatistics: JSON
+}
+
+"""
+Player roster history - player team history.
+"""
+type PlayerRosterHistory {
+  "Player ID"
+  playerId: ID
+  "Gamertag"
+  gamertag: String
+  "Team name"
+  teamName: String
+  "League name"
+  leagueName: String
+  "Season number"
+  seasonNumber: Int
+  "Game year"
+  gameYear: String
+  "Start date"
+  startDate: String
+  "End date"
+  endDate: String
+}
+
+"""
+Player stats by league season - player statistics aggregated by league season.
+"""
+type PlayerStatsByLeagueSeason {
+  "Player ID"
+  playerId: ID
+  "Gamertag"
+  gamertag: String
+  "League season ID"
+  leagueSeasonId: ID
+  "Season stats"
+  seasonStats: JSON
+}
+
+"""
+Team roster current - current team roster information.
+"""
+type TeamRosterCurrent {
+  "Team ID"
+  teamId: ID
+  "Team name"
+  teamName: String
+  "Current roster"
+  currentRoster: JSON
+  "Player count"
+  playerCount: Int
+}
+
+"""
+Team roster history - team roster history over time.
+"""
+type TeamRosterHistory {
+  "Team ID"
+  teamId: ID
+  "Team name"
+  teamName: String
+  "Team logo"
+  teamLogo: String
+  "League name"
+  leagueName: String
+  "Season number"
+  seasonNumber: Int
+  "Game year"
+  gameYear: String
+  "Roster"
+  roster: JSON
+  "Player count"
+  playerCount: Int
+}
+
+"""
+Top tournament performers - top performing players in tournaments.
+"""
+type TopTournamentPerformers {
+  "Player ID"
+  playerId: ID
+  "Gamertag"
+  gamertag: String
+  "Current team"
+  currentTeam: String
+  "Tournament count"
+  tournamentCount: Int
+  "Total points"
+  totalPoints: Int
+  "Average points"
+  avgPoints: Float
+  "Performance data"
+  performanceData: JSON
+}
+
+"""
+Past champions by league - historical league champions.
+"""
+type PastChampionsByLeague {
+  "League ID"
+  leagueId: ID
+  "League name"
+  leagueName: String
+  "Season number"
+  seasonNumber: Int
+  "Champion team ID"
+  championTeamId: ID
+  "Champion name"
+  championName: String
+  "Championship date"
+  championshipDate: String
+}
+
+"""
+Past champions by year - historical champions by year.
+"""
+type PastChampionsByYear {
+  "Game year"
+  gameYear: String
+  "Champion team ID"
+  championTeamId: ID
+  "Champion name"
+  championName: String
+  "League name"
+  leagueName: String
+  "Championship date"
+  championshipDate: String
+}
+
+"""
+Event strength metrics - event difficulty and strength metrics.
+"""
+type EventStrengthMetrics {
+  "Event key"
+  eventKey: String
+  "Event name"
+  eventName: String
+  "Event type"
+  eventType: String
+  "Tournament ID"
+  tournamentId: ID
+  "Season ID"
+  seasonId: ID
+  "Game year"
+  gameYear: String
+  "Start date"
+  startDate: String
+  "Event strength"
+  eventStrength: Float
+  "Tier label"
+  tierLabel: String
+  "Tier score"
+  tierScore: Float
+  "Team count"
+  teamCount: Int
+  "Bracket size"
+  bracketSize: Int
+  "Prize pool"
+  prizePool: Float
+  "RP cap"
+  rpCap: Float
+  "Organizer name"
+  organizerName: String
+  "Player value component"
+  playerValueComponent: Float
+  "Prize pool component"
+  prizePoolComponent: Float
+  "Top field component"
+  topFieldComponent: Float
+  "Parity component"
+  parityComponent: Float
+  "Recent strength component"
+  recentStrengthComponent: Float
+  "Bracket component"
+  bracketComponent: Float
+  "LAN bonus component"
+  lanBonusComponent: Float
+  "Hybrid strength component"
+  hybridStrengthComponent: Float
+  "Calculated at"
+  calculatedAt: String
+}
+
+"""
+OCR correction patterns - OCR text correction patterns.
+"""
+type OcrCorrectionPatterns {
+  "Pattern"
+  pattern: String
+  "Correction"
+  correction: String
+  "Frequency"
+  frequency: Int
+}
+
+"""
+OCR correction stats - OCR correction statistics.
+"""
+type OcrCorrectionStats {
+  "Field name"
+  fieldName: String
+  "Total corrections"
+  totalCorrections: Int
+  "Accuracy rate"
+  accuracyRate: Float
+}
+
 # =============================================================================
 # QUERY TYPE
 # =============================================================================
@@ -2085,6 +3033,336 @@ type Query {
     "Number of records to skip for pagination"
     offset: Int = 0
   ): [TournamentMvps!]!
+
+  "Get league results - comprehensive team standings and performance"
+  getLeagueResults(
+    "Filter by league ID"
+    leagueId: String
+    "Filter by season ID"
+    seasonId: String
+    "Filter by team ID"
+    teamId: String
+    "Filter by game year"
+    gameYear: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [LeagueResults!]!
+
+  "Get league calendar - league season schedules and status"
+  getLeagueCalendar(
+    "Filter by league ID"
+    leagueId: String
+    "Filter by season ID"
+    seasonId: String
+    "Filter by game year"
+    gameYear: String
+    "Filter by active status"
+    isActive: Boolean
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [LeagueCalendar!]!
+
+  "Get league division standings"
+  getLeagueDivisionStandings(
+    "Filter by division ID"
+    divisionId: String
+    "Filter by season ID"
+    seasonId: String
+    "Filter by team ID"
+    teamId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [LeagueDivisionStandings!]!
+
+  "Get tournament calendar - tournament schedules and information"
+  getTournamentCalendar(
+    "Filter by tournament ID"
+    id: String
+    "Filter by game year"
+    gameYear: String
+    "Filter by status"
+    status: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TournamentCalendar!]!
+
+  "Get tournament results - team performance in tournaments"
+  getTournamentResults(
+    "Filter by tournament ID"
+    tournamentId: String
+    "Filter by team ID"
+    teamId: String
+    "Filter by game year"
+    gameYear: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TournamentResults!]!
+
+  "Get tournament player statistics"
+  getTournamentPlayerStats(
+    "Filter by tournament ID"
+    tournamentId: String
+    "Filter by player ID"
+    playerId: String
+    "Filter by team ID"
+    teamId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TournamentPlayerStats!]!
+
+  "Get tournament team statistics"
+  getTournamentTeamStats(
+    "Filter by tournament ID"
+    tournamentId: String
+    "Filter by team ID"
+    teamId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TournamentTeamStats!]!
+
+  "Get league open player statistics"
+  getLeagueOpenPlayerStats(
+    "Filter by player ID"
+    playerId: String
+    "Filter by team ID"
+    teamId: String
+    "Filter by season ID"
+    seasonId: String
+    "Filter by league ID"
+    leagueId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [LeagueOpenPlayerStats!]!
+
+  "Get league playoff player statistics"
+  getLeaguePlayoffPlayerStats(
+    "Filter by player ID"
+    playerId: String
+    "Filter by team ID"
+    teamId: String
+    "Filter by season ID"
+    seasonId: String
+    "Filter by league ID"
+    leagueId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [LeaguePlayoffPlayerStats!]!
+
+  "Get league regular season player statistics"
+  getLeagueRegularSeasonPlayerStats(
+    "Filter by player ID"
+    playerId: String
+    "Filter by team ID"
+    teamId: String
+    "Filter by season ID"
+    seasonId: String
+    "Filter by league ID"
+    leagueId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [LeagueRegularSeasonPlayerStats!]!
+
+  "Get league season team rosters"
+  getLeagueSeasonTeamRosters(
+    "Filter by team ID"
+    teamId: String
+    "Filter by season ID"
+    seasonId: String
+    "Filter by league ID"
+    leagueId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [LeagueSeasonTeamRosters!]!
+
+  "Get league team rosters"
+  getLeagueTeamRosters(
+    "Filter by team ID"
+    teamId: String
+    "Filter by league ID"
+    leagueId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [LeagueTeamRosters!]!
+
+  "Get tournament team rosters"
+  getTournamentTeamRosters(
+    "Filter by tournament ID"
+    tournamentId: String
+    "Filter by team ID"
+    teamId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TournamentTeamRosters!]!
+
+  "Get player league season statistics"
+  getPlayerLeagueSeasonStatsMart(
+    "Filter by player ID"
+    playerId: String
+    "Filter by season ID"
+    seasonId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [PlayerLeagueSeasonStatsMart!]!
+
+  "Get player performance by game year"
+  getPlayerPerformanceByGameYear(
+    "Filter by player ID"
+    playerId: String
+    "Filter by game year"
+    gameYear: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [PlayerPerformanceByGameYear!]!
+
+  "Get player public profiles"
+  getPlayerPublicProfile(
+    "Filter by player ID"
+    playerId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [PlayerPublicProfile!]!
+
+  "Get player roster history"
+  getPlayerRosterHistory(
+    "Filter by player ID"
+    playerId: String
+    "Filter by team name"
+    teamName: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [PlayerRosterHistory!]!
+
+  "Get player stats by league season"
+  getPlayerStatsByLeagueSeason(
+    "Filter by player ID"
+    playerId: String
+    "Filter by league season ID"
+    leagueSeasonId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [PlayerStatsByLeagueSeason!]!
+
+  "Get current team rosters"
+  getTeamRosterCurrent(
+    "Filter by team ID"
+    teamId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TeamRosterCurrent!]!
+
+  "Get team roster history"
+  getTeamRosterHistory(
+    "Filter by team ID"
+    teamId: String
+    "Filter by league name"
+    leagueName: String
+    "Filter by game year"
+    gameYear: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TeamRosterHistory!]!
+
+  "Get top tournament performers"
+  getTopTournamentPerformers(
+    "Filter by player ID"
+    playerId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TopTournamentPerformers!]!
+
+  "Get past champions by league"
+  getPastChampionsByLeague(
+    "Filter by league ID"
+    leagueId: String
+    "Filter by season number"
+    seasonNumber: Int
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [PastChampionsByLeague!]!
+
+  "Get past champions by year"
+  getPastChampionsByYear(
+    "Filter by game year"
+    gameYear: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [PastChampionsByYear!]!
+
+  "Get event strength metrics"
+  getEventStrengthMetrics(
+    "Filter by tournament ID"
+    tournamentId: String
+    "Filter by season ID"
+    seasonId: String
+    "Filter by game year"
+    gameYear: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [EventStrengthMetrics!]!
+
+  "Get OCR correction patterns"
+  getOcrCorrectionPatterns(
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [OcrCorrectionPatterns!]!
+
+  "Get OCR correction statistics"
+  getOcrCorrectionStats(
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [OcrCorrectionStats!]!
 }
 
 # =============================================================================
