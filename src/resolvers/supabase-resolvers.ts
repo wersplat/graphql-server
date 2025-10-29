@@ -403,6 +403,38 @@ export const supabaseResolvers = {
       
       if (error) throw new Error(`Failed to fetch league divisions: ${error.message}`);
       return data || [];
+    },
+
+    // Dashboard Stats
+    getDashboardStats: async () => {
+      const supabase = getSupabaseClient();
+      
+      try {
+        // Get basic counts
+        const [playersResult, teamsResult, matchesResult] = await Promise.all([
+          supabase.from('players').select('id', { count: 'exact', head: true }),
+          supabase.from('teams').select('id', { count: 'exact', head: true }),
+          supabase.from('matches').select('id', { count: 'exact', head: true })
+        ]);
+
+        return {
+          totalPlayers: playersResult.count || 0,
+          totalTeams: teamsResult.count || 0,
+          totalMatches: matchesResult.count || 0,
+          activeLeagues: 0, // You can implement this based on your needs
+          upcomingMatches: 0 // You can implement this based on your needs
+        };
+      } catch (error) {
+        console.error('Error fetching dashboard stats:', error);
+        // Return default values instead of null to avoid GraphQL errors
+        return {
+          totalPlayers: 0,
+          totalTeams: 0,
+          totalMatches: 0,
+          activeLeagues: 0,
+          upcomingMatches: 0
+        };
+      }
     }
   },
 

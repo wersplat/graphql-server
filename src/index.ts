@@ -394,8 +394,11 @@ async function startServer() {
         const query = typeof req.body?.query === 'string' ? req.body.query : '';
         if (query.includes('__schema') || query.includes('__type')) {
           const auth = await parseAuth(req.headers.authorization);
-          // Allow authenticated users to introspect
-          if (auth.role === 'anon') {
+          const isApolloStudio = req.headers.origin === 'https://studio.apollographql.com' || 
+                                req.headers.referer?.includes('studio.apollographql.com');
+          
+          // Allow authenticated users and Apollo Studio to introspect
+          if (auth.role === 'anon' && !isApolloStudio) {
             res.status(403).json({ error: 'Forbidden' });
             return;
           }
