@@ -11,6 +11,16 @@ Custom scalar for handling UUID values.
 scalar UUID
 
 """
+The Node interface for Relay-style pagination and object identification.
+"""
+interface Node {
+  """
+  A globally unique identifier for the node.
+  """
+  nodeId: ID!
+}
+
+"""
 Custom scalar for handling date and time values in ISO 8601 format.
 """
 scalar DateTime
@@ -554,47 +564,47 @@ enum game_year {
   """
   2K16
   """
-  2K16
+  Y_2K16
   """
   2K17
   """
-  2K17
+  Y_2K17
   """
   2K18
   """
-  2K18
+  Y_2K18
   """
   2K19
   """
-  2K19
+  Y_2K19
   """
   2K20
   """
-  2K20
+  Y_2K20
   """
   2K21
   """
-  2K21
+  Y_2K21
   """
   2K22
   """
-  2K22
+  Y_2K22
   """
   2K23
   """
-  2K23
+  Y_2K23
   """
   2K24
   """
-  2K24
+  Y_2K24
   """
   2K25
   """
-  2K25
+  Y_2K25
   """
   2K26
   """
-  2K26
+  Y_2K26
 }
 
 """
@@ -23534,9 +23544,9 @@ input ocr_validationsInsertInput {
   """
   error: String
   """
-  auto-corrected
+  auto_corrected
   """
-  auto-corrected: Boolean
+  auto_corrected: Boolean
   """
   verified
   """
@@ -23598,9 +23608,9 @@ input ocr_validationsUpdateInput {
   """
   error: String
   """
-  auto-corrected
+  auto_corrected
   """
-  auto-corrected: Boolean
+  auto_corrected: Boolean
   """
   verified
   """

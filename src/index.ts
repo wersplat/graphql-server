@@ -28,7 +28,7 @@ import { User, Player } from './types/User';
 import { Match, Team, Event, PlayerMatchStats } from './types/Match';
 
 // Load GraphQL schema
-const typeDefs = readFileSync(join(__dirname, 'schema-generated.graphql'), 'utf8');
+const typeDefs = readFileSync(join(__dirname, 'schema.graphql'), 'utf8');
 
 // Use Supabase resolvers
 const resolvers = {
@@ -106,90 +106,6 @@ const resolvers = {
       }
       return null;
     }
-  JSON: {
-    __serialize(value: any) {
-      return value;
-    },
-    __parseValue(value: any) {
-      return value;
-    },
-    __parseLiteral(ast: any) {
-      if (ast.kind === 'StringValue') {
-        return JSON.parse(ast.value);
-      }
-      return null;
-    }
-  },
-  BigInt: {
-    __serialize(value: any) {
-      return value;
-    },
-    __parseValue(value: any) {
-      return value;
-    },
-    __parseLiteral(ast: any) {
-      if (ast.kind === 'StringValue') {
-        return ast.value;
-      }
-      return null;
-    }
-  },
-  BigFloat: {
-    __serialize(value: any) {
-      return value;
-    },
-    __parseValue(value: any) {
-      return value;
-    },
-    __parseLiteral(ast: any) {
-      if (ast.kind === 'StringValue') {
-        return ast.value;
-      }
-      return null;
-    }
-  }
-  JSON: {
-    __serialize(value: any) {
-      return value;
-    },
-    __parseValue(value: any) {
-      return value;
-    },
-    __parseLiteral(ast: any) {
-      if (ast.kind === 'StringValue') {
-        return JSON.parse(ast.value);
-      }
-      return null;
-    }
-  },
-  BigInt: {
-    __serialize(value: any) {
-      return value;
-    },
-    __parseValue(value: any) {
-      return value;
-    },
-    __parseLiteral(ast: any) {
-      if (ast.kind === 'StringValue') {
-        return ast.value;
-      }
-      return null;
-    }
-  },
-  BigFloat: {
-    __serialize(value: any) {
-      return value;
-    },
-    __parseValue(value: any) {
-      return value;
-    },
-    __parseLiteral(ast: any) {
-      if (ast.kind === 'StringValue') {
-        return ast.value;
-      }
-      return null;
-    }
-  }
   }
 };
 
