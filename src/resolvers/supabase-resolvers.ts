@@ -1,5 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 import type { GraphQLContext } from '../types/Context';
+import { 
+  mapPlayerPositionDbToGql, 
+  mapMatchStageDbToGql, 
+  mapStatusDbToGql,
+  mapPlayerPositionGqlToDb,
+  mapMatchStageGqlToDb,
+  mapStatusGqlToDb
+} from '../utils/enum-mapping';
 
 // Type definitions for Supabase database
 type Database = {
@@ -46,7 +54,12 @@ export const supabaseResolvers = {
         .single();
       
       if (error) throw new Error(`Failed to fetch player: ${error.message}`);
-      return data;
+      
+      // Map database enum values to GraphQL enum values
+      return {
+        ...data,
+        position: mapPlayerPositionDbToGql(data?.position)
+      };
     },
 
     getPlayers: async (_: any, { tier, region, limit = 20, offset = 0 }: {
@@ -66,7 +79,12 @@ export const supabaseResolvers = {
         .order('created_at', { ascending: false });
       
       if (error) throw new Error(`Failed to fetch players: ${error.message}`);
-      return data || [];
+      
+      // Map database enum values to GraphQL enum values
+      return (data || []).map((player: any) => ({
+        ...player,
+        position: mapPlayerPositionDbToGql(player.position)
+      }));
     },
 
     // Team queries
@@ -107,7 +125,13 @@ export const supabaseResolvers = {
         .single();
       
       if (error) throw new Error(`Failed to fetch match: ${error.message}`);
-      return data;
+      
+      // Map database enum values to GraphQL enum values
+      return {
+        ...data,
+        stage: mapMatchStageDbToGql(data?.stage),
+        status: mapStatusDbToGql(data?.status)
+      };
     },
 
     getMatches: async (_: any, { teamId, leagueId, status, stage, limit = 20, offset = 0 }: {
@@ -125,15 +149,21 @@ export const supabaseResolvers = {
         query = query.or(`team_a_id.eq.${teamId},team_b_id.eq.${teamId}`);
       }
       if (leagueId) query = query.eq('league_id', leagueId);
-      if (status) query = query.eq('status', status);
-      if (stage) query = query.eq('stage', stage as any);
+      if (status) query = query.eq('status', mapStatusGqlToDb(status));
+      if (stage) query = query.eq('stage', mapMatchStageGqlToDb(stage));
       
       const { data, error } = await query
         .range(offset, offset + limit - 1)
         .order('played_at', { ascending: false, nullsFirst: false });
       
       if (error) throw new Error(`Failed to fetch matches: ${error.message}`);
-      return data || [];
+      
+      // Map database enum values to GraphQL enum values
+      return (data || []).map((match: any) => ({
+        ...match,
+        stage: mapMatchStageDbToGql(match.stage),
+        status: mapStatusDbToGql(match.status)
+      }));
     },
 
     // League queries
@@ -549,7 +579,12 @@ export const supabaseResolvers = {
         .single();
       
       if (error) return null;
-      return data;
+      
+      // Map database enum values to GraphQL enum values
+      return {
+        ...data,
+        position: mapPlayerPositionDbToGql(data?.position)
+      };
     },
 
     achievement: async (parent: any) => {

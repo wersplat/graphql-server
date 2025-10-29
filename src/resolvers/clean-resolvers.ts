@@ -1,6 +1,14 @@
 import { CleanGraphQLService } from '../services/clean-graphql-service';
 import { assertValid, playerCreateSchema, playerUpdateSchema, matchCreateSchema, awardRankingPointsSchema, addRosterSchema, submitMatchSchema, reviewMatchSubmissionSchema } from '../validation';
 import type { GraphQLContext } from '../types/Context';
+import { 
+  mapPlayerPositionDbToGql, 
+  mapMatchStageDbToGql, 
+  mapStatusDbToGql,
+  mapPlayerPositionGqlToDb,
+  mapMatchStageGqlToDb,
+  mapStatusGqlToDb
+} from '../utils/enum-mapping';
 
 /**
  * Clean GraphQL Resolvers
@@ -23,7 +31,14 @@ export const cleanResolvers = {
           }
         `;
         const data = await ctx.pg(q, { id });
-        return data?.playersCollection?.edges?.[0]?.node ?? null;
+        const player = data?.playersCollection?.edges?.[0]?.node;
+        if (!player) return null;
+        
+        // Map enum values from database to GraphQL
+        return {
+          ...player,
+          position: mapPlayerPositionDbToGql(player.position)
+        };
       } catch (error) {
         console.error('Error fetching player:', error);
         throw new Error(`Failed to fetch player: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -45,7 +60,10 @@ export const cleanResolvers = {
           }
         `;
         const data = await ctx.pg(q, { first: limit });
-        const items = (data?.playersCollection?.edges || []).map((e: any) => e.node);
+        const items = (data?.playersCollection?.edges || []).map((e: any) => ({
+          ...e.node,
+          position: mapPlayerPositionDbToGql(e.node.position)
+        }));
         // For now, estimate total from items length and pagination
         const totalCount = items.length;
         return {

@@ -24052,8 +24052,8 @@ export type Database = {
         | "Assists"
         | "Defense"
         | "Rebounding"
-        | "Mixed_Stats"
-        | "Streak_and_Longevity"
+        | "Mixed Stats"
+        | "Streak & Longevity"
         | "Legendary"
       achievement_event_type: "match_event" | "player_stat_event"
       achievement_rarity: "Common" | "Rare" | "Epic" | "Legendary"
@@ -24078,7 +24078,7 @@ export type Database = {
         | "Lockdown"
         | "Streak"
         | "Longevity"
-        | "Mixed_Stats"
+        | "Mixed Stats"
       app_role:
         | "admin"
         | "league_staff"
@@ -24087,8 +24087,8 @@ export type Database = {
         | "analyst"
         | "team_staff"
         | "player"
-      award_types: "Offensive_MVP" | "Defensive_MVP" | "Rookie_of_Tournament"
-      console: "Cross_Play" | "Playstation" | "Xbox"
+      award_types: "Offensive MVP" | "Defensive MVP" | "Rookie of Tournament"
+      console: "Cross Play" | "Playstation" | "Xbox"
       counter_scope: "career" | "season" | "rolling10" | "game"
       event_tier: "T1" | "T2" | "T3" | "T4" | "T5"
       event_type: "League" | "Tournament" | "match_event" | "player_stat_event"
@@ -24106,19 +24106,19 @@ export type Database = {
         | "2K26"
       leaderboard_tier: "S" | "A" | "B" | "C" | "D"
       leagues:
-        | "Unified_Pro_Am_Association"
-        | "UPA_College"
+        | "Unified Pro Am Association"
+        | "UPA College"
         | "WR"
         | "MPBA"
-        | "Rising_Stars"
-        | "Staten_Island_Basketball_Association"
-        | "Hall_Of_Fame_League"
-        | "Dunk_League"
-        | "Road_to_25K"
+        | "Rising Stars"
+        | "Staten Island Basketball Association"
+        | "Hall Of Fame League"
+        | "Dunk League"
+        | "Road to 25K"
         | "Association"
-        | "USA_Basketball"
-        | "HOF_EU"
-        | "UPA_EU"
+        | "USA Basketball"
+        | "HOF EU"
+        | "UPA EU"
       match_report_status:
         | "pending"
         | "submitted"
@@ -24131,25 +24131,25 @@ export type Database = {
         | "completed"
         | "cancelled"
       player_position:
-        | "Point_Guard"
-        | "Shooting_Guard"
+        | "Point Guard"
+        | "Shooting Guard"
         | "Lock"
-        | "Power_Forward"
+        | "Power Forward"
         | "Center"
       queue_slot_status: "waiting" | "matched" | "left"
       queue_status: "queued" | "processing" | "done" | "error"
       roster_source_type: "league" | "current"
       salary_tier: "S" | "A" | "B" | "C" | "D"
       stage:
-        | "Regular_Season"
-        | "Group_Play"
-        | "Round_1"
-        | "Round_2"
-        | "Round_3"
-        | "Round_4"
-        | "Semi_Finals"
+        | "Regular Season"
+        | "Group Play"
+        | "Round 1"
+        | "Round 2"
+        | "Round 3"
+        | "Round 4"
+        | "Semi Finals"
         | "Finals"
-        | "Grand_Finals"
+        | "Grand Finals"
         | "L1"
         | "L2"
         | "L3"
@@ -24165,9 +24165,9 @@ export type Database = {
         | "Open"
       status:
         | "scheduled"
-        | "in_progress"
+        | "in progress"
         | "completed"
-        | "under_review"
+        | "under review"
         | "reviewed"
         | "approved"
       team_queue_slot_status:
@@ -24313,8 +24313,8 @@ export const Constants = {
         "Assists",
         "Defense",
         "Rebounding",
-        "Mixed_Stats",
-        "Streak_and_Longevity",
+        "Mixed Stats",
+        "Streak & Longevity",
         "Legendary",
       ],
       achievement_event_type: ["match_event", "player_stat_event"],
@@ -24331,17 +24331,17 @@ export const Constants = {
         "epic",
       ],
       achievement_type: [
-        "Career_Points_Milestone",
-        "Single_Game",
+        "Career Points Milestone",
+        "Single Game",
         "Efficiency",
         "Season",
-        "Career_Milestones",
+        "Career Milestones",
         "Blocks",
         "Steals",
         "Lockdown",
         "Streak",
         "Longevity",
-        "Mixed_Stats",
+        "Mixed Stats",
       ],
       app_role: [
         "admin",
@@ -24352,8 +24352,8 @@ export const Constants = {
         "team_staff",
         "player",
       ],
-      award_types: ["Offensive_MVP", "Defensive_MVP", "Rookie_of_Tournament"],
-      console: ["Cross_Play", "Playstation", "Xbox"],
+      award_types: ["Offensive MVP", "Defensive MVP", "Rookie of Tournament"],
+      console: ["Cross Play", "Playstation", "Xbox"],
       counter_scope: ["career", "season", "rolling10", "game"],
       event_tier: ["T1", "T2", "T3", "T4", "T5"],
       event_type: ["League", "Tournament", "match_event", "player_stat_event"],
@@ -24372,19 +24372,19 @@ export const Constants = {
       ],
       leaderboard_tier: ["S", "A", "B", "C", "D"],
       leagues: [
-        "Unified_Pro_Am_Association",
-        "UPA_College",
+        "Unified Pro Am Association",
+        "UPA College",
         "WR",
         "MPBA",
-        "Rising_Stars",
-        "Staten_Island_Basketball_Association",
-        "Hall_Of_Fame_League",
-        "Dunk_League",
-        "Road_to_25K",
+        "Rising Stars",
+        "Staten Island Basketball Association",
+        "Hall Of Fame League",
+        "Dunk League",
+        "Road to 25K",
         "Association",
-        "USA_Basketball",
-        "HOF_EU",
-        "UPA_EU",
+        "USA Basketball",
+        "HOF EU",
+        "UPA EU",
       ],
       match_report_status: [
         "pending",
@@ -24400,10 +24400,10 @@ export const Constants = {
         "cancelled",
       ],
       player_position: [
-        "Point_Guard",
-        "Shooting_Guard",
+        "Point Guard",
+        "Shooting Guard",
         "Lock",
-        "Power_Forward",
+        "Power Forward",
         "Center",
       ],
       queue_slot_status: ["waiting", "matched", "left"],
@@ -24411,15 +24411,15 @@ export const Constants = {
       roster_source_type: ["league", "current"],
       salary_tier: ["S", "A", "B", "C", "D"],
       stage: [
-        "Regular_Season",
-        "Group_Play",
-        "Round_1",
-        "Round_2",
-        "Round_3",
-        "Round_4",
-        "Semi_Finals",
+        "Regular Season",
+        "Group Play",
+        "Round 1",
+        "Round 2",
+        "Round 3",
+        "Round 4",
+        "Semi Finals",
         "Finals",
-        "Grand_Finals",
+        "Grand Finals",
         "L1",
         "L2",
         "L3",
@@ -24436,9 +24436,9 @@ export const Constants = {
       ],
       status: [
         "scheduled",
-        "in_progress",
+        "in progress",
         "completed",
-        "under_review",
+        "under review",
         "reviewed",
         "approved",
       ],
