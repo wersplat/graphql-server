@@ -1553,9 +1553,37 @@ League season performance mart - season-level performance analytics.
 """
 type LeagueSeasonPerformanceMart {
   "Season ID"
-  seasonId: ID!
+  seasonId: ID
   "League ID"
   leagueId: ID
+  "League name"
+  leagueName: String
+  "Season number"
+  seasonNumber: Int
+  "Is active"
+  isActive: Boolean
+  "Start date"
+  startDate: String
+  "End date"
+  endDate: String
+  "First match date"
+  firstMatchDate: String
+  "Last match date"
+  lastMatchDate: String
+  "Total matches"
+  totalMatches: Int
+  "Total players"
+  totalPlayers: Int
+  "Total unique teams"
+  totalUniqueTeams: Int
+  "Average total points per game"
+  avgTotalPointsPerGame: Float
+  "Prize pool"
+  prizePool: Float
+  "Open champion"
+  openChampion: String
+  "Playoff champion"
+  playoffChampion: String
   "Season performance data"
   seasonPerformanceData: JSON
   "Team standings"
