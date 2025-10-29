@@ -1,4 +1,12 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { 
+  mapPlayerPositionDbToGql, 
+  mapMatchStageDbToGql, 
+  mapStatusDbToGql,
+  mapPlayerPositionGqlToDb,
+  mapMatchStageGqlToDb,
+  mapStatusGqlToDb
+} from '../utils/enum-mapping';
 
 export class SupabaseService {
   private client: SupabaseClient;
@@ -51,7 +59,7 @@ export class SupabaseService {
         currentRp: data.player_rp || 0,
         peakRp: data.player_rp || 0,
         tier: 'bronze' as any, // Default tier
-        position: data.position || null,
+        position: mapPlayerPositionDbToGql(data.position),
         salaryTier: data.salary_tier || null,
         teamName: null,
         isVerified: false,
@@ -93,7 +101,7 @@ export class SupabaseService {
         currentRp: player.player_rp || 0,
         peakRp: player.player_rp || 0,
         tier: 'bronze' as any, // Default tier
-        position: player.position || null,
+        position: mapPlayerPositionDbToGql(player.position),
         salaryTier: player.salary_tier || null,
         teamName: null,
         isVerified: false,
@@ -109,7 +117,7 @@ export class SupabaseService {
     const playerData = {
       gamertag: userData.username,
       discord_id: userData.discord_id,
-      position: 'Center', // Default position
+      position: mapPlayerPositionGqlToDb('Center'), // Default position
       current_team_id: null,
       performance_score: 50, // Default score
       player_rp: 0,
@@ -217,7 +225,7 @@ export class SupabaseService {
       teamBId: data.team_b_id,
       teamAName: data.team_a_name,
       teamBName: data.team_b_name,
-      stage: data.stage || 'Group_Play',
+      stage: mapMatchStageDbToGql(data.stage) || 'Group_Play',
       gameNumber: data.game_number || 1,
       status: data.played_at ? 'completed' : 'scheduled', // Determine status based on played_at
       scoreA: data.score_a,
@@ -266,7 +274,7 @@ export class SupabaseService {
     }
 
     if (filters.stage) {
-      query = query.eq('stage', filters.stage);
+      query = query.eq('stage', mapMatchStageGqlToDb(filters.stage));
     }
 
     const { data, error } = await query
@@ -286,7 +294,7 @@ export class SupabaseService {
       teamBId: match.team_b_id,
       teamAName: match.team_a_name,
       teamBName: match.team_b_name,
-      stage: match.stage || 'Group_Play',
+      stage: mapMatchStageDbToGql(match.stage) || 'Group_Play',
       gameNumber: match.game_number || 1,
       status: match.played_at ? 'completed' : 'scheduled', // Determine status based on played_at
       scoreA: match.score_a,
