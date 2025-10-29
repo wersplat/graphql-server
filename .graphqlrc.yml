@@ -1,0 +1,9 @@
+schema: 
+  - "src/schema.graphql"
+documents: 
+  - "src/**/*.graphql"
+  - "src/**/*.gql"
+extensions:
+  languageService:
+    useSchemaFileDefinitions: true
+    cacheSchemaFileForLookup: true
