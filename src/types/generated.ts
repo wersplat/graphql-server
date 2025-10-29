@@ -1161,7 +1161,7 @@ export interface players {
   position?: player_position;
   region_id?: string;
   current_team_id?: string;
-  performance_score?: number;
+  avg_performance_score?: number;
   player_rp?: number;
   player_rank_score?: number;
   salary_tier?: salary_tier;

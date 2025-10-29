@@ -220,18 +220,18 @@ export class SupabaseService {
     // Transform to match our GraphQL schema
     return {
       id: data.id,
-      eventId: data.event_id,
+      eventId: data.tournament_id,
       teamAId: data.team_a_id,
       teamBId: data.team_b_id,
-      teamAName: data.team_a_name,
-      teamBName: data.team_b_name,
+      teamAName: data.team_a?.name || null,
+      teamBName: data.team_b?.name || null,
       stage: mapMatchStageDbToGql(data.stage) || 'Group_Play',
       gameNumber: data.game_number || 1,
       status: data.played_at ? 'completed' : 'scheduled', // Determine status based on played_at
       scoreA: data.score_a,
       scoreB: data.score_b,
       winnerId: data.winner_id,
-      winnerName: data.winner_name,
+      winnerName: data.winner?.name || null,
       scheduledAt: null, // Not in schema
       playedAt: data.played_at,
       startedAt: null, // Not in schema
@@ -256,8 +256,7 @@ export class SupabaseService {
         *,
         team_a:teams!team_a_id(*),
         team_b:teams!team_b_id(*),
-        winner:teams!winner_id(*),
-        event:events(*)
+        winner:teams!winner_id(*)
       `);
 
     // Apply filters
@@ -266,7 +265,7 @@ export class SupabaseService {
     }
 
     if (filters.eventId) {
-      query = query.eq('event_id', filters.eventId);
+      query = query.eq('tournament_id', filters.eventId);
     }
 
     if (filters.status) {
@@ -289,18 +288,18 @@ export class SupabaseService {
     // Transform to match our GraphQL schema
     return (data || []).map(match => ({
       id: match.id,
-      eventId: match.event_id,
+      eventId: match.tournament_id,
       teamAId: match.team_a_id,
       teamBId: match.team_b_id,
-      teamAName: match.team_a_name,
-      teamBName: match.team_b_name,
+      teamAName: match.team_a?.name || null,
+      teamBName: match.team_b?.name || null,
       stage: mapMatchStageDbToGql(match.stage) || 'Group_Play',
       gameNumber: match.game_number || 1,
       status: match.played_at ? 'completed' : 'scheduled', // Determine status based on played_at
       scoreA: match.score_a,
       scoreB: match.score_b,
       winnerId: match.winner_id,
-      winnerName: match.winner_name,
+      winnerName: match.winner?.name || null,
       scheduledAt: null, // Not in schema
       playedAt: match.played_at,
       startedAt: null, // Not in schema
@@ -864,7 +863,7 @@ export class SupabaseService {
 
     const { data, error } = await query
       .range(offset, offset + limit - 1)
-      .order('performance_score', { ascending: false });
+      .order('avg_performance_score', { ascending: false });
 
     if (error) {
       console.error('Error fetching player performance mart:', error);
@@ -902,7 +901,7 @@ export class SupabaseService {
 
     const { data, error } = await query
       .range(offset, offset + limit - 1)
-      .order('created_at', { ascending: false });
+      .order('played_at', { ascending: false, nullsFirst: false });
 
     if (error) {
       console.error('Error fetching match analytics mart:', error);

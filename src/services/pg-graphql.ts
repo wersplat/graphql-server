@@ -249,17 +249,14 @@ export class PgGraphQLService {
             node {
               nodeId
               id
-              event_id
+              tournament_id
               team_a_id
               team_b_id
-              team_a_name
-              team_b_name
               stage
               game_number
               score_a
               score_b
               winner_id
-              winner_name
               boxscore_url
               played_at
               events {
@@ -292,18 +289,18 @@ export class PgGraphQLService {
     
     return {
       id: match.id,
-      eventId: match.event_id,
+      eventId: match.tournament_id,
       teamAId: match.team_a_id,
       teamBId: match.team_b_id,
-      teamAName: match.team_a_name,
-      teamBName: match.team_b_name,
+      teamAName: null, // team names need to be fetched separately
+      teamBName: null, // team names need to be fetched separately
       stage: this.mapStageValue(match.stage),
       gameNumber: match.game_number || 1,
       status: this.determineMatchStatus(match),
       scoreA: match.score_a,
       scoreB: match.score_b,
       winnerId: match.winner_id,
-      winnerName: match.winner_name,
+      winnerName: null, // winner name needs to be fetched separately
       boxscoreUrl: match.boxscore_url,
       scheduledAt: undefined, // Not in your schema
       playedAt: match.played_at ? new Date(match.played_at) : undefined,
@@ -345,7 +342,7 @@ export class PgGraphQLService {
     }
 
     if (filters.eventId) {
-      filterClause = `filter: { event_id: { eq: "${filters.eventId}" } }`;
+      filterClause = `filter: { tournament_id: { eq: "${filters.eventId}" } }`;
     }
 
     if (filters.stage) {
@@ -362,17 +359,14 @@ export class PgGraphQLService {
             node {
               nodeId
               id
-              event_id
+              tournament_id
               team_a_id
               team_b_id
-              team_a_name
-              team_b_name
               stage
               game_number
               score_a
               score_b
               winner_id
-              winner_name
               boxscore_url
               played_at
               events {
@@ -405,18 +399,18 @@ export class PgGraphQLService {
       const match = edge.node;
       return {
         id: match.id,
-        eventId: match.event_id,
+        eventId: match.tournament_id,
         teamAId: match.team_a_id,
         teamBId: match.team_b_id,
-        teamAName: match.team_a_name,
-        teamBName: match.team_b_name,
+        teamAName: null, // team names need to be fetched separately
+        teamBName: null, // team names need to be fetched separately
         stage: this.mapStageValue(match.stage),
         gameNumber: match.game_number || 1,
         status: this.determineMatchStatus(match),
         scoreA: match.score_a,
         scoreB: match.score_b,
         winnerId: match.winner_id,
-        winnerName: match.winner_name,
+        winnerName: null, // winner name needs to be fetched separately
         boxscoreUrl: match.boxscore_url,
         scheduledAt: undefined,
         playedAt: match.played_at ? new Date(match.played_at) : undefined,
@@ -670,32 +664,27 @@ export class PgGraphQLService {
         insertIntoMatchesCollection(objects: [$input]) {
           records {
             id
-            eventId
-            teamAId
-            teamBId
-            teamAName
-            teamBName
+            tournament_id
+            team_a_id
+            team_b_id
             stage
-            gameNumber
-            scoreA
-            scoreB
-            winnerId
-            winnerName
-            boxscoreUrl
-            playedAt
+            game_number
+            score_a
+            score_b
+            winner_id
+            boxscore_url
+            played_at
           }
         }
       }
     `;
 
     const input = {
-      eventId: matchData.event_id,
-      teamAId: matchData.team_a_id,
-      teamBId: matchData.team_b_id,
-      teamAName: matchData.team_a_name,
-      teamBName: matchData.team_b_name,
+      tournament_id: matchData.tournament_id,
+      team_a_id: matchData.team_a_id,
+      team_b_id: matchData.team_b_id,
       stage: matchData.stage,
-      gameNumber: matchData.game_number
+      game_number: matchData.game_number
     };
 
     const result = await this.executeGraphQLQuery(mutation, { input });

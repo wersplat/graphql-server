@@ -307,11 +307,9 @@ export const matchResolvers = {
       
       try {
         const matchData = {
-          event_id: input.eventId,
+          tournament_id: input.eventId,
           team_a_id: input.teamAId,
           team_b_id: input.teamBId,
-          team_a_name: input.teamAName,
-          team_b_name: input.teamBName,
           stage: input.stage || MatchStage.GROUP_PLAY,
           game_number: input.gameNumber || 1,
           status: MatchStatus.SCHEDULED,

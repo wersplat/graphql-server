@@ -444,27 +444,6 @@ export const supabaseResolvers = {
       tier?: string;
     }) => {
       const supabase = getSupabaseClient();
-      
-      try {
-        let query = supabase
-          .from('players')
-          .select(`
-            id,
-            username,
-            current_tier,
-            total_matches_played,
-            wins,
-            losses,
-            created_at
-          `);
-
-        if (tier) {
-          query = query.eq('current_tier', tier);
-        }
-
-        const { data, error } = await query
-          .order('wins', { ascending: false })
-          .limit(limit);
 
         if (error) throw new Error(`Failed to fetch top players: ${error.message}`);
 
@@ -474,7 +453,7 @@ export const supabaseResolvers = {
           player: {
             id: player.id,
             username: player.username,
-            currentTier: player.current_tier,
+            currentTier: null, // current_tier field doesn't exist in achievement_eligibility_mart
             totalMatchesPlayed: player.total_matches_played || 0,
             wins: player.wins || 0,
             losses: player.losses || 0,
@@ -709,7 +688,7 @@ export const supabaseResolvers = {
 
       const { data, error } = await query
         .range(offset, offset + limit - 1)
-        .order('created_at', { ascending: false });
+        .order('last_game_date', { ascending: false, nullsFirst: false });
 
       if (error) throw new Error(`Failed to fetch player stats tracking mart: ${error.message}`);
       return data || [];
@@ -727,7 +706,7 @@ export const supabaseResolvers = {
 
       const { data, error } = await query
         .range(offset, offset + limit - 1)
-        .order('created_at', { ascending: false });
+        .order('end_date', { ascending: false, nullsFirst: false });
 
       if (error) throw new Error(`Failed to fetch tournament performance mart: ${error.message}`);
       return data || [];
@@ -747,7 +726,7 @@ export const supabaseResolvers = {
 
       const { data, error } = await query
         .range(offset, offset + limit - 1)
-        .order('created_at', { ascending: false });
+        .order('season_number', { ascending: false });
 
       if (error) throw new Error(`Failed to fetch league season performance mart: ${error.message}`);
       return data || [];
