@@ -444,6 +444,13 @@ export const supabaseResolvers = {
       tier?: string;
     }) => {
       const supabase = getSupabaseClient();
+      
+      try {
+        const { data, error } = await supabase
+          .from('achievement_eligibility_mart')
+          .select('*')
+          .order('total_achievements_earned', { ascending: false })
+          .limit(limit);
 
         if (error) throw new Error(`Failed to fetch top players: ${error.message}`);
 
