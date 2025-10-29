@@ -2,6 +2,7 @@
 # 
 # This schema provides a unified GraphQL API for the Bodega Cats GC gaming platform.
 # It serves as a layer between multiple frontends (admin, dashboard, public) and the Supabase backend.
+# Updated to match Supabase database schema structure.
 
 """
 Custom scalar for handling date and time values in ISO 8601 format.
@@ -62,34 +63,48 @@ Each player is associated with a user account.
 type Player {
   "Unique identifier for the player"
   id: ID!
-  "ID of the associated user account"
-  userId: ID!
   "Gaming handle/username used in matches"
   gamertag: String!
-  "Geographic region for matchmaking"
-  region: String
+  "Alternative gamertag for the player"
+  alternateGamertag: String
   "Current ranking points"
   currentRp: Float
-  "Highest ranking points achieved"
-  peakRp: Float
+  "Player rank score for internal calculations"
+  playerRankScore: Float
+  "Performance score based on recent matches"
+  performanceScore: Float
+  "Monthly value assessment"
+  monthlyValue: Float
   "Current player tier (bronze, silver, gold, etc.)"
   tier: PlayerTier
   "Player position on the court"
   position: PlayerPosition
   "Salary tier indicating player value"
   salaryTier: SalaryTier
+  "ID of the current team"
+  currentTeamId: String
   "Name of the team the player is currently on"
-  teamName: String
-  "Whether the player account has been verified"
-  isVerified: Boolean
+  currentTeamName: String
+  "Crew affiliation ID"
+  crewAffiliation: String
+  "Crew name"
+  crewName: String
+  "Discord ID for platform integration"
+  discordId: String
+  "Discord ID number"
+  discordIdNo: String
+  "Twitch handle"
+  twitch: String
+  "Twitter ID"
+  twitterId: String
+  "Whether the player is a rookie"
+  isRookie: Boolean
   "When the player profile was created"
-  createdAt: DateTime!
-  "When the player profile was last updated"
-  updatedAt: DateTime
-  "Associated user account"
-  user: User!
+  createdAt: DateTime
   "Current team information"
-  current_teams: Team
+  currentTeam: Team
+  "Crew information"
+  crew: CityCrew
 }
 
 """
@@ -157,6 +172,120 @@ enum EventTier {
   T3
   "Tier 4 - Entry level events"
   T4
+  "Tier 5 - Entry level events"
+  T5
+}
+
+"""
+Game year versions supported by the platform.
+"""
+enum GameYear {
+  "NBA 2K16"
+  NBA_2K16
+  "NBA 2K17"
+  NBA_2K17
+  "NBA 2K18"
+  NBA_2K18
+  "NBA 2K19"
+  NBA_2K19
+  "NBA 2K20"
+  NBA_2K20
+  "NBA 2K21"
+  NBA_2K21
+  "NBA 2K22"
+  NBA_2K22
+  "NBA 2K23"
+  NBA_2K23
+  "NBA 2K24"
+  NBA_2K24
+  "NBA 2K25"
+  NBA_2K25
+  "NBA 2K26"
+  NBA_2K26
+}
+
+"""
+Console platforms supported.
+"""
+enum Console {
+  "Cross-platform play"
+  CROSS_PLAY
+  "PlayStation console"
+  PLAYSTATION
+  "Xbox console"
+  XBOX
+}
+
+"""
+Achievement categories for player accomplishments.
+"""
+enum AchievementCategory {
+  "Scoring achievements"
+  SCORING
+  "Assist achievements"
+  ASSISTS
+  "Defensive achievements"
+  DEFENSE
+  "Rebounding achievements"
+  REBOUNDING
+  "Mixed statistical achievements"
+  MIXED_STATS
+  "Streak and longevity achievements"
+  STREAK_LONGEVITY
+  "Legendary achievements"
+  LEGENDARY
+}
+
+"""
+Achievement rarity levels.
+"""
+enum AchievementRarity {
+  "Common achievement"
+  COMMON
+  "Rare achievement"
+  RARE
+  "Epic achievement"
+  EPIC
+  "Legendary achievement"
+  LEGENDARY
+}
+
+"""
+Achievement scope indicating the timeframe.
+"""
+enum AchievementScope {
+  "Per game achievement"
+  PER_GAME
+  "Season-long achievement"
+  SEASON
+  "Career achievement"
+  CAREER
+  "Streak achievement"
+  STREAK
+  "Event-specific achievement"
+  EVENT
+}
+
+"""
+Achievement tier levels.
+"""
+enum AchievementTier {
+  "Bronze tier"
+  BRONZE
+  "Silver tier"
+  SILVER
+  "Gold tier"
+  GOLD
+  "Platinum tier"
+  PLATINUM
+  "Common tier"
+  COMMON
+  "Rare tier"
+  RARE
+  "Epic tier"
+  EPIC
+  "Legendary tier"
+  LEGENDARY
 }
 
 """
@@ -166,60 +295,50 @@ Matches can be in various stages and have detailed statistics.
 type Match {
   "Unique identifier for the match"
   id: ID!
-  "ID of the event this match belongs to"
-  eventId: UUID
-  "ID of the first team"
-  teamAId: UUID!
-  "ID of the second team"
-  teamBId: UUID!
-  "Name of the first team"
-  teamAName: String!
-  "Name of the second team"
-  teamBName: String!
-  "Current stage of the match (group, finals, etc.)"
-  stage: MatchStage!
   "Game number within the match series"
-  gameNumber: Int!
+  gameNumber: Int
+  "Game year (2K24, 2K25, etc.)"
+  gameYear: GameYear
+  "ID of the league this match belongs to"
+  leagueId: String
+  "ID of the season this match belongs to"
+  seasonId: String
+  "ID of the tournament this match belongs to"
+  tournamentId: String
+  "ID of the first team"
+  teamAId: String
+  "ID of the second team"
+  teamBId: String
+  "Current stage of the match (group, finals, etc.)"
+  stage: MatchStage
   "Current status of the match"
-  status: MatchStatus!
+  status: String
   "Score for team A"
   scoreA: Int
   "Score for team B"
   scoreB: Int
   "ID of the winning team"
-  winnerId: UUID
-  "Name of the winning team"
-  winnerName: String
-  "When the match was scheduled to start"
-  scheduledAt: DateTime
+  winnerId: String
   "When the match was actually played"
   playedAt: DateTime
-  "When the match started"
-  startedAt: DateTime
-  "When the match ended"
-  endedAt: DateTime
   "URL to the match boxscore/stats"
   boxscoreUrl: String
-  "When the match record was created"
-  createdAt: DateTime!
-  "When the match record was last updated"
-  updatedAt: DateTime
-  "Whether the match is currently being played live"
-  isLive: Boolean!
-  "Time elapsed in the current match (for live matches)"
-  timeElapsed: String
+  "Whether the match has been verified"
+  verified: Boolean!
+  "Possible duplicate match ID"
+  possibleDuplicateOf: String
   "Team A details"
   teamA: Team
   "Team B details"
   teamB: Team
   "Winning team details"
   winner: Team
-  "Event details"
-  event: Event
-  "Player statistics for team A"
-  teamAPlayers: [PlayerMatchStats!]!
-  "Player statistics for team B"
-  teamBPlayers: [PlayerMatchStats!]!
+  "League information"
+  league: League
+  "Season information"
+  season: LeagueSeason
+  "Tournament information"
+  tournament: Tournament
 }
 
 """
@@ -293,18 +412,266 @@ type Team {
   id: ID!
   "Name of the team"
   name: String!
-  "Description of the team"
-  description: String
   "URL to the team logo"
   logoUrl: String
-  "Geographic region the team represents"
-  region: String
+  "Current ranking points"
+  currentRp: Float
+  "ELO rating for matchmaking"
+  eloRating: Float
+  "Global rank position"
+  globalRank: Int
+  "Hybrid score calculation"
+  hybridScore: Float
+  "Player rank score aggregate"
+  playerRankScore: Float
+  "Total money won"
+  moneyWon: Float
+  "Leaderboard tier classification"
+  leaderboardTier: String
+  "League conference ID"
+  lgConf: String
+  "League division ID"
+  lgDivision: String
+  "Team Twitter handle"
+  teamTwitter: String
   "Whether the team is currently active"
-  isActive: Boolean!
+  isActive: Boolean
   "When the team was created"
+  createdAt: DateTime
+  "League conference information"
+  conference: LeagueConference
+  "League division information"
+  division: LeagueDivision
+}
+
+"""
+Represents a city crew that players can be affiliated with.
+"""
+type CityCrew {
+  "Unique identifier for the crew"
+  id: ID!
+  "Name of the crew"
+  crewName: String!
+  "URL to the crew logo"
+  crewLogo: String
+  "When the crew was created"
   createdAt: DateTime!
-  "When the team was last updated"
-  updatedAt: DateTime
+}
+
+"""
+Represents a league in the platform.
+"""
+type League {
+  "Unique identifier for the league"
+  id: ID!
+  "Name of the league"
+  name: String!
+  "League abbreviation"
+  abbreviation: String
+  "League description"
+  description: String
+  "Whether the league is currently active"
+  isActive: Boolean!
+  "When the league was created"
+  createdAt: DateTime!
+}
+
+"""
+Represents a league season.
+"""
+type LeagueSeason {
+  "Unique identifier for the season"
+  id: ID!
+  "Season name"
+  name: String!
+  "League ID this season belongs to"
+  leagueId: String!
+  "Season start date"
+  startDate: DateTime!
+  "Season end date"
+  endDate: DateTime!
+  "Whether the season is currently active"
+  isActive: Boolean!
+  "When the season was created"
+  createdAt: DateTime!
+  "Associated league"
+  league: League!
+}
+
+"""
+Represents a league conference.
+"""
+type LeagueConference {
+  "Unique identifier for the conference"
+  id: ID!
+  "Conference name"
+  name: String!
+  "Conference abbreviation"
+  abbr: String
+  "URL to conference logo"
+  confLogo: String
+  "When the conference was created"
+  createdAt: DateTime!
+}
+
+"""
+Represents a league division.
+"""
+type LeagueDivision {
+  "Unique identifier for the division"
+  id: ID!
+  "Division name"
+  name: String!
+  "Division abbreviation"
+  abbr: String
+  "Conference ID this division belongs to"
+  conferenceId: String
+  "URL to division logo"
+  divisionLogo: String
+  "When the division was created"
+  createdAt: DateTime!
+  "Associated conference"
+  conference: LeagueConference
+}
+
+"""
+Represents a tournament in the platform.
+"""
+type Tournament {
+  "Unique identifier for the tournament"
+  id: ID!
+  "Tournament name"
+  name: String!
+  "Tournament description"
+  description: String
+  "Tournament format"
+  format: TournamentFormat
+  "Entry fee for the tournament"
+  entryFee: Float
+  "Prize pool amount"
+  prizePool: Float
+  "Maximum number of participants"
+  maxParticipants: Int
+  "Tournament start date"
+  startDate: DateTime
+  "Tournament end date"
+  endDate: DateTime
+  "Tournament status"
+  status: EventStatus
+  "When the tournament was created"
+  createdAt: DateTime!
+}
+
+"""
+Tournament format types.
+"""
+enum TournamentFormat {
+  "Single elimination tournament"
+  SINGLE_ELIMINATION
+  "Double elimination tournament"
+  DOUBLE_ELIMINATION
+  "Swiss system tournament"
+  SWISS
+  "Round robin tournament"
+  ROUND_ROBIN
+}
+
+"""
+Represents an achievement that can be earned by players.
+"""
+type Achievement {
+  "Unique identifier for the achievement"
+  id: ID!
+  "Achievement name"
+  name: String!
+  "Achievement description"
+  description: String
+  "Achievement category"
+  category: AchievementCategory
+  "Achievement rarity"
+  rarity: AchievementRarity
+  "Achievement tier"
+  tier: AchievementTier
+  "Achievement scope"
+  scope: AchievementScope
+  "Badge image URL"
+  achievementBadge: String
+  "Points awarded for this achievement"
+  points: Int
+  "When the achievement was created"
+  createdAt: DateTime!
+}
+
+"""
+Represents an achievement rule that defines when achievements are awarded.
+"""
+type AchievementRule {
+  "Unique identifier for the rule"
+  id: ID!
+  "Rule name"
+  name: String!
+  "Achievement scope"
+  scope: AchievementScope!
+  "Achievement tier"
+  tier: AchievementTier!
+  "Rule predicate (JSON)"
+  predicate: JSON!
+  "Award template (JSON)"
+  awardTemplate: JSON
+  "Window predicate (JSON)"
+  windowPredicate: JSON
+  "Window size for evaluation"
+  windowSize: Int
+  "Whether the rule requires approval"
+  requiresApproval: Boolean!
+  "Whether the rule is active"
+  isActive: Boolean!
+  "Game year this rule applies to"
+  gameYear: GameYear
+  "League ID this rule applies to"
+  leagueId: String
+  "Season ID this rule applies to"
+  seasonId: String
+  "When the rule was created"
+  createdAt: DateTime!
+  "When the rule was last updated"
+  updatedAt: DateTime!
+}
+
+"""
+Represents a player award earned through achievements.
+"""
+type PlayerAward {
+  "Unique identifier for the award"
+  id: ID!
+  "Player ID who earned the award"
+  playerId: String!
+  "Achievement ID this award is for"
+  achievementId: String
+  "Award name"
+  name: String!
+  "Award description"
+  description: String
+  "PNG asset URL"
+  assetPngUrl: String
+  "SVG asset URL"
+  assetSvgUrl: String
+  "Award category"
+  category: String
+  "Award rarity"
+  rarity: AchievementRarity
+  "Award tier"
+  tier: AchievementTier
+  "Points awarded"
+  points: Int
+  "When the award was earned"
+  awardedAt: DateTime
+  "When the award was created"
+  createdAt: DateTime!
+  "Associated player"
+  player: Player!
+  "Associated achievement"
+  achievement: Achievement
 }
 
 """
@@ -891,6 +1258,112 @@ type Query {
     "Filter by player tier"
     tier: PlayerTier
   ): [LeaderboardEntry!]!
+  
+  # League and Season queries
+  "Get a specific league by ID"
+  getLeague(id: ID!): League
+  "Get a list of leagues"
+  getLeagues(limit: Int = 10, offset: Int = 0): [League!]!
+  "Get a specific league season by ID"
+  getLeagueSeason(id: ID!): LeagueSeason
+  "Get league seasons with optional filtering"
+  getLeagueSeasons(
+    "Filter by league ID"
+    leagueId: String
+    "Filter by active status"
+    isActive: Boolean
+    "Maximum number of seasons to return"
+    limit: Int = 10
+    "Number of seasons to skip for pagination"
+    offset: Int = 0
+  ): [LeagueSeason!]!
+  
+  # Tournament queries
+  "Get a specific tournament by ID"
+  getTournament(id: ID!): Tournament
+  "Get tournaments with optional filtering"
+  getTournaments(
+    "Filter by tournament status"
+    status: EventStatus
+    "Filter by tournament format"
+    format: TournamentFormat
+    "Maximum number of tournaments to return"
+    limit: Int = 10
+    "Number of tournaments to skip for pagination"
+    offset: Int = 0
+  ): [Tournament!]!
+  
+  # Achievement queries
+  "Get a specific achievement by ID"
+  getAchievement(id: ID!): Achievement
+  "Get achievements with optional filtering"
+  getAchievements(
+    "Filter by achievement category"
+    category: AchievementCategory
+    "Filter by achievement rarity"
+    rarity: AchievementRarity
+    "Filter by achievement tier"
+    tier: AchievementTier
+    "Maximum number of achievements to return"
+    limit: Int = 20
+    "Number of achievements to skip for pagination"
+    offset: Int = 0
+  ): [Achievement!]!
+  
+  # Achievement Rule queries
+  "Get a specific achievement rule by ID"
+  getAchievementRule(id: ID!): AchievementRule
+  "Get achievement rules with optional filtering"
+  getAchievementRules(
+    "Filter by active status"
+    isActive: Boolean
+    "Filter by game year"
+    gameYear: GameYear
+    "Filter by league ID"
+    leagueId: String
+    "Maximum number of rules to return"
+    limit: Int = 20
+    "Number of rules to skip for pagination"
+    offset: Int = 0
+  ): [AchievementRule!]!
+  
+  # Player Award queries
+  "Get player awards for a specific player"
+  getPlayerAwards(
+    "Player ID to get awards for"
+    playerId: ID!
+    "Filter by award category"
+    category: String
+    "Filter by award rarity"
+    rarity: AchievementRarity
+    "Maximum number of awards to return"
+    limit: Int = 20
+    "Number of awards to skip for pagination"
+    offset: Int = 0
+  ): [PlayerAward!]!
+  
+  # City Crew queries
+  "Get a specific city crew by ID"
+  getCityCrew(id: ID!): CityCrew
+  "Get city crews"
+  getCityCrews(limit: Int = 10, offset: Int = 0): [CityCrew!]!
+  
+  # Conference and Division queries
+  "Get a specific league conference by ID"
+  getLeagueConference(id: ID!): LeagueConference
+  "Get league conferences"
+  getLeagueConferences(limit: Int = 10, offset: Int = 0): [LeagueConference!]!
+  "Get a specific league division by ID"
+  getLeagueDivision(id: ID!): LeagueDivision
+  "Get league divisions"
+  getLeagueDivisions(
+    "Filter by conference ID"
+    conferenceId: String
+    "Maximum number of divisions to return"
+    limit: Int = 10
+    "Number of divisions to skip for pagination"
+    offset: Int = 0
+  ): [LeagueDivision!]!
 }
 
 # =============================================================================
