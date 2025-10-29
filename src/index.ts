@@ -20,8 +20,8 @@ import * as Sentry from '@sentry/node';
 // Load environment variables
 dotenv.config();
 
-// Import Phase 1 resolvers
-import { Query, Mutation } from './resolvers/phase1-resolvers';
+// Import Supabase resolvers
+import { supabaseResolvers } from './resolvers/supabase-resolvers';
 
 // Import types
 import { User, Player } from './types/User';
@@ -30,10 +30,9 @@ import { Match, Team, Event, PlayerMatchStats } from './types/Match';
 // Load GraphQL schema
 const typeDefs = readFileSync(join(__dirname, 'schema.graphql'), 'utf8');
 
-// Use Phase 1 resolvers
+// Use Supabase resolvers
 const resolvers = {
-  Query,
-  Mutation,
+  ...supabaseResolvers,
   // Add scalar resolvers
   DateTime: {
     __serialize(value: any) {

@@ -1,13 +1,12 @@
 {
-  "totalTypes": 378,
-  "queries": 34,
-  "mutations": 132,
+  "totalTypes": 904,
+  "queries": 86,
+  "mutations": 271,
   "subscriptions": 0,
   "directives": 2,
   "mainTypes": [
     "players",
     "matches",
-    "teams",
-    "events"
+    "teams"
   ]
 }
