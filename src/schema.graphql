@@ -1163,6 +1163,484 @@ input UserUpdateInput {
 }
 
 # =============================================================================
+# ANALYTICS MARTS AND VIEWS
+# =============================================================================
+
+"""
+Player performance analytics mart - aggregated player statistics and metrics.
+"""
+type PlayerPerformanceMart {
+  "Player ID"
+  playerId: ID!
+  "Player username"
+  username: String
+  "Current tier"
+  currentTier: PlayerTier
+  "Total matches played"
+  totalMatches: Int!
+  "Total wins"
+  totalWins: Int!
+  "Total losses"
+  totalLosses: Int!
+  "Win percentage"
+  winPercentage: Float!
+  "Average score per match"
+  avgScore: Float
+  "Highest score achieved"
+  maxScore: Int
+  "Current win streak"
+  currentStreak: Int
+  "Longest win streak"
+  longestStreak: Int
+  "Last match date"
+  lastMatchDate: DateTime
+}
+
+"""
+Team analytics mart - aggregated team statistics and performance metrics.
+"""
+type TeamAnalyticsMart {
+  "Team ID"
+  teamId: ID!
+  "Team name"
+  teamName: String!
+  "Total matches played"
+  totalMatches: Int!
+  "Total wins"
+  totalWins: Int!
+  "Total losses"
+  totalLosses: Int!
+  "Win percentage"
+  winPercentage: Float!
+  "Average team score"
+  avgTeamScore: Float
+  "Total points scored"
+  totalPointsScored: Int
+  "Total points conceded"
+  totalPointsConceded: Int
+  "Current active players"
+  activePlayersCount: Int
+  "Team creation date"
+  createdAt: DateTime
+  "Last match date"
+  lastMatchDate: DateTime
+}
+
+"""
+Match analytics mart - detailed match statistics and performance data.
+"""
+type MatchAnalyticsMart {
+  "Match ID"
+  matchId: ID!
+  "Match date"
+  matchDate: DateTime
+  "League information"
+  leagueName: String
+  "Season information"
+  seasonName: String
+  "Team 1 name"
+  team1Name: String
+  "Team 2 name"
+  team2Name: String
+  "Team 1 score"
+  team1Score: Int
+  "Team 2 score"
+  team2Score: Int
+  "Match duration in minutes"
+  durationMinutes: Int
+  "Total players participated"
+  totalPlayers: Int
+  "Match type"
+  matchType: String
+  "Winner team ID"
+  winnerTeamId: ID
+}
+
+"""
+Achievement eligibility mart - player achievement eligibility and progress tracking.
+"""
+type AchievementEligibilityMart {
+  "Player ID"
+  playerId: ID
+  "Player gamertag"
+  gamertag: String
+  "Current team"
+  currentTeam: String
+  "Current team ID"
+  currentTeamId: ID
+  "Player position"
+  position: PlayerPosition
+  "Total games played"
+  totalGames: Int
+  "Total points scored"
+  totalPoints: Int
+  "Total assists"
+  totalAssists: Int
+  "Total rebounds"
+  totalRebounds: Int
+  "Total steals"
+  totalSteals: Int
+  "Total blocks"
+  totalBlocks: Int
+  "Total achievements earned"
+  totalAchievementsEarned: Int
+  "Century club eligible"
+  centuryClubEligible: String
+  "Fifty point eligible"
+  fiftyPointEligible: String
+  "Triple double eligible"
+  tripleDoubleEligible: String
+  "Veteran eligible"
+  veteranEligible: String
+  "Season award eligible"
+  seasonAwardEligible: String
+  "Consistent scorer eligible"
+  consistentScorerEligible: String
+  "Active season games"
+  activeSeasonGames: Int
+  "Active season average points"
+  activeSeasonAvgPoints: Float
+  "Active streak type"
+  activeStreakType: String
+  "Active streak length"
+  activeStreakLength: Int
+  "Points to next milestone"
+  pointsToNextMilestone: Int
+  "Assists to next milestone"
+  assistsToNextMilestone: Int
+}
+
+"""
+League player statistics view - comprehensive player stats by league.
+"""
+type LeaguePlayerStats {
+  "Player ID"
+  playerId: ID!
+  "Season ID"
+  seasonId: ID
+  "Team ID"
+  teamId: ID
+  "Player gamertag"
+  gamertag: String
+  "Games played"
+  gamesPlayed: Int
+  "Points scored"
+  points: Int
+  "Assists"
+  assists: Int
+  "Rebounds"
+  rebounds: Int
+  "Steals"
+  steals: Int
+  "Blocks"
+  blocks: Int
+  "Field goals made"
+  fieldGoalsMade: Int
+  "Field goals attempted"
+  fieldGoalsAttempted: Int
+  "Three pointers made"
+  threePointersMade: Int
+  "Three pointers attempted"
+  threePointersAttempted: Int
+  "Free throws made"
+  freeThrowsMade: Int
+  "Free throws attempted"
+  freeThrowsAttempted: Int
+  "Average points per game"
+  avgPointsPerGame: Float
+  "Win percentage"
+  winPercentage: Float
+}
+
+"""
+Tournament statistics view - tournament performance data.
+"""
+type TournamentStats {
+  "Tournament ID"
+  tournamentId: ID!
+  "Player ID"
+  playerId: ID
+  "Team ID"
+  teamId: ID
+  "Tournament name"
+  tournamentName: String
+  "Games played"
+  gamesPlayed: Int
+  "Points scored"
+  points: Int
+  "Assists"
+  assists: Int
+  "Rebounds"
+  rebounds: Int
+  "Tournament placement"
+  placement: Int
+  "Prize money earned"
+  prizeMoneyEarned: Float
+  "RP earned"
+  rpEarned: Int
+}
+
+"""
+Head to head matchup mart - team vs team historical data.
+"""
+type HeadToHeadMatchupMart {
+  "Team 1 ID"
+  team1Id: ID!
+  "Team 2 ID"
+  team2Id: ID!
+  "Total meetings"
+  totalMeetings: Int
+  "Team 1 wins"
+  team1Wins: Int
+  "Team 2 wins"
+  team2Wins: Int
+  "Team 1 average score"
+  team1AvgScore: Float
+  "Team 2 average score"
+  team2AvgScore: Float
+  "Average score differential"
+  avgScoreDifferential: Float
+  "Current winner"
+  currentWinner: String
+  "First meeting date"
+  firstMeeting: DateTime
+  "Last meeting date"
+  lastMeeting: DateTime
+  "Days since last meeting"
+  daysSinceLastMeeting: Int
+  "League meetings count"
+  leagueMeetings: Int
+  "Game years"
+  gameYears: [String!]
+  "League IDs"
+  leagueIds: [ID!]
+}
+
+"""
+Player hot streak mart - player performance streaks and momentum.
+"""
+type PlayerHotStreakMart {
+  "Player ID"
+  playerId: ID!
+  "Current streak type"
+  currentStreakType: String
+  "Current streak length"
+  currentStreakLength: Int
+  "Longest win streak"
+  longestWinStreak: Int
+  "Longest scoring streak"
+  longestScoringStreak: Int
+  "Hot streak indicator"
+  hotStreakIndicator: Boolean
+  "Streak start date"
+  streakStartDate: DateTime
+  "Last game performance"
+  lastGamePerformance: String
+}
+
+"""
+Roster value comparison mart - team roster value analytics.
+"""
+type RosterValueComparisonMart {
+  "Team ID"
+  teamId: ID!
+  "Team name"
+  teamName: String
+  "Total roster value"
+  totalRosterValue: Float
+  "Average player value"
+  avgPlayerValue: Float
+  "Highest valued player"
+  highestValuedPlayer: String
+  "Roster strength rating"
+  rosterStrengthRating: Float
+  "League rank by value"
+  leagueRankByValue: Int
+}
+
+"""
+Team momentum indicators mart - team performance momentum tracking.
+"""
+type TeamMomentumIndicatorsMart {
+  "Team ID"
+  teamId: ID!
+  "Team name"
+  teamName: String
+  "Recent form (last 5 games)"
+  recentForm: String
+  "Momentum score"
+  momentumScore: Float
+  "Trending direction"
+  trendingDirection: String
+  "Performance consistency"
+  performanceConsistency: Float
+  "Last 5 game results"
+  last5GameResults: [String!]
+}
+
+"""
+Event strength metrics materialized view - tournament/event strength calculations.
+"""
+type EventStrengthMetricsMv {
+  "Event key"
+  eventKey: String
+  "Event name"
+  eventName: String
+  "Tournament ID"
+  tournamentId: ID
+  "Event strength score"
+  eventStrength: Float
+  "Event type"
+  eventType: String
+  "Game year"
+  gameYear: String
+  "Bracket size"
+  bracketSize: Int
+  "Team count"
+  teamCount: Int
+  "Prize pool"
+  prizePool: Float
+  "Prize pool component"
+  prizePoolComponent: Float
+  "Player value component"
+  playerValueComponent: Float
+  "Bracket component"
+  bracketComponent: Float
+  "Tier score"
+  tierScore: Float
+  "Tier label"
+  tierLabel: String
+  "RP cap"
+  rpCap: Int
+  "Calculated at"
+  calculatedAt: DateTime
+}
+
+"""
+Player stats tracking mart - comprehensive player statistics tracking.
+"""
+type PlayerStatsTrackingMart {
+  "Player ID"
+  playerId: ID!
+  "Season tracking data"
+  seasonData: JSON
+  "Performance trends"
+  performanceTrends: JSON
+  "Statistical milestones"
+  statisticalMilestones: JSON
+  "Consistency metrics"
+  consistencyMetrics: JSON
+}
+
+"""
+Tournament performance mart - tournament-specific performance analytics.
+"""
+type TournamentPerformanceMart {
+  "Tournament ID"
+  tournamentId: ID!
+  "Tournament name"
+  tournamentName: String
+  "Performance metrics"
+  performanceMetrics: JSON
+  "Participation data"
+  participationData: JSON
+  "Prize distribution"
+  prizeDistribution: JSON
+}
+
+"""
+League season performance mart - season-level performance analytics.
+"""
+type LeagueSeasonPerformanceMart {
+  "Season ID"
+  seasonId: ID!
+  "League ID"
+  leagueId: ID
+  "Season performance data"
+  seasonPerformanceData: JSON
+  "Team standings"
+  teamStandings: JSON
+  "Player rankings"
+  playerRankings: JSON
+}
+
+"""
+Player performance view - player performance summary view.
+"""
+type PlayerPerformanceView {
+  "Player ID"
+  id: ID!
+  "Player name"
+  playerName: String
+  "Performance summary"
+  performanceSummary: JSON
+  "Career statistics"
+  careerStatistics: JSON
+}
+
+"""
+Team performance view - team performance summary view.
+"""
+type TeamPerformanceView {
+  "Team ID"
+  teamId: ID!
+  "Team name"
+  teamName: String
+  "Logo URL"
+  logoUrl: String
+  "Performance summary"
+  performanceSummary: JSON
+  "Team statistics"
+  teamStatistics: JSON
+}
+
+"""
+Team performance by game year - yearly team performance breakdown.
+"""
+type TeamPerformanceByGameYear {
+  "Team ID"
+  teamId: ID!
+  "Game year"
+  gameYear: String
+  "Yearly performance data"
+  yearlyPerformanceData: JSON
+  "Season results"
+  seasonResults: JSON
+}
+
+"""
+Tournament champions by year - historical tournament winners.
+"""
+type TournamentChampionsByYear {
+  "Game year"
+  gameYear: String!
+  "Champion team ID"
+  championTeamId: ID
+  "Champion name"
+  championName: String
+  "Champion logo"
+  championLogo: String
+  "Tournament details"
+  tournamentDetails: JSON
+}
+
+"""
+Tournament MVPs - tournament most valuable players.
+"""
+type TournamentMvps {
+  "Tournament ID"
+  tournamentId: ID!
+  "Player ID"
+  playerId: ID!
+  "Team ID"
+  teamId: ID
+  "MVP statistics"
+  mvpStatistics: JSON
+  "Award details"
+  awardDetails: JSON
+}
+
+# =============================================================================
 # QUERY TYPE
 # =============================================================================
 
@@ -1364,6 +1842,221 @@ type Query {
     "Number of divisions to skip for pagination"
     offset: Int = 0
   ): [LeagueDivision!]!
+
+  # Analytics Marts and Views
+  "Get player performance analytics data"
+  getPlayerPerformanceMart(
+    "Filter by specific player ID"
+    playerId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [PlayerPerformanceMart!]!
+
+  "Get team analytics data"
+  getTeamAnalyticsMart(
+    "Filter by specific team ID"
+    teamId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TeamAnalyticsMart!]!
+
+  "Get match analytics data"
+  getMatchAnalyticsMart(
+    "Filter by specific match ID"
+    matchId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [MatchAnalyticsMart!]!
+
+  # Additional Analytics Views and Marts
+  "Get achievement eligibility data for players"
+  getAchievementEligibilityMart(
+    "Filter by specific player ID"
+    playerId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [AchievementEligibilityMart!]!
+
+  "Get league player statistics"
+  getLeaguePlayerStats(
+    "Filter by specific player ID"
+    playerId: String
+    "Filter by season ID"
+    seasonId: String
+    "Filter by team ID"
+    teamId: String
+    "League type (open, playoff, regular_season)"
+    leagueType: String = "regular_season"
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [LeaguePlayerStats!]!
+
+  "Get tournament statistics"
+  getTournamentStats(
+    "Filter by specific tournament ID"
+    tournamentId: String
+    "Filter by player ID"
+    playerId: String
+    "Filter by team ID"
+    teamId: String
+    "Stats type (player or team)"
+    statsType: String = "player"
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TournamentStats!]!
+
+  "Get head-to-head matchup data between teams"
+  getHeadToHeadMatchupMart(
+    "Team 1 ID"
+    team1Id: String
+    "Team 2 ID"
+    team2Id: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [HeadToHeadMatchupMart!]!
+
+  "Get player hot streak and momentum data"
+  getPlayerHotStreakMart(
+    "Filter by specific player ID"
+    playerId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [PlayerHotStreakMart!]!
+
+  "Get roster value comparison analytics"
+  getRosterValueComparisonMart(
+    "Filter by specific team ID"
+    teamId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [RosterValueComparisonMart!]!
+
+  "Get team momentum indicators"
+  getTeamMomentumIndicatorsMart(
+    "Filter by specific team ID"
+    teamId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TeamMomentumIndicatorsMart!]!
+
+  # Complete Views and Marts Collection
+  "Get event strength metrics"
+  getEventStrengthMetricsMv(
+    "Filter by tournament ID"
+    tournamentId: String
+    "Filter by game year"
+    gameYear: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [EventStrengthMetricsMv!]!
+
+  "Get player stats tracking data"
+  getPlayerStatsTrackingMart(
+    "Filter by specific player ID"
+    playerId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [PlayerStatsTrackingMart!]!
+
+  "Get tournament performance analytics"
+  getTournamentPerformanceMart(
+    "Filter by specific tournament ID"
+    tournamentId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TournamentPerformanceMart!]!
+
+  "Get league season performance data"
+  getLeagueSeasonPerformanceMart(
+    "Filter by specific season ID"
+    seasonId: String
+    "Filter by league ID"
+    leagueId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [LeagueSeasonPerformanceMart!]!
+
+  "Get player performance view data"
+  getPlayerPerformanceView(
+    "Filter by specific player ID"
+    playerId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [PlayerPerformanceView!]!
+
+  "Get team performance view data"
+  getTeamPerformanceView(
+    "Filter by specific team ID"
+    teamId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TeamPerformanceView!]!
+
+  "Get team performance by game year"
+  getTeamPerformanceByGameYear(
+    "Filter by specific team ID"
+    teamId: String
+    "Filter by game year"
+    gameYear: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TeamPerformanceByGameYear!]!
+
+  "Get tournament champions by year"
+  getTournamentChampionsByYear(
+    "Filter by game year"
+    gameYear: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TournamentChampionsByYear!]!
+
+  "Get tournament MVPs"
+  getTournamentMvps(
+    "Filter by tournament ID"
+    tournamentId: String
+    "Filter by player ID"
+    playerId: String
+    "Maximum number of records to return"
+    limit: Int = 20
+    "Number of records to skip for pagination"
+    offset: Int = 0
+  ): [TournamentMvps!]!
 }
 
 # =============================================================================
