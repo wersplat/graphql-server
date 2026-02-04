@@ -33,7 +33,7 @@
   "author": "Bodega Cats GC",
   "license": "MIT",
   "dependencies": {
-    "@apollo/server": "^4.12.2",
+    "@apollo/server": "^5.4.0",
     "@apollo/server-plugin-response-cache": "^4.1.1",
     "@apollo/utils.keyvaluecache": "^4.0.0",
     "@sentry/node": "^10.2.0",
